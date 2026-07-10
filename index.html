@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code for Public Radio — A Role-by-Role Field Guide</title>
+<style>
+  :root{
+    --ink:#12181F; --ink2:#1B242E; --panel:#212B37;
+    --paper:#F4F2EC; --slate:#8A93A0; --text:#D7DBE0;
+    --amber:#E9A335; --amber-d:#B0700F; --red:#D14836;
+    --line:#39434E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important;animation:none!important} }
+  body{background:var(--ink);color:var(--text);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.6}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-weight:700;letter-spacing:-.01em;color:#fff}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--amber);text-transform:uppercase}
+
+  /* ---- hero ---- */
+  header{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+  header h1{font-size:clamp(34px,6vw,56px);line-height:1.05;margin:14px 0 12px}
+  header p.sub{font-size:18px;color:var(--slate);max-width:620px}
+
+  /* ---- dial ---- */
+  .dial{margin:36px 0 8px}
+  .dial svg{width:100%;height:auto;display:block}
+  .dial-roles{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .freq-btn{background:var(--ink2);border:1px solid var(--line);color:var(--text);
+    padding:8px 14px;border-radius:3px;font:inherit;font-size:13px;cursor:pointer;
+    display:flex;gap:10px;align-items:baseline;transition:border-color .15s,background .15s}
+  .freq-btn b{color:var(--amber);font-size:12px;letter-spacing:.05em}
+  .freq-btn:hover{border-color:var(--amber)}
+  .freq-btn[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+  .freq-btn[aria-pressed="true"] b{color:var(--ink)}
+  .freq-btn:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+  /* ---- sections ---- */
+  section{padding:52px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:26px;margin:10px 0 18px}
+  .rulebar{width:52px;height:4px;background:var(--amber);margin-bottom:20px}
+  p.lede{font-size:16.5px;color:var(--text);max-width:720px;margin-bottom:14px}
+  p.body,li{color:var(--slate);font-size:15px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:20px}
+  .card h3{font-size:15px;margin-bottom:8px}
+  .card p{font-size:14px;color:var(--slate)}
+
+  .steps{counter-reset:s;list-style:none;max-width:700px}
+  .steps li{counter-increment:s;padding:10px 0 10px 44px;position:relative;border-bottom:1px dashed var(--line)}
+  .steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:10px;
+    color:var(--amber);font-weight:700;font-size:13px;letter-spacing:.05em}
+
+  .notice{border-left:3px solid var(--amber);background:var(--ink2);padding:14px 18px;
+    border-radius:0 4px 4px 0;max-width:720px;margin:6px 0 22px}
+  .notice p{font-size:14.5px;color:var(--text)}
+
+  /* ---- role viewer ---- */
+  .role-view{background:var(--ink2);border:1px solid var(--line);border-radius:6px;
+    padding:28px;margin-top:22px}
+  .role-head{display:flex;align-items:center;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:16px}
+  .role-freq{background:var(--amber);color:var(--ink);font-weight:700;font-size:18px;
+    padding:8px 12px;border-radius:3px;letter-spacing:.02em}
+  .role-head h3{font-size:22px}
+  .role-view p.sum{color:var(--text);font-size:15.5px;margin-bottom:18px;max-width:760px}
+  .role-cols{display:grid;grid-template-columns:1.15fr .85fr;gap:24px}
+  @media(max-width:760px){.role-cols{grid-template-columns:1fr}}
+  .uc h4,.pp h4,.prompt h4{font-size:11px;letter-spacing:.2em;color:var(--amber);
+    text-transform:uppercase;margin-bottom:10px}
+  .uc ul{list-style:none}
+  .uc li{padding:7px 0 7px 20px;position:relative;font-size:14.5px;border-bottom:1px dashed var(--line)}
+  .uc li::before{content:"—";position:absolute;left:0;color:var(--amber)}
+  .prompt{background:var(--ink);border:1px solid var(--line);border-left:3px solid var(--amber);
+    border-radius:0 4px 4px 0;padding:16px 18px;margin-bottom:18px}
+  .prompt code{font-family:"SF Mono",Consolas,Menlo,monospace;font-size:13px;line-height:1.65;
+    color:var(--text);display:block;white-space:pre-wrap}
+  .copy{margin-top:12px;background:transparent;border:1px solid var(--amber);color:var(--amber);
+    font:inherit;font-size:12.5px;font-weight:700;padding:6px 14px;border-radius:3px;cursor:pointer}
+  .copy:hover{background:var(--amber);color:var(--ink)}
+  .copy:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .pp p{font-size:14px;color:var(--slate)}
+
+  /* ---- policy ---- */
+  .policy li{padding:10px 0 10px 22px;position:relative;border-bottom:1px dashed var(--line);
+    list-style:none;max-width:760px}
+  .policy li::before{content:"—";position:absolute;left:0;color:var(--red)}
+  .policy b{color:var(--text)}
+  .challenge{border-left:3px solid var(--red);background:var(--ink2);padding:18px 22px;
+    border-radius:0 4px 4px 0;margin-top:28px;max-width:760px}
+  .challenge p{color:var(--text);font-size:15px}
+
+  .res li{list-style:none;padding:9px 0;border-bottom:1px dashed var(--line);max-width:760px}
+  .res b{color:var(--text)}
+
+  footer{padding:36px 0 56px;color:var(--slate);font-size:13px}
+  a{color:var(--amber)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="eyebrow">A Field Guide · 2026</span>
+    <h1>Claude Code for Public Radio</h1>
+    <p class="sub">A role-by-role guide for stations that do more with less. Eight desks, one dial — tune to yours.</p>
+
+    <div class="dial" aria-hidden="true">
+      <svg viewBox="0 0 960 74" xmlns="http://www.w3.org/2000/svg" id="dialSvg">
+        <line x1="0" y1="60" x2="960" y2="60" stroke="#39434E" stroke-width="1"/>
+        <g id="ticks"></g>
+        <g id="labels" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="700" fill="#8A93A0"></g>
+        <line id="needle" x1="80" y1="10" x2="80" y2="66" stroke="#D14836" stroke-width="3"/>
+      </svg>
+    </div>
+
+    <div class="dial-roles" role="tablist" aria-label="Choose your role" id="roleTabs"></div>
+  </div>
+</header>
+
+<section id="why">
+  <div class="wrap">
+    <span class="eyebrow">Why this guide exists</span>
+    <h2>Built for small teams wearing many hats</h2>
+    <div class="rulebar"></div>
+    <p class="lede">Public radio runs on small teams wearing many hats. Claude Code — Anthropic's agentic AI tool — was built for software developers, but it turns out to be a force multiplier for anyone whose job involves files, data, documents, and repeatable workflows. That's everyone at your station.</p>
+    <p class="body" style="max-width:720px;margin-bottom:26px">Claude Code works directly with the files on your computer. Unlike a chatbot that only talks, it can read your spreadsheets, draft and organize documents, analyze data, automate repetitive tasks, and write software. You describe the outcome in plain language; it plans the approach, does the work, and shows you the results. It's available in the Claude desktop app (easiest start), in your browser at claude.ai, in editors like VS Code, and in the terminal.</p>
+    <div class="grid2">
+      <div class="card"><h3>Small staff, big surface area</h3><p>No developers, no analysts, no spare hands? A membership manager can clean a donor file, a music director can analyze spin data, a PD can prototype a tool — without hiring for it.</p></div>
+      <div class="card"><h3>Your data is already files</h3><p>Nielsen PDFs, Triton reports, CRM exports, playlists, grant narratives, board decks. Claude Code works where that data already lives — no pasting into a chat box.</p></div>
+      <div class="card"><h3>Repeatable work is automatable work</h3><p>Weekly metrics decks, acknowledgments, program logs, show prep. Anything you do the same way every week can become a saved workflow you run with one command.</p></div>
+      <div class="card"><h3>Mission alignment matters</h3><p>AI should extend your staff, not replace your voice. Use it for operational work — and keep commissioned creative, on-air talent, and editorial judgment human and local.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <span class="eyebrow">Setup</span>
+    <h2>Getting started — no terminal required</h2>
+    <div class="rulebar"></div>
+    <div class="notice"><p><b>Before you start:</b> you need a paid Claude plan (Pro, Max, Team, or Enterprise) or an Anthropic Console account with API credits. The free plan doesn't include Claude Code. Official docs: <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a></p></div>
+
+    <div class="grid2" style="margin-bottom:30px">
+      <div class="card"><h3>Beginner — desktop app or browser</h3><p>Download the Claude desktop app or open Claude Code at claude.ai. No terminal, no install commands. The right starting point for most station staff.</p></div>
+      <div class="card"><h3>Comfortable — VS Code</h3><p>Install the Claude Code extension from the Extensions marketplace for inline diffs and conversation history next to your work.</p></div>
+      <div class="card" style="grid-column:1/-1"><h3>Power user — the terminal</h3><p>Install the native version with the one-line command from the official docs, or via npm with Node.js 18+: <code style="color:var(--amber)">npm install -g @anthropic-ai/claude-code</code>. Then type <code style="color:var(--amber)">claude</code> in any project folder and log in on first use.</p></div>
+    </div>
+
+    <h3 style="font-size:16px;margin-bottom:14px">The beginner path, step by step — desktop app or browser</h3>
+    <p class="body" style="max-width:720px;margin-bottom:12px">The right starting point for most station staff. No terminal, no install commands, nothing to configure.</p>
+    <ol class="steps" style="margin-bottom:26px">
+      <li><b style="color:var(--text)">Confirm your account.</b> You need a paid Claude plan — Pro, Max, Team, or Enterprise. On a station Team plan? Ask whoever manages it to add you.</li>
+      <li><b style="color:var(--text)">Get the app (or skip to the browser).</b> Download the Claude desktop app for Mac or Windows from claude.ai/download and sign in — or run Claude Code in your browser at claude.ai with nothing installed.</li>
+      <li><b style="color:var(--text)">Start a session in a real folder.</b> Point Claude Code at a folder of real files — start with copies, like this week's reports. It asks permission, scoped to the folder you choose.</li>
+      <li><b style="color:var(--text)">Describe the outcome, not the steps.</b> "Read these three PDFs and build a one-page summary comparing them." It plans its approach and shows you before acting.</li>
+      <li><b style="color:var(--text)">Approve, review, iterate.</b> It asks before doing anything consequential. Check the result like you'd check a new colleague's first draft.</li>
+      <li><b style="color:var(--text)">Make it repeatable.</b> When something works, ask Claude Code to write down the steps it took so you can run the same workflow next week — the seed of your first skill.</li>
+    </ol>
+
+    <details style="max-width:720px;margin-bottom:14px;border:1px solid var(--line);border-radius:4px;background:var(--ink2)">
+      <summary style="cursor:pointer;padding:14px 18px;font-weight:700;color:var(--amber);font-size:14px">The CLI path — for the technically comfortable</summary>
+      <div style="padding:4px 18px 16px">
+        <ul style="list-style:none">
+          <li style="padding:6px 0 6px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber)">—</span><b style="color:var(--text)">Recommended:</b> run the one-line native installer from the official setup page at <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> — no dependencies, auto-updates.</li>
+          <li style="padding:6px 0 6px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber)">—</span><b style="color:var(--text)">Alternative:</b> with Node.js 18+, <code style="color:var(--amber)">npm install -g @anthropic-ai/claude-code</code>. Note: npm installs don't auto-update.</li>
+          <li style="padding:6px 0 6px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber)">—</span>Windows native installs also need Git for Windows (git-scm.com). WSL setups don't.</li>
+          <li style="padding:6px 0 6px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber)">—</span>Open a terminal, <code style="color:var(--amber)">cd</code> into any project folder, and type <code style="color:var(--amber)">claude</code>. You'll log in via your browser on first use; <code style="color:var(--amber)">/login</code> switches accounts later.</li>
+          <li style="padding:6px 0 6px 18px;position:relative"><span style="position:absolute;left:0;color:var(--amber)">—</span>Type <code style="color:var(--amber)">/init</code> in your first session and Claude drafts a CLAUDE.md for the project.</li>
+        </ul>
+        <p class="body" style="margin-top:10px"><b style="color:var(--text)">Working in VS Code?</b> Install the Claude Code extension from the Extensions marketplace (Cmd/Ctrl+Shift+X, search "Claude Code"), then open it from the Command Palette for inline diffs beside your files.</p>
+      </div>
+    </details>
+
+    <div class="notice" style="border-left-color:var(--red)"><p><b>A note on freshness:</b> install commands are the fastest-staling content in any guide. If anything here disagrees with <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>, the docs win.</p></div>
+
+    <h3 style="font-size:16px;margin:32px 0 10px">Claude Code or Claude Cowork? Same engine, two front doors</h3>
+    <p class="body" style="max-width:720px;margin-bottom:16px">Claude Cowork brings Claude Code's agentic architecture to everyday knowledge work — no terminal, no code. In the Claude desktop app, select <b style="color:var(--text)">Cowork</b> in the message box and hand it a task; it plans, works through subtasks, and delivers finished files for review. Sessions run remotely, so work continues when your laptop is closed — and it's rolling out on web and mobile too. Same paid plans as Claude Code.</p>
+    <div class="grid2" style="margin-bottom:16px">
+      <div class="card"><h3>Start in Cowork for…</h3>
+        <ul style="list-style:none">
+          <li style="padding:5px 0 5px 16px;position:relative;font-size:14px;color:var(--slate)"><span style="position:absolute;left:0;color:var(--amber)">—</span>Reports and briefs from messy inputs — notes, transcripts, voice memos</li>
+          <li style="padding:5px 0 5px 16px;position:relative;font-size:14px;color:var(--slate)"><span style="position:absolute;left:0;color:var(--amber)">—</span>Slide decks and spreadsheets with working formulas, not just CSVs</li>
+          <li style="padding:5px 0 5px 16px;position:relative;font-size:14px;color:var(--slate)"><span style="position:absolute;left:0;color:var(--amber)">—</span>Donor-file analysis, reconciliations, "pull these updates into one document"</li>
+          <li style="padding:5px 0 5px 16px;position:relative;font-size:14px;color:var(--slate)"><span style="position:absolute;left:0;color:var(--amber)">—</span>Scheduled tasks: the Monday metrics brief that builds itself</li>
+        </ul></div>
+      <div class="card"><h3>Start in Claude Code for…</h3>
+        <ul style="list-style:none">
+          <li style="padding:5px 0 5px 16px;position:relative;font-size:14px;color:var(--slate)"><span style="position:absolute;left:0;color:var(--amber)">—</span>Building something: scripts, tools, websites, data pipelines, MCP integrations</li>
+          <li style="padding:5px 0 5px 16px;position:relative;font-size:14px;color:var(--slate)"><span style="position:absolute;left:0;color:var(--amber)">—</span>Deep work inside a project folder with CLAUDE.md, skills, and version control</li>
+          <li style="padding:5px 0 5px 16px;position:relative;font-size:14px;color:var(--slate)"><span style="position:absolute;left:0;color:var(--amber)">—</span>Engineering and automation workflows where the terminal is home</li>
+        </ul></div>
+    </div>
+    <div class="notice"><p><b>Rule of thumb:</b> if the deliverable is a document, deck, or spreadsheet, start in Cowork. If it's a tool or system, start in Claude Code. Anthropic's own data: more than 90% of Cowork sessions aren't software development — the top categories are business operations and content creation. That's a public radio week in a nutshell. Most starter use cases in the role guide run beautifully in Cowork; the power-user paths live in Claude Code.</p></div>
+
+    <h3 style="font-size:16px;margin:26px 0 14px">Five concepts that unlock everything else</h3>
+    <div class="grid2">
+      <div class="card"><h3>CLAUDE.md</h3><p>A plain-text file read at the start of every session. Put your style guide, brand voice, report formats, and "never do this" rules in it once — every session starts briefed. Type <code style="color:var(--amber)">/init</code> and Claude drafts it for you.</p></div>
+      <div class="card"><h3>Plan Mode</h3><p>Ask Claude Code to plan first: it lays out intended steps and waits for approval before touching anything. Ideal when you're new or stakes are high.</p></div>
+      <div class="card"><h3>Skills</h3><p>A saved, shareable recipe — <code style="color:var(--amber)">/weekly-metrics</code>, <code style="color:var(--amber)">/show-prep</code> — anyone on staff can run. One person's workflow becomes the whole station's capability.</p></div>
+      <div class="card"><h3>MCP connections</h3><p>The Model Context Protocol lets Claude Code read Google Drive, pull from Slack, update project boards, and connect to broadcast and fundraising systems. Your data stays put; Claude comes to it.</p></div>
+      <div class="card" style="grid-column:1/-1"><h3>Auto memory</h3><p>Claude Code saves what it learns as it works — commands, quirks of your files, decisions you made — so future sessions start smarter.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="wrap">
+    <span class="eyebrow">The role guide</span>
+    <h2>Find your desk on the dial</h2>
+    <div class="rulebar"></div>
+    <p class="body" style="max-width:720px">Each role gets four starter use cases, a first prompt you can copy verbatim, and a power-user path. Use the dial above or the buttons below — the needle follows you.</p>
+    <div class="role-view" id="roleView" role="tabpanel" tabindex="0"></div>
+  </div>
+</section>
+
+<section id="policy">
+  <div class="wrap">
+    <span class="eyebrow">Station policy</span>
+    <h2>Responsible use — the public-media way</h2>
+    <div class="rulebar" style="background:var(--red)"></div>
+    <p class="body" style="max-width:720px;margin-bottom:16px">Public radio's asset is trust. Five commitments to adapt into your station's written policy:</p>
+    <ul class="policy">
+      <li><b>Keep creative and editorial human.</b> Draft with AI, decide with people. On-air voice, commissioned creative, and editorial judgment stay human — and where possible, local.</li>
+      <li><b>Verify before it airs.</b> Claude Code accelerates research; it doesn't replace verification. Ask for page numbers and sources so checking is easy.</li>
+      <li><b>Protect donor and listener data.</b> Treat exports with the same care as the systems they came from. Work on copies. Follow your organization's data policy.</li>
+      <li><b>Review before it acts.</b> Use Plan Mode when stakes are high. Keep backups. Read what it proposes, especially early on.</li>
+      <li><b>Start small, share what works.</b> One task, one folder, one week. When a workflow works, turn it into a skill and hand it to a colleague.</li>
+    </ul>
+    <div class="challenge"><p><b>The one-week challenge.</b> Pick one task you do every week. Put its files in a folder. Spend 30 minutes with Claude Code on it. If it saves you an hour, teach it to a colleague — that's how a station's capability compounds.</p></div>
+  </div>
+</section>
+
+<section id="resources" style="border-bottom:none">
+  <div class="wrap">
+    <span class="eyebrow">Resources</span>
+    <h2>Where to go next</h2>
+    <div class="rulebar"></div>
+    <ul class="res">
+      <li><b>Official documentation</b> — <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>: installation, quickstart, every feature</li>
+      <li><b>Anthropic product news</b> — <a href="https://www.anthropic.com/news" target="_blank" rel="noopener">anthropic.com/news</a>: new models and capabilities</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">A public resource for the industry · Verified against official Claude Code documentation, July 2026 · Frequencies are ornamental; the workflows are not.</div>
+</footer>
+
+<script>
+const ROLES=[
+{id:"gm",freq:"88.1",title:"General Manager / Executive Leadership",
+ sum:"You live in board decks, budgets, grant deadlines, and strategy documents. Claude Code turns scattered reports into a decision-ready picture — and gives you a low-risk way to understand what AI can and can't do before you set policy for everyone else.",
+ uc:["Combine Nielsen, streaming, membership, and underwriting reports into one board-ready summary with trends flagged","Draft and iterate grant narratives against a funder's actual guidelines document","Analyze multi-year budgets: revenue concentration risk, trends against plan","Turn a strategic plan into a quarterly tracker your leadership team actually updates"],
+ prompt:"Here's a folder with our last four quarterly board reports. Read them and give me: the three metrics trending worst, the three trending best, and any claims that contradict each other between reports.",
+ pp:"Build a standing 'board packet' skill: drop in the month's raw reports, run one command, get a formatted draft deck plus a one-page executive summary. Then write your station's AI use policy from experience, not fear."},
+{id:"pd",freq:"89.7",title:"Program Director / Content Leadership",
+ sum:"Your job is judgment — but the inputs are buried in logs, schedules, ratings books, and aircheck notes. Claude Code does the assembly so you spend your hours on the decisions only you can make.",
+ uc:["Analyze program logs against ratings: which dayparts and shows over- or under-perform","Draft programming clocks and format changes, then stress-test against the current schedule","Summarize listener feedback into themes with representative quotes","Build a competitive scan: what peer stations in your format do that you aren't"],
+ prompt:"This folder has six months of our program schedule and the matching audience data export. Which hours have the biggest gap between lead-in audience and retained audience, and what's scheduled there?",
+ pp:"Create a weekly 'programming health' skill merging logs, streaming numbers, and feedback into one Monday-morning brief. Pilot a small internal tool — a schedule-conflict checker, a music-clock visualizer — without waiting for a vendor."},
+{id:"md",freq:"90.5",title:"Music Director / On-Air Host",
+ sum:"Show prep, spin analysis, label mail triage, back-announce research — the invisible hours around the on-air hour. Claude Code compresses them. It's a research assistant with perfect patience for your library's messy metadata.",
+ uc:["Analyze spin data: rotation balance, artist diversity, how much new music made air","Clean and deduplicate music library metadata (wrong years, misspellings, missing genres)","Build show-prep briefs: artist backgrounds, release context, local connections for tonight's playlist","Cross-reference playlists against charts and new-release feeds to spot what you're missing"],
+ prompt:"Here's an export of our last 90 days of spins. Break down: top 20 artists by plays, percentage of spins that were releases from the last 12 months, and any artist who appeared in only one daypart.",
+ pp:"Connect Claude Code to your scheduling system's exports and build a recurring rotation-audit skill. Ambitious hosts have built full agentic research platforms — artist data, label info, and archival context flowing into prep docs automatically."},
+{id:"news",freq:"91.3",title:"News Director / Journalists",
+ sum:"Public records don't read themselves. Claude Code is built for exactly what data journalism requires: parsing budget PDFs, cleaning FOIA spreadsheets, finding the pattern in 400 pages of minutes — with you verifying every claim before it airs.",
+ uc:["Extract data from government budget PDFs; find year-over-year changes worth a story","Clean and analyze FOIA responses: messy spreadsheets, scans, inconsistent formats","Summarize hours of meeting minutes into a tip sheet with page citations","Build newsroom lookup tools: campaign finance, property records, inspection data"],
+ prompt:"This is our city's proposed budget PDF and last year's adopted budget PDF. Extract both into tables, then show me every department with a change of more than 10 percent, with page numbers so I can verify.",
+ pp:"Build deterministic civic-data pipelines: budget documents in, structured verifiable data out, the same answer every time. Newsrooms are turning legislative feeds into automated briefings — with human editorial judgment as the non-negotiable last step."},
+{id:"dev",freq:"92.1",title:"Development / Membership",
+ sum:"Your CRM knows things it isn't telling you. Claude Code reads the exports your database vendor makes painful — lapsed-donor patterns, sustainer churn, acknowledgment backlogs — and drafts the personalized follow-through you never have time for.",
+ uc:["Analyze donor exports: lapse risk, upgrade candidates, sustainer retention by cohort","Draft segmented renewal and acknowledgment letters that reference giving history","Reconcile pledge-drive data across CRM, payment processor, and on-air tallies","Model scenarios: what a 5-point retention improvement does to next year's budget"],
+ prompt:"Here's a CSV export of our members. Show me: how many are within 60 days of lapsing, sustainer vs one-time breakdown by year joined, and the 25 lapsed donors with the largest lifetime giving.",
+ pp:"Build a monthly 'membership health' skill with cohort retention curves your board can read. Connect your fundraising platform via MCP and generate the development dashboard your budget never covered."},
+{id:"uw",freq:"93.3",title:"Underwriting / Sponsorship",
+ sum:"Proposals, prospecting, proof-of-performance — the paperwork between a handshake and a renewal. Claude Code drafts credit copy within FCC constraints, builds prospect briefs, and turns fulfillment data into renewal-winning reports.",
+ uc:["Draft underwriting credit copy variants that stay inside noncommercial guidelines","Build prospect briefs: local business research, giving history, category fit","Turn spot logs and streaming stats into clean proof-of-performance reports per client","Analyze your book of business: category concentration, renewal risk, seasonal gaps"],
+ prompt:"Here's our underwriting client list with contract values and end dates, plus last year's version. Which categories are we over-concentrated in, which clients didn't renew, and what does Q4 look like against last Q4?",
+ pp:"Create a proof-of-performance skill: client name in, formatted report out, pulling from traffic and streaming exports. Build a prospecting pipeline that cross-references local business news with your category gaps."},
+{id:"digital",freq:"94.9",title:"Digital / Marketing / Audience",
+ sum:"You're one person doing the job of a digital agency. Claude Code is the analyst, production assistant, and web developer you don't have — turning GA4 exports into insight and one piece of content into ten.",
+ uc:["Analyze GA4, social, and newsletter exports together: what moves listening and membership","Repurpose one interview into an article, newsletter item, social set, and audio description","Audit your website: broken links, missing metadata, accessibility issues, slow pages","Build landing pages, email templates, and campaign microsites without a developer"],
+ prompt:"Here are exports from GA4, our Mailchimp campaigns, and our social insights for the last quarter. Which content topics show up in the top 10 percent of all three channels, and which do well in one channel but never get cross-posted?",
+ pp:"Wire your analytics stack together (GA4, streaming, email, fundraising) into an automated board-facing dashboard. Build station-specific tools — event pages, interactive program guides, surveys — that would have been five-figure vendor quotes."},
+{id:"eng",freq:"95.7",title:"Engineering / Operations / IT",
+ sum:"You already think in systems; Claude Code speaks the language. Script the maintenance work, document the transmitter site while the knowledge is still in your head, and finally build the integrations between systems never designed to talk.",
+ uc:["Write and maintain scripts: log rotation, silence-detection alerts, backup verification, EAS log parsing","Turn tribal knowledge into runbooks, site diagrams, and failure procedures","Parse automation logs to find patterns behind intermittent failures","Bridge systems: playout to website now-playing, traffic to billing, remote monitoring"],
+ prompt:"Here are two weeks of logs from our automation system around the audio dropouts we've been chasing. Find every dropout event, what happened in the 60 seconds before each one, and any pattern in timing or preceding events.",
+ pp:"Build MCP servers for your broadcast stack so the whole station's tooling can talk to playout, traffic, and monitoring systems safely. Stations have shipped 20+ production integrations this way — treat your infrastructure as a codebase."}
+];
+
+// --- build dial ticks/labels ---
+const ticks=document.getElementById('ticks'), labels=document.getElementById('labels');
+const X0=20,X1=940,N=72;
+let t='',l='';
+for(let i=0;i<=N;i++){
+  const x=X0+(X1-X0)*i/N;
+  if(i%12===0){t+=`<line x1="${x}" y1="38" x2="${x}" y2="60" stroke="#E9A335" stroke-width="1.6"/>`;}
+  else if(i%6===0){t+=`<line x1="${x}" y1="46" x2="${x}" y2="60" stroke="#8A93A0" stroke-width="1"/>`;}
+  else{t+=`<line x1="${x}" y1="52" x2="${x}" y2="60" stroke="#39434E" stroke-width="0.8"/>`;}
+}
+["88","89","90","91","92","93","94","95","96"].forEach((f,i)=>{
+  const x=X0+(X1-X0)*i/8; l+=`<text x="${x}" y="28" text-anchor="middle">${f}</text>`;
+});
+ticks.innerHTML=t; labels.innerHTML=l;
+
+// --- role tabs + viewer ---
+const tabs=document.getElementById('roleTabs'), view=document.getElementById('roleView');
+const needle=document.getElementById('needle');
+
+function freqToX(freq){
+  const f=parseFloat(freq);
+  return X0+(X1-X0)*(f-88)/8;
+}
+function render(idx){
+  const r=ROLES[idx];
+  document.querySelectorAll('.freq-btn').forEach((b,i)=>b.setAttribute('aria-pressed',i===idx?'true':'false'));
+  const x=freqToX(r.freq);
+  needle.setAttribute('x1',x); needle.setAttribute('x2',x);
+  view.innerHTML=`
+    <div class="role-head"><span class="role-freq">${r.freq}</span><h3>${r.title}</h3></div>
+    <p class="sum">${r.sum}</p>
+    <div class="role-cols">
+      <div class="uc"><h4>Start here</h4><ul>${r.uc.map(u=>`<li>${u}</li>`).join('')}</ul></div>
+      <div>
+        <div class="prompt"><h4>A first prompt to copy</h4><code>&ldquo;${r.prompt}&rdquo;</code>
+          <button class="copy" data-p="${r.prompt.replace(/"/g,'&quot;')}">Copy prompt</button></div>
+        <div class="pp"><h4>Power-user path</h4><p>${r.pp}</p></div>
+      </div>
+    </div>`;
+  view.querySelector('.copy').addEventListener('click',e=>{
+    const btn=e.currentTarget;
+    navigator.clipboard.writeText(btn.dataset.p).then(()=>{
+      btn.textContent='Copied ✓'; setTimeout(()=>btn.textContent='Copy prompt',1600);
+    }).catch(()=>{btn.textContent='Select & copy above';});
+  });
+}
+ROLES.forEach((r,i)=>{
+  const b=document.createElement('button');
+  b.className='freq-btn'; b.setAttribute('role','tab'); b.setAttribute('aria-pressed','false');
+  b.innerHTML=`<b>${r.freq}</b><span>${r.title.split(' / ')[0]}</span>`;
+  b.addEventListener('click',()=>{render(i);document.getElementById('roles').scrollIntoView({behavior:'smooth',block:'start'});});
+  tabs.appendChild(b);
+});
+render(0);
+</script>
+</body>
+</html>
