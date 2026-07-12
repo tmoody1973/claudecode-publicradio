@@ -1,0 +1,134 @@
+{
+  "id": "m5",
+  "number": 5,
+  "title": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+  "kicker": "Context, memory, and mapping the process",
+  "runtimeMin": 24,
+  "sourceChapters": [
+    {"n": 17, "title": "The Context Window & Session Handoff", "start": 6973, "startLabel": "1:56:13"},
+    {"n": 18, "title": "Memory & Your Second Brain", "start": 7397, "startLabel": "2:03:17"},
+    {"n": 19, "title": "Constraints, Metrics & Mapping Your Process", "start": 7895, "startLabel": "2:11:35"}
+  ],
+  "plainSummary": "Every AI session has a finite amount of room to hold information — the context window. Fill it up and the assistant gets noticeably worse: it forgets what you told it an hour ago, contradicts itself, and starts making things up. This module teaches you to see how full it is, to reset it deliberately with a written 'session handoff' instead of losing your work, and to make Claude remember the durable stuff (your preferences, your station's rules) in files rather than in the conversation. Then it turns to the least glamorous and most valuable skill in the whole course: writing down how you actually do a thing, step by step, before you ask a machine to help you do it. The video's line is blunt — you can't automate what you can't map.",
+  "whyItMatters": "The number one thing non-coders get wrong is treating the AI like it has infinite memory, then blaming the model when a four-hour session turns to mush. And the second thing they get wrong is trying to automate a process nobody has ever written down. At a station, the unwritten process usually lives in exactly one person's head — the traffic person who knows why the 7:20 spot always moves, the membership person who knows which donors get a call and not an email. Mapping that process so an AI can follow it is the same document you'd need if that person left tomorrow. The AI project is the excuse; the succession plan is the payoff.",
+  "concepts": [
+    {
+      "term": "Context window",
+      "plain": "The total amount of text the AI can hold in mind at once — your messages, its replies, the files it opened, its own instructions. It is large but finite, and it fills up.",
+      "stationTranslation": "The producer's prep folder for one show. Everything the host can reach for while on air. Stuff more in and eventually they can't find anything.",
+      "tLabel": "1:56:20",
+      "t": 6980
+    },
+    {
+      "term": "Context rot (the 'dumb zone')",
+      "plain": "As the window fills, answer quality drifts. The model gets confused, forgets earlier decisions, repeats itself. It isn't broken — it's overloaded.",
+      "stationTranslation": "Hour eleven of pledge drive. The board op is still technically there, but the errors start. The video's analogy: a truck driver past their legal hours.",
+      "tLabel": "1:57:00",
+      "t": 7020
+    },
+    {
+      "term": "/clear vs /compact",
+      "plain": "/clear wipes the session to zero — a fresh start with no memory of the conversation. /compact summarizes and keeps going. Claude Code also auto-compacts when you get close to full.",
+      "stationTranslation": "/clear is a new prep folder. /compact is cramming the old one into a one-page summary — helpful, but you lose detail you may still need.",
+      "tLabel": "2:00:18",
+      "t": 7218
+    },
+    {
+      "term": "Session handoff",
+      "plain": "Before you clear, ask Claude to write a summary of where you started, decisions locked, what shipped, key files, what's still open. You copy that, run /clear, and paste it into the fresh session.",
+      "stationTranslation": "The shift-change note. The morning board op leaves a page for the afternoon: here's what aired, here's what broke, here's what still needs a decision.",
+      "tLabel": "1:58:20",
+      "t": 7100
+    },
+    {
+      "term": "Memory (files, not conversation)",
+      "plain": "Claude Code has auto-memory: it writes durable facts and your corrections into small markdown files it can look up later, indexed by a MEMORY.md file. CLAUDE.md holds the rules; memory holds learned facts.",
+      "stationTranslation": "CLAUDE.md is the station's style guide and operations policy. Memory is the sticky notes: 'this GM hates the word leverage,' 'we always spell it Wisconsin Avenue.'",
+      "tLabel": "2:04:32",
+      "t": 7472
+    },
+    {
+      "term": "The constraint",
+      "plain": "The one bottleneck that actually limits your output. Fixing anything else just makes you busy. The video's test: if five times the volume showed up tomorrow, what breaks first?",
+      "stationTranslation": "If your membership doubled overnight, what snaps — the thank-you letters? The traffic log? Automate that. Not the thing that demoed well on LinkedIn.",
+      "tLabel": "2:12:13",
+      "t": 7933
+    },
+    {
+      "term": "You can't automate what you can't map",
+      "plain": "Before you build anything, write the process down: what triggers it, what you do, in what order, with what judgment calls. If you can't explain it to an intern, an AI can't do it either.",
+      "stationTranslation": "This is the thing nobody has time for and everybody needs. The map you write so Claude can run the process is the same map you'd hand a new hire on day one.",
+      "tLabel": "2:17:16",
+      "t": 8236
+    }
+  ],
+  "glossary": [
+    {"term": "Token", "definition": "A chunk of text, roughly three-quarters of a word. Context windows and usage limits are measured in tokens, not pages."},
+    {"term": "Context rot", "definition": "The quality drop that happens as a session's context window fills up. Also called 'the dumb zone.'"},
+    {"term": "/compact", "definition": "Claude Code command that summarizes the conversation so far and keeps going. Runs automatically when you near the limit — often too late."},
+    {"term": "/clear", "definition": "Wipes the session clean. Fresh context, zero memory of what you just did — so hand off first."},
+    {"term": "Auto-memory", "definition": "Claude Code writing durable facts and your corrections into small markdown files across sessions. Toggle it with /memory in the terminal."},
+    {"term": "MEMORY.md", "definition": "The index file that points to those individual memory files. One fact per file; MEMORY.md is the table of contents."},
+    {"term": "North star metric", "definition": "The one number you pick before you build, that tells you afterward whether the build was worth it."},
+    {"term": "Theory of constraints", "definition": "Work only compounds at the bottleneck. Unclog the biggest one, and the next one becomes the biggest."}
+  ],
+  "useCases": [
+    {
+      "role": "Traffic & Operations",
+      "title": "Get the log out of one person's head",
+      "scenario": "Your traffic person has run the log for eleven years. Nobody else fully understands the rotation rules, the make-good policy, or why certain sponsors never sit next to each other. They're talking about retiring.",
+      "howClaudeHelps": "Sit with them and use Claude Code as the scribe: it interviews them, asks the follow-up questions you'd forget, and writes the process to a plain markdown file — triggers, steps, judgment calls, exceptions. Two sessions in, you have a real operations document. Only then do you look at what part of it could be automated.",
+      "timeSaved": "A process doc that has been 'on the list' for a decade gets drafted in two 90-minute sittings",
+      "guardrail": "The retiring expert reviews and signs off on the map. Claude will happily fill a gap with a plausible-sounding rule that isn't your rule — every step needs a human 'yes, that's how we do it.'"
+    },
+    {
+      "role": "Membership & Development",
+      "title": "Map the drive before you automate the drive",
+      "scenario": "Pledge drive prep is a two-week scramble every time, and the sequence lives in a shared inbox and one person's memory. Leadership keeps asking whether AI could help.",
+      "howClaudeHelps": "Do the video's audit first: write down every trigger in a drive week (pitch block starts, gift comes in, thank-you goes out, premium ships) and which of them happens most. Pick the single biggest clog and a north star number — 'we cut thank-you turnaround from nine days to two.' Then build only for that.",
+      "timeSaved": "Prevents three months of building the wrong tool",
+      "guardrail": "Map the process using descriptions, not data. No donor names, addresses, giving history, or CRM exports go into Claude — the map says 'look up the donor's last gift,' it does not contain the donor's last gift."
+    },
+    {
+      "role": "News",
+      "title": "A three-day investigation that doesn't lose the thread",
+      "scenario": "A reporter is working a records-heavy story across several days — hundreds of pages of council minutes, a spreadsheet of contracts, a working outline. By day two the assistant is contradicting its own earlier summaries.",
+      "howClaudeHelps": "That's context rot, not a bad model. At the end of each working session, ask for a session handoff: what we established, what's still unverified, which documents we've read, what to check next. Copy it, /clear, paste it into a fresh session. The reporter picks up sharp instead of dragging two days of sludge along.",
+      "timeSaved": "A day-three session that used to be useless becomes as sharp as day one",
+      "guardrail": "The handoff note is a research memo, not a fact-check. Every claim in it still gets verified against the primary document by the reporter before it goes anywhere near air or print."
+    },
+    {
+      "role": "Grants & Compliance",
+      "title": "Write down how the LCSR actually gets done",
+      "scenario": "The CPB Local Content and Service Report gets assembled every year by whoever is least able to say no. The steps are re-invented annually — which numbers come from where, who signs off, what counts as a partnership.",
+      "howClaudeHelps": "During this year's assembly, keep a Claude Code session open and narrate as you go: 'this figure comes from the underwriting spreadsheet, this narrative gets reviewed by the GM.' Have it write the process to a file. Next year that file is the starting point, not a blank page — and it's the same file you'd hand to a successor.",
+      "timeSaved": "Next year's assembly starts from a written process instead of institutional archaeology",
+      "guardrail": "Claude does not know CPB's current requirements. The map documents your station's internal process; the actual reporting rules come from CPB's published guidance and a human confirms them each cycle."
+    },
+    {
+      "role": "Leadership",
+      "title": "Find the clog before you buy the tool",
+      "scenario": "The GM is getting pitched AI tools from every direction and has budget for roughly one. Every vendor demo looks impressive.",
+      "howClaudeHelps": "Run the video's constraint question with your department heads: if we got five times the volume tomorrow — five times the members, five times the story pitches, five times the underwriting inquiries — what breaks first? Write down the answers. That list, plus a north star number for each, is your actual AI roadmap, and it's yours rather than a vendor's.",
+      "timeSaved": "One afternoon of honest questions replaces a year of shiny-object procurement",
+      "guardrail": "Don't automate a broken process — you'll just scale the breakage. If a step is broken, fix the step before you speed it up."
+    }
+  ],
+  "tryThis": {
+    "title": "Map one process you've never written down",
+    "setup": "Pick a process you personally run every week that nobody else at the station could run tomorrow. Open Claude Code in a folder where you can save a file. Have 30 uninterrupted minutes — this is an interview, not a prompt.",
+    "prompt": "I run [the weekly underwriting spot-copy review] at a public radio station and it exists nowhere except in my head. I want you to interview me and turn it into a written process document that a new hire could actually follow.\n\nRules for you:\n- Ask me ONE question at a time and wait for my answer. Do not write the document until I say we're done.\n- Start with what triggers this process — what event kicks it off, and how often does it happen?\n- Then walk me step by step through what I actually do. When I skip a step because it's obvious to me, catch it and ask.\n- Push me hard on the judgment calls: the places where I decide something based on experience rather than a rule. Those are the parts that will be lost if I leave, so make me say them out loud.\n- Ask what has gone wrong in the past and what I now do to prevent it.\n\nWhen I say we're done, write it to PROCESS.md with these sections: Trigger, Inputs, Steps, Judgment calls and why, Failure modes, Who to ask when it breaks. Flag anywhere I was vague — don't smooth it over or guess.\n\nDon't include any donor names, contact info, or giving history in the document. Refer to systems and roles, not people's data."
+  },
+  "pitfalls": [
+    "Waiting for auto-compact to save you. The video is clear that it kicks in too late — by then the answers have already gotten worse. Hand off deliberately at around a quarter of the window, not when the machine forces it.",
+    "Running /clear before you've written the handoff. That is genuinely gone. Get the summary out first, copy it, then clear.",
+    "Assuming a fresh session is empty. Your CLAUDE.md, skills, and memory files load automatically — a brand-new session may already be 30-40k tokens deep before you type a word.",
+    "Automating a broken process. If the traffic log workflow is a mess, automating it gives you a faster mess. Fix the step, then speed it up.",
+    "Building with no number. Before you start, name the one metric that would make this worth having done. Without it, nobody can tell six months later whether it worked, and the next AI project gets killed."
+  ],
+  "keyQuotes": [
+    {"quote": "Answer quality drifts as the context window fills. It causes Claude to get confused, forget things — that is called the dumb zone. It's also called context rot.", "tLabel": "1:57:00", "t": 7020},
+    {"quote": "If you don't clearly understand the process already, then how in the world do you expect an intern to understand it, or an AI agent to understand it?", "tLabel": "2:17:16", "t": 8236},
+    {"quote": "Automate a broken process and you don't fix it — you scale it. You can't automate what you can't map.", "tLabel": "2:11:43", "t": 7903}
+  ]
+}

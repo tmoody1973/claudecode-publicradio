@@ -1,0 +1,196 @@
+{
+  "id": "m1",
+  "number": 1,
+  "title": "Orientation: What Claude Code Actually Is",
+  "kicker": "The mental shift before the first keystroke",
+  "runtimeMin": 32,
+  "sourceChapters": [
+    {"n": 0, "title": "Intro: From Beginner to AI Native", "start": 0, "startLabel": "0:00:00"},
+    {"n": 1, "title": "What Is Claude Code (Chat, Cowork, Code)", "start": 60, "startLabel": "0:01:00"},
+    {"n": 2, "title": "Models vs Context (The Core Analogy)", "start": 304, "startLabel": "0:05:04"},
+    {"n": 3, "title": "The 12 Mindset Shifts", "start": 408, "startLabel": "0:06:48"},
+    {"n": 4, "title": "Prompt Engineering vs Context Engineering", "start": 892, "startLabel": "0:14:52"},
+    {"n": 5, "title": "Taste, Iteration & Building Your Jarvis", "start": 1053, "startLabel": "0:17:33"},
+    {"n": 6, "title": "One Passion, Many Branches", "start": 1460, "startLabel": "0:24:20"}
+  ],
+  "plainSummary": "Claude Code has the word 'code' in the name, but you do not write code to use it. It is a chat window that can also open, read, and edit the actual files on your computer — your spreadsheets, your scripts, your show notes — and reach out to things online. This module explains the three Claude products (Chat, Cowork, Code), why Claude Code is the powerful one, and the single analogy that makes the whole thing click: the AI model is an engine, Claude Code is the car built around it, and you are the driver. The rest of the module is mindset: the difference between writing clever prompts and giving the AI real context about your station, why your judgment about what is good still decides everything, and why you should think of yourself as a manager of a very fast, very literal new hire.",
+  "whyItMatters": "Most station staff have only ever used AI as a chatbot in a browser tab — retyping the same background every single time, getting generic output back, and concluding it is not worth the trouble. The shift here is that Claude Code can already know your pledge calendar, your style guide, your last twelve underwriting scripts, and your CPB reporting language, because it can read the folders where those things already live. That is the difference between a smart stranger and a colleague who has been at the station for three years.",
+  "concepts": [
+    {
+      "term": "Chat vs. Cowork vs. Code",
+      "plain": "Anthropic makes three things. Chat is the website you already know. Cowork is a simpler tool for everyday office automation. Claude Code is the most powerful, and despite the name it needs no coding.",
+      "stationTranslation": "Chat is asking a smart temp a question. Claude Code is that temp with a desk in your building, a key to the file room, and your style guide already read.",
+      "tLabel": "0:01:10",
+      "t": 70
+    },
+    {
+      "term": "The harness (engine, car, driver)",
+      "plain": "The AI model (Opus, Sonnet, Haiku) is the engine. Claude Code is the car built around it — steering, doors, trunk. You are the driver. Swap engines or swap cars; the driver is the constant.",
+      "stationTranslation": "The model is the transmitter. Claude Code is the studio and console around it. You are still the one deciding what actually goes on the air.",
+      "tLabel": "0:05:09",
+      "t": 309
+    },
+    {
+      "term": "Access to local files",
+      "plain": "The real difference: Claude Code works inside a folder you point it at. It can open, read, and change the files there — and still search the web when it needs to.",
+      "stationTranslation": "Point it at your 'Fall Drive 2026' folder and it can read last year's scripts, the goal sheet, and the copy that flopped — instead of you re-explaining all of it.",
+      "tLabel": "0:03:15",
+      "t": 195
+    },
+    {
+      "term": "Context engineering (vs. prompt engineering)",
+      "plain": "Prompts are how you ask. Context is what the AI actually knows. As models improve, clever prompt wording matters less — what it knows about your world matters more, and always will.",
+      "stationTranslation": "A new intern is not useless because you phrased the assignment badly. They are useless until someone tells them what the station does, who's on the desk, and what's on the air tonight.",
+      "tLabel": "0:16:08",
+      "t": 968
+    },
+    {
+      "term": "Taste and judgment",
+      "plain": "As output gets good, the temptation is to stop reading it. The skill that survives is knowing what good looks like — and correcting the system every time it misses, so it misses less.",
+      "stationTranslation": "AI can draft the newscast tease. You still know whether it sounds like your station or like a press release. Your name is on the air either way.",
+      "tLabel": "0:11:55",
+      "t": 715
+    },
+    {
+      "term": "Iteration speed and a definition of done",
+      "plain": "You almost never get it right in one shot. Build the ugly version fast, see what breaks, feed the correction back. And decide up front what 'done' means, or you will tinker forever.",
+      "stationTranslation": "Like teaching a kid to ride a bike: hand on the back, correct the lean, let go a little more each run. Pick one number — hours saved, spots logged — and stop when you hit it.",
+      "tLabel": "0:19:50",
+      "t": 1190
+    },
+    {
+      "term": "Vending machine vs. slot machine",
+      "plain": "A plain workflow is a vending machine: same input, same output, cheap, never surprises you. An AI agent is a slot machine: powerful when the input is messy and reasoning is needed, but variable, pricier, and it fails in odd ways.",
+      "stationTranslation": "Emailing the traffic log every Monday needs no AI — that's a vending machine. Reading 200 messy listener emails and sorting what they actually want does.",
+      "tLabel": "0:21:47",
+      "t": 1307
+    }
+  ],
+  "mindsetShifts": [
+    {
+      "n": 1,
+      "shift": "Become 'the AI person'",
+      "plain": "It's relative, not absolute. You don't need to be an expert — you need to know more than the people around you, and to have actually shipped something with it.",
+      "stationTake": "You do not need to out-nerd Silicon Valley. You need to be the person at your station who has actually cut a four-hour task to forty minutes and can show it in a staff meeting."
+    },
+    {
+      "n": 2,
+      "shift": "Taste and judgment are the skill that survives",
+      "plain": "Anyone can generate. The scarce skill is knowing what's good, catching the tells, and refusing to ship what isn't.",
+      "stationTake": "Editorial judgment is the whole job and always was. AI does not lower that bar — it raises the volume of things you now have to hold to it."
+    },
+    {
+      "n": 3,
+      "shift": "Become a context engineer, not a prompt engineer",
+      "plain": "Prompts are how you ask; context is what it knows. Stop opening blank chats. Give it your real documents, history, and priorities.",
+      "stationTake": "The AI cannot know your pledge script conventions, your music rotation rules, or your CPB reporting language unless you hand it the folder where those live."
+    },
+    {
+      "n": 4,
+      "shift": "Iteration speed wins",
+      "plain": "Build the ugly version fast, see what breaks, correct it, repeat. Every pass is data. Also: know when to stop — define 'done' before you start.",
+      "stationTake": "Ship the rough draft of the automation on a Tuesday, not the perfect one next quarter. Tie it to one number — hours off the log, minutes off show prep — and stop there."
+    },
+    {
+      "n": 5,
+      "shift": "Build your Jarvis — but default to the simplest thing",
+      "plain": "The goal is systems that run without you triggering them. But the moment you leave the loop, risk goes up — and many tasks need a plain workflow, not an AI agent at all.",
+      "stationTake": "The impressive move is not an AI agent for everything. It's being the person who says 'this one is just a scheduled script — cheaper, safer, and it will never hallucinate a donor's name.'"
+    },
+    {
+      "n": 6,
+      "shift": "Unemployment insurance — one passion, many branches",
+      "plain": "Build more than one income stream from the same expertise rather than five unrelated ones. Building in public is the default way to become discoverable.",
+      "stationTake": "The transcript's least station-relevant point, and worth naming as such: public media staff have contracts, outside-activity policies, and a nonprofit's conflict-of-interest rules. Read them before acting on this one."
+    },
+    {
+      "n": 7,
+      "shift": "AI native is not what you know — it's what your hand reaches for",
+      "plain": "The test isn't how many models you can name. It's whether your reflex, when a task lands, is to open the AI or to open the same browser tab you always have.",
+      "stationTake": "When a records request or a 90-minute meeting recording lands, does your hand go to the transcript tool by reflex — or do you still start typing notes by hand?"
+    },
+    {
+      "n": 8,
+      "shift": "Don't quit in the dip — the payoff is the climb",
+      "plain": "Learning a new method costs you speed for a week or two. Most people quit inside that dip, right before the returns turn exponential.",
+      "stationTake": "Week one you will feel slower than you were with your old process. That is the dip, not the verdict. Budget for it before you tell the GM whether it worked."
+    },
+    {
+      "n": 9,
+      "shift": "You are just a manager of AI agents",
+      "plain": "Onboard it, tell it clearly what good and bad look like, review what it hands back, give feedback, and update its instructions so next time is better. All of it in plain English.",
+      "stationTake": "If you have ever supervised a summer intern in the newsroom, you already have the entire skill. You just have to keep actually reading their work."
+    }
+  ],
+  "mindsetShiftsNote": "Accuracy note: the video's chapter is titled 'The 12 Mindset Shifts' and Nate says he wrote a book around 12 of them, but the transcript never enumerates all twelve. What he actually delivers is a six-skill list (items 1-6 above), then he returns and names three shifts explicitly (items 7-9), calling one of them 'number four' before moving on to installation. The nine above are everything the transcript genuinely contains — we did not invent the missing three.",
+  "glossary": [
+    {"term": "Harness", "definition": "The tool wrapped around an AI model that gives it hands — file access, web search, memory. Claude Code is a harness."},
+    {"term": "Model", "definition": "The raw AI brain — Opus, Sonnet, Haiku, Fable. Interchangeable. Claude Code runs on the same ones as Claude Chat."},
+    {"term": "Context", "definition": "Everything the AI actually knows about your situation: your files, your history, your priorities. Not the same as your prompt."},
+    {"term": "Context window", "definition": "How much the AI can hold in its head at once — like a producer's prep folder for one show. It is finite."},
+    {"term": "Prompt engineering", "definition": "Wording a request well. Was a big deal; matters less each year as models improve on their own."},
+    {"term": "Context engineering", "definition": "Filling the AI's working memory with exactly the right information. Karpathy's phrase. The durable skill."},
+    {"term": "Agent", "definition": "AI that reasons and decides in a loop rather than following fixed steps. Powerful, variable, more expensive, fails in surprising ways."},
+    {"term": "Workflow", "definition": "A fixed if-this-then-that sequence with no AI in it. Predictable, cheap, boring, almost never breaks. Often the right answer."}
+  ],
+  "useCases": [
+    {
+      "role": "News",
+      "title": "The news director who has never opened a terminal",
+      "scenario": "You get a 400-page county budget PDF the night before a council vote and one reporter who is already filing two other stories.",
+      "howClaudeHelps": "Drop the PDF in a folder, point Claude Code at it, and ask it to pull every line item that changed by more than 10% year over year, with page numbers. It reads the whole thing in minutes and cites where it found each figure so your reporter can verify against the source. This is the local-files idea from Chapter 1 — the AI works in your folder, not in a browser tab.",
+      "timeSaved": "A full evening of skimming becomes ~20 minutes of reading a cited summary",
+      "guardrail": "Nothing it produces goes on air or online until your reporter has opened the actual PDF page it cited and confirmed the number. AI finds the lead; a human confirms it. Always."
+    },
+    {
+      "role": "Membership & Development",
+      "title": "Onboard Claude to your drive the way you'd onboard an intern",
+      "scenario": "Every fall drive, you rewrite the same pitch scripts from scratch because last year's live in someone's Google Drive and nobody remembers which ones actually converted.",
+      "howClaudeHelps": "Put your past scripts, your goal sheet, and your notes on what worked and what flopped into one folder — the summer-intern move from Chapter 4. Now Claude Code drafts against your station's actual voice and history instead of generic best practices. Correct it once, tell it why, and the next draft is closer.",
+      "timeSaved": "Two days of script rewriting becomes an afternoon of editing",
+      "guardrail": "Scripts and copy only. Never put the donor file in that folder — no names, no addresses, no giving history, no CRM export. The AI needs your language, not your list."
+    },
+    {
+      "role": "Underwriting / Corporate Support",
+      "title": "Know when the answer is 'this needs no AI at all'",
+      "scenario": "Your GM wants 'an AI' to handle underwriting spot copy end to end because a vendor demo looked impressive.",
+      "howClaudeHelps": "Use the vending-machine-vs-slot-machine test from Chapter 5. Emailing the weekly spot schedule is a vending machine — a plain scheduled script, no AI, never fails. Turning a client's messy intake email into a compliant draft spot is genuinely messy input and needs reasoning, so that part earns the AI. Being the person who can draw that line is the point.",
+      "timeSaved": "Avoids a six-week build for something a five-minute script does",
+      "guardrail": "FCC rules do not care that a machine wrote it. Every spot still gets human compliance review: no calls to action, no price claims, no qualitative claims. That review never gets automated."
+    },
+    {
+      "role": "Music & Programming",
+      "title": "Prep the local-music segment without the tab-switching",
+      "scenario": "Your local music host spends two hours before every show pulling artist bios, tour dates, and release news across a dozen browser tabs.",
+      "howClaudeHelps": "This is the 'what your hand reaches for' shift. Instead of opening the same tabs, hand Claude Code the week's playlist file and let it web-search and assemble a single prep sheet per artist. It reads your local file and reaches out online — both at once, which Chat cannot do.",
+      "timeSaved": "A 2-hour prep block becomes ~25 minutes of review",
+      "guardrail": "Anything the host says on air about an artist — a tour date, a label, a hometown — gets confirmed against a real source. A hallucinated tour date is your station's error, not the AI's."
+    },
+    {
+      "role": "Leadership",
+      "title": "Budget for the dip before you report on it",
+      "scenario": "You green-light an AI pilot and someone asks for results after two weeks. The team is slower than before and morale is dropping.",
+      "howClaudeHelps": "That is the dip from Chapter 6, and it is expected, not failure — a short-term productivity cost before the exponential return. Set the definition-of-done up front: one team, one workflow, one metric (hours off show prep, days off the LCSR draft), and a realistic window. Then judge it.",
+      "timeSaved": "Prevents killing a working pilot three weeks early",
+      "guardrail": "Disclose to your board and to staff what you are piloting and where. Public media runs on trust; a quiet AI rollout that surfaces later is a much bigger problem than a slow one announced early."
+    }
+  ],
+  "tryThis": {
+    "title": "Give Claude Code a first day at your station",
+    "setup": "Once Claude Code is installed (that's the next module), make one folder on your desktop called 'station-context'. Put in only public, non-sensitive things: your style guide, three underwriting scripts you're proud of, last quarter's newsletter, your on-air pledge script. No donor data. Then open Claude Code in that folder.",
+    "prompt": "Read every file in this folder. This is context about the public radio station I work at. Then write me a one-page summary of what you learned, organized as: (1) what this station sounds like — tone, sentence length, what it avoids; (2) three conventions our underwriting copy follows; (3) five things you'd need to know about us that are NOT in these files. For part 3, ask me the questions rather than guessing. Do not write anything for air yet — I just want to know what you actually understand about us."
+  },
+  "pitfalls": [
+    "The 'code' in Claude Code scares people off. There is no coding. It is a chat window that can also open the files on your computer — that is the entire difference from the Claude website.",
+    "Opening a blank chat every time and re-explaining your station from scratch. That is the single habit this module exists to break. Give it the folder, not the paragraph.",
+    "Trusting output because it reads well. The video's own warning: when the drafts get good, people stop reading them. In public media, an unread AI draft that reaches air or a donor is a trust problem, not a typo.",
+    "Reaching for an AI agent when a boring scheduled script would do. Agents are slot machines — variable, pricier, they fail in odd ways. Default to the simplest thing that works.",
+    "Quitting in the dip. Week one with a new method feels slower than the old way. That is the expected cost, not the result. Do not report it to your GM as a failure.",
+    "The 'stack side income streams' skill translates badly to public media. Check your outside-activity policy and your station's conflict-of-interest rules before you act on it."
+  ],
+  "keyQuotes": [
+    {"quote": "Prompts are how you ask. Context is what your AI actually knows.", "tLabel": "0:15:20", "t": 920},
+    {"quote": "AI can generate the work. Taste is deciding what deserves your name.", "tLabel": "0:14:18", "t": 858},
+    {"quote": "AI native isn't what you know. It's about what your hand reaches for.", "tLabel": "0:27:01", "t": 1621}
+  ]
+}

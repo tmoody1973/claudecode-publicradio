@@ -1,0 +1,179 @@
+{
+  "id": "m7",
+  "number": 7,
+  "title": "Build It, Ship It, and Know When to Trust It",
+  "kicker": "From a blank folder to a live URL",
+  "runtimeMin": 43,
+  "sourceChapters": [
+    {"n": 24, "title": "Building & Cloning Websites", "start": 10391, "startLabel": "2:53:11"},
+    {"n": 25, "title": "Deploying With GitHub & Vercel", "start": 11454, "startLabel": "3:10:54"},
+    {"n": 26, "title": "The AI Systems Pyramid & Trusting the Output", "start": 11938, "startLabel": "3:18:58"}
+  ],
+  "plainSummary": "This module is where the abstract becomes a thing on the internet. First you build a web page — a pledge microsite, an election guide, a local music showcase — by giving Claude Code a folder of your brand assets and a one-sentence prompt, then letting it screenshot its own work and fix what looks wrong. You can point it at a site you admire and have it build something in that spirit, then swap in your colors, your logo, your copy. Then you put it online: GitHub stores the files, Vercel turns them into a real address people can visit, and the two talk to each other so a change you approve goes live in about a minute. The last and most important part is the AI Systems Pyramid — a four-level map of how much freedom you are handing the machine, and the hard rule that a prompt is a suggestion, not a lock.",
+  "whyItMatters": "The microsite your station keeps postponing — the one that needs a $12,000 agency invoice or a six-week wait for the one web person — is now a weekend. But the same power that builds a pledge page in an afternoon can also send 150,000 emails you never asked for, and this module is the only one that tells you where the brakes are.",
+  "concepts": [
+    {
+      "term": "The front-end design skill",
+      "plain": "A free add-on you install once. It tells Claude how to make pages that look professionally designed instead of obviously machine-made — real spacing, real type, real motion.",
+      "stationTranslation": "The difference between a page that looks like your station and a page that looks like a 2009 WordPress template someone abandoned.",
+      "tLabel": "2:53:11",
+      "t": 10391
+    },
+    {
+      "term": "The screenshot loop",
+      "plain": "Claude builds the page, opens it in a browser, takes a picture of it, looks at the picture, and fixes what looks wrong — twice — before it shows you anything.",
+      "stationTranslation": "It listens back to its own tape before airing it. Turn it off for animated backgrounds — a still photo of motion confuses it into endless re-editing.",
+      "tLabel": "2:57:47",
+      "t": 10667
+    },
+    {
+      "term": "Cloning a reference site",
+      "plain": "Take a full-page screenshot of a site you like, hand it to Claude with the page's style code, and it builds something structurally similar that you then repaint with your own brand.",
+      "stationTranslation": "Like a producer saying 'give me a show that feels like Radiolab.' You're borrowing the structure and pacing, not the content — then making it yours.",
+      "tLabel": "3:00:18",
+      "t": 10818
+    },
+    {
+      "term": "GitHub and Vercel",
+      "plain": "GitHub is a cloud filing cabinet for your project that remembers every version. Vercel is the thing that takes what's in that cabinet and turns it into a web address anyone can visit.",
+      "stationTranslation": "GitHub is the archive with every cut of the piece. Vercel is the transmitter. Approve a change, it goes to the archive, and the transmitter picks it up automatically.",
+      "tLabel": "3:10:54",
+      "t": 11454
+    },
+    {
+      "term": "Local vs. live",
+      "plain": "'Local host' is a private preview only on your machine. Nothing reaches the public site until you explicitly say push. Write that rule into your CLAUDE.md so it never guesses.",
+      "stationTranslation": "The production studio versus the air chain. Everything gets built and checked off-air. You say the word, and only then does it hit the transmitter.",
+      "tLabel": "3:15:05",
+      "t": 11705
+    },
+    {
+      "term": "Deterministic vs. non-deterministic",
+      "plain": "Deterministic means same input, same output, every time — a vending machine. Non-deterministic means the AI generates something fresh each run. Flexible, but you cannot predict it exactly.",
+      "stationTranslation": "A carted promo plays identically every time. A live host reading the same copy will do it differently each hour. Both are fine — you just have to know which one you built.",
+      "tLabel": "3:17:49",
+      "t": 11869
+    },
+    {
+      "term": "The tool layer beats the prompt layer",
+      "plain": "Telling an AI 'never send an email' works 100 times and fails on the 101st. Removing the send-email tool entirely means it cannot send one even if it tries.",
+      "stationTranslation": "Don't post a sign saying 'do not key the mic.' Unplug the mic. Give it a draft tool and no send tool, a read tool and no delete tool.",
+      "tLabel": "3:22:50",
+      "t": 12170
+    }
+  ],
+  "glossary": [
+    {"term": "GitHub", "definition": "A cloud home for your project's files that keeps every past version, so any change can be traced or undone."},
+    {"term": "Vercel", "definition": "A service that takes the files in your GitHub repo and publishes them as a live website at a real web address."},
+    {"term": "Deploy", "definition": "Moving your work from a private preview on your own computer to a public address the world can open."},
+    {"term": "Repository (repo)", "definition": "One project's folder on GitHub — all the files plus the full history of who changed what and when."},
+    {"term": "Local host", "definition": "A private preview of your site that runs only on your own machine. Nobody else can see it."},
+    {"term": "Brand assets folder", "definition": "A folder with your logo and brand guidelines that you point Claude at, so what it builds comes out in your colors and type."},
+    {"term": "Evals", "definition": "A set of known inputs with known correct outputs. Run them against your automation to see how often it gets it right before you trust it."},
+    {"term": ".gitignore", "definition": "A list of files GitHub should never upload — API keys, passwords, anything sensitive. Check it before your first push."}
+  ],
+  "useCases": [
+    {
+      "role": "Membership & Development",
+      "title": "The pledge-drive microsite you never had time for",
+      "scenario": "Fall drive is three weeks out. You want a single page with the case for support, the thank-you gifts, a challenge-grant thermometer, and a big button to the donation form — and the web person is booked through November.",
+      "howClaudeHelps": "Drop your logo and brand guidelines into a brand_assets folder, describe the page in a sentence, and let the front-end design skill and the screenshot loop build and self-correct it. Push it to GitHub, import it into Vercel, and it's live on a real URL. Copy edits after that take a minute each.",
+      "timeSaved": "A $12k agency invoice and a six-week queue become an afternoon and a $20 domain",
+      "guardrail": "The donate button must point to your existing, PCI-compliant donation platform. Do not let Claude build a form that collects card numbers, names, or addresses. The page links out; it never captures donor data."
+    },
+    {
+      "role": "News",
+      "title": "An election guide that ships before the election",
+      "scenario": "You have candidate questionnaires for 14 local races and no way to present them beyond a wall of PDFs nobody opens.",
+      "howClaudeHelps": "Give Claude your questionnaire responses as files and ask for a clean, searchable page — one card per race, candidates side by side, mobile-first. The screenshot loop makes it legible on a phone before you ever look at it. Deploy to Vercel; corrections push live in a minute.",
+      "timeSaved": "Two weeks of web queue becomes about two days, most of it fact-checking",
+      "guardrail": "Every candidate's words are verbatim from their questionnaire — Claude formats, it does not paraphrase or summarize a candidate's position. An editor reads every card against the source before it goes live."
+    },
+    {
+      "role": "Music & Programming",
+      "title": "A local music showcase page for the station's featured artists",
+      "scenario": "Your music director wants a page for the 20 local artists in rotation this quarter — photo, bio, embedded track, show dates — and it needs to look better than a spreadsheet.",
+      "howClaudeHelps": "Find a music site whose layout you like, screenshot it, and use it as a structural reference. Then have Claude rebuild it with your brand colors and your artists. Pull individual pieces — a nicer card, a better hover state — from a component library like 21st.dev and ask Claude to work them in.",
+      "timeSaved": "A quarterly page refresh drops from a two-week ask to an afternoon",
+      "guardrail": "Embed audio through the platforms that already hold the license (Bandcamp, Spotify, the artist's own player). Do not have Claude host or serve audio files directly — that is a licensing question, not a coding one."
+    },
+    {
+      "role": "Leadership",
+      "title": "Deciding how much rope to give any AI project",
+      "scenario": "Three departments now want to automate something. You have no framework for saying yes to one and not yet to another, and no one has been able to explain the actual risk to your board.",
+      "howClaudeHelps": "Use the AI Systems Pyramid as a governance tool. Ask of every proposal: which level is this — chatbot, workflow, AI workflow, or agent? Push each one down a level if you can. Most things a station wants are AI workflows wearing an agent costume, and the workflow version is cheaper, faster, and nearly failure-free.",
+      "timeSaved": "Replaces months of vague AI-policy debate with one four-level question",
+      "guardrail": "Any automation touching donor records, member data, or anything publishable stays at chatbot level — human-triggered, human-reviewed — until it has been run against a set of known cases and passed."
+    },
+    {
+      "role": "Digital & Audience",
+      "title": "Auditing the automations nobody remembers building",
+      "scenario": "Someone set up an AI helper months ago. It still runs. Nobody is sure exactly what it can reach, and nobody has looked at its output in weeks.",
+      "howClaudeHelps": "Inventory every automation and, for each, list the tools it can actually touch — not what the prompt tells it to do, but what it is physically able to do. Strip out every tool it does not need: no send, no delete, no publish. Then ask Claude directly to help you enumerate the edge cases and design a safe failure for each one.",
+      "timeSaved": "One afternoon now versus one very bad week later",
+      "guardrail": "This is exactly how the instructor's own forgotten automation started DMing the wrong people and posting to public channels. If an automation can reach your CRM, your CMS, or your listener email list, it needs a hard tool-level wall — not a polite instruction."
+    }
+  ],
+  "tryThis": {
+    "title": "Build and ship a real one-page site for something your station is doing next month",
+    "setup": "Make a folder for the project. Inside it, make another folder called brand_assets and drop in your station logo (any format) and your brand guidelines — a PDF, a screenshot of the style guide, even a note listing your hex colors and fonts. If you don't have a guideline doc, a paragraph in a text file works. You'll need a free GitHub account and a free Vercel account to publish it; sign into Vercel with your GitHub login and it wires itself together.",
+    "prompt": "Build me a modern, professional one-page site for our fall pledge drive. Use @brand_assets/ for our logo, colors, and typography — match them exactly.\n\nSections, in order: a hero with our tagline and a big 'Become a Member' button; a short case-for-support section; a challenge-grant progress bar (hardcode it at 40% for now); a thank-you gift tier list with three tiers; and a footer with our call letters, address, and a link to our privacy policy.\n\nRules:\n- Mobile-first. Most of our listeners will open this on a phone.\n- The 'Become a Member' button links out to our existing donation platform. Do NOT build a form that collects any personal or payment information.\n- Use the screenshot loop to check your own work at phone width before you show me anything.\n- Keep everything on local host. Do not push anything to GitHub until I explicitly tell you to.\n\nShow me the local preview when it's ready and I'll give you notes."
+  },
+  "pitfalls": [
+    "Prompting is not a permission layer. The instructor told an automation to DM only him; it obeyed for five weeks, then started posting stats into public channels — because it still had access to every channel. If it can touch a thing, assume it eventually will.",
+    "Bypass permissions mode ('dangerously skip permissions') lets Claude run any command without asking. The instructor uses it and admits it is dangerous. Fine for a throwaway design folder while you are watching. Never on a machine with credentials to your CRM, CMS, or automation system.",
+    "Check .gitignore before your first push. GitHub repos can be public, and API keys, passwords, or an exported member list committed by accident are effectively published. Ask Claude what it is about to upload before you say push.",
+    "A cloned site is a starting structure, not a finished product. The generated copy, stats, and testimonials are placeholder fiction — the instructor's demo page invented its own statistics. Every number and every quote on a station page must be real and checked before it goes live.",
+    "Don't build an agent when a workflow will do. The instructor's rule-based inbox workflow was more reliable, cheaper, faster, and easier to debug than the AI agent that did the same job — and had 'basically no failures.'"
+  ],
+  "pyramid": {
+    "levels": [
+      {
+        "n": 1,
+        "name": "Chatbots (and skills you invoke yourself)",
+        "plain": "A human triggers it, every time. You ask, it answers or does one thing, you take the output and decide what happens next. You are sitting there the whole time.",
+        "stationExample": "A producer asks Claude to summarize a 40-minute council meeting transcript and pull the three usable quotes. Nothing moves until the producer moves it.",
+        "trustLevel": "Lowest autonomy, lowest risk. Nothing happens without you. This is where almost everything a station does should start — and where most of it should stay."
+      },
+      {
+        "n": 2,
+        "name": "Workflows (deterministic, no AI)",
+        "plain": "Plain old automation, triggered by an event or a schedule, with no AI in it at all. Same input, same output, every single time. It runs while you sleep.",
+        "stationExample": "Every Monday at 6am, pull last week's stream numbers from the analytics export and drop them into a shared spreadsheet. No judgment involved, so no AI needed.",
+        "trustLevel": "Runs unattended, but fully predictable. Higher autonomy than a chatbot, and yet arguably safer — because you know exactly what it will do. If a job doesn't need AI, do not put AI in it."
+      },
+      {
+        "n": 3,
+        "name": "AI workflows",
+        "plain": "A fixed chain of steps — 1, 2, 3, 4 — where one of the steps is an AI step. You know the order and the path. You just don't know exactly what the AI step will produce.",
+        "stationExample": "An underwriting inquiry hits the inbox. The workflow looks up whether the sender is an existing sponsor (objective), has AI draft a reply (generative), and drops it in the AE's drafts folder. Same three steps, every time.",
+        "trustLevel": "Medium. The route is locked; only the wording varies. This is the sweet spot for most station automation — the instructor rebuilt his unreliable inbox agent as an AI workflow and it went to 'basically no failures,' cheaper and faster."
+      },
+      {
+        "n": 4,
+        "name": "Agents",
+        "plain": "You hand the AI a set of tools and a goal, and it decides which tools to use, in what order, how many times. You do not know the path in advance. That is the whole point of it.",
+        "stationExample": "A research agent that, given a story tip, decides on its own whether to search public records, pull past coverage, check a database, or all three in some order — and comes back with a brief.",
+        "trustLevel": "Highest autonomy, highest unpredictability, highest cost, highest risk. Worth it only when the path genuinely cannot be known in advance. Enforce limits at the tool layer, never in the prompt, and never point one at donor data, your CMS, or your email list."
+      }
+    ],
+    "bigIdea": "As you climb the pyramid, four things rise together: autonomy, unpredictability, cost, and risk. So build the simplest system that does the job, and no simpler — and no more complex. Most things people reach for an agent to do are really an AI workflow, and most AI workflows are really just workflows. Push every idea down a level and see if it still works. Then, wherever you land, enforce your limits by removing tools, not by writing rules — because a prompt is a suggestion and a missing tool is a wall. The instructor's version: putting an automation live and walking away is like putting a kid on a bike with a helmet and going inside for a nap. You hold the seat. You run alongside. You let go slowly."
+  },
+  "keyQuotes": [
+    {
+      "quote": "Prompting is not a permission layer. The agent could follow instructions 100 times, but on the 101st time, maybe it just gets a little confused and it ignores that prompt.",
+      "tLabel": "3:22:50",
+      "t": 12170
+    },
+    {
+      "quote": "You have to assume that if an agent can read or touch or use something, assume that it will. Assume worst case scenario.",
+      "tLabel": "3:23:55",
+      "t": 12235
+    },
+    {
+      "quote": "You want to design the simplest solution for the job. If the process doesn't need AI, there's no reason you should put AI in there.",
+      "tLabel": "3:18:58",
+      "t": 11938
+    }
+  ]
+}

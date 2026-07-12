@@ -1,0 +1,161 @@
+{
+  "id": "m9",
+  "number": 9,
+  "title": "Work That Happens While You Sleep",
+  "kicker": "Scheduled automations and cloud routines",
+  "runtimeMin": 42,
+  "sourceChapters": [
+    {"n": 31, "title": "Scheduled Automations & Cloud Routines", "start": 17135, "startLabel": "4:45:35"},
+    {"n": 32, "title": "Building a Research Automation", "start": 18183, "startLabel": "5:03:03"}
+  ],
+  "plainSummary": "Everything up to now has been you sitting at the keyboard, talking to Claude. This module is about the opposite: saving a prompt once and having it run on its own — every weekday at 5:30am, or every time a form gets submitted. Claude Code now has 'routines,' which run the prompt on Anthropic's servers, so your computer can be off and it still fires. The module also teaches the harder judgment call: a lot of the things you want automated are boring and predictable, and for those you don't want an AI agent at all — you want a plain script that does the same thing the same way every morning. The video walks the whole build end to end: a 6am research brief that searches the web, writes it up, and drops it in the owner's chat tool.",
+  "whyItMatters": "Stations run on recurring grunt work nobody has time for: scanning agendas, watching grant deadlines, tracking new businesses, checking what local artists released this week. This is the module where that work stops being a person's Monday and starts being a file that ran at 5am. But it's also the module where you learn which of those jobs should never be handed to an AI that runs unsupervised.",
+  "concepts": [
+    {
+      "term": "Cloud routine",
+      "plain": "A prompt you save once and Claude runs on its own, on Anthropic's servers. Your laptop can be closed. It reads a GitHub folder you point it at, does the work, and reports back.",
+      "stationTranslation": "Like a recorded show that airs on a timer — you set it up once, and it goes out at 5am whether or not anyone is in the building.",
+      "tLabel": "4:46:20",
+      "t": 17180
+    },
+    {
+      "term": "One-shot prompt",
+      "plain": "A routine has to work without asking you anything, because you're asleep. So the prompt must be complete: what to look at, what to produce, where to send it, what to do if something fails.",
+      "stationTranslation": "It's a script for a fill-in host who can't call you. Anything you'd normally clarify mid-task has to be written down before it airs.",
+      "tLabel": "4:47:20",
+      "t": 17240
+    },
+    {
+      "term": "Three ways to trigger it",
+      "plain": "A routine can fire on a schedule (minimum once an hour), from an API call another system makes, or from an event like a new push to a GitHub repo.",
+      "stationTranslation": "Clock-based, like a scheduled newscast. Or event-based — someone rings the bell and it wakes up. Most station automations are clock-based.",
+      "tLabel": "4:47:05",
+      "t": 17225
+    },
+    {
+      "term": "Cloud environment and secrets",
+      "plain": "The routine can't see files on your machine, so your API keys can't come from a local file. You paste them into the routine's environment settings, where they're stored separately from your code.",
+      "stationTranslation": "The automation runs in a rented room, not your office. Anything it needs — keys, logins — has to be handed to it at the door, deliberately.",
+      "tLabel": "4:49:00",
+      "t": 17340
+    },
+    {
+      "term": "Stateless run",
+      "plain": "Each run clones your folder fresh, does the job, then deletes the copy. Nothing carries over. No saved logins, no browser cookies, no memory of yesterday unless you make it write notes down somewhere.",
+      "stationTranslation": "Every morning a new temp shows up who has never been here. They get the handbook (your project folder) and nothing else.",
+      "tLabel": "4:59:20",
+      "t": 17960
+    },
+    {
+      "term": "Agentic vs. deterministic — when NOT to use a routine",
+      "plain": "If the work is a straight line — search, summarize, send — you don't need an AI agent deciding what to do. Write a plain script that does the same steps every time. Cheaper, more predictable, easier to trust.",
+      "stationTranslation": "The traffic log doesn't need judgment; it needs to be right. Save the agent for jobs where the next step genuinely depends on what it found.",
+      "tLabel": "5:05:00",
+      "t": 18300
+    },
+    {
+      "term": "Webhook vs. polling",
+      "plain": "Polling means checking over and over: 'anything new? anything new?' A webhook is a doorbell — the other system tells you the moment something happens. Better for events like a form submission.",
+      "stationTranslation": "Don't station someone at the front door checking every ten minutes. Put in a bell. Volunteer signup, tip line, contest entry — those are doorbells.",
+      "tLabel": "5:17:05",
+      "t": 19030
+    }
+  ],
+  "glossary": [
+    {"term": "Routine", "definition": "A saved prompt Claude Code runs by itself on a schedule, on Anthropic's servers, with your machine off."},
+    {"term": "Scheduled task (local)", "definition": "Same idea, but it runs on your own computer — so your machine has to be on and awake."},
+    {"term": "Cron", "definition": "The old term for 'run this on a clock.' You don't need to learn the syntax; you can just say 'weekdays at 6am.'"},
+    {"term": "Environment variable", "definition": "A password or API key handed to a program at startup instead of written into its files. Keeps secrets out of shared code."},
+    {"term": "Webhook", "definition": "A doorbell. One system pings another the instant something happens, instead of the second system constantly checking."},
+    {"term": "Connector", "definition": "A prebuilt link between Claude and a tool you already use — Slack, Gmail, Google Drive. You switch it on in settings."},
+    {"term": "Modal / trigger.dev", "definition": "Cheap hosting services that run a small script on a schedule or on a webhook. Pennies per run. Used in the video's build."},
+    {"term": "Run history / logs", "definition": "The record of every automated run. When one fails, you paste the failed run back to Claude and ask it why."}
+  ],
+  "useCases": [
+    {
+      "role": "News",
+      "title": "The 5:30am story-lead brief",
+      "scenario": "Your news director spends the first ninety minutes of every day scanning city council agendas, the county board site, the police log, and three local outlets — just to find out what's worth chasing.",
+      "howClaudeHelps": "A scheduled routine pulls the public agenda feeds and searches local coverage overnight, then posts a short brief to the newsroom Slack: what's on the docket, what changed since last week, and three flagged 'this looks like a story' items with links. Realistically: most city clerks now run Legistar/CivicClerk/Granicus portals that publish agendas as public pages or RSS, so this is buildable today. Police blotters and PDF-only packets are hit or miss — start with what has a real URL and add the messy sources later.",
+      "timeSaved": "A 90-minute morning scan becomes a 10-minute read of a brief someone else wrote overnight",
+      "guardrail": "The brief is a tip sheet, not reporting. Every lead gets verified against the primary document by a human before anyone calls a source or writes a word. Never let a routine post to a public-facing channel."
+    },
+    {
+      "role": "Underwriting / Corporate Support",
+      "title": "Weekly new-business prospect scan",
+      "scenario": "Your two-person corporate support team finds out a new restaurant opened six months after it opened — and after a commercial station already signed them.",
+      "howClaudeHelps": "A Monday-morning routine checks the city/county new business license postings, the local business journal, and grand-opening coverage, then drops a ranked list into the underwriting team's shared doc: business name, what they do, contact info if it's public, why they might fit. This is a straight-line job — search, filter, format — so the video's advice applies: it may not even need the agentic version, just a script that runs every Monday.",
+      "timeSaved": "A prospecting afternoon nobody ever actually does becomes a list waiting on Monday",
+      "guardrail": "It's a lead list, not a pitch. No auto-emailing prospects, ever. And nothing about existing underwriters or their rates goes into the prompt."
+    },
+    {
+      "role": "Grants & Compliance",
+      "title": "Grant deadline radar",
+      "scenario": "Someone forwards you a CPB or state arts board RFP eleven days before it closes, and the grant writer has to decide in an afternoon whether to even try.",
+      "howClaudeHelps": "A weekly routine watches the funders you actually apply to — Grants.gov (which has a real public API), CPB, NEA, your state arts board, the two community foundations that fund you — and emails the development director a one-page radar: new opportunities, eligibility in one line, deadline, and a countdown on anything already tracked. Community foundation sites are usually plain web pages, so a web search step covers what has no feed.",
+      "timeSaved": "Two hours a week of tab-checking, replaced by a page that arrives Monday — and one fewer missed deadline a year",
+      "guardrail": "Eligibility and deadlines get confirmed against the actual RFP PDF before anyone starts writing. A hallucinated deadline that costs you a submission is the worst possible outcome here."
+    },
+    {
+      "role": "Music & Programming",
+      "title": "Local music radar for the adds meeting",
+      "scenario": "Your music director wants the Tuesday adds meeting to start with the local scene, but assembling it means an hour of Bandcamp, venue calendars, and Instagram.",
+      "howClaudeHelps": "A Monday-night routine scans new releases from artists on your local list, venue calendars for the next two weeks, and local music press, then writes the meeting prep doc: new local releases with links, who's touring through, and anything with a hook (album release show, hometown return). It writes into a shared file the MD opens Tuesday morning.",
+      "timeSaved": "An hour of scattered tab-hunting becomes a prep doc already sitting there",
+      "guardrail": "Adds are a human editorial call — the routine gathers, it doesn't recommend rotation. And it can't hear the record. Nothing gets added that a human hasn't listened to."
+    },
+    {
+      "role": "Membership & Development",
+      "title": "The churn brief that never touches the cloud",
+      "scenario": "Leadership wants a monthly read on lapsed members — who's slipping away and what the pattern is — but that data is your donor CRM, and donor data does not go into a cloud AI.",
+      "howClaudeHelps": "This is the case where the honest answer is 'not a cloud routine.' Because a routine runs on someone else's servers and can only see what you upload, the right build is a local scheduled task on a station machine: a script aggregates the CRM export into counts and cohorts — no names, no addresses, no giving history — and only those aggregate numbers are ever summarized. The video's own rule applies: if the automation can't reach it, it can't leak it.",
+      "timeSaved": "A half-day monthly report becomes a 20-minute review of a draft",
+      "guardrail": "Absolutely no donor PII leaves the building. Not names, not emails, not gift amounts tied to a person. Aggregate counts only, and a human reads the brief before leadership sees it."
+    }
+  ],
+  "automationBlueprint": {
+    "name": "Newsroom Morning Story-Lead Brief",
+    "trigger": "Cloud routine, weekdays at 5:30am station time (routines run at minimum hourly intervals, so a daily 5:30am fire is well within limits — and at 5 runs/day on Pro, one weekday brief is affordable)",
+    "steps": [
+      "Pull the current and upcoming agendas from the city council and county board portals. Most of these run on Legistar, CivicClerk, or Granicus and expose public agenda pages or RSS — put the exact URLs in the project's CLAUDE.md so the routine doesn't have to guess.",
+      "Diff against yesterday: flag agenda items that are new, that moved to a vote, or that name a person or organization already on the newsroom's watch list (keep that list as a plain text file in the repo).",
+      "Run a web search over the last 24 hours of local outlets — the daily paper, the alt-weekly, the TV stations, the neighborhood blogs — for stories the newsroom hasn't already covered.",
+      "Check the public safety and public records feeds that actually publish machine-readable data. Be honest: many police blotters are scanned PDFs or a Facebook post. Skip what isn't reachable rather than faking it.",
+      "Write the brief: 5-8 items, each with a one-line what-happened, a link to the primary source, and a one-line 'why this might be a story.' Explicitly instruct it to say 'nothing notable in this category today' rather than padding.",
+      "Post to the newsroom Slack channel via the Slack connector, and also write the same brief as a dated markdown file in the repo so there's a searchable archive.",
+      "If any step fails, post a short failure note to Slack instead of silently doing nothing."
+    ],
+    "output": "A Slack post in #newsroom at 5:30am, plus a dated brief file in the repo (briefs/2026-07-13.md) that builds into a searchable archive of what the routine saw.",
+    "humanCheckpoint": "The news director triages the brief before any of it becomes assignment. Nothing in it is reporting, nothing in it is verified, and no item leaves the newsroom until a human has opened the primary document. The routine posts only to an internal channel — never to a public account, never to the website.",
+    "estSetupTime": "A focused half-day to build and test it by hand, plus about two weeks of tuning (the first week's briefs will be too long, will miss the sources you care about most, and will over-flag routine agenda items). Budget the tuning — that's where it becomes actually useful. Do not schedule it until you've hit 'run now' several times and liked what came back."
+  },
+  "tryThis": {
+    "title": "Build the brief by hand before you automate it",
+    "setup": "You need Claude Code open and the actual URLs for your city council agenda page, your county board page, and two or three local news sites. Don't schedule anything yet — the video is clear that you test a routine repeatedly before you let it fire unattended.",
+    "prompt": "I want to build a morning story-lead brief for our newsroom, but today I just want to see what one run produces so I can judge whether it's worth automating.\n\nHere are the sources:\n- City council agendas: [paste URL]\n- County board agendas: [paste URL]\n- Local outlets: [paste 2-3 URLs]\n\nGo look at what's actually there right now and write me a brief with:\n1. Agenda items coming up in the next 10 days that a local reporter might care about — with a link to the actual agenda item, not a summary of it.\n2. Anything in the local press from the last 24 hours that looks like it has a second-day story in it.\n3. For each item, one line on why it might matter. If a category has nothing worth flagging, say so — do not pad it.\n\nRules: link to primary sources only. If you can't reach a source, tell me it failed instead of guessing what's on it. Do not characterize anything as fact that you haven't actually read.\n\nAfter you write it, tell me honestly: which of these sources were actually machine-readable, and which would break if this ran unattended at 5:30am?"
+  },
+  "pitfalls": [
+    "A routine can't see your computer. No local files, no saved logins, no browser cookies. If it has to log into something to work, it needs a real API key — the video's browser automation broke for exactly this reason.",
+    "It will not stop and ask you a question. If your prompt is ambiguous, it doesn't pause — it guesses, at 5am, with nobody watching. Write the prompt as if for someone who cannot call you.",
+    "Run limits are real: roughly 5 cloud routine runs a day on Pro, 15 on Max. One daily brief is fine. A newsroom full of hourly scanners is not.",
+    "Never point a routine at anything containing donor PII, and never let one post to a public-facing channel. Internal Slack, internal doc, internal email — that's the whole allowed list.",
+    "Don't reach for AI when a script would do. A form submission that needs to become a Slack message needs no AI at all — adding it just adds cost and a way to be wrong."
+  ],
+  "keyQuotes": [
+    {
+      "quote": "Think of a scheduled task or a routine as you basically typing in a prompt, and then someone coming into your laptop and typing it in for you.",
+      "tLabel": "4:48:10",
+      "t": 17290
+    },
+    {
+      "quote": "Boring is beautiful. Predictability is beautiful when it comes to self-firing automations.",
+      "tLabel": "5:11:40",
+      "t": 18700
+    },
+    {
+      "quote": "Build the simplest solution that you actually need for the problem. All AI would do is add a little bit of risk and increase our cost.",
+      "tLabel": "5:21:50",
+      "t": 19310
+    }
+  ]
+}

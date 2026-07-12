@@ -1,0 +1,133 @@
+{
+  "id": "m2",
+  "number": 2,
+  "title": "First Contact — Point It at a Real Station File",
+  "kicker": "Install it, run it, verify it",
+  "runtimeMin": 16,
+  "sourceChapters": [
+    {"n": 7, "title": "Installing Claude Code & Your First Prompts", "start": 1904, "startLabel": "0:31:44"},
+    {"n": 8, "title": "Working With Local Files (Excel, HTML)", "start": 2049, "startLabel": "0:34:09"},
+    {"n": 9, "title": "Prompt Engineering & Verifying the Output", "start": 2298, "startLabel": "0:38:18"},
+    {"n": 10, "title": "Tokens & Choosing Your Model", "start": 2605, "startLabel": "0:43:25"}
+  ],
+  "plainSummary": "This is your first thirty minutes. You install Claude Code (the desktop app is the easy path — no terminal required), you sign in with a paid Claude plan, and you point it at a folder on your own computer. From there it can find files, read them, and build new ones — the demo in the video takes a pile of raw YouTube stats and returns a finished, formatted Excel workbook in about ten minutes, written entirely in plain English. You then learn the four things that make a prompt work (role, context, what NOT to do, and proof), and how to make the AI verify its own output instead of you catching every mistake. Finally, the money part: what a token is, and when Haiku, Sonnet, or Opus is worth reaching for.",
+  "whyItMatters": "Every station already has the file. The pledge-drive results spreadsheet, the music log, the underwriting traffic report, the CPB reporting workbook — they exist, and somebody spends a weekend wrestling each one into a shape a board or a funder can read. This module is the point where that stops being a weekend and starts being a prompt, and where you learn how to prove the numbers are right before anyone sees them.",
+  "concepts": [
+    {
+      "term": "Where you run it",
+      "plain": "Claude Code runs in the Claude desktop app, in a code editor, or in a terminal window. Same engine underneath. Pick whichever looks least scary.",
+      "stationTranslation": "Like choosing between the studio board and the remote kit — same signal path, different surface. Start with the desktop app; nothing is lost if you switch later.",
+      "tLabel": "0:33:20",
+      "t": 2000
+    },
+    {
+      "term": "Local file access",
+      "plain": "Claude Code can look inside folders on your own machine — find a file you half-remember, read it, edit it, move it, and make new files next to it.",
+      "stationTranslation": "It is a producer who can actually open the shared drive. 'Find the Q2 pledge results somewhere in Downloads' is a real, working instruction.",
+      "tLabel": "0:34:30",
+      "t": 2070
+    },
+    {
+      "term": "It builds the deliverable, not just the answer",
+      "plain": "Ask for analysis and you get a chat reply. Ask for a workbook and you get an actual .xlsx on disk — dashboard tab, per-item scorecard, trends, color-coded.",
+      "stationTranslation": "The output is the thing you hand the GM or the board, not notes you then have to retype into a spreadsheet at 11pm.",
+      "tLabel": "0:36:00",
+      "t": 2160
+    },
+    {
+      "term": "The four levers of a prompt",
+      "plain": "Role (who it is), context and background (what the situation actually is), negative prompting (what NOT to do), and verification (prove it).",
+      "stationTranslation": "Same as briefing a new intern before a shift: who you are today, what's going on, what not to touch, and show me before it airs.",
+      "tLabel": "0:38:30",
+      "t": 2310
+    },
+    {
+      "term": "Negative prompting",
+      "plain": "Explicitly say what not to do. A capable but inexperienced helper will try things you never imagined unless you rule them out up front.",
+      "stationTranslation": "'Do not invent a number that isn't in the file. Do not round. Do not include any donor names.' Say it out loud, every time.",
+      "tLabel": "0:40:36",
+      "t": 2436
+    },
+    {
+      "term": "Make the AI prove its work",
+      "plain": "Tell it how to check itself. Unverified, a first pass lands around 60% right and you grind it up by hand. Self-verifying, it starts near 80% and you finish in two passes.",
+      "stationTranslation": "The check the AI runs is the check you would have run: re-add the column, re-count the rows, cross-check the total against the source file. Ask for that check in the prompt.",
+      "tLabel": "0:41:10",
+      "t": 2470
+    },
+    {
+      "term": "Tokens, and picking a model",
+      "plain": "You are billed by token — roughly three-quarters of a word. Output tokens cost about five times input. Haiku is fast and cheap, Sonnet is balanced, Opus is the most capable and the most expensive.",
+      "stationTranslation": "Haiku for sorting and tidying. Sonnet for most real work. Opus when the reasoning has to be right the first time — grant narrative, board analysis, anything a funder reads.",
+      "tLabel": "0:44:10",
+      "t": 2650
+    }
+  ],
+  "glossary": [
+    {"term": "Token", "definition": "The unit AI bills in. Roughly 3/4 of a word. Text going in is input; text coming out is output."},
+    {"term": "Input vs output tokens", "definition": "What you feed the model vs what it writes back. Output costs about 5x more per token."},
+    {"term": "Haiku / Sonnet / Opus", "definition": "Claude's models: fast-and-cheap, balanced, and most-capable-and-priciest. Same tool, different horsepower."},
+    {"term": "Negative prompt", "definition": "The 'do NOT do this' part of your instructions. Guardrails, stated before the work starts."},
+    {"term": "Verification", "definition": "Making the AI check its own output against something real before it hands the work back to you."},
+    {"term": "Session limit", "definition": "On a Claude subscription you get a rolling 5-hour usage window plus a weekly cap, instead of per-token billing."}
+  ],
+  "useCases": [
+    {
+      "role": "Membership & Development",
+      "title": "Turn the pledge-drive export into a board-ready readout",
+      "scenario": "The drive ended Sunday. You have a 3,000-row export from the CRM and a board meeting Thursday, and nobody has time to build the pivot tables again.",
+      "howClaudeHelps": "Strip the export down to non-identifying columns first — gift amount, date, hour, premium, new-vs-renewing, channel — and save that anonymized file locally. Point Claude Code at it and ask for a workbook: dashboard tab, hour-by-hour take, new vs. renewing split, comparison to last drive. Add the verification line so it re-sums every column against the source before handing it over.",
+      "timeSaved": "A two-day spreadsheet weekend becomes about 30 minutes plus a review pass",
+      "guardrail": "Donor names, emails, addresses, phone numbers and giving history never leave your CRM. Export the numbers, not the people. Strip PII before Claude ever sees the file."
+    },
+    {
+      "role": "Music & Programming",
+      "title": "Read the music log without reading the music log",
+      "scenario": "Your automation system spits out a play log every week. You want to know whether local artist rotation actually hit the target you promised in the last grant, and whether new music share is drifting.",
+      "howClaudeHelps": "Drop the log export in a folder and ask Claude Code to tally spins by artist, flag which are tagged local, chart the local percentage week over week, and write the counts into a spreadsheet you can reuse. Tell it explicitly not to guess an artist's local status when the tag is blank — flag those rows for a human instead.",
+      "timeSaved": "A 4-hour manual tally becomes ~20 minutes",
+      "guardrail": "Claude counts spins; it does not decide licensing or reporting obligations. Anything headed to SoundExchange, ASCAP or BMI goes through the person who actually owns that filing."
+    },
+    {
+      "role": "Grants & Compliance",
+      "title": "Assemble the CPB Local Content & Service Report evidence pile",
+      "scenario": "The LCSR is due and the underlying numbers are scattered across five spreadsheets, three departments and one person's Downloads folder.",
+      "howClaudeHelps": "Ask Claude Code to find the relevant files across your project folder, read them, and build a single consolidated worksheet with every figure traced back to its source file and cell. Then ask it to prove the work: recompute each total from the raw file and show its arithmetic next to the number it reported.",
+      "timeSaved": "A 6-hour hunt-and-reconcile pass becomes ~45 minutes",
+      "guardrail": "Claude assembles and cross-checks; a human signs the report. Never let it fill a gap by estimating — an empty cell stays empty and gets escalated."
+    },
+    {
+      "role": "Digital & Audience",
+      "title": "Make the podcast download CSV mean something",
+      "scenario": "You get a monthly download CSV per show. Leadership asks 'how are the podcasts doing,' and you have never had a clean way to answer with a trend rather than a number.",
+      "howClaudeHelps": "Point Claude Code at the folder of monthly CSVs. Ask it to merge them, chart downloads per episode and per show over time, flag the episodes that outperformed their show's median, and write it into one workbook you re-run each month. Cheap, structural work — this is a Haiku or Sonnet job, not an Opus one.",
+      "timeSaved": "A recurring 2-hour monthly chore becomes a 5-minute re-run",
+      "guardrail": "Download platforms count differently. Ask Claude to state the definition it used for a 'download' and keep the platform's own methodology note attached to the report."
+    },
+    {
+      "role": "Underwriting / Corporate Support",
+      "title": "Reconcile the traffic report against what actually aired",
+      "scenario": "A sponsor claims their spots didn't run. You have the traffic log and the as-aired report, and comparing them by eye is how people lose afternoons.",
+      "howClaudeHelps": "Give Claude Code both exports and ask it to match scheduled spots against as-aired, list every discrepancy with date, time and spot ID, and produce a make-good candidate list. Tell it to show the matching rows for each discrepancy so you can spot-check the logic rather than trust it.",
+      "timeSaved": "A 3-hour line-by-line reconciliation becomes ~25 minutes",
+      "guardrail": "Claude finds mismatches; it does not draft the client response or write spot copy. Any copy that reaches air goes through FCC compliance review — no calls to action, no price or qualitative claims."
+    }
+  ],
+  "tryThis": {
+    "title": "Your first real file — a pledge-drive readout, no formulas",
+    "setup": "Install the Claude desktop app and sign in with a paid Claude plan. Make a folder on your machine (call it 'station-work'), and put ONE anonymized spreadsheet in it — a pledge-drive export with donor names, emails, addresses and phone numbers deleted before it ever leaves your CRM. Numbers only. Open Claude Code and point it at that folder.",
+    "prompt": "You are a development analyst at a small public radio station. In this folder there is one spreadsheet: our most recent pledge drive results. It has already been stripped of donor names and contact info — it is numbers only, and it must stay that way.\n\nRead the file first and tell me what columns you actually see before you do anything else.\n\nThen build me an Excel workbook called drive-readout.xlsx with:\n1. A summary tab: total raised, number of gifts, average gift, median gift, new vs. renewing split.\n2. An hour-by-hour tab showing when money actually came in.\n3. A premium tab: which thank-you gifts drove the most dollars and which underperformed.\n4. A short written 'what this tells us' section a board member could read in two minutes.\n\nDO NOT invent, estimate, or fill in any number that is not in the source file. If a column I asked about doesn't exist, say so and leave it out — do not approximate. DO NOT add any donor names or contact information, even if you find some.\n\nBefore you show me the workbook, verify your work: recompute every total and average directly from the source rows, compare it to what you wrote into the workbook, and show me that comparison. If anything doesn't reconcile, fix it and re-check before you tell me you're done."
+  },
+  "pitfalls": [
+    "It gives you 60% on the first pass unless you ask it to verify. Bake the proof step into the prompt or you become the QA department.",
+    "Never point it at a raw CRM or donor export. Strip names, emails, addresses, phones and giving history first — anonymize before the file leaves your system, not after.",
+    "'It made a beautiful spreadsheet' is not 'the numbers are right.' Formatting quality and arithmetic quality are separate things. Spot-check totals against the source yourself the first few times.",
+    "Don't reflexively run everything on Opus. Sorting a CSV is a Haiku job; output tokens cost about 5x input, so re-generating a giant workbook repeatedly is where usage disappears.",
+    "Model names and prices in the video are a snapshot in time. Check Anthropic's current pricing before you build a budget on them."
+  ],
+  "keyQuotes": [
+    {"quote": "How long would this have taken you to manually go pull out 75 videos, put all the analytics in here, color code it, design it? This literally took my AI agent about 10 minutes.", "tLabel": "0:37:30", "t": 2250},
+    {"quote": "Make the AI prove its work.", "tLabel": "0:41:10", "t": 2470},
+    {"quote": "If a human gave you this work, what would you do to approve it? Whatever you would do to verify it, chances are you can tell Claude Code to do that.", "tLabel": "0:42:40", "t": 2560}
+  ]
+}

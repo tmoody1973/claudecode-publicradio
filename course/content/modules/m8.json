@@ -1,0 +1,189 @@
+{
+  "id": "m8",
+  "number": 8,
+  "title": "The Station's Second Brain",
+  "kicker": "Turn what your station knows into something AI can use",
+  "runtimeMin": 56,
+  "sourceChapters": [
+    {"n": 27, "title": "Building a Second Brain", "start": 12975, "startLabel": "3:36:15"},
+    {"n": 28, "title": "The 5 Levels of a Second Brain", "start": 14188, "startLabel": "3:56:28"},
+    {"n": 29, "title": "Knowledge Graphs & the Grill-Me Skill", "start": 15223, "startLabel": "4:13:43"}
+  ],
+  "plainSummary": "Every AI chat you have today is thrown away tomorrow. This module shows how to stop that: build a folder of plain text files that your AI reads before it answers, so the knowledge stacks up instead of evaporating. The video walks through Andrej Karpathy's 'LLM wiki' idea — you drop raw documents into a 'raw' folder, Claude Code reads them, and it writes them back out as organized, cross-linked notes with an index. Then it lays out five levels of second brain, from a single routing file up to an always-on system, and is blunt that higher is not better — pick the lowest level that solves an actual pain. It closes with the 'grill-me' skill: a prompt that interviews you relentlessly about something you know and writes the answers to a document, because the hard part is not the AI retrieving knowledge, it's getting the knowledge out of your head in the first place.",
+  "whyItMatters": "Your station's real institutional memory — why the spring drive script works, which underwriter never renews, how the transmitter site gets reset at 2am — lives in the heads of three or four long-tenured people, and some of them are retiring. Every AI tool you buy is only as good as the context you can hand it, and right now that context is unwritten. This module is the cheapest succession-planning tool in the building: a folder of markdown files and a skill that interviews people before they walk out the door.",
+  "concepts": [
+    {
+      "term": "Second brain",
+      "plain": "A folder of plain text files holding what you know, organized so an AI can find the right one and answer from it instead of guessing.",
+      "stationTranslation": "The station shared drive, except an AI can actually navigate it. The real test: could Claude find last spring's pledge script, and could you?",
+      "tLabel": "3:56:35",
+      "t": 14195
+    },
+    {
+      "term": "The LLM wiki (raw in, wiki out)",
+      "plain": "You put source documents in a 'raw' folder. The AI reads them and writes organized, linked notes into a 'wiki' folder, plus an index and a running log of what it did.",
+      "stationTranslation": "Dump five years of pledge drive recaps and board minutes into 'raw.' Claude reads them and writes back a browsable set of notes with an index, no hand-filing.",
+      "tLabel": "3:38:00",
+      "t": 13080
+    },
+    {
+      "term": "CLAUDE.md as a router",
+      "plain": "The file Claude reads first in a project. Beyond who you are, it says where things live: 'if you need X, look in this folder.' Without those rules, Claude won't go looking.",
+      "stationTranslation": "The map taped to the front of the filing cabinet. 'Underwriting history is in this drawer. Music rotation logic is in that one.' No map, no find.",
+      "tLabel": "3:57:10",
+      "t": 14230
+    },
+    {
+      "term": "It's just markdown — no database needed",
+      "plain": "No vector database, no embeddings, no infrastructure. Plain text files in folders. Cost is basically zero; you only pay for the tokens the AI reads.",
+      "stationTranslation": "This is a station-budget technology. There is nothing to buy, nothing to license, and nothing that stops working when the person who set it up leaves.",
+      "tLabel": "3:38:40",
+      "t": 13120
+    },
+    {
+      "term": "Reverse-engineer from the question",
+      "plain": "Decide how you'll ask for the knowledge before you decide how to store it. The shape of the question determines the shape of the file.",
+      "stationTranslation": "If you'll ask 'summarize the March board meeting,' store one whole file per meeting. If you'll ask 'what's rule 17,' chopping it into searchable pieces makes sense.",
+      "tLabel": "3:55:20",
+      "t": 14120
+    },
+    {
+      "term": "Context vs. connections",
+      "plain": "Ingest the evergreen stuff — decisions, processes, history. Don't ingest the churn — email threads, live CRM data. Give the AI permission to go fetch that live instead.",
+      "stationTranslation": "Your style guide and last year's drive results belong in the brain. Today's donor records do not — the brain should know they exist and never hold a copy.",
+      "tLabel": "4:22:30",
+      "t": 15550
+    },
+    {
+      "term": "The grill-me skill",
+      "plain": "A skill that interviews you relentlessly about one topic, one question at a time, writing every answer to a document as it goes. It stops when there are no gaps left.",
+      "stationTranslation": "Sit your retiring chief engineer down for ninety minutes. The AI asks the questions you wouldn't know to ask, and writes the runbook nobody ever had time to write.",
+      "tLabel": "4:26:30",
+      "t": 15790
+    }
+  ],
+  "glossary": [
+    {"term": "Markdown", "definition": "Plain text with light formatting. Opens in any editor, readable in 20 years, needs no software to survive."},
+    {"term": "Index file", "definition": "A table of contents the AI reads first, so it knows which note to open instead of reading everything."},
+    {"term": "Backlink", "definition": "A link from one note to another. Follow it to jump from 'spring drive 2024' to 'sustainer messaging.'"},
+    {"term": "Obsidian", "definition": "A free app that displays your markdown files and draws the links between them as a picture. Optional — the files work without it."},
+    {"term": "Semantic search", "definition": "Finding notes by meaning rather than exact wording. Searching 'listener complaints' surfaces a note that says 'audience feedback.'"},
+    {"term": "Knowledge graph", "definition": "Storage that records how things relate — 'Jordan works at Acme,' 'Acme sponsors Morning Edition' — not just that they're linked."},
+    {"term": "Lint / health check", "definition": "Periodically asking the AI to audit its own notes for gaps, contradictions, and missing information."},
+    {"term": "Auto-memory", "definition": "A Claude Code setting where it writes and updates a memory file on its own as you work. Toggle it with /memory."}
+  ],
+  "levels": [
+    {
+      "n": 1,
+      "name": "CLAUDE.md + folders (routing)",
+      "plain": "One file that tells the AI who you are and where everything lives, plus a handful of plain folders. Answers: can I find it by an exact name or word?",
+      "stationExample": "A station-ops folder: style guide, underwriting compliance rules, a decisions log. CLAUDE.md says 'FCC underwriting language lives in /compliance — read it before drafting any spot copy.'",
+      "effort": "Low",
+      "payoff": "You stop re-explaining the station to the AI every session. This is where everyone starts, and where most stations should stay."
+    },
+    {
+      "n": 2,
+      "name": "The LLM wiki (Karpathy-style)",
+      "plain": "A 'raw' folder where you dump source documents and a 'wiki' folder the AI writes into — organized notes, cross-links, an index, and a log. Answers: can I pull everything on one topic together?",
+      "stationExample": "Drop five years of pledge drive scripts, hourly results, and post-drive recaps into raw. Claude builds notes on sustainer conversion, matching-gift language, and which day parts overperform, all linked.",
+      "effort": "Medium",
+      "payoff": "Big. The video's own presenter sits his entire operation here. One user cut query token usage 95% moving 383 files into a wiki."
+    },
+    {
+      "n": 3,
+      "name": "Semantic search (vector database)",
+      "plain": "Notes are chopped into chunks and indexed by meaning, so you can search with different words than you wrote. Answers: can it find it when I don't remember the wording?",
+      "stationExample": "A big searchable pile of show transcripts and archives where 'housing affordability' surfaces a segment that only ever said 'rent burden.'",
+      "effort": "Medium",
+      "payoff": "Real, but narrow. Great for pulling one specific fact out of a huge pile. Bad at whole-document work — it returns chunks, so it can't reliably summarize a full meeting."
+    },
+    {
+      "n": 4,
+      "name": "Knowledge graph (relationship mapping)",
+      "plain": "Stores entities and how they relate — not just 'these two notes link,' but 'this person works at this company, which sponsors this show.' Answers: can I follow a chain from X back to A?",
+      "stationExample": "Underwriting: this account exec sold this client, who sponsored this show, whose PD left, and the account lapsed. Trace the chain and you find why revenue moved.",
+      "effort": "High",
+      "payoff": "Powerful for relationship-heavy work like a donor or sponsor CRM. The presenter says outright he does not use one day-to-day — his work isn't relationship-heavy enough to justify it."
+    },
+    {
+      "n": 5,
+      "name": "Always-on brain OS",
+      "plain": "The brain syncs and refreshes itself continuously — always ingesting, always updating, no human pressing go. Tools like GBrain sit here.",
+      "stationExample": "A system that pulls in every meeting recording, every newsletter, every log automatically, with nobody deciding what belongs.",
+      "effort": "High",
+      "payoff": "Questionable, and the video says so. The presenter deliberately does NOT run level 5 — he wants control over what gets ingested, because too much context does more damage than good."
+    }
+  ],
+  "useCases": [
+    {
+      "role": "Engineering / IT",
+      "title": "Grill the chief engineer before he retires",
+      "scenario": "Your chief engineer has run the transmitter site for 22 years. The generator start sequence, the STL failover, which breaker is mislabeled — none of it is written down. He retires in eight months.",
+      "howClaudeHelps": "Run the grill-me skill: 'Grill me about the transmitter site — every routine, every failure mode, every workaround.' Claude interviews him one question at a time and checkpoints every answer to a markdown file, so nothing is lost even in a two-hour session. It flags what he can't answer so you know who else to ask. The result goes into a level-1 second brain as your engineering runbook.",
+      "timeSaved": "A runbook nobody has written in 22 years becomes a real document in two or three sessions",
+      "guardrail": "Do not put transmitter access codes, site alarm passwords, or EAS credentials in the files. Write 'credential stored in the station password manager' and point to it."
+    },
+    {
+      "role": "Membership & Development",
+      "title": "A pledge drive brain that remembers every drive",
+      "scenario": "Every drive, you rebuild the script from scratch and half-remember what worked. The results spreadsheets, the hourly logs, and the post-mortems are scattered across three drives and one person's inbox.",
+      "howClaudeHelps": "Drop past drive scripts, hourly result exports (dollars and counts only, no donor records), and post-drive recaps into a 'raw' folder and have Claude build the wiki. Ask it 'what pitch language preceded our best sustainer hours across the last five drives?' and it reads the index, follows the links, and answers from your own history instead of generic best practices.",
+      "timeSaved": "A week of digging through old drives becomes an afternoon of asking questions",
+      "guardrail": "Aggregate numbers only. No donor names, addresses, giving histories, or CRM exports ever go into the raw folder — the whole folder is readable by the AI, so if it's in there, it's uploaded."
+    },
+    {
+      "role": "Music & Programming",
+      "title": "Write down the rotation logic that only the MD knows",
+      "scenario": "Your music director carries the rotation rules in her head: separation between similar artists, how new local music gets added, which categories can't touch drive time, how a track graduates or gets rested.",
+      "howClaudeHelps": "Grill-me the music director about the rotation logic, then store the output as the music section of the station brain. Now a fill-in host or a new MD can ask 'why can't these two tracks air in the same hour?' and get the station's actual answer. Add the local-music library notes and the wiki starts linking artists, categories, and rules together.",
+      "timeSaved": "Onboarding a new music director drops from months of osmosis to weeks",
+      "guardrail": "AI does not pick the music. It documents the reasoning; the MD still makes every call, and licensing/reporting obligations to SoundExchange and the PROs stay a human, verified process."
+    },
+    {
+      "role": "Grants & Compliance",
+      "title": "Stop rewriting the same CPB narrative every year",
+      "scenario": "The Local Content and Service Report and every grant application ask variations of the same questions about community impact, partnerships, and service. Each year someone reconstructs the answers from memory and last year's PDF.",
+      "howClaudeHelps": "Build a wiki from past grant applications, CPB reports, community partner lists, and board minutes. Claude organizes them into linked notes — partners, initiatives, outcomes — with an index. When the next report opens, ask it to assemble the source material for each section, with links back to the original documents so every claim is traceable.",
+      "timeSaved": "A three-week reporting scramble becomes about a week of drafting and verification",
+      "guardrail": "Every number and every claim in a CPB filing gets verified against the primary source by a human before submission. The brain gathers evidence; it does not certify it."
+    },
+    {
+      "role": "Leadership",
+      "title": "Pick the lowest level that fixes an actual pain",
+      "scenario": "A vendor is pitching your GM an AI knowledge platform with a knowledge graph, embeddings, and a monthly seat cost. The station has 40 documents that matter and no budget.",
+      "howClaudeHelps": "The module's own answer: don't buy it yet. Level 1 is a CLAUDE.md and some folders. Level 2 is a folder of markdown the AI organizes itself. Neither needs a vendor, a database, or a subscription. Move up a level only when you feel a specific pain — the video's presenter runs his entire operation at level 2 and deliberately refuses level 5.",
+      "timeSaved": "A five-figure annual platform spend avoided until you can prove you need it",
+      "guardrail": "Whatever you build, it must stay portable — plain files you own, not a vendor's format. And write down who maintains it, or in a year it's another dead shared drive."
+    }
+  ],
+  "tryThis": {
+    "title": "Build the station brain, level 1, in twenty minutes",
+    "setup": "Make an empty folder called station-brain on your machine. Copy in three things you already have and don't mind an AI reading: your station style guide, your underwriting copy rules, and one past pledge drive script. No donor data, no personnel files, no passwords. Open Claude Code in that folder.",
+    "prompt": "You are helping me build the first level of a second brain for a public radio station. Read the files in this folder. Then:\n\n1. Create a CLAUDE.md that acts as a router. It should say what this station is, who works here and what they do, and — most importantly — WHERE things live: which folder holds the style guide, which holds underwriting compliance rules, which holds pledge drive history. Include a rule that you must read the underwriting compliance file before drafting any sponsor copy.\n\n2. Create a /context folder with an about-the-station.md and a decisions.md (a running log of choices we make, with dates).\n\n3. Create an index.md listing what's in here, so you can find things without reading every file.\n\nAsk me questions one at a time about anything you need to know and can't find in the files — don't guess. Then show me what's missing: what would a new employee need that isn't written down anywhere?"
+  },
+  "pitfalls": [
+    "Everything you put in the folder gets sent to Anthropic when the AI reads it. The video says this out loud. That means no donor records, no CRM exports, no personnel files, no credentials — ever.",
+    "Higher level is not better. The presenter deliberately sits at level 2 and refuses level 5. If you don't have a pain, don't add architecture.",
+    "Semantic search is not magic. It returns chunks, so 'summarize the March board meeting' can silently miss half the meeting. For whole-document questions, keep the whole document as one file.",
+    "The AI will not find what you didn't tell it about. If your CLAUDE.md doesn't say where the file lives, Claude won't go hunting for it — and you'll blame the AI for your missing routing.",
+    "Don't ingest the churn. Slack threads, emails, and live data go stale and become noise you have to prune every month. Ingest evergreen knowledge; give the brain a path to look up the live stuff.",
+    "A second brain nobody maintains is just a shared drive with extra steps. Name an owner and a refresh cadence before you build it."
+  ],
+  "keyQuotes": [
+    {
+      "quote": "Normal AI chats are ephemeral — the knowledge disappears after the conversation. This method makes knowledge compound like interest in a bank.",
+      "tLabel": "3:38:50",
+      "t": 13130
+    },
+    {
+      "quote": "Sometimes it seems like the bigger problem is getting everything out of your brain into the system. So before you blame AI, take a look at your folders and files.",
+      "tLabel": "4:15:15",
+      "t": 15315
+    },
+    {
+      "quote": "If I had six hours to chop down a tree, I would spend the first four sharpening the axe.",
+      "tLabel": "4:30:15",
+      "t": 16215
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "id": "m3",
+  "number": 3,
+  "title": "Set Up Your Station's Workspace — And Its Guardrails",
+  "kicker": "CLAUDE.md, settings, keys, and what never leaves the building",
+  "runtimeMin": 32,
+  "sourceChapters": [
+    { "n": 11, "title": "Setting Up a Project (claude.md & settings.json)", "start": 2890, "startLabel": "0:48:10" },
+    { "n": 12, "title": "Connecting Tools: API Keys & .env", "start": 3606, "startLabel": "1:00:06" },
+    { "n": 13, "title": "Permission Modes, Scoped Keys & Privacy", "start": 4199, "startLabel": "1:09:59" }
+  ],
+  "plainSummary": "This module is where you stop chatting with an AI and start running it inside a workspace you control. You create a project folder, write a CLAUDE.md — a plain-English file the AI reads before it reads anything you type — and a .claude folder that holds your settings. You learn where secrets go (a .env file that never gets shared), what an API key actually is (a password), and how to hand out keys that can only do one narrow job. Then you learn the permission modes that decide how much Claude Code can do without asking you first, and the difference between bypass mode and sleeping well at night. Finally: what actually happens to your data when you hit enter.",
+  "whyItMatters": "Everything else in this course is a technique. This is the part that keeps you out of trouble. A station holds donor giving histories, unpublished investigations, personnel files, and CPB reporting data — and the difference between a tool that saves your development director ten hours and a tool that ends her career is entirely the setup you do in this module.",
+  "concepts": [
+    {
+      "term": "CLAUDE.md",
+      "plain": "A plain-text file in your project that Claude Code reads before it reads your message. It holds your rules, your context, and where things live.",
+      "stationTranslation": "The station style guide the AI actually reads — every time, without being reminded. Your pronunciation list, your no-go phrases, your beat structure, your donor-data rules.",
+      "tLabel": "0:48:20",
+      "t": 2900
+    },
+    {
+      "term": "Global vs. project CLAUDE.md",
+      "plain": "A global file applies to every project on your machine. A project file applies only inside that one folder. You get both, and both get read.",
+      "stationTranslation": "Global is house style — how the station writes, always. Project is show-level — the rules for pledge drive, or for this one investigation.",
+      "tLabel": "0:53:35",
+      "t": 3215
+    },
+    {
+      "term": "The .claude folder (settings.json)",
+      "plain": "A config folder next to your CLAUDE.md. Inside, settings.json lists what Claude Code is allowed to do and what it is flatly denied from doing.",
+      "stationTranslation": "The door codes. CLAUDE.md is the staff handbook; settings.json is which rooms the badge actually opens. You describe the rules in English and Claude writes the file.",
+      "tLabel": "0:57:43",
+      "t": 3463
+    },
+    {
+      "term": "API keys and the .env file",
+      "plain": "An API key is a password that lets one tool pull data from another. It goes in a .env file, which stays on your machine and never gets shared or published.",
+      "stationTranslation": "The key is a station credit card with your name on it. The .env file is the locked drawer. Never the script, never the email, never the shared folder.",
+      "tLabel": "1:01:11",
+      "t": 3671
+    },
+    {
+      "term": "Permission modes",
+      "plain": "How much Claude Code can do before asking. The video shows auto (the default), manual permissions, accept edits, plan mode, and bypass permissions.",
+      "stationTranslation": "Auto asks before anything consequential. Plan mode makes it show you the rundown first. Bypass is handing an intern the master key and going to lunch.",
+      "tLabel": "1:09:59",
+      "t": 4199
+    },
+    {
+      "term": "Scoped keys / least privilege",
+      "plain": "Most tools let you create a key that can only do a few specific things, and only spend a set amount. Give the AI a key that can read but not delete.",
+      "stationTranslation": "Your CRM key should let the AI read donor counts, never edit or delete a record. If it physically cannot delete, it cannot delete by accident.",
+      "tLabel": "1:11:31",
+      "t": 4291
+    },
+    {
+      "term": "What leaves your machine",
+      "plain": "Claude is a closed model. Every message you send goes to Anthropic's servers to be processed. The data is there even when training is turned off.",
+      "stationTranslation": "Treat the prompt box like a phone call to a vendor, not a note to yourself. Whatever you paste, you have handed to someone outside the station.",
+      "tLabel": "1:17:27",
+      "t": 4647
+    }
+  ],
+  "glossary": [
+    { "term": "CLAUDE.md", "definition": "Plain-English instructions file Claude Code reads before every message. Your standing rules and context." },
+    { "term": "settings.json", "definition": "Config file in the .claude folder listing what Claude Code is allowed and denied from doing." },
+    { "term": ".env", "definition": "File holding secrets like API keys. Kept local and excluded from anything you publish or share." },
+    { "term": "API key", "definition": "A password letting one tool pull data from another. Anyone holding it can use your account." },
+    { "term": "Scoped key", "definition": "An API key restricted to specific capabilities and spending limits. Read-only, or one narrow function." },
+    { "term": "Permission mode", "definition": "Setting controlling how often Claude Code stops to ask before acting. Auto is the default." },
+    { "term": "Bypass permissions", "definition": "Mode where Claude Code never asks for approval. Also called 'dangerously skip permissions.' It means it." },
+    { "term": "MCP", "definition": "Model Context Protocol. A standard way to plug Claude Code into another tool, like Gmail or QuickBooks." }
+  ],
+  "useCases": [
+    {
+      "role": "Membership & Development",
+      "title": "A CRM key that can look but not touch",
+      "scenario": "Your development director wants Claude Code to summarize lapsed-donor trends by segment, but the last thing anyone wants is an agent writing to the donor database.",
+      "howClaudeHelps": "Generate a read-only, scoped API key in your CRM — read access only, no edit, no delete, no export-all — and store it in .env. Then add a deny rule in settings.json so Claude Code can never run a delete or write command against it. Ask for aggregate counts, never named records.",
+      "timeSaved": "A quarterly segment pull that took a week of back-and-forth with IT becomes an afternoon",
+      "guardrail": "Never paste a donor export, name, address, email, or giving history into the prompt box. Aggregates only. If the key can write, it is the wrong key."
+    },
+    {
+      "role": "News",
+      "title": "The newsroom style guide the AI actually follows",
+      "scenario": "Every reporter re-explains the same rules to the AI: how you refer to the mayor's office, which sources need a second confirmation, that you never use 'slammed' in a lede.",
+      "howClaudeHelps": "Put all of it in a project CLAUDE.md once. When an output comes back wrong, tell Claude to update its own CLAUDE.md so it never repeats the mistake — the file gets smarter every time you correct it, instead of you retyping the same note.",
+      "timeSaved": "Ten minutes of setup instructions per session drops to zero",
+      "guardrail": "Unpublished investigative material and confidential source identities go nowhere near the prompt box. CLAUDE.md should say so explicitly, in writing, at the top."
+    },
+    {
+      "role": "Underwriting / Corporate Support",
+      "title": "Compliance rules baked into the workspace",
+      "scenario": "An account executive drafts spot copy and keeps having to strip out calls to action and price claims that would violate FCC underwriting rules.",
+      "howClaudeHelps": "Write the FCC constraints directly into a project CLAUDE.md — no calls to action, no qualitative or comparative claims, no prices, no inducements to buy. Claude Code reads it before every draft, so the copy comes back closer to compliant on the first pass.",
+      "timeSaved": "Three compliance rewrites per spot becomes roughly one",
+      "guardrail": "A CLAUDE.md rule is a first filter, not a lawyer. Every spot still gets a human compliance review before it airs. Never treat the AI's 'this is compliant' as clearance."
+    },
+    {
+      "role": "Leadership / GM",
+      "title": "Deciding what the station will and won't send to a vendor",
+      "scenario": "Staff are already pasting things into AI tools and nobody has written down what is allowed. The board asks what your policy is.",
+      "howClaudeHelps": "Use this module's plain framing to write one: closed models send every prompt to a vendor's servers; turning off training does not delete the data; scoped keys and settings.json deny-rules are how you enforce limits technically instead of by memo. Put the resulting policy in your global CLAUDE.md so it applies to every project on every machine.",
+      "timeSaved": "Turns a vague six-month policy debate into a one-page rule everyone can follow this week",
+      "guardrail": "Donor PII, personnel files, unpublished journalism, legal correspondence, and anything under an NDA. Name them in the policy — 'be careful' is not a policy."
+    },
+    {
+      "role": "Grants & Compliance",
+      "title": "Plan mode before it touches your CPB reporting files",
+      "scenario": "Your Local Content and Service Report data lives in a folder of spreadsheets nobody wants an agent silently rewriting the week before the deadline.",
+      "howClaudeHelps": "Work in plan mode so Claude Code shows you exactly what it intends to change before it changes anything, and set deny rules in settings.json so it can never delete files in that directory. Then review the plan the way you'd review a rundown.",
+      "timeSaved": "Removes the 'did it just overwrite my source data' panic entirely",
+      "guardrail": "Never run bypass permissions mode in a folder containing the only copy of anything. Keep a backup outside the project directory."
+    }
+  ],
+  "tryThis": {
+    "title": "Build your station's CLAUDE.md in ten minutes",
+    "setup": "Make a new folder on your desktop — call it 'station-workspace' — and open Claude Code in it. When it asks whether you trust the folder, say yes (you made it). You do not need to know what a JSON file is; you are going to describe what you want in English and let Claude write the file.",
+    "prompt": "I work at a small public radio station. I want to set up this project properly before I do any real work in it.\n\nPlease do three things:\n\n1. Create a CLAUDE.md in this folder. Use the example structure I'm about to describe: a short section on who we are, a house style section, a hard 'never do this' section covering donor data and unpublished journalism, and a section on where files live. Ask me questions if you need details about the station — don't guess.\n\n2. Create a .claude folder with a settings.json. I want you to be explicitly DENIED from deleting any file in this project, and denied from running any command that removes files. I don't know the syntax — write it for me and then explain in plain English what each rule does.\n\n3. Create a .env file with a placeholder for an API key, and make sure it can never be committed or shared. Explain to me in two sentences why the key goes there and not in CLAUDE.md.\n\nWhen you're done, show me all three files and walk me through them like I've never seen a config file before — because I haven't."
+  },
+  "exampleClaudeMd": "# CLAUDE.md — WXYZ Public Radio\n\n## Who we are\nWXYZ is a community-licensed public radio station. Small team, no IT department.\nStaff using this workspace: news, membership, underwriting, music, and the GM.\nWhen in doubt about what a role needs, ask — don't assume.\n\n## Never — no exceptions\nThese are not preferences. Do not do these even if I ask in the moment.\n- Never accept, process, or repeat donor PII: names, addresses, emails, phone numbers,\n  giving history, credit card data, or CRM exports. If I paste any of it, STOP and tell me\n  I just made a mistake. Aggregate, de-identified numbers only.\n- Never accept unpublished investigative material, confidential source identities,\n  or anything under embargo.\n- Never accept personnel files, salary data, or legal correspondence.\n- Never publish, post, send, or schedule anything. You draft. A human sends.\n- Never delete files in this project. Never run a command that removes files.\n\n## Editorial rules (news)\n- You do not write publishable journalism. You research, transcribe, summarize, prep\n  questions, and draft. A human reporter edits and verifies every fact before air or post.\n- Every factual claim you give me needs a source I can check. No source, mark it UNVERIFIED.\n- Never invent a quote, a name, a date, or a statistic. If you don't know, say you don't know.\n- House style: AP, with our exceptions in /style/ap-exceptions.md.\n- Banned in ledes: \"slammed,\" \"blasted,\" \"amid growing concerns,\" \"in a stunning move.\"\n\n## Underwriting rules (FCC)\nUnderwriting is NOT advertising. Any spot copy you draft must have:\n- No call to action (\"visit,\" \"call now,\" \"stop by,\" \"buy\")\n- No price or value information, no discounts, no \"free\"\n- No qualitative or comparative claims (\"best,\" \"finest,\" \"leading\")\n- No inducement to buy\nYou are a first filter, not clearance. Every spot goes to a human for compliance review.\nFlag anything you're unsure about rather than smoothing it over.\n\n## Music & licensing\n- Do not state ASCAP/BMI/SESAC/SoundExchange rules from memory. If I ask about reporting\n  requirements, look them up and cite the source, or tell me you don't know.\n- Local artist spellings and pronunciations: /music/pronunciation.md. Check it before drafting\n  any host copy. Getting a local artist's name wrong is worse than not mentioning them.\n\n## Voice\nWarm, plain, specific. We sound like a person talking to a neighbor, not a press release.\n- No hype. No \"delve,\" \"tapestry,\" \"in today's fast-paced world,\" \"it's not just X, it's Y.\"\n- Short sentences. Say the thing.\n- Never use an em dash where a period works.\n\n## Where things live\n- /news/          drafts, interview prep, transcripts (NO unpublished investigations)\n- /membership/    pledge scripts, campaign copy (AGGREGATE NUMBERS ONLY)\n- /underwriting/  spot copy drafts, FCC reference\n- /music/         playlists, host copy, pronunciation guide\n- /grants/        CPB LCSR drafts, board reporting\n- /style/         AP exceptions, banned phrases\n- .env            API keys. Never read these values back to me in chat.\n\n## How to get better\nWhen I tell you an output was wrong, don't just fix that one output. Update this file so\nyou don't make the same mistake next time, and tell me what you changed.\n",
+  "pitfalls": [
+    "Bypass permissions mode is exactly what the name says — Claude Code never stops to ask. The video's own team had an agent email a discount code to 150,000 people, and is honest about the real cause: not the permission mode, but an agent with access to too many tools. Scoped keys are your first line of defense; permission modes are the second. Don't run bypass on a station machine that touches real files.",
+    "Turning off 'help improve Claude' in your privacy settings stops training on your data. It does not mean the vendor never had it. Every prompt still traveled to their servers. Decide what your station is willing to send before you send it, not after.",
+    "Your API key is a password. Not 'kind of like' a password — it is one. Anyone holding it can spend your budget and read your account. It belongs in .env, never in CLAUDE.md, never in a shared drive, never in Slack.",
+    "A CLAUDE.md rule is guidance, not a lock. If something must never happen — deleting files, writing to your CRM — enforce it in settings.json deny rules and in the key's own permissions, where the AI physically cannot get around it.",
+    "Don't build a perfect CLAUDE.md on day one. The video is clear that it grows: you get a bad output, you tell Claude to update its own instructions so it never happens again. That loop is the whole point."
+  ],
+  "keyQuotes": [
+    {
+      "quote": "This allows Claude to just do everything. It will never stop and say, 'Hey, is this okay? Can I do this?' It will just do everything.",
+      "tLabel": "1:10:15",
+      "t": 4215
+    },
+    {
+      "quote": "Would you give a new hire a credit card and say, hey, don't spend anything — but with this card you could? That just makes no sense.",
+      "tLabel": "1:13:00",
+      "t": 4380
+    },
+    {
+      "quote": "For the company that you work for or your own business, you should not be sending over private sensitive data.",
+      "tLabel": "1:17:30",
+      "t": 4650
+    }
+  ]
+}

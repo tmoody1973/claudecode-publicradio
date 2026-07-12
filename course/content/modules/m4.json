@@ -1,0 +1,197 @@
+{
+  "id": "m4",
+  "number": 4,
+  "title": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+  "kicker": "Google Workspace, CLIs vs MCPs, and Skills",
+  "runtimeMin": 42,
+  "sourceChapters": [
+    {
+      "n": 14,
+      "title": "Building Your AI Operating System",
+      "start": 4831,
+      "startLabel": "1:20:31"
+    },
+    {
+      "n": 15,
+      "title": "Connecting Google Workspace: CLIs vs MCPs",
+      "start": 5108,
+      "startLabel": "1:25:08"
+    },
+    {
+      "n": 16,
+      "title": "Skills Deep Dive",
+      "start": 6028,
+      "startLabel": "1:40:28"
+    },
+    {
+      "n": 23,
+      "title": "Installing in the Terminal + Free Resources",
+      "start": 10047,
+      "startLabel": "2:47:27"
+    }
+  ],
+  "plainSummary": "Up to now Claude Code has been working with files you hand it. This module connects it to the systems your station actually lives in — Gmail, Drive, Docs, Sheets, Calendar — so it can go get the information itself instead of waiting for you to paste it. You'll see the three ways a tool gets connected (a one-click connector, an MCP, or a command-line tool), and why the course argues for the plumbing you own rather than the plumbing a single app owns. Then it gets to the biggest idea in the whole course: Skills. A Skill is a plain-text folder that holds one of your station's procedures — how underwriting copy gets written, how a host preps a show — and Claude picks it up on its own the moment the work matches. Do the job once with Claude, then tell it to save what you just did as a Skill, and the procedure stops living in one person's head.",
+  "whyItMatters": "Every station has a dozen procedures that exist only because one person remembers them — the LCSR spreadsheet quirks, the way underwriting copy gets phrased so it clears compliance, the show-prep ritual a host does at 5:30am. A Skill turns that into a written, improvable file that anyone on staff can run and that survives the person leaving. And because Claude can reach into the Google Workspace your station already pays for, those procedures run against real logs, real calendars, and real drafts instead of re-typed copies.",
+  "concepts": [
+    {
+      "term": "AI operating system",
+      "plain": "Instead of hopping between fifteen browser tabs all day, you talk to one place, and it goes and uses the tools for you. Your project folder grows into that hub over time.",
+      "stationTranslation": "One window instead of Gmail, Drive, the music log, the CRM, and the traffic system all open at once. You ask; it goes and fetches.",
+      "tLabel": "1:21:20",
+      "t": 4880
+    },
+    {
+      "term": "CLI (command-line interface)",
+      "plain": "A tool you run by typing a command instead of clicking buttons. Same actions a person would do in the web app, just triggered by text — which is exactly how Claude works anyway.",
+      "stationTranslation": "Like the automation system's command syntax versus its click-around screen. Claude drives Google Workspace by typing commands, not by pretending to be a browser.",
+      "tLabel": "1:28:58",
+      "t": 5338
+    },
+    {
+      "term": "The Google Workspace CLI (gws)",
+      "plain": "One free open-source Google tool that gives Claude reach into Gmail, Drive, Docs, Sheets, Slides, and Calendar. One install and one login instead of six separate hookups.",
+      "stationTranslation": "The one connection that unlocks most of your day: draft in Docs, read the log in Sheets, triage the info@ inbox, find a free hour on the GM's calendar.",
+      "tLabel": "1:26:40",
+      "t": 5200
+    },
+    {
+      "term": "CLI vs MCP vs connector",
+      "plain": "Three ways to plug a tool in. The video's argument for the CLI: one interface across many apps, clean structured output, it updates itself, and it eats far less of Claude's attention than a pile of separate MCP tool definitions.",
+      "stationTranslation": "A connector is the easiest today and the most painful the day you switch tools. Keys and CLIs you set up yourself move with you.",
+      "tLabel": "1:37:39",
+      "t": 5859
+    },
+    {
+      "term": "A Skill",
+      "plain": "A folder holding a SKILL.md file — a written recipe for one procedure. Claude reads the recipe when the job matches, follows the steps, and you edit the recipe when the output isn't right.",
+      "stationTranslation": "The station SOP, finally written down somewhere that actually does the work. 'How we write underwriting copy' becomes a file, not a person's memory.",
+      "tLabel": "1:40:50",
+      "t": 6050
+    },
+    {
+      "term": "Progressive disclosure (why Skills scale)",
+      "plain": "Each Skill starts with a few lines saying what it is and when to use it. Claude skims only those lines across all your Skills, then fully reads the one it needs.",
+      "stationTranslation": "Like a shelf of binders with clear spine labels. Claude reads the spines, pulls one binder, ignores the other thirty-nine.",
+      "tLabel": "1:42:34",
+      "t": 6154
+    },
+    {
+      "term": "Building a Skill after the fact",
+      "plain": "Two ways to make one. Plan it up front — 'step one, step two, step three' — or just do the task with Claude, then say: that's something I do every week, turn it into a Skill.",
+      "stationTranslation": "The second way is better for stations. Nobody can describe how they prep a show. But they can do it once and let Claude write it down.",
+      "tLabel": "1:45:18",
+      "t": 6318
+    }
+  ],
+  "glossary": [
+    {
+      "term": "CLI",
+      "definition": "Command-line interface. A tool you operate by typing commands instead of clicking. Free, fast, and easy for Claude to drive."
+    },
+    {
+      "term": "MCP",
+      "definition": "A standard plug that lets an AI talk to an app. Useful, but each one loads its own set of tools into Claude's attention."
+    },
+    {
+      "term": "Connector",
+      "definition": "The one-click sign-in list inside the Claude app. Easiest to set up, but the connection lives in that app, not in your files."
+    },
+    {
+      "term": "Tool-agnostic",
+      "definition": "Set up so your work survives switching AI apps. Files, folders, and your own keys move; app-specific connectors don't."
+    },
+    {
+      "term": "Skill",
+      "definition": "A folder with a SKILL.md file describing one procedure. Claude loads it on its own when the request matches."
+    },
+    {
+      "term": "YAML front matter",
+      "definition": "The few labeled lines at the top of a SKILL.md — name, description, when to use it. Claude reads these to decide."
+    },
+    {
+      "term": "Progressive disclosure",
+      "definition": "Claude skims every Skill's description, then fully reads only the one it needs. Keeps forty Skills from crowding out your actual work."
+    },
+    {
+      "term": "OAuth",
+      "definition": "The 'Sign in with Google, allow access' step. How you grant Claude reach into your own Workspace account, revocably."
+    }
+  ],
+  "useCases": [
+    {
+      "role": "Underwriting / Corporate Support",
+      "title": "An \"underwriting-copy\" Skill that knows the FCC line",
+      "scenario": "Sponsor copy gets written by whoever's free, then bounces back from compliance review because someone slipped in a qualitative claim or a call to action.",
+      "howClaudeHelps": "Build a SKILL.md that holds your station's actual rules: value-neutral language, no CTA, no price or comparative claims, required sponsor identification, your 15-second and 30-second templates, plus three approved examples. From then on, 'draft copy for the new sponsor' pulls that Skill automatically and produces two or three variants against the rules. Every time compliance catches something, you add one line to the Skill and it never happens again.",
+      "timeSaved": "Copy-and-rewrite cycles drop from three rounds to about one",
+      "guardrail": "A human still signs off on every spot before it airs. The Skill is a first draft and a rule reminder, not FCC clearance — Claude does not know your license."
+    },
+    {
+      "role": "Music & Programming",
+      "title": "A \"show-prep\" Skill that builds the host's doc before dawn",
+      "scenario": "A host spends the first hour of every morning stitching together the music log, local headlines, and what's happening in town into a prep doc.",
+      "howClaudeHelps": "With the Google Workspace CLI connected, one Skill reads today's log out of the Sheet, pulls the station's local-news doc from Drive, and writes a formatted prep Doc — not raw markdown dumped into a page, but an actual Google Doc with headers and links. The host runs it with one sentence, then spends the saved hour on the parts only a human can do: the story behind the track, the phrasing, the local voice.",
+      "timeSaved": "A 60-minute morning stitch-together becomes about 10 minutes of review",
+      "guardrail": "Anything the host says on air is the host's. Claude assembles the folder; it does not write the break. Check every artist name and date — it will get one wrong eventually."
+    },
+    {
+      "role": "Grants & Compliance",
+      "title": "An \"lcsr-helper\" Skill for the CPB report",
+      "scenario": "The Local Content & Service Report comes due, and last year's answers live in an email thread with a person who has since left the station.",
+      "howClaudeHelps": "Turn the report into a Skill: the actual CPB questions, the tone that worked last year, where each piece of evidence lives in Drive, and the station's standing description of its service area. Claude pulls last year's submission, pulls this year's supporting docs, and drafts each narrative section with the source noted beside it. The Skill gets edited as the questions change, so next year's report starts from the real procedure instead of from scratch.",
+      "timeSaved": "A multi-week scramble becomes a few focused days of verification",
+      "guardrail": "Every number in a CPB filing must be traced back to your own records by a human. Claude drafts narrative; it does not certify. Never let it invent a figure to fill a blank."
+    },
+    {
+      "role": "Membership & Development",
+      "title": "A \"pledge-recap\" Skill for the board packet",
+      "scenario": "The drive ends Sunday night. The board wants a summary Tuesday, and the person who knows the spreadsheet is asleep.",
+      "howClaudeHelps": "A Skill that reads the aggregate results Sheet — totals by day, by hour, by challenge grant, new vs renewing counts — and turns it into the board-ready narrative your GM actually presents: what worked, what fell flat, how it compares to last spring. The Skill stores your board's preferred format, so the recap comes out in the shape they already read.",
+      "timeSaved": "A two-day scramble becomes an afternoon",
+      "guardrail": "Aggregate numbers only. No donor names, no addresses, no giving histories, no CRM export ever goes into the folder Claude can read. Strip to totals before Claude sees the file, and say so inside the Skill itself."
+    },
+    {
+      "role": "Leadership / Operations",
+      "title": "Inbox triage on the station's shared account",
+      "scenario": "The info@ and news tips inboxes have 200 unread messages and nobody owns them, so real listener questions and real story tips die in there.",
+      "howClaudeHelps": "This is the exact demo in the course, retargeted: with Workspace connected, a Skill scores unread mail against what it knows about the station's priorities and sorts it into high / needs action / ignore, with a short brief. Start it in read-only mode — brief only, no labels, no deletion — and only let it take action once you've watched it be right twenty times.",
+      "timeSaved": "A 200-message backlog triaged in ~15 minutes instead of a lost afternoon",
+      "guardrail": "Read-only until proven. Never let it auto-archive or auto-reply on a public-facing account — one deleted news tip or one auto-reply to a major donor is a bad day."
+    }
+  ],
+  "tryThis": {
+    "title": "Turn one thing you already did into a Skill",
+    "setup": "Pick a task you actually finished with Claude Code this week — a rewritten sponsor spot, a cleaned-up spreadsheet, a summarized meeting. Stay in that same conversation, so Claude still has the steps in front of it.",
+    "prompt": "Look back at everything we just did in this conversation. That's a process I repeat at the station — roughly every week. Turn it into a Skill I can reuse.\n\nBefore you write it, ask me 3-5 questions about the parts you had to guess at, so the Skill captures how we actually do it here and not just how it went once.\n\nThen create the Skill folder with a SKILL.md that has:\n- front matter with a clear name and a description that says exactly when to use it\n- the numbered steps we followed\n- our station's rules and preferences (format, tone, what we never do)\n- a short section on what a human must check before anything goes out\n\nWhen it's written, show it to me in plain English so I can tell you what you got wrong."
+  },
+  "pitfalls": [
+    "Connectors are the trap. The one-click sign-in list is easiest today and the most painful the day you switch apps — the video is blunt that you'd have to rebuild every connection from scratch. Set up your own keys and CLIs and your plumbing moves with you.",
+    "The Google Workspace CLI is a Google open-source beta, not an officially supported Google product. The course says so out loud, and the repo warns of breaking changes. Fine for drafting and reading; do not build a compliance deadline on top of it without a fallback.",
+    "Setup will not work on the first try. The video's own walkthrough hits a dead end and has to back up and do it manually. Expect a Google Cloud project, an OAuth screen, and a round of enabling APIs one at a time. Budget an hour and let Claude read the docs for you.",
+    "A Skill is never finished. The video's whole point is the loop: run it, judge it, edit the file. A Skill written once and never corrected will confidently repeat your worst assumptions — and it may behave differently when the model updates, so re-run your important ones after each new release.",
+    "Connecting Gmail and Drive means Claude can now see whatever is in Gmail and Drive. Before you authorize it, know what lives in that Drive. If donor exports, personnel files, or unredacted tips are sitting in a shared folder, move them out first — or use an account that never had access."
+  ],
+  "keyQuotes": [
+    {
+      "quote": "It's basically just an SOP. However you decide you want to do something, a skill just packages it up so that you can consistently do that again every time.",
+      "tLabel": "1:50:10",
+      "t": 6610
+    },
+    {
+      "quote": "Becoming tool agnostic is the most important thing you can do, because these tools evolve so quick. All we're doing here is building a bunch of folders and files.",
+      "tLabel": "1:38:20",
+      "t": 5900
+    },
+    {
+      "quote": "The hardest part, honestly, is just identifying what tools you need. Go look at the tabs you have open right now. What tools are you visiting frequently? That's what you want to connect.",
+      "tLabel": "1:21:40",
+      "t": 4900
+    }
+  ],
+  "skillAnatomy": {
+    "whatItIs": "A Skill is a written procedure Claude can pick up and follow — a station SOP saved as a plain text file. It is not a prompt you paste each time and it is not a setting you toggle. A prompt is a request you make once; a Skill is a recipe that stays on the shelf, gets used whenever the job matches, and gets edited when the output isn't right. The course's analogy is a recipe card: the first time you make it you follow every step, then you decide you want more chocolate chips, so you change the card — and now everyone who reaches for that card gets your version.",
+    "whereItLives": "A folder inside your project, under .claude/skills/. Each Skill is its own subfolder — .claude/skills/underwriting-copy/ — containing a file named SKILL.md. That markdown file is the master instruction. Alongside it you can drop anything the procedure needs: a reference file of your FCC rules, an examples file of approved copy, the station style guide, a spreadsheet template. Because it is all just folders and text files, a Skill can be emailed to another station, checked into a shared Drive, or carried over to a different AI tool — the course notes that other tools look in a differently-named folder, but the files themselves transfer.",
+    "whenClaudeLoadsIt": "On its own, when the work matches. Every SKILL.md opens with a few labeled lines — the front matter — giving its name and a description of exactly when to use it. Claude skims only those descriptions across all your Skills, then fully reads the one that fits. That's called progressive disclosure, and it's why a station can accumulate forty Skills without them crowding out the actual work: forty spine labels get read, one binder gets opened. So 'draft copy for the new credit union sponsor' triggers the underwriting Skill without you naming it. You can also call one deliberately with a slash command, like /underwriting-copy.",
+    "exampleSkillMd": "---\nname: underwriting-copy\ndescription: Drafts FCC-compliant underwriting announcements for station sponsors. Use when someone asks for sponsor copy, a spot script, an underwriting announcement, a credit, or says \"write copy for [sponsor]\".\n---\n\n# Underwriting Copy\n\nDraft announcements that identify a sponsor without promoting them. We are a\nnoncommercial station. Underwriting is not advertising, and copy that reads like\nadvertising puts the license at risk.\n\n## Before you write\n\n1. Ask for the sponsor name, what they do, their location, and any URL or phone\n   number they want included. Do not guess at these.\n2. Ask which lengths are needed. Default to one :15 and one :30.\n3. Read `rules.md` in this folder. Read `approved-examples.md` for our voice.\n\n## The rules (non-negotiable)\n\nNEVER include:\n- A call to action. No \"visit\", \"call today\", \"stop by\", \"check out\", \"don't miss\".\n- Price, discounts, or any deal. No \"$5 off\", \"free consultation\", \"affordable\".\n- Qualitative or comparative claims. No \"best\", \"leading\", \"award-winning\",\n  \"trusted\", \"finest\", \"#1\". Value-neutral language only.\n- Superlatives about the sponsor's product or service, in any form.\n\nALWAYS include:\n- The sponsor's legal name, clearly stated.\n- A value-neutral description of what they actually do.\n- The station's standard closing tag from `rules.md`.\n\nAllowed and encouraged:\n- Established factual descriptors (\"serving Milwaukee since 1974\").\n- A location. A slogan the sponsor already uses in general circulation.\n- A URL or phone number, stated plainly, with no urgency attached.\n\n## Write\n\nProduce two options per requested length so the sponsor has a choice.\nStay inside our word counts: :15 is 35-40 words, :30 is 70-80 words.\nRead each draft back and check it against the NEVER list, line by line.\n\n## Output format\n\nFor each option:\n- The copy, exactly as it would be read on air\n- The word count and estimated read time\n- A short compliance note: which rules you checked, and anything you were unsure\n  about — flag it rather than smoothing it over\n\n## Human review — required\n\nEnd every run with this line, plainly:\n\n  \"This is a draft. It has not been cleared. Underwriting must review and\n   approve before this airs.\"\n\nYou do not clear copy. You draft it. If the sponsor pushes for language that\nbreaks a rule above, say so directly and hand it to a human — do not soften the\nrule to make the sponsor happy.\n\n## Keep this Skill current\n\nWhen compliance rejects a line, ask me why, then add it to the NEVER list with\nthe real example. This file should get harder to break every month.\n"
+  }
+}

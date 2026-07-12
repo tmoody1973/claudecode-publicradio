@@ -1,0 +1,147 @@
+{
+  "id": "m6",
+  "number": 6,
+  "title": "Delegation: Freelancers, and a Newsroom",
+  "kicker": "Sub-agents, agent teams, and knowing when not to",
+  "runtimeMin": 41,
+  "sourceChapters": [
+    {"n": 20, "title": "Sub-Agents Explained", "start": 8423, "startLabel": "2:20:23"},
+    {"n": 21, "title": "Building a Sub-Agent: The Plan Roaster", "start": 9101, "startLabel": "2:31:41"},
+    {"n": 22, "title": "When to Use Sub-Agents", "start": 9826, "startLabel": "2:43:46"},
+    {"n": 30, "title": "Sub-Agents vs Agent Teams", "start": 16310, "startLabel": "4:31:50"}
+  ],
+  "plainSummary": "Up to now you have been working with one AI in one conversation. This module is about running more than one. A sub-agent is a worker your main session hands a job to — it gets a fresh, empty head, does the work in its own conversation, and reports back one paragraph instead of dumping 300 pages into yours. You build one by writing a single markdown file: a name, a description that says when to trigger it, which tools it may touch, and which model it runs on. An agent team is different and more expensive: several agents that can actually talk to each other, share a task list, and argue toward a consensus. The last third of the module is the part most people skip — when NOT to delegate.",
+  "whyItMatters": "A station of nine people cannot afford a research assistant, a compliance reader, and a devil's advocate. Sub-agents are the closest thing: you write the brief once and reuse it forever, and the cheap ones do the reading so your expensive main session stays clear. Just as important, the tool-restriction feature here is the only honest way to let AI near sensitive material — a read-only sub-agent physically cannot write or send anything, which is a real control, unlike asking it politely not to.",
+  "concepts": [
+    {
+      "term": "Sub-agent",
+      "plain": "A worker your main AI session hands a job to. It starts with an empty head, does the work in its own separate conversation, and reports back a short summary. It can only talk to your main session, never to you directly.",
+      "stationTranslation": "A freelancer you brief once and reuse. You hand them the assignment, they go work, they file. They don't sit in on your other meetings.",
+      "tLabel": "2:23:10",
+      "t": 8590
+    },
+    {
+      "term": "Why delegate: a clean context window",
+      "plain": "The sub-agent's reading fills up its own memory, not yours. In the demo, a roasting sub-agent burned 22,800 tokens of reading and thinking, but the main session only received the finished verdict.",
+      "stationTranslation": "The intern reads the whole 300-page CPB filing. You get the one-page memo. Your desk stays clear for the show.",
+      "tLabel": "2:39:22",
+      "t": 9562
+    },
+    {
+      "term": "The delegation test",
+      "plain": "One question decides it: is this about to dump a pile of stuff into my chat that I'll never read again? Yes means delegate. Other signals: lots of files to read, a wall of output, a job you keep repeating, independent work that can run in parallel, or a review you want from someone with no memory of your earlier arguing.",
+      "stationTranslation": "If it's a stack of documents nobody will reread, send it out. If it's a two-line edit to your newsletter, just do it yourself.",
+      "tLabel": "2:43:55",
+      "t": 9835
+    },
+    {
+      "term": "The description is the trigger",
+      "plain": "A sub-agent is one markdown file. The top section — the front matter — holds its name, description, allowed tools, and model. Claude only reads that top section to decide whether to call the agent, so a vague description means it fires when you don't want it and stays silent when you do. Those are misfires, and you fix them by rewriting the description.",
+      "stationTranslation": "It's the line in your staff directory that says what this person does. Write 'handles stuff' and nobody routes work to them.",
+      "tLabel": "2:28:00",
+      "t": 8880
+    },
+    {
+      "term": "Cheap workers, one smart lead",
+      "plain": "Each sub-agent can run on a different model. Your main session can be the expensive one while the workers doing bulk reading run on Haiku, the cheapest. Reading a long report to pull three facts does not need the most expensive model.",
+      "stationTranslation": "Your news director doesn't transcribe the school board tape. An intern does, and the director reads the summary.",
+      "tLabel": "2:43:08",
+      "t": 9768
+    },
+    {
+      "term": "Read-only by tool restriction, not by asking",
+      "plain": "When you build a sub-agent you choose exactly which tools it may use. Pick read-only and it physically cannot write files, edit, or send anything. The video is blunt: if your AI could read data, assume it will — so a permission layer is a real control and a polite instruction in a prompt is not.",
+      "stationTranslation": "The difference between telling a contractor 'please don't go in the donor files' and simply not giving them that key.",
+      "tLabel": "2:42:12",
+      "t": 9732
+    },
+    {
+      "term": "Agent team",
+      "plain": "Different from sub-agents. The main agent spins up a team that shares one task list, and the teammates can talk to each other, claim tasks, and debate to a consensus before reporting back. Sub-agents work alone in silence; a team works in a room. Teams cost noticeably more, and the feature is experimental — you switch it on in settings and you must say 'team create' or Claude will just quietly spin up ordinary sub-agents instead.",
+      "stationTranslation": "Sub-agents are five freelancers in five cubicles. An agent team is an editorial meeting — the same people arguing the same story out loud until they land it.",
+      "tLabel": "4:32:00",
+      "t": 16320
+    }
+  ],
+  "glossary": [
+    {"term": "Sub-agent", "definition": "A separate AI worker with a fresh, empty memory, given one job by your main session. Reports back a summary. Defined in one markdown file."},
+    {"term": "Agent team", "definition": "Several agents that share a task list and can talk to each other, debate, and reach consensus. More expensive than sub-agents. Experimental feature."},
+    {"term": "Orchestrator", "definition": "Your main session. The only one you talk to. It hands work out to sub-agents and relays their findings back to you."},
+    {"term": "Front matter", "definition": "The settings block at the top of a sub-agent's markdown file: name, description, allowed tools, model, memory. Everything below it is the instructions."},
+    {"term": "Progressive disclosure", "definition": "Claude reads only a sub-agent's name and description to decide whether to use it, so it doesn't waste effort loading agents it won't need."},
+    {"term": "Misfire", "definition": "A sub-agent fires when you didn't want it, or stays silent when you did. Fixed by rewriting its description, not its instructions."},
+    {"term": "Dynamic workflow", "definition": "Claude fans a big job out to many sub-agents at once — sometimes dozens. Powerful, but it eats your usage limit fast."},
+    {"term": "Session limit", "definition": "Your rolling five-hour usage cap. Sub-agents and agent teams don't fill your chat, but they absolutely spend against this."}
+  ],
+  "useCases": [
+    {
+      "role": "Underwriting / Corporate Support",
+      "title": "The Compliance Roaster",
+      "scenario": "A sponsor sends back copy with 'the best rates in Milwaukee — call today!' baked in, and you have twenty spots to clear before the log closes.",
+      "howClaudeHelps": "Build a read-only sub-agent whose only job is to be hostile to your spot copy: it hunts for calls to action, price claims, and qualitative language, and files a line-by-line teardown with the exact phrase flagged. Because it starts fresh every time, it has no memory of the copy you argued for last week. You point it at your station's underwriting policy doc so it roasts against your rules, not a generic idea of the FCC.",
+      "timeSaved": "A 90-minute copy-clearing pass becomes a 15-minute review of what got flagged",
+      "guardrail": "The roaster flags, it does not approve. Nothing airs on a sub-agent's say-so — a human who is accountable for the license signs off, every time."
+    },
+    {
+      "role": "News",
+      "title": "Pitch Roaster before the morning meeting",
+      "scenario": "A reporter pitches a three-week investigation. Everyone in the room likes it, which is exactly the problem.",
+      "howClaudeHelps": "The video's own reason for building a roaster is that AI defaults to being a yes-man, so you build one agent whose job is to disagree. Hand it the pitch and it comes back with the holes: what's the actual accountability question, who is the missing voice, what happens if the central document doesn't exist, what's the cheaper version of this story. A fresh sub-agent has no stake in the newsroom's enthusiasm.",
+      "timeSaved": "Kills a doomed three-week story in an afternoon instead of week two",
+      "guardrail": "Pitch framing only. No source names, no unpublished confidential material, no tips from people who haven't agreed to be identified — a pitch memo can be stripped down to the question without them."
+    },
+    {
+      "role": "Music & Programming",
+      "title": "Forty local submissions, forty briefs",
+      "scenario": "The local music inbox has forty new submissions and your music director has one afternoon.",
+      "howClaudeHelps": "This is the parallel-and-independent case the video calls out: each submission is unrelated to the others and order doesn't matter, so you fan them out to cheap sub-agents. Each one reads the bio, the press notes, and the links, and files a one-paragraph brief — who they are, where they're from, what it sounds like on paper, whether they're actually local. Your director gets forty briefs instead of forty inboxes.",
+      "timeSaved": "A full afternoon of triage becomes about 45 minutes of listening to the shortlist",
+      "guardrail": "No song gets added to rotation because an AI summarized it well. A human listens to every track that advances — the briefs only decide listening order."
+    },
+    {
+      "role": "Membership & Development",
+      "title": "Roast the drive plan, not the donors",
+      "scenario": "You have a spring drive plan — goal, day parts, premium ladder, script themes — and three weeks to fix whatever's wrong with it.",
+      "howClaudeHelps": "Hand the plan document to a Plan Roaster sub-agent and tell it to play devil's advocate: where is the goal unsupported by last year's actual pace, which premium tier makes no economic sense, which ask is doing double duty. This is exactly the ice-cream-stand demo from the video, aimed at something real. Build it read-only so it cannot touch a single file you didn't hand it.",
+      "timeSaved": "Replaces a planning retreat you were never going to schedule",
+      "guardrail": "The plan document only. No CRM export, no donor names, no giving history, no lapsed-donor lists — not into the main session and not into a sub-agent. Aggregate numbers you typed yourself are fine; a file from the donor database is not."
+    },
+    {
+      "role": "Grants & Compliance",
+      "title": "An agent team on the CPB narrative",
+      "scenario": "Your Local Content and Service Report narrative is drafted and it reads like it was written by the person who wanted it to be true.",
+      "howClaudeHelps": "This is the case for a real agent team rather than lone sub-agents — you want the perspectives to argue with each other. Spin up a team with distinct seats: a skeptical grant reviewer, a community member who never listens to you, your GM, a station down the road doing it better. They debate the narrative across a couple of rounds and hand back a consensus on what's actually persuasive and what's filler. Remember to say 'team create' or Claude will quietly give you silent sub-agents instead.",
+      "timeSaved": "Two rounds of internal review compressed into one working session",
+      "guardrail": "Every number in the narrative is verified by a human against your own records. An agent team will happily reach a confident consensus about a statistic it invented."
+    }
+  ],
+  "tryThis": {
+    "title": "Build a Compliance Roaster",
+    "setup": "Have your station's underwriting policy in a plain text or markdown file inside your project folder, plus one piece of real spot copy you're allowed to share. Then type /agents, choose 'Create new agent', pick Project level, pick 'Generate with Claude', and when it asks about tools choose read-only.",
+    "prompt": "Create me a sub-agent called compliance-roaster. Its job is to be adversarial about noncommercial underwriting copy for a public radio station. When I hand it spot copy, it should NOT tell me it looks good. It should hunt for every FCC problem: calls to action ('call today', 'visit now', 'don't miss'), price and value information, comparative or qualitative claims ('best', 'leading', 'award-winning' used promotionally), and anything that reads like an ad instead of an identification of a sponsor. It should read underwriting-policy.md in this project and roast against OUR rules, not generic ones. Output: a line-by-line table with the exact offending phrase, why it's a problem, and a compliant rewrite. End with a verdict: CLEAR, NEEDS EDIT, or REWRITE. It must never say copy is approved — only a human clears copy. Trigger it whenever I say 'roast this copy', 'check this spot', or 'compliance check'. Read-only tools, Haiku model."
+  },
+  "pitfalls": [
+    "Don't force it. The video is explicit: sub-agents are a great feature, but forcing too many of them gives worse results. A quick edit, or steps that depend on each other in order, belong in your main session.",
+    "Sub-agents can't talk to you or each other. If the work needs to ask you a clarifying question, or needs the full history of what you two have been discussing, keep it in the main session — the sub-agent wakes up blind and only reports back to the orchestrator.",
+    "The description is where it breaks. A vague description means misfires, and a single unclosed quote in the front matter silently stops the agent from ever firing — that exact mistake happens on camera. If it didn't run, ask Claude to read its own agent file and tell you why.",
+    "Teams and big fan-outs eat your usage limit. Agent teams talk, and talking costs tokens; one dynamic workflow in the video spun up 210 agents and burned through the session limit. It won't clog your chat window — it will end your afternoon.",
+    "Borrowed agents are code you didn't write. Grabbing someone's sub-agent markdown off GitHub is easy, and the video warns to check it for prompt injection first. For a station: never install a borrowed agent that has write or send permissions anywhere near membership, traffic, or automation systems."
+  ],
+  "keyQuotes": [
+    {
+      "quote": "Is this about to dump a pile of stuff into my chat that I'll never read again? If that's ever yes, delegate it to a sub-agent. If it's no, then maybe you keep it in line.",
+      "tLabel": "2:43:55",
+      "t": 9835
+    },
+    {
+      "quote": "Just because this feature is awesome, that doesn't mean to force it. Sometimes if you're forcing too many sub-agents, you're going to get worse results.",
+      "tLabel": "2:46:48",
+      "t": 10008
+    },
+    {
+      "quote": "In agent teams, the main agent spins up the team and there's a shared task list. These specialized teammates can communicate between each other and claim tasks off the list.",
+      "tLabel": "4:32:00",
+      "t": 16320
+    }
+  ]
+}

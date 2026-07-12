@@ -1,0 +1,212 @@
+{
+  "id": "m10",
+  "number": 10,
+  "title": "What This Actually Costs — Tokens, Caching, and Session Limits",
+  "kicker": "The answer when your GM asks the budget question",
+  "runtimeMin": 32,
+  "sourceChapters": [
+    {"n": 33, "title": "Token Management & Prompt Caching", "start": 19633, "startLabel": "5:27:13"},
+    {"n": 34, "title": "Final Thoughts", "start": 21500, "startLabel": "5:58:20"}
+  ],
+  "plainSummary": "Claude charges you by the token — roughly one token per word — and every time you send a message it rereads the whole conversation from the beginning. That means cost compounds instead of adding: message one might be 500 tokens, message thirty might be 15,500. Prompt caching is what stops that from bankrupting you: Claude stores the unchanged part of your session and re-reads it at 10% of normal input cost. This module teaches what gets cached (system instructions, your CLAUDE.md, the conversation so far), how long the cache lives, and — most usefully — the everyday moves that silently destroy it and make your next message cost full freight.",
+  "whyItMatters": "Public media runs on thin margins, and somebody in leadership will ask what an AI tool costs the station before anyone is allowed to use it. The honest answer is that the plan price is fixed but the value you get out of it swings enormously with habits — one person who understands caching gets several times the work out of the same subscription as someone who doesn't. As the video puts it: most people don't need a bigger plan, they have a context hygiene problem.",
+  "concepts": [
+    {
+      "term": "Token",
+      "plain": "The smallest unit of text an AI model reads and charges you for. Roughly one token per word — not exactly, but close enough to budget with.",
+      "stationTranslation": "Think of tokens as the meter on a phone line. Everything you say and everything Claude says back runs through it, and the meter never stops mid-session.",
+      "tLabel": "5:28:40",
+      "t": 19720
+    },
+    {
+      "term": "Compounding cost",
+      "plain": "Every time you send a message, Claude rereads the entire conversation from the start. So costs multiply as a chat grows — they don't just add up.",
+      "stationTranslation": "Like re-reading the full show rundown out loud before every single break. Thirty breaks in, you're spending most of your air time on the rundown, not the show.",
+      "tLabel": "5:28:50",
+      "t": 19730
+    },
+    {
+      "term": "Prompt caching",
+      "plain": "Claude saves the unchanged front part of your session and reuses it. Cached tokens cost about 10% of normal input, so a long session stays affordable.",
+      "stationTranslation": "The prep folder stays on the desk between segments. You don't rebuild it every hour — you just add today's new pages to it.",
+      "tLabel": "5:47:46",
+      "t": 20866
+    },
+    {
+      "term": "Cache create vs. cache read",
+      "plain": "Cache create is writing something into the cache the first time — a one-time cost that pays off next turn. Cache read is reusing it, roughly ten times cheaper than fresh input.",
+      "stationTranslation": "Cache create is filing the prep folder once. Cache read is pulling the same folder off the shelf tomorrow instead of researching it all over again.",
+      "tLabel": "5:51:04",
+      "t": 21064
+    },
+    {
+      "term": "TTL (time to live)",
+      "plain": "How long the cache survives before it expires. One hour on a Claude subscription inside Claude Code. Five minutes by default on the API and for sub-agents.",
+      "stationTranslation": "The prep folder has a shelf life. Walk away long enough and somebody clears the desk — you rebuild from scratch, at full price.",
+      "tLabel": "5:48:02",
+      "t": 20882
+    },
+    {
+      "term": "The three cached layers",
+      "plain": "System layer (base instructions, tool definitions, output style), project layer (CLAUDE.md, memory, rules), and conversation layer (your messages and Claude's replies, growing each turn).",
+      "stationTranslation": "Station-wide policy, this show's format sheet, and today's script. The first two should sit still; only the script should be growing.",
+      "tLabel": "5:51:49",
+      "t": 21109
+    },
+    {
+      "term": "Session handoff",
+      "plain": "Instead of /compact, have Claude write a summary of what you've done, the files, the open decisions, and where to pick up. Then /clear, paste the summary back, and keep going.",
+      "stationTranslation": "The handoff note a morning host leaves for the afternoon host. Short, complete, and cheaper than making the next person listen to the whole shift.",
+      "tLabel": "5:53:42",
+      "t": 21222
+    }
+  ],
+  "glossary": [
+    {"term": "Token", "definition": "The smallest chunk of text an AI reads and bills for. Roughly one word, give or take."},
+    {"term": "Cache create", "definition": "Writing content into the cache for the first time. A one-time cost that pays off on the next turn."},
+    {"term": "Cache read", "definition": "Reusing already-cached content. Costs about 10% of normal input tokens — roughly ten times cheaper."},
+    {"term": "TTL", "definition": "Time to live. How long cached content stays valid: one hour on a subscription, five minutes on the API."},
+    {"term": "Prefix matching", "definition": "How the cache works: it reuses content only if the front of the request is identical to last time."},
+    {"term": "/context", "definition": "A command showing exactly what is eating your tokens right now — history, MCP overhead, loaded files."},
+    {"term": "/cost", "definition": "A command showing actual token usage and estimated spend for the current session."},
+    {"term": "Peak hours", "definition": "8am-2pm Eastern on weekdays, when the five-hour session window drains faster because demand is high."}
+  ],
+  "useCases": [
+    {
+      "role": "Leadership",
+      "title": "Answering the board's 'what does AI cost us' question with real numbers",
+      "scenario": "Your GM is being asked by the board what an AI subscription buys, and whether staff will blow through it in a week.",
+      "howClaudeHelps": "Run /cost and /context in a real working session and screenshot both. You can show exactly where tokens go — system overhead, CLAUDE.md, conversation history — and demonstrate that cache reads run at 10% of normal input, so a disciplined user gets many times the work per dollar. The pitch becomes a habits story, not a licensing story.",
+      "timeSaved": "A vague 'we think it's worth it' becomes a one-page cost briefing in about an hour",
+      "guardrail": "Do not screenshot a session that has station financials, donor data, or unaired reporting on screen. Use a scratch session built for the demo."
+    },
+    {
+      "role": "News",
+      "title": "A long investigative session that doesn't burn the whole day's budget",
+      "scenario": "A reporter is working through a two-hundred-page records dump across a full afternoon, and the session keeps growing.",
+      "howClaudeHelps": "Stay in one session so the cache keeps paying off, and don't switch models mid-stream — a /model switch re-reads the entire history with no cache hits. At around 60% context, do a session handoff: ask Claude to summarize the findings, files, and open questions, then /clear and paste that summary back to continue clean.",
+      "timeSaved": "A session that would hit the limit by 2pm now runs until end of day",
+      "guardrail": "Confidential source material and anything under embargo does not go into a cloud tool at all. Caching is about cost, not about what is safe to upload — that judgment is separate and comes first."
+    },
+    {
+      "role": "Membership & Development",
+      "title": "Pledge-drive scripting during off-peak hours",
+      "scenario": "Drive week. The membership team needs dozens of script variants, and everyone is working at once on the same subscription window.",
+      "howClaudeHelps": "Schedule the heavy generation work for afternoons, evenings, or weekends — the five-hour session window drains faster during peak hours (8am-2pm Eastern, weekdays). Batch related asks into one message instead of three, and keep the drive's tone and rules in a lean CLAUDE.md so they're cached instead of retyped.",
+      "timeSaved": "Three separate prompt rounds collapse into one; the session lasts noticeably longer",
+      "guardrail": "No donor names, giving history, or CRM exports in the prompt. Aggregate, anonymized framing only — 'sustainers who gave under $10/month', never a list."
+    },
+    {
+      "role": "Digital & Audience",
+      "title": "Stopping the invisible MCP token drip",
+      "scenario": "Your digital lead connected four MCP servers months ago, and every session now starts thousands of tokens in the hole before anyone types a word.",
+      "howClaudeHelps": "Run /context in a brand-new session to see the starting overhead — the video's own fresh session began 51,000 tokens down from system prompts, tools, agents, skills, and memory. Then run /mcp and disconnect what you're not using this session. A single server can cost around 18,000 tokens on every message.",
+      "timeSaved": "Recovering tens of thousands of tokens per session, every session",
+      "guardrail": "Before disconnecting anything shared, check who else on staff relies on that connection. Note what you turned off so it can be turned back on."
+    },
+    {
+      "role": "Grants & Compliance",
+      "title": "Working the CPB Local Content and Service Report without model-hopping",
+      "scenario": "Someone is assembling the annual LCSR narrative across many sessions and keeps flipping between models to 'save money'.",
+      "howClaudeHelps": "Explain that each model has its own cache, so switching models mid-session re-reads the whole conversation from scratch. That includes the 'opus plan' setting, which uses Opus for planning and Sonnet for execution — every toggle is a model switch and starts a fresh cache. Pick a model for the session and stay in it; edit CLAUDE.md instead, which does not break the cache because it only applies on restart.",
+      "timeSaved": "Avoids repeatedly paying full price to re-read a 100k-token report draft",
+      "guardrail": "AI drafts the narrative; a human verifies every number against the actual station records before anything is filed with CPB."
+    }
+  ],
+  "tryThis": {
+    "title": "Find out what your sessions actually cost — in ten minutes",
+    "setup": "Open Claude Code in a project you actually use. Do this in a fresh session, before you type anything else. You'll run two built-in commands first, then ask Claude to interpret them.",
+    "prompt": "I want to understand my token costs before my GM asks me about them.\n\nFirst, walk me through what /context is showing right now in this fresh session — I want to know how many tokens I'm already spending before I've said a word, and what each category (system prompt, tools, skills, memory, MCP servers) is costing me.\n\nThen tell me, based on what you see:\n1. Which MCP servers I could safely disconnect for this session, and roughly what that saves per message.\n2. Whether my CLAUDE.md is lean enough — it gets re-read on every message, so flag anything over 200 lines or anything that should be an index pointer to another file instead of inline text.\n3. The three habits that would most extend my session, given how I actually work.\n\nBe concrete and give me numbers, not general advice. I'm going to put this in a memo."
+  },
+  "pitfalls": [
+    "Switching models mid-session — including turning on 'opus plan' mode — re-reads your entire conversation with zero cache hits. It feels like a savings move and it isn't.",
+    "Stepping away too long. On a subscription the cache lives an hour; on the API and for sub-agents it's five minutes by default. Come back late and your next message reprocesses everything at full cost.",
+    "Sub-agent workflows use roughly seven to ten times more tokens than a single-agent session, because each one wakes up with its own full context. Use them deliberately, and prefer Haiku for the grunt work.",
+    "Shell command output lands in your context whole. A command that returns 200 commits or a giant log dump is invisible tokens — deny permissions for commands a project genuinely doesn't need.",
+    "None of this token discipline is a privacy control. Being efficient with donor data in the prompt is not the same as being allowed to put donor data in the prompt. Decide what may be uploaded first, then optimize cost."
+  ],
+  "keyQuotes": [
+    {"quote": "A token is the smallest unit of text that an AI model reads and charges you for. Every time you send a message, Claude rereads the entire conversation from the beginning.", "tLabel": "5:28:45", "t": 19725},
+    {"quote": "Most people don't need a bigger plan. They need to stop resending their entire conversation history 30 times. It's not a limits problem, it's a context hygiene problem.", "tLabel": "5:46:40", "t": 20800},
+    {"quote": "The opus plan model setting resolves to Opus during plan mode and Sonnet during execution. So each plan toggle is a model switch and starts a fresh cache.", "tLabel": "5:55:13", "t": 21313}
+  ],
+  "cacheBreakers": [
+    {
+      "action": "Switching the model mid-session (/model)",
+      "breaksCache": true,
+      "why": "Each model has its own cache. The cache works by prefix matching, and switching models changes the prefix — so the next request reads the entire conversation history with no cache hits, even though the context is identical.",
+      "costImpact": "High",
+      "avoidBy": "Pick a model at the start of a session and stay in it. Sonnet for most work, Opus only when Sonnet wasn't enough, and start a new session if you truly need to switch."
+    },
+    {
+      "action": "Turning on 'opus plan' mode",
+      "breaksCache": true,
+      "why": "The opus plan setting resolves to Opus during plan mode and Sonnet during execution. Every plan toggle is therefore a model switch, and each switch starts a fresh cache. The video explicitly walks this back as a token-saving tip.",
+      "costImpact": "High",
+      "avoidBy": "Know the trade-off. It may still save session limit over the long run, but it does reset the cache each time it flips. Don't use it expecting cache savings."
+    },
+    {
+      "action": "Running /compact",
+      "breaksCache": true,
+      "why": "Compacting rewrites the conversation, so the cached prefix no longer matches. The video says plainly that /compact will break the cache — and after three or four compacts in a row, output quality degrades anyway.",
+      "costImpact": "Medium",
+      "avoidBy": "Use a session handoff instead: have Claude summarize the work, files, and open decisions, then /clear and paste the summary back. Faster than /compact and it gives you a clean, cheap cache."
+    },
+    {
+      "action": "Running /clear",
+      "breaksCache": true,
+      "why": "You are deliberately throwing away the conversation, so of course the cache goes with it. The next message pays cache-create prices for the new, much smaller context.",
+      "costImpact": "Low",
+      "avoidBy": "Don't avoid it — /clear between unrelated tasks is the single best habit for extending your session. The new cache is cheap precisely because the context is small."
+    },
+    {
+      "action": "Idling past the TTL",
+      "breaksCache": true,
+      "why": "The cache expires. One hour on a Claude subscription in Claude Code, five minutes by default on the API and for sub-agents. Leave a session sitting and your next message reprocesses everything from scratch at full cost. This is why people see usage spike out of nowhere after a break.",
+      "costImpact": "High",
+      "avoidBy": "If you're stepping away for a long stretch, do a session handoff or /clear before you go, so you come back to a small context rather than an expensive re-read of a huge one."
+    },
+    {
+      "action": "Changing the system prompt mid-session",
+      "breaksCache": true,
+      "why": "The system layer sits at the very front of the cached prefix. Change it on message 16 and everything from the beginning must be reprocessed — an expensive move made late in a long session.",
+      "costImpact": "High",
+      "avoidBy": "Settle your system-level setup (instructions, tool definitions, output style) before the session starts, not halfway through it."
+    },
+    {
+      "action": "Spawning a sub-agent",
+      "breaksCache": true,
+      "why": "A sub-agent is a separate instance that wakes up with its own full context and reloads everything. Agent workflows use roughly seven to ten times the tokens of a standard single-agent session, and sub-agent caches carry a five-minute TTL on any plan.",
+      "costImpact": "High",
+      "avoidBy": "Use sub-agents deliberately, for one-off research or bulk processing where only a summary comes back — and run them on Haiku so the expensive tokens stay in your main session."
+    },
+    {
+      "action": "Editing CLAUDE.md mid-session",
+      "breaksCache": false,
+      "why": "This is the one that surprises people. The edit doesn't apply until you restart the session, so the cached project layer stays exactly as it was. The cache stays safe.",
+      "costImpact": "None",
+      "avoidBy": "Nothing to avoid — go ahead and edit. Just remember your changes take effect on the next session, not this one."
+    },
+    {
+      "action": "Sending your next message within the TTL",
+      "breaksCache": false,
+      "why": "This is the cache doing its job. The system layer, project layer, and everything said so far are already cached — Claude only has to newly process the last reply and your new message, then cache those too.",
+      "costImpact": "None",
+      "avoidBy": "Nothing to avoid. Keep the session alive, keep it focused, and let the cache reads pile up at 10% of normal input cost."
+    },
+    {
+      "action": "Blowing past your weekly limit into pay-per-token usage",
+      "breaksCache": false,
+      "why": "It doesn't break the cache directly, but it quietly changes the rules: you leave subscription territory and land on API pricing, where the default TTL drops from an hour to five minutes. Sessions that felt fine now re-cache constantly.",
+      "costImpact": "Medium",
+      "avoidBy": "Watch your usage dashboard. If you spill into extra usage, tighten up — shorter gaps between messages, or bump the TTL back to an hour at additional cost."
+    }
+  ],
+  "costModel": {
+    "cachedReadMultiplier": 0.1,
+    "subscriptionTtlMinutes": 60,
+    "apiTtlMinutes": 5,
+    "subagentTtlMinutes": 5,
+    "notes": "Numbers as stated in the transcript. Cached tokens cost 10% of normal input — the video's example: 91 million cached tokens in a day billed like about 9 million. TTL on a Claude subscription inside Claude Code is 1 hour; on the API it is 5 minutes by default, and it can be bumped to 1 hour at extra cost. Sub-agents get 5 minutes on any plan. claude.ai web projects are NOT clearly documented — the video's presenter assumes they behave like the subscription but says he could not confirm it, and only that dropping documents into a project appears better optimized than pasting them into chat. Other figures worth modeling: a single MCP server can add ~18,000 tokens per message; a fresh session in the video already started ~51,000 tokens down from system prompt, tools, agents, skills, and memory; sub-agent workflows run roughly 7-10x the tokens of a single-agent session; autocompact triggers around 95% context, but manual compaction is recommended around 60%. Cost compounds rather than adds: the video's illustration has message 1 at ~500 tokens and message 30 at ~15,500, reaching nearly a quarter-million cumulative tokens after 30 messages, with one tracked 100+ message chat spending 98.5% of its tokens rereading old history."
+  }
+}
