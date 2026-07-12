@@ -163,7 +163,7 @@
         "title": "Get the board-ready readout",
         "do": "Now that the personal columns are gone, ask for the actual numbers: total raised, gift count, average gift, and a breakdown by campaign.",
         "prompt": "Good. Now use drive-numbers-only.csv to put together a short readout I can bring to the board: total raised, how many gifts, average gift, and a breakdown by campaign_code. Keep it to something I could read in two minutes.",
-        "youWillSee": "A short written readout: the total raised, the gift count, both the average AND the median gift (it will explain why those two numbers can tell different stories), and a table breaking the total down by campaign code.",
+        "youWillSee": "A short written readout: the total raised, the gift count, both the average AND the median gift, and a table breaking the total down by campaign code. It reads polished and confident — and one of its numbers is flat wrong. That's exactly why the checks below exist: read the readout, then check it.",
         "sessionTurn": 10
       }
     ],
@@ -177,6 +177,11 @@
         "check": "The total in the readout matches the total in your CRM.",
         "why": "If the total is off, Claude read the wrong file or the wrong column — everything downstream is then wrong too.",
         "ifWrong": "Ask it to show its arithmetic: 'Show me the total and how you calculated it.'"
+      },
+      {
+        "check": "Read the last paragraph of the recording above, then count the $1,000 gifts in the file yourself.",
+        "why": "Claude says five donors gave $1,000, about 6% of the total. It is wrong. Thirty-five donors gave $1,000 — that is 45% of everything raised, and it is the single most important fact in the drive. It said this confidently, and it never caught itself. We left it in.",
+        "ifWrong": "This is not a trick — it is the whole lesson. Claude sounds exactly as certain when it is wrong as when it is right. Check every number that matters before it reaches a board packet."
       }
     ],
     "troubleshooting": [
@@ -188,7 +193,7 @@
       {
         "symptom": "It made up a number that looks plausible but is wrong.",
         "cause": "You asked for a conclusion before asking it to read the data.",
-        "fix": "Always make it read first and summarize the columns, before you ask it to calculate anything."
+        "fix": "Always make it read first and summarize the columns, before you ask it to calculate anything. It won't always save you — in the recording above, Claude read the real data and still said five donors gave $1,000 when the true number is thirty-five. Check the number itself, not just whether it read the file."
       }
     ],
     "session": {
