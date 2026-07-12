@@ -1,5 +1,8 @@
-import { AlertTriangle, ListVideo, Play, Quote } from "lucide-react";
+import { AlertTriangle, ListVideo, Quote } from "lucide-react";
 import type { Concept, KeyQuote, SourceChapter } from "@/lib/course";
+import { TimestampLink } from "@/components/video/timestamp-link";
+
+export { TimestampLink };
 
 /** Shared section shell: a loud heading, an optional plain-English subtitle. */
 export function Section({
@@ -24,33 +27,6 @@ export function Section({
   );
 }
 
-/**
- * Deep link to the exact second of the source video. The site's proof of work —
- * every concept, quote and chapter carries one.
- */
-export function TimestampLink({
-  href,
-  label,
-  context,
-}: {
-  href: string;
-  label: string;
-  context: string;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="retro-box retro-lift inline-flex min-h-11 items-center gap-1.5 bg-card px-3 text-[13px] no-underline"
-    >
-      <Play className="size-3.5 shrink-0" aria-hidden />
-      <span className="font-mono">{label}</span>
-      <span className="sr-only">— watch “{context}” in the source video</span>
-    </a>
-  );
-}
-
 export function SourceChapters({ chapters }: { chapters: SourceChapter[] }) {
   return (
     <ul className="flex flex-col gap-3">
@@ -58,7 +34,7 @@ export function SourceChapters({ chapters }: { chapters: SourceChapter[] }) {
         <li key={c.n} className="retro-box flex flex-wrap items-center gap-3 bg-card p-3">
           <ListVideo className="size-4 shrink-0 text-muted-foreground" aria-hidden />
           <span className="min-w-0 flex-1 font-head text-[14px] leading-snug">{c.title}</span>
-          <TimestampLink href={c.youtube} label={c.startLabel} context={c.title} />
+          <TimestampLink href={c.youtube} label={c.startLabel} context={c.title} seconds={c.start} />
         </li>
       ))}
     </ul>
@@ -76,7 +52,7 @@ export function Concepts({ concepts }: { concepts: Concept[] }) {
         <li key={c.term} className="retro-box bg-card">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-border p-3">
             <h3 className="min-w-0 font-head text-base leading-snug sm:text-lg">{c.term}</h3>
-            <TimestampLink href={c.youtube} label={c.tLabel} context={c.term} />
+            <TimestampLink href={c.youtube} label={c.tLabel} context={c.term} seconds={c.t} />
           </div>
 
           <div className="grid gap-px bg-border sm:grid-cols-2">
@@ -124,7 +100,7 @@ export function KeyQuotes({ quotes }: { quotes: KeyQuote[] }) {
             “{q.quote}”
           </blockquote>
           <div className="mt-3">
-            <TimestampLink href={q.youtube} label={q.tLabel} context={q.quote} />
+            <TimestampLink href={q.youtube} label={q.tLabel} context={q.quote} seconds={q.t} />
           </div>
         </li>
       ))}

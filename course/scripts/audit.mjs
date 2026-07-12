@@ -17,6 +17,7 @@ const BASE = process.argv[2] ?? "http://localhost:3000";
 
 const PAGES = [
   "/",
+  "/guide",
   "/modules",
   ...Array.from({ length: 10 }, (_, i) => `/modules/module-${i + 1}`),
   "/use-cases",

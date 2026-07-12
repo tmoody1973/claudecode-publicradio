@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ModuleCard } from "@/components/module-card";
 import { RoleStrip } from "@/components/home/role-strip";
 import { Limits } from "@/components/home/limits";
+import { VideoProvider } from "@/components/video/video-player";
 import { meta, modules } from "@/lib/course";
 
 export const metadata: Metadata = {
@@ -112,6 +113,16 @@ export default function Home() {
               break, and what must never go into it?</em> If we could not name a real station job
               for a feature, we left it out.
             </p>
+          </div>
+
+          {/* The source, right here. Nothing loads from YouTube until you press play. */}
+          <div className="mt-8 max-w-3xl">
+            <VideoProvider startAt={0} label={`${meta.sourceTitle} — by ${meta.sourceAuthor}`}>
+              <p className="mt-3 text-sm text-muted-foreground">
+                The whole {SOURCE_HOURS}-hour original. Inside any module, the timestamps play the
+                relevant minute right on the page.
+              </p>
+            </VideoProvider>
           </div>
         </div>
       </section>

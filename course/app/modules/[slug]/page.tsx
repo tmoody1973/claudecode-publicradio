@@ -18,7 +18,8 @@ import {
 } from "@/components/module/module-sections";
 import { Pyramid } from "@/components/module/pyramid";
 import { UseCaseCards } from "@/components/module/use-case-cards";
-import { getModule, modules } from "@/lib/course";
+import { VideoProvider } from "@/components/video/video-player";
+import { getModule, meta, modules } from "@/lib/course";
 import type { CourseModule } from "@/lib/course";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -133,26 +134,31 @@ export default async function ModulePage({ params }: Props) {
         <ModuleNav prev={prev} next={next} />
       </div>
 
-      <Section id="plain-english" title="In plain English">
-        <p className="text-[16px] leading-relaxed sm:text-lg">{mod.plainSummary}</p>
-
-        <div className="retro-box-lg mt-5 rounded-none bg-primary p-4 text-black sm:p-6">
-          <p className="font-head text-[11px] uppercase tracking-widest">
-            Why it matters at your station
-          </p>
-          <p className="mt-2 text-[16px] font-medium leading-relaxed sm:text-lg">
-            {mod.whyItMatters}
-          </p>
-        </div>
-      </Section>
-
-      <Section
-        id="source"
-        title="What’s in the source"
-        subtitle="The chapters of the original video this module is built from. Every link opens at the exact second."
+      {/* The player wraps the page so every timestamp below can seek it in place. */}
+      <VideoProvider
+        startAt={mod.sourceChapters[0]?.start ?? 0}
+        label={`${meta.sourceTitle} — ${mod.sourceChapters[0]?.title ?? ""}`}
       >
-        <SourceChapters chapters={mod.sourceChapters} />
-      </Section>
+        <Section id="plain-english" title="In plain English">
+          <p className="text-[16px] leading-relaxed sm:text-lg">{mod.plainSummary}</p>
+
+          <div className="retro-box-lg mt-5 rounded-none bg-primary p-4 text-black sm:p-6">
+            <p className="font-head text-[11px] uppercase tracking-widest">
+              Why it matters at your station
+            </p>
+            <p className="mt-2 text-[16px] font-medium leading-relaxed sm:text-lg">
+              {mod.whyItMatters}
+            </p>
+          </div>
+        </Section>
+
+        <Section
+          id="source"
+          title="What’s in the source"
+          subtitle="The chapters of the original video this module is built from. Press any timestamp and it plays in the player above."
+        >
+          <SourceChapters chapters={mod.sourceChapters} />
+        </Section>
 
       <Section
         id="ideas"
@@ -192,9 +198,10 @@ export default async function ModulePage({ params }: Props) {
         <Pitfalls pitfalls={mod.pitfalls} />
       </Section>
 
-      <Section id="quotes" title="Worth quoting">
-        <KeyQuotes quotes={mod.keyQuotes} />
-      </Section>
+        <Section id="quotes" title="Worth quoting">
+          <KeyQuotes quotes={mod.keyQuotes} />
+        </Section>
+      </VideoProvider>
 
       <div className="mt-12">
         <ModuleNav prev={prev} next={next} />

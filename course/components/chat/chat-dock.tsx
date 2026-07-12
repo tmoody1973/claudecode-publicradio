@@ -10,7 +10,7 @@ import {
   type Message,
 } from "@openuidev/react-headless";
 import { Renderer } from "@openuidev/react-lang";
-import { MessageCircle, X, Send, Square } from "lucide-react";
+import { Loader2, MessageCircle, Send, Square, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { courseLibrary } from "@/lib/openui-library";
 import { PRIMARY_MODEL } from "@/lib/models";
@@ -39,11 +39,44 @@ function textOf(message: Message): string {
   return "";
 }
 
+/** A visible, honest wait. Free models are slow; silence reads as broken. */
+function Pending() {
+  const [secs, setSecs] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setSecs((s) => s + 1), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="retro-box bg-card p-3" role="status" aria-live="polite">
+      <div className="flex items-center gap-2.5">
+        <Loader2 className="size-4 shrink-0 animate-spin motion-reduce:animate-none" aria-hidden />
+        <p className="font-head text-[13px] uppercase tracking-wide">
+          Reading the course{secs > 0 ? ` · ${secs}s` : ""}
+        </p>
+      </div>
+      <p className="mt-1.5 text-[12px] leading-relaxed text-muted-foreground">
+        {secs < 8
+          ? "Looking through all ten modules for the parts that answer this."
+          : secs < 25
+            ? "Still going. The free model is thorough but slow — usually 20 to 30 seconds."
+            : "Taking longer than usual. Free models get busy; if this stalls, ask again."}
+      </p>
+    </div>
+  );
+}
+
 function Thread({ onClose }: { onClose: () => void }) {
   const { messages, isRunning, processMessage, cancelMessage } = useThread();
   const [draft, setDraft] = useState("");
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // True from the instant you hit send until the first token of the reply arrives.
+  const last = messages[messages.length - 1];
+  const awaitingReply =
+    isRunning && (!last || last.role === "user" || textOf(last).length === 0);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -132,15 +165,16 @@ function Thread({ onClose }: { onClose: () => void }) {
                     }
                   }}
                 />
-                {streaming && !content ? (
-                  <div className="retro-box bg-card p-3">
-                    <p className="text-[13px] text-muted-foreground">Thinking…</p>
-                  </div>
-                ) : null}
               </div>
             );
           })
         )}
+
+        {/* The free model takes 20-35s and the assistant message doesn't exist until the
+            first token lands — so without this the panel sits blank and reads as broken.
+            Show the wait, and say why. */}
+        {awaitingReply ? <Pending /> : null}
+
         <div ref={endRef} />
       </div>
 
