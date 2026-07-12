@@ -606,8 +606,7 @@
               "Review the flagged blank-tag rows yourself and fill in the local status by hand.",
               "Compare the resulting local percentage to the number you promised in your last grant, before you report it anywhere."
             ],
-            "verify": "Pick five rows at random from the tally and count their spins yourself straight from the log — if your hand count doesn't match what Claude reported for those five, don't trust the rest of the tally either.",
-            "walkthroughSlug": "first-30-minutes"
+            "verify": "Pick five rows at random from the tally and count their spins yourself straight from the log — if your hand count doesn't match what Claude reported for those five, don't trust the rest of the tally either."
           }
         },
         {
@@ -3841,8 +3840,7 @@
           "Review the flagged blank-tag rows yourself and fill in the local status by hand.",
           "Compare the resulting local percentage to the number you promised in your last grant, before you report it anywhere."
         ],
-        "verify": "Pick five rows at random from the tally and count their spins yourself straight from the log — if your hand count doesn't match what Claude reported for those five, don't trust the rest of the tally either.",
-        "walkthroughSlug": "first-30-minutes"
+        "verify": "Pick five rows at random from the tally and count their spins yourself straight from the log — if your hand count doesn't match what Claude reported for those five, don't trust the rest of the tally either."
       }
     },
     {

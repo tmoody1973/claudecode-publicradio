@@ -76,5 +76,3 @@ export function walkthroughForModule(moduleNumber: number): Walkthrough | undefi
   const forModule = walkthroughs.filter((w) => w.moduleNumber === moduleNumber);
   return forModule.find((w) => w.tier === "flagship") ?? forModule[0];
 }
-
-export const onboarding = walkthroughs.find((w) => w.tier === "onboarding");
