@@ -16,10 +16,10 @@ export default function WalkthroughsPage() {
     <div className="mx-auto max-w-6xl px-4 pb-24 pt-10">
       <h1 className="text-2xl uppercase tracking-tight sm:text-4xl">Do it with us</h1>
       <p className="mt-3 max-w-2xl text-[15px] leading-relaxed sm:text-base">
-        Every walkthrough shows you a <strong>real recorded session</strong> — the actual
-        thing running, permission prompts and wrong turns and all — before you try it
-        yourself. The three job-specific ones come with fake station data you can practise
-        on, so nothing real is ever at risk.
+        Every walkthrough shows you a <strong>real recorded session</strong> — every tool
+        call, every result, exactly as it ran — before you try it yourself. The three
+        job-specific ones come with fake station data you can practise on, so nothing real
+        is ever at risk.
       </p>
 
       <section aria-labelledby="start" className="mt-10">

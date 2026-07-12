@@ -51,7 +51,7 @@ export default async function WalkthroughPage({ params }: Props) {
       <Section
         id="watch"
         title="Watch it happen first"
-        subtitle="A real session, recorded. Press Next to step through it — including the bits where it asks permission, and the bit where it gets something wrong."
+        subtitle="A real session, recorded. Press Next to step through it one turn at a time. Claude Code will ask your permission before it touches a file — the steps below tell you when."
       >
         <RecordedSession session={w.session} />
       </Section>
