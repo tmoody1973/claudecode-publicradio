@@ -15,7 +15,7 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
 3. BRANCH: feat/walkthroughs.
 
 ## Tasks
-- [ ] 1 validator + types
+- [x] 1 validator + types — COMPLETE (commits 02f7743..cc6027f, review clean)
 - [ ] 2 synthetic sample data
 - [ ] 3 recorded-session terminal
 - [ ] 4 walkthrough section components
@@ -25,3 +25,8 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
 - [ ] 8 wire in + audit gate
 
 ## Minor findings (for the final whole-branch review to triage)
+- T1: no test exercises per-field checks on `verify` entries (check/why/ifWrong) or
+  `sampleData.columns` non-empty. Code paths exist but are unexercised. Task 7's
+  fixtures could cover them.
+- T1 env note: `node --test scripts/lib/` (bare dir) throws MODULE_NOT_FOUND on Node 26.
+  Use the glob form `node --test scripts/lib/*.test.mjs`. Applies to Tasks 5/7 too.
