@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "In Claude Code, ask it to create a Skill folder — .claude/skills/underwriting-copy — with a SKILL.md that describes exactly when to use it: drafting sponsor spot copy.",
+    "Give it your actual rules: no call to action, no price or comparative claims, required sponsor identification, and your 15- and 30-second templates.",
+    "Add two or three approved past examples to the Skill folder so Claude has real copy to match the voice against.",
+    "Require every draft the Skill produces to close with a plain line stating it hasn't been cleared and needs human compliance review.",
+    "Test it: ask for copy for a new sponsor without naming the Skill, and confirm Claude pulled it in on its own.",
+    "Every time compliance catches something the Skill missed, add that exact example to the SKILL.md so it never slips through again."
+  ],
+  "verify": "Ask for sponsor copy without mentioning the Skill by name. If Claude doesn't apply the rules and templates on its own, the Skill's description isn't specific enough for Claude to find it — rewrite that description line."
+}

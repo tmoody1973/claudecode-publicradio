@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Gather past grant applications, CPB reports, community partner lists, and board minutes into a folder called raw.",
+    "Open Claude Code in that folder and ask it to organize everything into linked notes \u2014 partners, initiatives, outcomes \u2014 with an index, in a wiki folder.",
+    "When the next report opens, ask Claude to assemble the source material for each section, with a link back to the original document for every claim.",
+    "Read every claim and every number in the draft against its linked source document.",
+    "Fix anything unverified or unsourced before it goes into the draft you'll submit.",
+    "Have a second person check the final draft against the wiki's links before submission.",
+    "Add this year's finished report back into raw so next year's wiki starts fuller."
+  ],
+  "verify": "Pick five sentences at random from the drafted report and follow each one's link back to its source document \u2014 if any of the five doesn't check out, stop and re-verify the whole section."
+}

@@ -48,6 +48,39 @@ export function UseCaseCard({ useCase }: { useCase: UseCase }) {
         Module {useCase.moduleNumber}: {useCase.moduleTitle}
         <ArrowRight className="size-4 shrink-0" aria-hidden />
       </Link>
+
+      {useCase.runbook ? (
+        <details className="mt-3 border-t-2 border-border pt-3">
+          <summary className="flex min-h-11 cursor-pointer items-center font-head text-[12px] uppercase tracking-wide">
+            How to actually do this
+          </summary>
+          <ol className="mt-3 space-y-2">
+            {useCase.runbook.steps.map((s, i) => (
+              <li key={i} className="flex gap-2.5 text-[14px] leading-relaxed">
+                <span
+                  className="grid size-6 shrink-0 place-items-center border-2 border-border bg-primary font-head text-[11px] text-black"
+                  aria-hidden
+                >
+                  {i + 1}
+                </span>
+                <span className="min-w-0">{s}</span>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-3 border-t-2 border-border pt-2 text-[13px] leading-relaxed">
+            <span className="font-head text-[10px] uppercase tracking-wider">Check it · </span>
+            {useCase.runbook.verify}
+          </p>
+          {useCase.runbook.walkthroughSlug ? (
+            <a
+              href={`/walkthroughs/${useCase.runbook.walkthroughSlug}`}
+              className="retro-box retro-lift mt-3 inline-flex min-h-11 items-center bg-primary px-3 font-head text-[11px] uppercase tracking-wide text-black no-underline"
+            >
+              Do the full walkthrough
+            </a>
+          ) : null}
+        </details>
+      ) : null}
     </article>
   );
 }

@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "In your CRM, create a new API key that is read-only — no edit, no delete, no export-all — and confirm in the CRM's own settings screen that it physically cannot write.",
+    "Save that key in a file called .env in your project folder, and never paste it anywhere else — not in CLAUDE.md, not in an email, not in Slack.",
+    "Open Claude Code in that folder and ask it to add a deny rule in settings.json blocking any write or delete command against the CRM.",
+    "Ask it to explain in plain English what that deny rule actually blocks, so you know it did what you asked before you rely on it.",
+    "Ask Claude for the donor segment summary you need — aggregate counts and totals only, never a request for named records.",
+    "Read the result back and confirm every line is a count or a total, with no donor name, email, or address anywhere in it."
+  ],
+  "verify": "Go back to your CRM's key management screen and confirm the key shows read-only. If it shows any write or delete permission, delete the key, generate a new one, and redo the setup before using it again."
+}

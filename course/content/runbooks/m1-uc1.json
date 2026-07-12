@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Save the budget PDF into a folder on your computer — call it something like \"budget-story\" so you can find it again.",
+    "Open Claude Code and point it at that folder (this just means telling it which folder on your computer to work in).",
+    "Ask it to read the whole PDF and list every line item where the amount changed by more than 10% since last year.",
+    "Ask it to give you the page number in the PDF where it found each one, not just the number itself.",
+    "Open the actual PDF to each page it cited and check that the number really says what Claude said it says.",
+    "Hand your reporter only the items you've personally confirmed on the page, with the page numbers attached."
+  ],
+  "verify": "Open the PDF to the page number Claude cited for each flagged line item — if what's on that page doesn't match the number in Claude's list, pull that item before it goes anywhere near a script."
+}

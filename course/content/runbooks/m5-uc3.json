@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Keep unverified claims and any source's identity out of anything you'll paste elsewhere later — the handoff note is a work summary, not a place to stash sensitive material.",
+    "At the end of each day's working session in Claude Code, before you close it, ask: write me a handoff — what we established, what's still unverified, which documents we've read, what to check next.",
+    "Read that handoff over and fix anything it got wrong or overstated — it will sound confident even about things that aren't confirmed.",
+    "Copy the handoff text somewhere safe, like a plain text file on your machine, not just left in the chat.",
+    "Run /clear to wipe the session — do this only after the handoff is safely copied out.",
+    "Paste the handoff into the fresh session as your first message the next day.",
+    "Before you write or air anything, check every claim in the handoff against the original document yourself."
+  ],
+  "verify": "Pick three claims from the handoff at random and find each one in the original council minutes, contract, or document. If you can't find one, that claim doesn't get used until you can."
+}

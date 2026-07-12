@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "List out, by name, everything that never goes in a prompt box: donor giving histories, personnel files, unpublished journalism, legal correspondence, anything under an NDA.",
+    "Open Claude Code and ask it to draft a one-page policy from that list, explaining in plain English that a closed AI model sends every prompt to a vendor's servers, and that turning off 'training' does not delete what was already sent.",
+    "Have Claude add the technical backstop as an example: a settings.json deny-rule and a scoped read-only key, so the policy isn't just a memo people forget.",
+    "Read the draft policy and correct anything it got wrong about your station's specific tools or data.",
+    "Put the final policy in your global CLAUDE.md so it applies on every project, on every machine, for everyone at the station.",
+    "Circulate the policy to staff and confirm each department head has actually read it."
+  ],
+  "verify": "Ask two staffers in different departments to tell you, in their own words, what they're never allowed to paste into an AI tool. If they can't name the list from memory, the policy is filed away instead of understood — shorten it or post it somewhere visible."
+}

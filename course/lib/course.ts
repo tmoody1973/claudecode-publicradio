@@ -27,6 +27,12 @@ export type Concept = {
   youtube: string;
 };
 
+export type Runbook = {
+  steps: string[];
+  verify: string;
+  walkthroughSlug?: string;
+};
+
 export type UseCase = {
   id: string;
   role: string;
@@ -39,6 +45,7 @@ export type UseCase = {
   moduleId: string;
   moduleNumber: number;
   moduleTitle: string;
+  runbook?: Runbook;
 };
 
 export type SourceChapter = {

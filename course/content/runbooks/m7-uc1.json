@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Make a project folder on your computer, and inside it a folder called brand_assets \u2014 drop in your logo and anything showing your colors and fonts.",
+    "Open Claude Code in that project folder and describe the page in one sentence: a hero, a case-for-support section, thank-you gifts, a progress thermometer, and a big donate button \u2014 tell it to match brand_assets exactly.",
+    "Tell it the donate button must only point to your station's existing donation platform \u2014 it must never build a form that collects a name, email, or card number.",
+    "Have it check its own work in a phone-width browser view and fix anything that looks off, twice, before it shows you anything.",
+    "Review the local preview on your own machine \u2014 this step is private, nothing is public yet.",
+    "Once you approve it, have it push the files to GitHub (an online backup that keeps every version of your project) and import that into Vercel (the service that turns those files into a live web address).",
+    "Click the donate button on the live page all the way through to confirm it lands on your real donation form."
+  ],
+  "verify": "Click the donate button on the live page and confirm it lands on your station's actual donation form \u2014 not a page Claude built that asks for a name, email, or card number."
+}

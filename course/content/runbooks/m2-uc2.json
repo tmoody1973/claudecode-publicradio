@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "Export this week's play log from your automation system.",
+    "Put the file in a folder on your computer and open Claude Code there.",
+    "Ask it to read the log, tally spins by artist, and flag which ones are tagged local.",
+    "Tell it plainly: if the local tag is blank, don't guess — flag that row for you to decide, don't count it either way.",
+    "Ask it to chart the local percentage week over week and write the counts into a spreadsheet you can reuse.",
+    "Review the flagged blank-tag rows yourself and fill in the local status by hand.",
+    "Compare the resulting local percentage to the number you promised in your last grant, before you report it anywhere."
+  ],
+  "verify": "Pick five rows at random from the tally and count their spins yourself straight from the log — if your hand count doesn't match what Claude reported for those five, don't trust the rest of the tally either.",
+  "walkthroughSlug": "first-30-minutes"
+}

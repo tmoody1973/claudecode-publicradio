@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Open your week's playlist file — the one your local-music host already has.",
+    "Put it in a folder on your computer and open Claude Code there.",
+    "Ask Claude Code to read the playlist and, for each local artist, search online for a short bio, upcoming tour dates, and any recent release news.",
+    "Ask it to put all of that into one prep sheet, organized by artist, in the order they're playing.",
+    "Read the prep sheet and flag anything that sounds off or too good to be true.",
+    "Before your host says anything on air about a tour date, label, or hometown, check it against a real source — the artist's own site or a wire story."
+  ],
+  "verify": "Pick three claims from the prep sheet — a tour date, a label, a hometown — and look each one up yourself on the artist's own site before your host reads any of them on air."
+}

@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Open Claude Code in your underwriting project folder and open (or create) CLAUDE.md.",
+    "Write in the FCC constraints in plain language: no calls to action, no price or comparative claims, no inducements to buy — sponsor name and a factual description only.",
+    "Add a line requiring every draft to end with a plain statement that it hasn't been cleared and needs human compliance review.",
+    "Ask Claude to draft copy for a real or practice sponsor, then check the result against the rules you just wrote, line by line.",
+    "If anything slips past the rules, tell Claude exactly what it got wrong and have it add that specific example to CLAUDE.md.",
+    "Send every draft to your compliance reviewer before it airs, regardless of how clean Claude's version looks."
+  ],
+  "verify": "Read the draft's closing note out loud. If it doesn't literally say the spot hasn't been cleared and needs a human review, the CLAUDE.md rule didn't take — fix it before the draft goes anywhere near a client."
+}

@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Get your department heads in a room for one afternoon, no vendors, no demos.",
+    "Ask each one the same question: if we got five times the volume tomorrow — five times the members, five times the story pitches, five times the underwriting inquiries — what breaks first in your department?",
+    "Write down every answer, in their words, without smoothing it into vendor-speak.",
+    "Open Claude Code afterward and have it help you organize those answers into a short list, one clog per department.",
+    "For each clog, agree on one plain number that would prove you'd fixed it — not a feeling, an actual measurable thing.",
+    "Rank the list so the biggest, most damaging clog is at the top.",
+    "Treat that ranked list as your actual AI roadmap for the year, and measure any tool pitch against it before you buy anything."
+  ],
+  "verify": "Read the top item on the list back to the department head who named it and ask, 'if we fixed only this and nothing else, would it matter?' If they hesitate, it isn't the real constraint — go back to the question."
+}

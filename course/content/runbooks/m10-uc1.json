@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Open a fresh scratch session in Claude Code — one that never had financials, donor data, or unaired reporting anywhere on screen.",
+    "In that session, run /context and read what it shows — how many tokens you're already spending before typing a word, broken down by system, tools, and memory.",
+    "Run /cost to see actual token usage and estimated spend for the session so far.",
+    "Do a few minutes of ordinary back-and-forth work, then run /cost again to see what a cache read costs compared to a fresh message.",
+    "Take screenshots of both /cost and /context, from this scratch session only.",
+    "Turn the screenshots into a one-page briefing: what a typical session costs, and how cache reads — about 10% the price of a fresh read — change the total.",
+    "Frame the recommendation for your GM as a habits story, not a licensing story: a disciplined user gets far more work per dollar than someone who isn't."
+  ],
+  "verify": "Before sending the screenshots anywhere, look at every line on screen for a name, dollar figure, or story detail that shouldn't leave the building. If you see any, the screenshot came from the wrong session — start over in a clean one."
+}

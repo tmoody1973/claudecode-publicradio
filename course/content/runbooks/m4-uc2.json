@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Connect the Google Workspace CLI to your Claude Code project so it can reach your Sheets and Drive.",
+    "Ask Claude to create a Skill — .claude/skills/show-prep — that reads today's row out of the music log Sheet and pulls the station's local-news doc from Drive.",
+    "Tell it the exact shape of the finished prep doc you want: headers, sections, links — not a raw markdown dump.",
+    "Have it write the result as an actual Google Doc, saved where the host already looks for it, not just a chat reply.",
+    "Run the Skill with one sentence and read the whole doc yourself before the host does.",
+    "Check every artist name, song title, and date against the source log — the Skill will get one wrong eventually."
+  ],
+  "verify": "Cross-check three random facts in the prep doc — an artist name, a date, a headline — against the actual Sheet and Drive doc. If any don't match, fix the Skill before the host reads it live."
+}

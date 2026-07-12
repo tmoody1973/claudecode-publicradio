@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Find a music site whose layout you like and take a full-page screenshot of it.",
+    "Open Claude Code in a project folder and hand it that screenshot plus your artists' photos, bios, and show dates.",
+    "Ask it to rebuild that layout's structure using your brand colors, logo, and your artists instead of the original site's content.",
+    "Tell it to embed each track through Bandcamp, Spotify, or the artist's own player \u2014 it must never host or serve an audio file directly.",
+    "Optionally, pull a nicer card design or hover effect from a component library like 21st.dev and ask Claude to work it into the page.",
+    "Have it check the page at phone width and fix anything that looks wrong before it shows you the result.",
+    "Push the files to GitHub and import them into Vercel, and confirm the page is live at a real web address."
+  ],
+  "verify": "Play every embedded track on the live page \u2014 if any artist's track doesn't load through their own streaming platform, the embed is broken or hosted the wrong way."
+}

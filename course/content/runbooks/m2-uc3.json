@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "Gather the five spreadsheets — wherever they actually live, including that one person's Downloads folder — into a single folder on your computer.",
+    "Open Claude Code and point it at that folder.",
+    "Ask it to find every figure the LCSR needs across those files and build one worksheet, with each number traced back to its source file and cell.",
+    "Tell it plainly: if a number isn't in any of the files, leave the cell empty and flag it for you — never estimate or guess a fill-in.",
+    "Ask it to recompute each total straight from the raw file and show its arithmetic next to the number it reported.",
+    "Chase down the real number yourself for every flagged empty cell before the report goes anywhere.",
+    "Have the person who owns the LCSR filing review and sign the consolidated worksheet before it's submitted."
+  ],
+  "verify": "Pick three numbers on the consolidated worksheet, open the source file and cell it cites, and check the number by eye — if any of the three don't match their cited cell, the whole worksheet needs a re-check before anyone signs it.",
+  "walkthroughSlug": "first-30-minutes"
+}

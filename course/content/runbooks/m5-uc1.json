@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "Sit down with your traffic person for 90 minutes, phone and distractions away, in a folder on your computer called station-work.",
+    "Open Claude Code in that folder and tell it: interview us about how the log actually gets built, one question at a time, and don't write anything until we say we're done.",
+    "Let it ask, and let the traffic person answer out loud — including the parts that feel too obvious to say, like why two sponsors never sit back to back.",
+    "When it guesses at a rule instead of asking, stop it and correct it on the spot — a plausible-sounding rule that isn't your rule is worse than no rule.",
+    "Have it write everything to a plain file called traffic-process.md: triggers, steps, judgment calls, exceptions.",
+    "Read the whole file out loud together and have the traffic person mark every line that isn't quite right.",
+    "Fix those lines, then have the traffic person sign and date the bottom of the file.",
+    "Only after it's signed off, ask what part of the written process — not the whole job — could actually be automated."
+  ],
+  "verify": "The traffic person reads the finished file start to finish and says, out loud, 'yes, that's how we do it' for every step. If there's one step they hesitate on, that step isn't done yet."
+}

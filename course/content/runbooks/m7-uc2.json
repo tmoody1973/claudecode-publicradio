@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Gather each candidate's questionnaire responses as separate files, one per candidate, with the race clearly labeled.",
+    "Open Claude Code in a folder with all the files and ask for a clean, searchable page \u2014 one card per race, candidates side by side, built for a phone screen first.",
+    "Tell it to use each candidate's own words only \u2014 it formats the responses, it never paraphrases or summarizes a position.",
+    "Have it check the page at phone width and fix anything illegible before it shows you the result.",
+    "Have an editor read every single card against the original questionnaire, word for word.",
+    "Fix any mismatches, then have Claude push the files to GitHub and import them into Vercel \u2014 the service that turns the project into a live web address \u2014 so it's live.",
+    "Do one more read of the live page before you share the link publicly."
+  ],
+  "verify": "Have an editor compare every published card, word for word, against the original questionnaire \u2014 if even one phrase doesn't match, pull the page down until it's fixed."
+}

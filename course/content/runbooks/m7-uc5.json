@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "List every AI automation currently running at your station, including any nobody remembers setting up.",
+    "For each one, list every tool it can actually reach \u2014 not what its instructions say, what it is physically able to do: send, delete, post, read.",
+    "Strip out every tool it doesn't need for its actual job, especially any send, delete, or publish access it isn't using.",
+    "For anything that can reach your CRM, your website, or your listener email list, add a hard restriction at the tool level \u2014 not just a written instruction telling it not to.",
+    "Ask Claude to help you list the edge cases each automation could hit and what a safe failure looks like for each one.",
+    "Check each automation's actual output from the last two weeks against what it's supposed to be doing.",
+    "Put a date on the calendar to repeat this whole check, so a new automation can't quietly reappear unwatched."
+  ],
+  "verify": "For each automation, look at the tools it still has and try to name one bad real-world action it could take with each \u2014 if you can name one, remove that tool now, don't wait for it to happen."
+}

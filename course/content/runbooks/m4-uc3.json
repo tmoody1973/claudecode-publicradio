@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Gather what the Skill will need: the actual CPB report questions, last year's submission, this year's supporting documents in Drive, and your station's standing service-area description.",
+    "Ask Claude to build a Skill — .claude/skills/lcsr-helper — that pulls those documents and drafts each narrative section with the source noted beside it.",
+    "Tell the Skill explicitly, in writing: never invent a number to fill a blank — leave it blank and flag it if the source isn't there.",
+    "Run the Skill and get a full draft of this year's report with every section sourced.",
+    "Trace every single number in the draft back to your own records, one at a time, before accepting it.",
+    "Edit the SKILL.md itself wherever this year's questions changed from last year's, so next year starts from the corrected version."
+  ],
+  "verify": "Pick five numbers at random from the draft and find each one in its cited source document. If even one doesn't match, or has no real source behind it, do not submit until you've traced every remaining figure by hand."
+}

@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Collect the monthly download CSV for each show into one folder on your computer.",
+    "Open Claude Code and point it at that folder.",
+    "Ask it to merge the CSVs and chart downloads per episode and per show over time.",
+    "Ask it to flag which episodes outperformed their own show's median.",
+    "Ask it to state, in plain words, exactly how it's defining a \"download\" — and keep that definition attached to the report.",
+    "Write the result into one workbook you can point Claude Code at again next month, instead of starting over."
+  ],
+  "verify": "Pick one show's total from the workbook and add up that show's downloads yourself straight from its monthly CSVs — if your total doesn't match, check whether the merge dropped a month or double-counted one.",
+  "walkthroughSlug": "first-30-minutes"
+}

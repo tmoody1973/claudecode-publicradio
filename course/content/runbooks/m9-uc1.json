@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Before scheduling anything, run it by hand once in a normal Claude Code chat: give it the real URLs for your city council agenda page, the county board page, and two or three local news sites, and ask it to write today's brief.",
+    "Look at what came back — which sources it actually reached, which ones it couldn't, and where it guessed instead of saying a source failed.",
+    "Rewrite the prompt so nothing is left for it to guess: name every source URL, say exactly what should be in the brief, and say what to do if a site won't load — nobody will be there to answer questions at 5:30am.",
+    "Turn that tested prompt into a scheduled routine — a saved prompt Claude runs on its own, on Anthropic's servers, timed to finish before the morning news meeting.",
+    "Point the routine at an internal newsroom channel only. Never let it post to anything public-facing.",
+    "Put any API keys the routine needs into the routine's own settings, not a file on your computer — it runs on separate servers that can't see your machine.",
+    "Let it run for a few mornings unattended, and read every brief yourself before the newsroom does."
+  ],
+  "verify": "Pick one flagged lead from the brief and open the actual agenda page or article it points to. If the link is dead, the date is wrong, or the item isn't really there, don't trust that morning's brief until you find out why."
+}

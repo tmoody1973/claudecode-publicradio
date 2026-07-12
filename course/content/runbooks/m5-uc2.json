@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "Before you open anything, agree with your team: this map describes what happens, in words — no donor names, addresses, giving history, or CRM exports ever go into Claude.",
+    "Open Claude Code in a folder on your machine called station-work.",
+    "List out loud every trigger that happens during a drive week: pitch block starts, a gift comes in, a thank-you goes out, a premium ships.",
+    "Ask Claude to help you mark which of those triggers happens most often, and where the backlog actually piles up.",
+    "Pick the single biggest clog and write down one plain-English number that would prove you fixed it, like 'thank-you turnaround drops from nine days to two.'",
+    "Have Claude write the clog, the number, and the trigger list to a file called drive-map.md — descriptions only, still no donor data.",
+    "Read the file back and confirm every line refers to a system or a step, never to a specific person's information.",
+    "Take that one file to leadership before anyone writes a line of code or buys a tool."
+  ],
+  "verify": "Search drive-map.md for an @ sign, a dollar amount, or a full name. If any of those show up, donor data leaked into the map and it needs to be rewritten in descriptions only."
+}

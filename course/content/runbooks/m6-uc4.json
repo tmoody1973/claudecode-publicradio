@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Confirm the plan document has no CRM export, donor names, giving history, or lapsed-donor lists in it — aggregate numbers you typed yourself are fine, a file pulled from the donor database is not.",
+    "In Claude Code, type /agents and create a project-level sub-agent with read-only tools, so it can't touch any file you didn't hand it.",
+    "Describe its job as playing devil's advocate on a spring drive plan: is the goal supported by last year's actual pace, does every premium tier make economic sense, is any ask doing double duty.",
+    "Hand it the plan document — goal, day parts, premium ladder, script themes.",
+    "Let it come back with a written teardown of where the plan doesn't hold up.",
+    "Go through the teardown with your team and decide, item by item, what's a real problem versus a thing you can defend.",
+    "Revise the plan document based only on what you've decided is a real problem."
+  ],
+  "verify": "Open the plan document you handed it and search for any donor name, dollar figure tied to a person, or giving history before you send it anywhere. If you find one, the plan document wasn't ready to hand to a sub-agent in the first place."
+}

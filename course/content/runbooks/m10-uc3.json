@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Before writing a single prompt, set the rule for the whole drive: no donor names, giving history, or CRM exports ever go in — describe audiences only in aggregate terms, like 'sustainers who gave under $10 a month'.",
+    "Put the drive's tone, rules, and that data rule into a short CLAUDE.md file so it's cached and read automatically instead of retyped every time.",
+    "Batch your requests — ask for all the script variants you need in one message instead of three separate rounds.",
+    "Schedule the heavy generation sessions for afternoons, evenings, or weekends — the five-hour session window drains faster during weekday peak hours, 8am to 2pm Eastern.",
+    "Stay in one session for the whole batch instead of starting fresh each time, so the cache keeps paying off.",
+    "Have a person review every script variant against the data rule before it airs, confirming no real donor detail slipped in."
+  ],
+  "verify": "Search every generated script for a real name, dollar amount, or specific giving detail. If anything beyond an aggregate description shows up, that script gets rewritten before it airs."
+}
