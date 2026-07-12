@@ -17,7 +17,7 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
 ## Tasks
 - [x] 1 validator + types — COMPLETE (commits 02f7743..cc6027f, review clean)
 - [x] 2 synthetic sample data — COMPLETE (commits f45bd5a..3abccf8, review clean, no findings)
-- [ ] 3 recorded-session terminal
+- [x] 3 recorded-session terminal — COMPLETE (commits 159de30..7d132ad, review clean, no findings)
 - [ ] 4 walkthrough section components
 - [ ] 5 author 4 walkthroughs + RECORD real sessions  <-- long pole, interactive
 - [ ] 6 walkthrough pages
@@ -30,3 +30,10 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
   fixtures could cover them.
 - T1 env note: `node --test scripts/lib/` (bare dir) throws MODULE_NOT_FOUND on Node 26.
   Use the glob form `node --test scripts/lib/*.test.mjs`. Applies to Tasks 5/7 too.
+- SITEWIDE CONTRAST BUG (found during T3): `text-white` on `bg-destructive` is near-
+  invisible in DARK mode — --destructive flips to a light coral (#ff6b6b) while
+  --destructive-foreground is dark (#1a1815). T3 fixed it in the terminal by using
+  `text-destructive-foreground`. The SAME bug exists in code written earlier:
+  components/home/limits.tsx, lib/openui-library.tsx (Callout guardrail, color:'#fff'),
+  and the use-case guardrail blocks. DESIGN.md calls WCAG AA a hard requirement.
+  → Fix in Task 8 or flag to the final whole-branch review.
