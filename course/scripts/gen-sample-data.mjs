@@ -60,13 +60,17 @@ const csv = (rows) =>
 {
   const header = ["artist", "track", "label", "release_date", "local", "genre", "spins_last_week", "notes"];
   const rows = [header];
+  // Artist names below are INVENTED, not real Radio Milwaukee artists — same reason as
+  // the donor names above. This file gets ranked and critiqued (e.g. "weakest signal")
+  // in a public walkthrough recording; a real musician's name doesn't belong anywhere
+  // near that, even attached to fabricated data.
   const artists = [
-    ["Klassik", "Milwaukee Sun", "Local", 1], ["Lex Allen", "Open Wide", "Local", 1],
-    ["Abby Jeanne", "Neon Hymn", "Local", 1], ["B~Free", "Sideways", "Local", 1],
-    ["Immortal Girlfriend", "Cold Static", "Local", 1], ["Nickel&Rose", "Half Light", "Local", 1],
-    ["The Vanishing", "Paper Radio", "Sub Pop", 0], ["Marigold Fields", "Slow Bloom", "4AD", 0],
-    ["Static Palace", "Overpass", "Merge", 0], ["Nightjar", "Tin Roof", "Dead Oceans", 0],
-    ["Ruthie Blue", "Anyhow", "Anti-", 0], ["Wide Ocean", "Signal Fade", "Matador", 0],
+    ["Sample Sunroom", "Milwaukee Sun", "Local", 1], ["Example Static", "Open Wide", "Local", 1],
+    ["Placeholder Neon", "Neon Hymn", "Local", 1], ["Anytown Afterglow", "Sideways", "Local", 1],
+    ["Sample Ghost Parade", "Cold Static", "Local", 1], ["Example Halfmoon", "Half Light", "Local", 1],
+    ["Example Radiogram", "Paper Radio", "Sub Pop", 0], ["Sample Fieldnote", "Slow Bloom", "4AD", 0],
+    ["Placeholder Overcoat", "Overpass", "Merge", 0], ["Anytown Nightshade", "Tin Roof", "Dead Oceans", 0],
+    ["Sample Bluebird", "Anyhow", "Anti-", 0], ["Example Driftwood", "Signal Fade", "Matador", 0],
   ];
   for (const [artist, track, label, local] of artists) {
     rows.push([
