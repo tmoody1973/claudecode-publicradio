@@ -34,7 +34,8 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
 - [x] 6 walkthrough pages — COMPLETE (e2a4b43..6f3bee4, review clean after 1 Important fix:
       terminal was 1655px vs 705px viewport and 'Next turn' produced NO visible change.
       Now capped at 55vh with scroll-into-view. All turns still in a11y tree.)
-- [ ] 7 fifty runbooks
+- [x] 7 fifty runbooks — COMPLETE (6a41132..dcf187f, review clean; 1 Minor folded into T8:
+      all 50 <summary> share the identical a11y name)
 - [ ] 8 wire in + audit gate
 
 ## Minor findings (for the final whole-branch review to triage)
