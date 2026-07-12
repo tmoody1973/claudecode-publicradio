@@ -10,6 +10,7 @@
     "lint": "eslint",
     "gen:content": "node scripts/compile-content.mjs",
     "gen:prompt": "node scripts/gen-prompt.mjs",
+    "gen:samples": "node scripts/gen-sample-data.mjs",
     "prebuild": "node scripts/compile-content.mjs && node scripts/gen-prompt.mjs",
     "audit": "node scripts/audit.mjs",
     "benchmark": "node scripts/benchmark.mjs"
