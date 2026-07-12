@@ -36,7 +36,8 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
       Now capped at 55vh with scroll-into-view. All turns still in a11y tree.)
 - [x] 7 fifty runbooks — COMPLETE (6a41132..dcf187f, review clean; 1 Minor folded into T8:
       all 50 <summary> share the identical a11y name)
-- [ ] 8 wire in + audit gate
+- [x] 8 wire in + audit gate — COMPLETE (3f4b8a2..09b29d0). a11y assert PROVEN by making
+      it fail (display:none on turns -> audit failed naming all 4 walkthrough routes) then pass.
 
 ## Minor findings (for the final whole-branch review to triage)
 - T1: no test exercises per-field checks on `verify` entries (check/why/ifWrong) or
