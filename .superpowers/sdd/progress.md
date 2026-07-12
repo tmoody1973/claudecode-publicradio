@@ -6,10 +6,18 @@ Branch: feat/walkthroughs
 Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
 
 ## Pre-flight decisions (binding — supersede the plan text)
-1. PERMISSION PROMPTS: record INTERACTIVELY in a real Claude Code session (default
-   permission mode) so prompts genuinely fire. The never-add rule stands: a
-   permission turn may only appear in a session if it was really captured.
-   Subagents must NOT fabricate one.
+1. PERMISSION PROMPTS — REVISED 2026-07-12 (human decision, supersedes original):
+   Permission prompts CANNOT be captured headlessly (verified against the real CLI —
+   they are an interactive-TTY feature). Requiring a permission TURN would have forced
+   fabrication, breaking the never-add rule. RESOLUTION: no permission turn required;
+   instead a STEP must warn the prompt is coming. Validator enforces this. Sessions are
+   still 100% real recordings.
+   RECORDING COMMAND (proven working, produces clean newcomer-representative output):
+     claude -p "<prompt>" \
+       --append-system-prompt "<neutralizer: ignore PAI/Algorithm output format>" \
+       --settings '{"hooks":{}}' \
+       --output-format stream-json --verbose --permission-mode default
+   (--bare is NOT usable: it never reads OAuth/keychain, so it cannot authenticate.)
 2. TERMINAL COLOURS: no hardcoded hex. Add --terminal-bg/-fg/-dim/-chrome/-accent
    to globals.css, identical in both themes (a terminal is theme-invariant).
 3. BRANCH: feat/walkthroughs.
@@ -17,6 +25,7 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
 ## Tasks
 - [x] 1 validator + types — COMPLETE (commits 02f7743..cc6027f, review clean)
 - [x] 2 synthetic sample data — COMPLETE (commits f45bd5a..3abccf8, review clean, no findings)
+- [x] 4 walkthrough section components — COMPLETE (commits 3ca47f8..3f2332a, review clean)
 - [x] 3 recorded-session terminal — COMPLETE (commits 159de30..7d132ad, review clean, no findings)
 - [ ] 4 walkthrough section components
 - [ ] 5 author 4 walkthroughs + RECORD real sessions  <-- long pole, interactive
