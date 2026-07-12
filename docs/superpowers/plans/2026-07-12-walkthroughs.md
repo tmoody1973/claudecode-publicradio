@@ -12,7 +12,20 @@
 
 ## Global Constraints
 
-- **Recording rule, absolute:** sessions are REAL recordings. We only ever **remove** turns. **Never add one.** Every session keeps ≥1 permission prompt and ≥1 wrong-turn-plus-correction.
+> **Pre-flight decisions (binding — these supersede any conflicting text below).**
+>
+> 1. **Permission prompts must be REAL.** Sessions are recorded *interactively*, in a real
+>    Claude Code session in default permission mode, so the prompts genuinely fire and get
+>    captured. A `role: "permission"` turn may appear in a session **only if it was actually
+>    recorded**. Never fabricate one — that would break the never-add rule, which is the
+>    entire reason we chose recordings over scripts.
+> 2. **No hardcoded hex in the terminal.** Define `--terminal-bg`, `--terminal-fg`,
+>    `--terminal-dim`, `--terminal-chrome`, `--terminal-accent` in `app/globals.css`,
+>    **identical in both light and dark themes** (a terminal is theme-invariant). Task 3's
+>    example code shows raw hex; replace it with these tokens.
+> 3. **Branch:** `feat/walkthroughs`.
+
+- **Recording rule, absolute:** sessions are REAL recordings. We only ever **remove** turns. **Never add one.** Every session keeps ≥1 permission prompt (really captured — see decision 1) and ≥1 wrong-turn-plus-correction.
 - **Sample data is always synthetic:** `sampleData.synthetic` is `true`, always. Names like `SAMPLE, Not-A-Real-Donor`, emails at `@example.invalid`, filenames containing `SYNTHETIC` and `do-not-upload`.
 - **Guardrail goes FIRST**, at the top of every walkthrough — never below the fold, never behind a click.
 - **Accessibility, hard requirement:** the replayed terminal renders **every** turn in the DOM at all times. Progressive reveal is *visual only*. Screen readers always get the full transcript.
