@@ -16,7 +16,7 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
 
 ## Tasks
 - [x] 1 validator + types — COMPLETE (commits 02f7743..cc6027f, review clean)
-- [ ] 2 synthetic sample data
+- [x] 2 synthetic sample data — COMPLETE (commits f45bd5a..3abccf8, review clean, no findings)
 - [ ] 3 recorded-session terminal
 - [ ] 4 walkthrough section components
 - [ ] 5 author 4 walkthroughs + RECORD real sessions  <-- long pole, interactive
