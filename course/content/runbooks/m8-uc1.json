@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Before you start, tell Claude: never write down access codes, alarm passwords, or EAS credentials \u2014 write \"stored in the station password manager\" instead and move on.",
+    "Open Claude Code with the grill-me skill (a set of instructions that has it interview someone, one question at a time, and save every answer as it goes) and sit down with your chief engineer.",
+    "Ask Claude to grill him about the transmitter site \u2014 every routine, every failure mode, every workaround.",
+    "Let Claude checkpoint each answer to a document as you go, so nothing is lost even in a two-hour session.",
+    "When Claude flags a question he can't answer, write down who else on staff might know it.",
+    "Read the finished document together and correct anything Claude got wrong or garbled.",
+    "Save it into your station's second brain folder as the engineering runbook, and point to it from CLAUDE.md \u2014 the file Claude reads first, that tells it where things live."
+  ],
+  "verify": "Search the finished document for anything that looks like a code or password \u2014 if you find one, delete it and replace it with \"stored in the password manager.\""
+}

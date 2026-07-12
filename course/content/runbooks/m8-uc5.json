@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "List the documents your station actually has that matter for institutional knowledge.",
+    "Before buying anything, ask whether a CLAUDE.md and a few plain folders (level 1) already answer most of your team's questions.",
+    "If that's not enough, try dropping the documents into a raw folder and asking Claude to build a wiki (level 2) \u2014 no vendor, no database, no subscription.",
+    "Only consider semantic search, a knowledge graph, or an always-on platform if you can name the specific pain level 1 or 2 didn't solve.",
+    "Whatever you build, keep it as plain files you own, not a vendor's proprietary format.",
+    "Name one person as the owner of the brain and set a date for when it gets reviewed and refreshed.",
+    "Bring the vendor's pitch back only if your own level-1 or level-2 attempt genuinely fails at something specific."
+  ],
+  "verify": "Ask three staff members to find last year's pledge drive script or the underwriting compliance rule using only what you built \u2014 if any of them can't find it in under a minute, the level you're at isn't solving the pain yet."
+}

@@ -56,6 +56,16 @@
   --color-role-traffic: var(--role-traffic);
   --color-role-engineering: var(--role-engineering);
   --color-role-grants: var(--role-grants);
+
+  /* Terminal — the recorded-session replay. Theme-invariant: a terminal
+     stays dark in both light and dark mode, so these have no .dark override. */
+  --color-terminal-bg: var(--terminal-bg);
+  --color-terminal-chrome: var(--terminal-chrome);
+  --color-terminal-controls: var(--terminal-controls);
+  --color-terminal-fg: var(--terminal-fg);
+  --color-terminal-accent: var(--terminal-accent);
+  --color-terminal-dim: var(--terminal-dim);
+  --color-terminal-dimmer: var(--terminal-dimmer);
 }
 
 :root {
@@ -104,6 +114,16 @@
   --role-traffic: #a8e05f;
   --role-engineering: #c9c2b4;
   --role-grants: #ff9ecd;
+
+  /* Terminal — deliberately identical in light and dark mode; see the
+     @theme inline note above. Do NOT add a .dark override for these. */
+  --terminal-bg: #1a1815;
+  --terminal-chrome: #3a352f;
+  --terminal-controls: #262320;
+  --terminal-fg: #f5f0e6;
+  --terminal-accent: #ffdc58;
+  --terminal-dim: #b8b1a3;
+  --terminal-dimmer: #7d7669;
 }
 
 .dark {

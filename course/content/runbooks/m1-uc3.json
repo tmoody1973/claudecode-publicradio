@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Write down every underwriting task your GM wants \"an AI\" to handle, one per line.",
+    "For each one, ask: does this follow the exact same steps every single time, or does it need someone to read something messy and make a judgment call?",
+    "Route the same-every-time tasks — like emailing the weekly spot schedule — to a plain scheduled script. That's not a Claude Code job at all.",
+    "For the genuinely messy task — turning a client's rambling intake email into a spot draft — open Claude Code and ask it to draft compliant copy from that email, in your station's usual format.",
+    "Tell it plainly, up front, what a spot must never contain: no calls to action, no price claims, no qualitative claims.",
+    "Send every draft it produces through your normal FCC compliance review before it reaches a client or the air.",
+    "Show your GM the actual split — one boring script, one Claude Code draft with human review — as the real answer to \"get an AI on this.\""
+  ],
+  "verify": "Read the compliance reviewer's notes on the first three Claude-drafted spots — if a call-to-action or price claim slipped through in any of them, tighten your instructions before you trust the next batch."
+}

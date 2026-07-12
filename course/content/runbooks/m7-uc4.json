@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "List every department's automation request on one page, one line each.",
+    "For each request, ask which of the four levels it actually is: a chatbot you trigger yourself, a plain no-AI workflow, a fixed AI workflow, or a full agent.",
+    "For anything that looks like an agent, ask whether a fixed AI workflow could do the same job \u2014 if it can, approve the lower level, not the agent.",
+    "For anything touching donor records, member data, or anything publishable, require it stay at chatbot level \u2014 human-triggered, human-reviewed \u2014 until proven otherwise.",
+    "Write your decision and the level for each request in one shared document leadership can point back to.",
+    "Require any approved AI workflow or agent to be run against a set of known test cases and pass before it goes live."
+  ],
+  "verify": "Pick one approved automation and ask its owner to list every tool it can actually touch \u2014 if that list includes anything the task doesn't need (sending, deleting, publishing), send it back before it launches."
+}

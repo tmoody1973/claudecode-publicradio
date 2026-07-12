@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Strip the pitch down to the question and the plan before it goes anywhere near Claude — no source names, no unpublished material, no tips from anyone who hasn't agreed to be identified.",
+    "In Claude Code, type /agents and create a new project-level sub-agent, read-only tools.",
+    "Describe its job as disagreeing on purpose: find the accountability question, the missing voice, what happens if the central document doesn't exist, and the cheaper version of the story.",
+    "Tell it explicitly not to be encouraging — its only job is to find the holes the room is too excited to see.",
+    "Hand it the stripped-down pitch and let it file its objections before your morning meeting.",
+    "Read every objection and decide, story by story, whether it's a real hole or a question you can already answer.",
+    "Bring the surviving pitches — and the holes the sub-agent found in the ones that didn't survive — into the room."
+  ],
+  "verify": "Pick a pitch everyone already loves and run it through the sub-agent first. If it comes back with zero objections on a story that hasn't been reported yet, the agent isn't actually pushing back — rewrite its description to be more adversarial."
+}

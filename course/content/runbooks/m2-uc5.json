@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "Export both the traffic log (what was scheduled) and the as-aired report (what actually ran).",
+    "Put both files in one folder on your computer and open Claude Code there.",
+    "Ask it to match scheduled spots against as-aired ones and list every discrepancy with date, time, and spot ID.",
+    "Ask it to show you the actual matching rows behind each discrepancy, not just its conclusion.",
+    "Ask it to produce a make-good candidate list from those discrepancies.",
+    "Spot-check a handful of the discrepancies yourself against the two original files before you tell the client anything.",
+    "Hand the confirmed list to whoever owns the client relationship — Claude drafts no response and no spot copy."
+  ],
+  "verify": "Pick three discrepancies from the list and look up those exact date, time, and spot-ID rows in both original files yourself — if the mismatch isn't really there, the matching logic is wrong and the whole list needs a re-run.",
+  "walkthroughSlug": "first-30-minutes"
+}

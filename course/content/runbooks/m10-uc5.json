@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Pick one model for the whole LCSR session before you start writing, and leave 'opus plan' mode off — every model switch, including that toggle, re-reads the entire conversation from scratch with no cache savings.",
+    "Draft the narrative in that one session, working section by section rather than restarting for each part.",
+    "If you need to change instructions or tone partway through, edit CLAUDE.md instead of switching models — that edit doesn't break the cache, it just takes effect on your next session.",
+    "Keep the growing draft in the same session as long as it stays workable, so the cache keeps paying off on a long document.",
+    "Once the draft narrative is complete, go through it line by line against your actual station records — every number needs a human to verify it.",
+    "File with CPB only after that verification is done."
+  ],
+  "verify": "Pick five numbers at random from the finished narrative and trace each one back to the actual station record it came from. If even one doesn't match, the draft isn't ready to file."
+}

@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Before opening anything in Claude Code, decide what's actually safe to upload — confidential source material and anything under embargo does not go into a cloud tool at all, full stop.",
+    "Work the cleared records in one continuous session rather than restarting — the cache only pays off if you stay in it.",
+    "Pick one model for the whole session and don't switch mid-stream — switching models re-reads the entire conversation from the beginning with no savings.",
+    "Keep working through the afternoon, batching related questions into one message instead of scattering them across many.",
+    "Around 60% of the way through the session's context, ask Claude to summarize the findings so far, the files touched, and the open questions.",
+    "Run /clear, then paste that summary back in to keep going in a small, cheap, fresh context.",
+    "Do the same handoff any time you're stepping away for a long stretch, so you come back to a small context instead of a stale one that re-reads everything at full price."
+  ],
+  "verify": "Read the handoff summary before you /clear — every finding, file, and open question from the session so far needs to be in it. If something's missing, the next stretch of work starts blind, not just cheap."
+}

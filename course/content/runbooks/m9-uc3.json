@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "List the exact funders to watch, with real web addresses for each — Grants.gov, CPB, NEA, your state arts board, and the specific community foundations you actually apply to.",
+    "Test it by hand once: ask Claude Code to check those sources today and draft the one-page radar — new opportunities, one line on eligibility, deadline, and a countdown on anything already tracked.",
+    "Tell it plainly what to do when a site won't load or a deadline isn't clearly posted: flag it as unclear, never guess.",
+    "Turn the tested prompt into a routine that runs weekly, with the radar emailed to the development director only.",
+    "Put any login or API keys the routine needs into the routine's own settings, not a file on your computer.",
+    "Before anyone acts on a deadline in the radar, open the actual RFP document yourself and confirm the date and eligibility line.",
+    "Review the radar every week it arrives — a missed week doesn't get skipped and caught up later."
+  ],
+  "verify": "Pick one deadline from this week's radar and open the source RFP PDF directly. The date and eligibility line must match exactly — a hallucinated deadline that costs you a submission is the one failure this can't survive."
+}

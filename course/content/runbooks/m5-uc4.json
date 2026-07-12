@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Open Claude Code in a folder called station-work and keep it open the whole time you assemble this year's LCSR.",
+    "As you pull each figure, narrate it out loud into the chat: 'this number comes from the underwriting spreadsheet,' 'this narrative gets reviewed by the GM.'",
+    "As you decide what counts as a partnership or a program, say the reasoning behind that call too, not just the answer.",
+    "At the end, ask Claude to turn everything you narrated into a written process file called lcsr-process.md: where each figure comes from, who signs off, what counts as what.",
+    "Read it against what you actually did this year and correct anything it smoothed over or guessed at.",
+    "Save that file somewhere the next person assembling the LCSR will actually find it, not just in this year's folder.",
+    "Note in the file that CPB's current requirements still need to be confirmed fresh from CPB's published guidance every year — this file documents your station's process, not CPB's rules."
+  ],
+  "verify": "Hand lcsr-process.md to someone at the station who didn't help assemble this year's report and ask them to find where any one figure comes from. If they can't find it in the file, the file is missing a step."
+}

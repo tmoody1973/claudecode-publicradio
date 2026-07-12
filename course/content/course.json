@@ -288,7 +288,18 @@
           "roleSlug": "news",
           "moduleId": "m1",
           "moduleNumber": 1,
-          "moduleTitle": "Orientation: What Claude Code Actually Is"
+          "moduleTitle": "Orientation: What Claude Code Actually Is",
+          "runbook": {
+            "steps": [
+              "Save the budget PDF into a folder on your computer — call it something like \"budget-story\" so you can find it again.",
+              "Open Claude Code and point it at that folder (this just means telling it which folder on your computer to work in).",
+              "Ask it to read the whole PDF and list every line item where the amount changed by more than 10% since last year.",
+              "Ask it to give you the page number in the PDF where it found each one, not just the number itself.",
+              "Open the actual PDF to each page it cited and check that the number really says what Claude said it says.",
+              "Hand your reporter only the items you've personally confirmed on the page, with the page numbers attached."
+            ],
+            "verify": "Open the PDF to the page number Claude cited for each flagged line item — if what's on that page doesn't match the number in Claude's list, pull that item before it goes anywhere near a script."
+          }
         },
         {
           "role": "Membership & Development",
@@ -301,7 +312,19 @@
           "roleSlug": "membership",
           "moduleId": "m1",
           "moduleNumber": 1,
-          "moduleTitle": "Orientation: What Claude Code Actually Is"
+          "moduleTitle": "Orientation: What Claude Code Actually Is",
+          "runbook": {
+            "steps": [
+              "Gather only past pitch scripts, your goal sheet, and notes on what worked or flopped — leave out anything with a donor's name, email, address, or CRM export.",
+              "Put those files in one folder on your computer, named something like \"drive-context.\"",
+              "Open Claude Code and point it at that folder.",
+              "Ask it to read everything and tell you back, in its own words, what your station's pitch voice sounds like and what's worked before.",
+              "Ask it to draft this year's pitch scripts in that voice, aimed at the goals on your goal sheet.",
+              "Read every draft, mark up what's off, and tell Claude Code why — not just what — you changed it.",
+              "Ask for one more pass using your corrections before you call any script final."
+            ],
+            "verify": "Open the drive-context folder yourself and search it for anything that looks like a donor name, email, or CRM export — if you find one, delete it and start the folder over before Claude Code ever reads it."
+          }
         },
         {
           "role": "Underwriting",
@@ -314,7 +337,19 @@
           "roleSlug": "underwriting",
           "moduleId": "m1",
           "moduleNumber": 1,
-          "moduleTitle": "Orientation: What Claude Code Actually Is"
+          "moduleTitle": "Orientation: What Claude Code Actually Is",
+          "runbook": {
+            "steps": [
+              "Write down every underwriting task your GM wants \"an AI\" to handle, one per line.",
+              "For each one, ask: does this follow the exact same steps every single time, or does it need someone to read something messy and make a judgment call?",
+              "Route the same-every-time tasks — like emailing the weekly spot schedule — to a plain scheduled script. That's not a Claude Code job at all.",
+              "For the genuinely messy task — turning a client's rambling intake email into a spot draft — open Claude Code and ask it to draft compliant copy from that email, in your station's usual format.",
+              "Tell it plainly, up front, what a spot must never contain: no calls to action, no price claims, no qualitative claims.",
+              "Send every draft it produces through your normal FCC compliance review before it reaches a client or the air.",
+              "Show your GM the actual split — one boring script, one Claude Code draft with human review — as the real answer to \"get an AI on this.\""
+            ],
+            "verify": "Read the compliance reviewer's notes on the first three Claude-drafted spots — if a call-to-action or price claim slipped through in any of them, tighten your instructions before you trust the next batch."
+          }
         },
         {
           "role": "Music & Programming",
@@ -327,7 +362,18 @@
           "roleSlug": "music",
           "moduleId": "m1",
           "moduleNumber": 1,
-          "moduleTitle": "Orientation: What Claude Code Actually Is"
+          "moduleTitle": "Orientation: What Claude Code Actually Is",
+          "runbook": {
+            "steps": [
+              "Open your week's playlist file — the one your local-music host already has.",
+              "Put it in a folder on your computer and open Claude Code there.",
+              "Ask Claude Code to read the playlist and, for each local artist, search online for a short bio, upcoming tour dates, and any recent release news.",
+              "Ask it to put all of that into one prep sheet, organized by artist, in the order they're playing.",
+              "Read the prep sheet and flag anything that sounds off or too good to be true.",
+              "Before your host says anything on air about a tour date, label, or hometown, check it against a real source — the artist's own site or a wire story."
+            ],
+            "verify": "Pick three claims from the prep sheet — a tour date, a label, a hometown — and look each one up yourself on the artist's own site before your host reads any of them on air."
+          }
         },
         {
           "role": "Leadership",
@@ -340,7 +386,18 @@
           "roleSlug": "leadership",
           "moduleId": "m1",
           "moduleNumber": 1,
-          "moduleTitle": "Orientation: What Claude Code Actually Is"
+          "moduleTitle": "Orientation: What Claude Code Actually Is",
+          "runbook": {
+            "steps": [
+              "Before you announce the pilot, pick exactly one team, one workflow, and one number you're measuring — hours off show prep, days off the LCSR draft, whatever's real for that team.",
+              "Set a realistic window for judging it — a few weeks, not a few days — and write that window down where the team can see it.",
+              "Tell your board and your staff what you're piloting and where, before anyone asks. Public trust runs on this, not surprise announcements.",
+              "When week one comes in slower than the old process, name it out loud as \"the dip,\" not a verdict on the pilot.",
+              "Keep a simple running log of the one number you picked, every week of the window.",
+              "At the end of the window — not before — sit down with the team and the log, and decide, based on that number, whether it worked."
+            ],
+            "verify": "Look at the log: compare the number from week one to the number from the final week. If you can't put two real numbers side by side, you don't have a verdict — you have a feeling, and a feeling is what would have killed this pilot three weeks early."
+          }
         }
       ],
       "tryThis": {
@@ -512,7 +569,20 @@
           "roleSlug": "membership",
           "moduleId": "m2",
           "moduleNumber": 2,
-          "moduleTitle": "First Contact — Point It at a Real Station File"
+          "moduleTitle": "First Contact — Point It at a Real Station File",
+          "runbook": {
+            "steps": [
+              "Export only the columns you need from your CRM — gift amount, date, hour, premium, new-vs-renewing, channel. No names, emails, addresses, or phone numbers.",
+              "Put that stripped file in a folder on your computer called something like \"drive-readout.\"",
+              "Open Claude Code in that folder and ask it to read the file and list back the columns it sees, before it does anything else.",
+              "Ask for the workbook you need: a summary tab, an hour-by-hour take, a new-vs-renewing split, and a comparison to your last drive.",
+              "Tell it to re-sum every column against the source file and show you that check before handing the workbook back.",
+              "Check the workbook's totals against your CRM's own totals for the drive before the numbers go anywhere near the board.",
+              "Save the prompt as a Skill, so the station owns this for next drive, not just you."
+            ],
+            "verify": "Open the finished workbook and search it for an @ sign — if any email address survived the strip, it isn't safe to work with; start over from a clean export.",
+            "walkthroughSlug": "pledge-drive-readout"
+          }
         },
         {
           "role": "Music & Programming",
@@ -525,7 +595,19 @@
           "roleSlug": "music",
           "moduleId": "m2",
           "moduleNumber": 2,
-          "moduleTitle": "First Contact — Point It at a Real Station File"
+          "moduleTitle": "First Contact — Point It at a Real Station File",
+          "runbook": {
+            "steps": [
+              "Export this week's play log from your automation system.",
+              "Put the file in a folder on your computer and open Claude Code there.",
+              "Ask it to read the log, tally spins by artist, and flag which ones are tagged local.",
+              "Tell it plainly: if the local tag is blank, don't guess — flag that row for you to decide, don't count it either way.",
+              "Ask it to chart the local percentage week over week and write the counts into a spreadsheet you can reuse.",
+              "Review the flagged blank-tag rows yourself and fill in the local status by hand.",
+              "Compare the resulting local percentage to the number you promised in your last grant, before you report it anywhere."
+            ],
+            "verify": "Pick five rows at random from the tally and count their spins yourself straight from the log — if your hand count doesn't match what Claude reported for those five, don't trust the rest of the tally either."
+          }
         },
         {
           "role": "Grants & Compliance",
@@ -538,7 +620,20 @@
           "roleSlug": "grants",
           "moduleId": "m2",
           "moduleNumber": 2,
-          "moduleTitle": "First Contact — Point It at a Real Station File"
+          "moduleTitle": "First Contact — Point It at a Real Station File",
+          "runbook": {
+            "steps": [
+              "Gather the five spreadsheets — wherever they actually live, including that one person's Downloads folder — into a single folder on your computer.",
+              "Open Claude Code and point it at that folder.",
+              "Ask it to find every figure the LCSR needs across those files and build one worksheet, with each number traced back to its source file and cell.",
+              "Tell it plainly: if a number isn't in any of the files, leave the cell empty and flag it for you — never estimate or guess a fill-in.",
+              "Ask it to recompute each total straight from the raw file and show its arithmetic next to the number it reported.",
+              "Chase down the real number yourself for every flagged empty cell before the report goes anywhere.",
+              "Have the person who owns the LCSR filing review and sign the consolidated worksheet before it's submitted."
+            ],
+            "verify": "Pick three numbers on the consolidated worksheet, open the source file and cell it cites, and check the number by eye — if any of the three don't match their cited cell, the whole worksheet needs a re-check before anyone signs it.",
+            "walkthroughSlug": "first-30-minutes"
+          }
         },
         {
           "role": "Digital & Audience",
@@ -551,7 +646,19 @@
           "roleSlug": "digital",
           "moduleId": "m2",
           "moduleNumber": 2,
-          "moduleTitle": "First Contact — Point It at a Real Station File"
+          "moduleTitle": "First Contact — Point It at a Real Station File",
+          "runbook": {
+            "steps": [
+              "Collect the monthly download CSV for each show into one folder on your computer.",
+              "Open Claude Code and point it at that folder.",
+              "Ask it to merge the CSVs and chart downloads per episode and per show over time.",
+              "Ask it to flag which episodes outperformed their own show's median.",
+              "Ask it to state, in plain words, exactly how it's defining a \"download\" — and keep that definition attached to the report.",
+              "Write the result into one workbook you can point Claude Code at again next month, instead of starting over."
+            ],
+            "verify": "Pick one show's total from the workbook and add up that show's downloads yourself straight from its monthly CSVs — if your total doesn't match, check whether the merge dropped a month or double-counted one.",
+            "walkthroughSlug": "first-30-minutes"
+          }
         },
         {
           "role": "Underwriting",
@@ -564,7 +671,20 @@
           "roleSlug": "underwriting",
           "moduleId": "m2",
           "moduleNumber": 2,
-          "moduleTitle": "First Contact — Point It at a Real Station File"
+          "moduleTitle": "First Contact — Point It at a Real Station File",
+          "runbook": {
+            "steps": [
+              "Export both the traffic log (what was scheduled) and the as-aired report (what actually ran).",
+              "Put both files in one folder on your computer and open Claude Code there.",
+              "Ask it to match scheduled spots against as-aired ones and list every discrepancy with date, time, and spot ID.",
+              "Ask it to show you the actual matching rows behind each discrepancy, not just its conclusion.",
+              "Ask it to produce a make-good candidate list from those discrepancies.",
+              "Spot-check a handful of the discrepancies yourself against the two original files before you tell the client anything.",
+              "Hand the confirmed list to whoever owns the client relationship — Claude drafts no response and no spot copy."
+            ],
+            "verify": "Pick three discrepancies from the list and look up those exact date, time, and spot-ID rows in both original files yourself — if the mismatch isn't really there, the matching logic is wrong and the whole list needs a re-run.",
+            "walkthroughSlug": "first-30-minutes"
+          }
         }
       ],
       "tryThis": {
@@ -736,7 +856,18 @@
           "roleSlug": "membership",
           "moduleId": "m3",
           "moduleNumber": 3,
-          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+          "runbook": {
+            "steps": [
+              "In your CRM, create a new API key that is read-only — no edit, no delete, no export-all — and confirm in the CRM's own settings screen that it physically cannot write.",
+              "Save that key in a file called .env in your project folder, and never paste it anywhere else — not in CLAUDE.md, not in an email, not in Slack.",
+              "Open Claude Code in that folder and ask it to add a deny rule in settings.json blocking any write or delete command against the CRM.",
+              "Ask it to explain in plain English what that deny rule actually blocks, so you know it did what you asked before you rely on it.",
+              "Ask Claude for the donor segment summary you need — aggregate counts and totals only, never a request for named records.",
+              "Read the result back and confirm every line is a count or a total, with no donor name, email, or address anywhere in it."
+            ],
+            "verify": "Go back to your CRM's key management screen and confirm the key shows read-only. If it shows any write or delete permission, delete the key, generate a new one, and redo the setup before using it again."
+          }
         },
         {
           "role": "News",
@@ -749,7 +880,18 @@
           "roleSlug": "news",
           "moduleId": "m3",
           "moduleNumber": 3,
-          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+          "runbook": {
+            "steps": [
+              "Open Claude Code in your newsroom project folder and ask it to create (or open) CLAUDE.md, with this as the very first rule: never accept unpublished investigative material or confidential source identities, in any form.",
+              "Tell Claude your house style — how you refer to the mayor's office, which sources need a second confirmation, banned words like 'slammed' — and have it write those rules into CLAUDE.md underneath.",
+              "Ask Claude to read the file back to you and confirm the no-go rule is still the first thing anyone sees when it opens the file.",
+              "Use Claude Code normally on a story that has no unpublished material or source names anywhere near it.",
+              "The next time an output comes back wrong — wrong style, wrong assumption — tell Claude to update CLAUDE.md itself so it doesn't repeat that mistake.",
+              "Ask it to show you exactly what changed in the file before you move on to the next story."
+            ],
+            "verify": "Open CLAUDE.md and check that the unpublished-material rule is still the first rule in the file. If a later edit pushed it down or dropped it, put it back at the top before anyone uses this folder again."
+          }
         },
         {
           "role": "Underwriting",
@@ -762,7 +904,18 @@
           "roleSlug": "underwriting",
           "moduleId": "m3",
           "moduleNumber": 3,
-          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+          "runbook": {
+            "steps": [
+              "Open Claude Code in your underwriting project folder and open (or create) CLAUDE.md.",
+              "Write in the FCC constraints in plain language: no calls to action, no price or comparative claims, no inducements to buy — sponsor name and a factual description only.",
+              "Add a line requiring every draft to end with a plain statement that it hasn't been cleared and needs human compliance review.",
+              "Ask Claude to draft copy for a real or practice sponsor, then check the result against the rules you just wrote, line by line.",
+              "If anything slips past the rules, tell Claude exactly what it got wrong and have it add that specific example to CLAUDE.md.",
+              "Send every draft to your compliance reviewer before it airs, regardless of how clean Claude's version looks."
+            ],
+            "verify": "Read the draft's closing note out loud. If it doesn't literally say the spot hasn't been cleared and needs a human review, the CLAUDE.md rule didn't take — fix it before the draft goes anywhere near a client."
+          }
         },
         {
           "role": "Leadership",
@@ -775,7 +928,18 @@
           "roleSlug": "leadership",
           "moduleId": "m3",
           "moduleNumber": 3,
-          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+          "runbook": {
+            "steps": [
+              "List out, by name, everything that never goes in a prompt box: donor giving histories, personnel files, unpublished journalism, legal correspondence, anything under an NDA.",
+              "Open Claude Code and ask it to draft a one-page policy from that list, explaining in plain English that a closed AI model sends every prompt to a vendor's servers, and that turning off 'training' does not delete what was already sent.",
+              "Have Claude add the technical backstop as an example: a settings.json deny-rule and a scoped read-only key, so the policy isn't just a memo people forget.",
+              "Read the draft policy and correct anything it got wrong about your station's specific tools or data.",
+              "Put the final policy in your global CLAUDE.md so it applies on every project, on every machine, for everyone at the station.",
+              "Circulate the policy to staff and confirm each department head has actually read it."
+            ],
+            "verify": "Ask two staffers in different departments to tell you, in their own words, what they're never allowed to paste into an AI tool. If they can't name the list from memory, the policy is filed away instead of understood — shorten it or post it somewhere visible."
+          }
         },
         {
           "role": "Grants & Compliance",
@@ -788,7 +952,18 @@
           "roleSlug": "grants",
           "moduleId": "m3",
           "moduleNumber": 3,
-          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+          "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+          "runbook": {
+            "steps": [
+              "Before you do anything else, copy your Local Content and Service Report folder to a separate backup location outside the project directory.",
+              "Open Claude Code in the project folder and confirm it's running in Plan mode, not Bypass Permissions mode.",
+              "Ask Claude to add deny rules to settings.json so it can never delete files in that folder.",
+              "Describe the change you want made to the spreadsheets, and ask Claude to show you its plan before it touches anything.",
+              "Read the plan the way you'd read a rundown, line by line, and only approve it once every step makes sense.",
+              "After it runs, open the files and confirm the changes match the plan you approved."
+            ],
+            "verify": "Compare today's file count and total row count in the folder against your backup. If either doesn't match what the approved plan said would change, stop and restore from backup before the deadline gets any closer."
+          }
         }
       ],
       "tryThis": {
@@ -968,7 +1143,18 @@
           "roleSlug": "underwriting",
           "moduleId": "m4",
           "moduleNumber": 4,
-          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+          "runbook": {
+            "steps": [
+              "In Claude Code, ask it to create a Skill folder — .claude/skills/underwriting-copy — with a SKILL.md that describes exactly when to use it: drafting sponsor spot copy.",
+              "Give it your actual rules: no call to action, no price or comparative claims, required sponsor identification, and your 15- and 30-second templates.",
+              "Add two or three approved past examples to the Skill folder so Claude has real copy to match the voice against.",
+              "Require every draft the Skill produces to close with a plain line stating it hasn't been cleared and needs human compliance review.",
+              "Test it: ask for copy for a new sponsor without naming the Skill, and confirm Claude pulled it in on its own.",
+              "Every time compliance catches something the Skill missed, add that exact example to the SKILL.md so it never slips through again."
+            ],
+            "verify": "Ask for sponsor copy without mentioning the Skill by name. If Claude doesn't apply the rules and templates on its own, the Skill's description isn't specific enough for Claude to find it — rewrite that description line."
+          }
         },
         {
           "role": "Music & Programming",
@@ -981,7 +1167,18 @@
           "roleSlug": "music",
           "moduleId": "m4",
           "moduleNumber": 4,
-          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+          "runbook": {
+            "steps": [
+              "Connect the Google Workspace CLI to your Claude Code project so it can reach your Sheets and Drive.",
+              "Ask Claude to create a Skill — .claude/skills/show-prep — that reads today's row out of the music log Sheet and pulls the station's local-news doc from Drive.",
+              "Tell it the exact shape of the finished prep doc you want: headers, sections, links — not a raw markdown dump.",
+              "Have it write the result as an actual Google Doc, saved where the host already looks for it, not just a chat reply.",
+              "Run the Skill with one sentence and read the whole doc yourself before the host does.",
+              "Check every artist name, song title, and date against the source log — the Skill will get one wrong eventually."
+            ],
+            "verify": "Cross-check three random facts in the prep doc — an artist name, a date, a headline — against the actual Sheet and Drive doc. If any don't match, fix the Skill before the host reads it live."
+          }
         },
         {
           "role": "Grants & Compliance",
@@ -994,7 +1191,18 @@
           "roleSlug": "grants",
           "moduleId": "m4",
           "moduleNumber": 4,
-          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+          "runbook": {
+            "steps": [
+              "Gather what the Skill will need: the actual CPB report questions, last year's submission, this year's supporting documents in Drive, and your station's standing service-area description.",
+              "Ask Claude to build a Skill — .claude/skills/lcsr-helper — that pulls those documents and drafts each narrative section with the source noted beside it.",
+              "Tell the Skill explicitly, in writing: never invent a number to fill a blank — leave it blank and flag it if the source isn't there.",
+              "Run the Skill and get a full draft of this year's report with every section sourced.",
+              "Trace every single number in the draft back to your own records, one at a time, before accepting it.",
+              "Edit the SKILL.md itself wherever this year's questions changed from last year's, so next year starts from the corrected version."
+            ],
+            "verify": "Pick five numbers at random from the draft and find each one in its cited source document. If even one doesn't match, or has no real source behind it, do not submit until you've traced every remaining figure by hand."
+          }
         },
         {
           "role": "Membership & Development",
@@ -1007,7 +1215,19 @@
           "roleSlug": "membership",
           "moduleId": "m4",
           "moduleNumber": 4,
-          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+          "runbook": {
+            "steps": [
+              "Before building anything, strip the results spreadsheet down to aggregates only — totals by day, by hour, by challenge grant, new vs. renewing counts — with no donor names, addresses, or giving histories in the file.",
+              "Put that stripped file in the folder Claude Code can see, and confirm the original donor-level export stays outside that folder entirely.",
+              "Ask Claude to build a Skill — .claude/skills/pledge-recap — that reads the aggregate Sheet and writes the board-ready narrative in your GM's preferred format.",
+              "Write the same rule into the SKILL.md itself: this Skill only ever reads aggregate totals, never a donor-level export.",
+              "Run the Skill and get the recap — what worked, what fell flat, how it compares to last spring.",
+              "Read the recap and confirm every figure is a total or a count, checked against the aggregate Sheet, before it goes to the board."
+            ],
+            "verify": "Open the aggregate file the Skill actually read and search it for an @ sign or anything that looks like a person's name. If either shows up, the file wasn't stripped — redo it before the Skill touches it again.",
+            "walkthroughSlug": "pledge-drive-readout"
+          }
         },
         {
           "role": "Traffic & Operations",
@@ -1020,7 +1240,18 @@
           "roleSlug": "traffic",
           "moduleId": "m4",
           "moduleNumber": 4,
-          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+          "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+          "runbook": {
+            "steps": [
+              "Connect Gmail through Claude Code using an account that only has access to the info@ and news-tips inboxes you intend to triage — nothing broader.",
+              "Ask Claude to build a Skill that reads unread mail and sorts it into high / needs action / ignore, with a short brief for each — read-only, no labels applied, nothing deleted.",
+              "Run it against today's backlog and read the brief for every message it calls 'ignore,' not just the ones it flags as high.",
+              "Compare its calls against what you already know about real listener questions or story tips sitting in there.",
+              "Keep it in read-only mode and repeat this check across at least twenty runs before you trust its sorting.",
+              "Only after twenty clean runs, consider letting it apply labels — and never let it auto-archive or auto-reply on a public-facing account, even then."
+            ],
+            "verify": "Manually open every message the Skill marked 'ignore' at least once. If a real tip or donor question is sitting in that bucket, it isn't ready to act on its own yet — stay read-only."
+          }
         }
       ],
       "tryThis": {
@@ -1198,7 +1429,20 @@
           "roleSlug": "traffic",
           "moduleId": "m5",
           "moduleNumber": 5,
-          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+          "runbook": {
+            "steps": [
+              "Sit down with your traffic person for 90 minutes, phone and distractions away, in a folder on your computer called station-work.",
+              "Open Claude Code in that folder and tell it: interview us about how the log actually gets built, one question at a time, and don't write anything until we say we're done.",
+              "Let it ask, and let the traffic person answer out loud — including the parts that feel too obvious to say, like why two sponsors never sit back to back.",
+              "When it guesses at a rule instead of asking, stop it and correct it on the spot — a plausible-sounding rule that isn't your rule is worse than no rule.",
+              "Have it write everything to a plain file called traffic-process.md: triggers, steps, judgment calls, exceptions.",
+              "Read the whole file out loud together and have the traffic person mark every line that isn't quite right.",
+              "Fix those lines, then have the traffic person sign and date the bottom of the file.",
+              "Only after it's signed off, ask what part of the written process — not the whole job — could actually be automated."
+            ],
+            "verify": "The traffic person reads the finished file start to finish and says, out loud, 'yes, that's how we do it' for every step. If there's one step they hesitate on, that step isn't done yet."
+          }
         },
         {
           "role": "Membership & Development",
@@ -1211,7 +1455,20 @@
           "roleSlug": "membership",
           "moduleId": "m5",
           "moduleNumber": 5,
-          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+          "runbook": {
+            "steps": [
+              "Before you open anything, agree with your team: this map describes what happens, in words — no donor names, addresses, giving history, or CRM exports ever go into Claude.",
+              "Open Claude Code in a folder on your machine called station-work.",
+              "List out loud every trigger that happens during a drive week: pitch block starts, a gift comes in, a thank-you goes out, a premium ships.",
+              "Ask Claude to help you mark which of those triggers happens most often, and where the backlog actually piles up.",
+              "Pick the single biggest clog and write down one plain-English number that would prove you fixed it, like 'thank-you turnaround drops from nine days to two.'",
+              "Have Claude write the clog, the number, and the trigger list to a file called drive-map.md — descriptions only, still no donor data.",
+              "Read the file back and confirm every line refers to a system or a step, never to a specific person's information.",
+              "Take that one file to leadership before anyone writes a line of code or buys a tool."
+            ],
+            "verify": "Search drive-map.md for an @ sign, a dollar amount, or a full name. If any of those show up, donor data leaked into the map and it needs to be rewritten in descriptions only."
+          }
         },
         {
           "role": "News",
@@ -1224,7 +1481,19 @@
           "roleSlug": "news",
           "moduleId": "m5",
           "moduleNumber": 5,
-          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+          "runbook": {
+            "steps": [
+              "Keep unverified claims and any source's identity out of anything you'll paste elsewhere later — the handoff note is a work summary, not a place to stash sensitive material.",
+              "At the end of each day's working session in Claude Code, before you close it, ask: write me a handoff — what we established, what's still unverified, which documents we've read, what to check next.",
+              "Read that handoff over and fix anything it got wrong or overstated — it will sound confident even about things that aren't confirmed.",
+              "Copy the handoff text somewhere safe, like a plain text file on your machine, not just left in the chat.",
+              "Run /clear to wipe the session — do this only after the handoff is safely copied out.",
+              "Paste the handoff into the fresh session as your first message the next day.",
+              "Before you write or air anything, check every claim in the handoff against the original document yourself."
+            ],
+            "verify": "Pick three claims from the handoff at random and find each one in the original council minutes, contract, or document. If you can't find one, that claim doesn't get used until you can."
+          }
         },
         {
           "role": "Grants & Compliance",
@@ -1237,7 +1506,19 @@
           "roleSlug": "grants",
           "moduleId": "m5",
           "moduleNumber": 5,
-          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+          "runbook": {
+            "steps": [
+              "Open Claude Code in a folder called station-work and keep it open the whole time you assemble this year's LCSR.",
+              "As you pull each figure, narrate it out loud into the chat: 'this number comes from the underwriting spreadsheet,' 'this narrative gets reviewed by the GM.'",
+              "As you decide what counts as a partnership or a program, say the reasoning behind that call too, not just the answer.",
+              "At the end, ask Claude to turn everything you narrated into a written process file called lcsr-process.md: where each figure comes from, who signs off, what counts as what.",
+              "Read it against what you actually did this year and correct anything it smoothed over or guessed at.",
+              "Save that file somewhere the next person assembling the LCSR will actually find it, not just in this year's folder.",
+              "Note in the file that CPB's current requirements still need to be confirmed fresh from CPB's published guidance every year — this file documents your station's process, not CPB's rules."
+            ],
+            "verify": "Hand lcsr-process.md to someone at the station who didn't help assemble this year's report and ask them to find where any one figure comes from. If they can't find it in the file, the file is missing a step."
+          }
         },
         {
           "role": "Leadership",
@@ -1250,7 +1531,19 @@
           "roleSlug": "leadership",
           "moduleId": "m5",
           "moduleNumber": 5,
-          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+          "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+          "runbook": {
+            "steps": [
+              "Get your department heads in a room for one afternoon, no vendors, no demos.",
+              "Ask each one the same question: if we got five times the volume tomorrow — five times the members, five times the story pitches, five times the underwriting inquiries — what breaks first in your department?",
+              "Write down every answer, in their words, without smoothing it into vendor-speak.",
+              "Open Claude Code afterward and have it help you organize those answers into a short list, one clog per department.",
+              "For each clog, agree on one plain number that would prove you'd fixed it — not a feeling, an actual measurable thing.",
+              "Rank the list so the biggest, most damaging clog is at the top.",
+              "Treat that ranked list as your actual AI roadmap for the year, and measure any tool pitch against it before you buy anything."
+            ],
+            "verify": "Read the top item on the list back to the department head who named it and ask, 'if we fixed only this and nothing else, would it matter?' If they hesitate, it isn't the real constraint — go back to the question."
+          }
         }
       ],
       "tryThis": {
@@ -1429,7 +1722,21 @@
           "roleSlug": "underwriting",
           "moduleId": "m6",
           "moduleNumber": 6,
-          "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+          "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+          "runbook": {
+            "steps": [
+              "Put your station's underwriting policy in a plain text or markdown file inside a project folder, plus the spot copy you're allowed to share.",
+              "In Claude Code, type /agents, choose Create new agent, then Project level, then Generate with Claude.",
+              "When it asks about tools, choose read-only — this sub-agent should never be able to write or send anything.",
+              "Describe the job in plain language: hunt for calls to action, price claims, and promotional language, and check the copy against your station's policy file, not a generic idea of the FCC rules.",
+              "Tell it what to hand back: a line-by-line list of the exact flagged phrase, why it's a problem, and a compliant rewrite, ending in a verdict of CLEAR, NEEDS EDIT, or REWRITE.",
+              "Tell it explicitly it must never say copy is approved — only a human clears copy for air.",
+              "Run it against a real piece of spot copy and read every line it flags before you touch anything.",
+              "Have a person accountable for the license make the actual clearance decision — the sub-agent's verdict is input, not sign-off."
+            ],
+            "verify": "Hand it copy you already know has a problem — a stray 'call today' or a 'best rates' claim — and confirm it actually gets flagged. If the sub-agent calls known-bad copy CLEAR, its description or policy file needs fixing before you trust it on real spots.",
+            "walkthroughSlug": "underwriting-red-team"
+          }
         },
         {
           "role": "News",
@@ -1442,7 +1749,19 @@
           "roleSlug": "news",
           "moduleId": "m6",
           "moduleNumber": 6,
-          "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+          "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+          "runbook": {
+            "steps": [
+              "Strip the pitch down to the question and the plan before it goes anywhere near Claude — no source names, no unpublished material, no tips from anyone who hasn't agreed to be identified.",
+              "In Claude Code, type /agents and create a new project-level sub-agent, read-only tools.",
+              "Describe its job as disagreeing on purpose: find the accountability question, the missing voice, what happens if the central document doesn't exist, and the cheaper version of the story.",
+              "Tell it explicitly not to be encouraging — its only job is to find the holes the room is too excited to see.",
+              "Hand it the stripped-down pitch and let it file its objections before your morning meeting.",
+              "Read every objection and decide, story by story, whether it's a real hole or a question you can already answer.",
+              "Bring the surviving pitches — and the holes the sub-agent found in the ones that didn't survive — into the room."
+            ],
+            "verify": "Pick a pitch everyone already loves and run it through the sub-agent first. If it comes back with zero objections on a story that hasn't been reported yet, the agent isn't actually pushing back — rewrite its description to be more adversarial."
+          }
         },
         {
           "role": "Music & Programming",
@@ -1455,7 +1774,19 @@
           "roleSlug": "music",
           "moduleId": "m6",
           "moduleNumber": 6,
-          "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+          "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+          "runbook": {
+            "steps": [
+              "Gather the forty submissions — bio, press notes, and links — into a folder called station-work.",
+              "In Claude Code, ask it to fan the batch out to sub-agents, one submission per sub-agent, since each one is independent and order doesn't matter.",
+              "Tell it what each brief should cover: who the artist is, where they're from, what it sounds like on paper, and whether they're actually local.",
+              "Run cheap sub-agents for this — it's bulk reading for a short summary, not work that needs your most expensive model.",
+              "Collect the forty one-paragraph briefs back in your main session.",
+              "Read the briefs yourself and sort them into a shortlist by what sounds most promising.",
+              "Listen to every track on the shortlist yourself before anything moves toward rotation."
+            ],
+            "verify": "Pick two or three submissions at random and read the original bio and press notes against the brief a sub-agent wrote. If the brief invents a fact that isn't in the source material, don't trust that brief's shortlist ranking without a second look."
+          }
         },
         {
           "role": "Membership & Development",
@@ -1468,7 +1799,19 @@
           "roleSlug": "membership",
           "moduleId": "m6",
           "moduleNumber": 6,
-          "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+          "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+          "runbook": {
+            "steps": [
+              "Confirm the plan document has no CRM export, donor names, giving history, or lapsed-donor lists in it — aggregate numbers you typed yourself are fine, a file pulled from the donor database is not.",
+              "In Claude Code, type /agents and create a project-level sub-agent with read-only tools, so it can't touch any file you didn't hand it.",
+              "Describe its job as playing devil's advocate on a spring drive plan: is the goal supported by last year's actual pace, does every premium tier make economic sense, is any ask doing double duty.",
+              "Hand it the plan document — goal, day parts, premium ladder, script themes.",
+              "Let it come back with a written teardown of where the plan doesn't hold up.",
+              "Go through the teardown with your team and decide, item by item, what's a real problem versus a thing you can defend.",
+              "Revise the plan document based only on what you've decided is a real problem."
+            ],
+            "verify": "Open the plan document you handed it and search for any donor name, dollar figure tied to a person, or giving history before you send it anywhere. If you find one, the plan document wasn't ready to hand to a sub-agent in the first place."
+          }
         },
         {
           "role": "Grants & Compliance",
@@ -1481,7 +1824,20 @@
           "roleSlug": "grants",
           "moduleId": "m6",
           "moduleNumber": 6,
-          "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+          "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+          "runbook": {
+            "steps": [
+              "Have your drafted LCSR narrative ready in a file, with every number in it already sourced back to your own records.",
+              "In Claude Code, turn on agent teams in settings if it isn't already on — this feature is experimental.",
+              "Say the words 'team create' out loud in your prompt — otherwise Claude will quietly hand you ordinary sub-agents instead of a team.",
+              "Give the team distinct seats: a skeptical grant reviewer, a community member who doesn't already listen to your station, your GM, and a station down the road doing this well.",
+              "Hand the team your narrative and let them debate it across a couple of rounds until they reach a consensus.",
+              "Read back what they agreed was persuasive and what they agreed was filler.",
+              "Revise the narrative using their consensus, but verify every number in the revised version against your own records yourself.",
+              "Watch your usage as you go — a team that talks to itself for multiple rounds spends against your five-hour session limit fast."
+            ],
+            "verify": "Take every statistic the team's consensus praised as persuasive and trace it back to your own records by hand. An agent team will reach a confident consensus about a number it invented just as easily as one that's real."
+          }
         }
       ],
       "tryThis": {
@@ -1653,7 +2009,19 @@
           "roleSlug": "membership",
           "moduleId": "m7",
           "moduleNumber": 7,
-          "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+          "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+          "runbook": {
+            "steps": [
+              "Make a project folder on your computer, and inside it a folder called brand_assets — drop in your logo and anything showing your colors and fonts.",
+              "Open Claude Code in that project folder and describe the page in one sentence: a hero, a case-for-support section, thank-you gifts, a progress thermometer, and a big donate button — tell it to match brand_assets exactly.",
+              "Tell it the donate button must only point to your station's existing donation platform — it must never build a form that collects a name, email, or card number.",
+              "Have it check its own work in a phone-width browser view and fix anything that looks off, twice, before it shows you anything.",
+              "Review the local preview on your own machine — this step is private, nothing is public yet.",
+              "Once you approve it, have it push the files to GitHub (an online backup that keeps every version of your project) and import that into Vercel (the service that turns those files into a live web address).",
+              "Click the donate button on the live page all the way through to confirm it lands on your real donation form."
+            ],
+            "verify": "Click the donate button on the live page and confirm it lands on your station's actual donation form — not a page Claude built that asks for a name, email, or card number."
+          }
         },
         {
           "role": "News",
@@ -1666,7 +2034,19 @@
           "roleSlug": "news",
           "moduleId": "m7",
           "moduleNumber": 7,
-          "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+          "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+          "runbook": {
+            "steps": [
+              "Gather each candidate's questionnaire responses as separate files, one per candidate, with the race clearly labeled.",
+              "Open Claude Code in a folder with all the files and ask for a clean, searchable page — one card per race, candidates side by side, built for a phone screen first.",
+              "Tell it to use each candidate's own words only — it formats the responses, it never paraphrases or summarizes a position.",
+              "Have it check the page at phone width and fix anything illegible before it shows you the result.",
+              "Have an editor read every single card against the original questionnaire, word for word.",
+              "Fix any mismatches, then have Claude push the files to GitHub and import them into Vercel — the service that turns the project into a live web address — so it's live.",
+              "Do one more read of the live page before you share the link publicly."
+            ],
+            "verify": "Have an editor compare every published card, word for word, against the original questionnaire — if even one phrase doesn't match, pull the page down until it's fixed."
+          }
         },
         {
           "role": "Music & Programming",
@@ -1679,7 +2059,19 @@
           "roleSlug": "music",
           "moduleId": "m7",
           "moduleNumber": 7,
-          "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+          "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+          "runbook": {
+            "steps": [
+              "Find a music site whose layout you like and take a full-page screenshot of it.",
+              "Open Claude Code in a project folder and hand it that screenshot plus your artists' photos, bios, and show dates.",
+              "Ask it to rebuild that layout's structure using your brand colors, logo, and your artists instead of the original site's content.",
+              "Tell it to embed each track through Bandcamp, Spotify, or the artist's own player — it must never host or serve an audio file directly.",
+              "Optionally, pull a nicer card design or hover effect from a component library like 21st.dev and ask Claude to work it into the page.",
+              "Have it check the page at phone width and fix anything that looks wrong before it shows you the result.",
+              "Push the files to GitHub and import them into Vercel, and confirm the page is live at a real web address."
+            ],
+            "verify": "Play every embedded track on the live page — if any artist's track doesn't load through their own streaming platform, the embed is broken or hosted the wrong way."
+          }
         },
         {
           "role": "Leadership",
@@ -1692,7 +2084,18 @@
           "roleSlug": "leadership",
           "moduleId": "m7",
           "moduleNumber": 7,
-          "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+          "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+          "runbook": {
+            "steps": [
+              "List every department's automation request on one page, one line each.",
+              "For each request, ask which of the four levels it actually is: a chatbot you trigger yourself, a plain no-AI workflow, a fixed AI workflow, or a full agent.",
+              "For anything that looks like an agent, ask whether a fixed AI workflow could do the same job — if it can, approve the lower level, not the agent.",
+              "For anything touching donor records, member data, or anything publishable, require it stay at chatbot level — human-triggered, human-reviewed — until proven otherwise.",
+              "Write your decision and the level for each request in one shared document leadership can point back to.",
+              "Require any approved AI workflow or agent to be run against a set of known test cases and pass before it goes live."
+            ],
+            "verify": "Pick one approved automation and ask its owner to list every tool it can actually touch — if that list includes anything the task doesn't need (sending, deleting, publishing), send it back before it launches."
+          }
         },
         {
           "role": "Digital & Audience",
@@ -1705,7 +2108,19 @@
           "roleSlug": "digital",
           "moduleId": "m7",
           "moduleNumber": 7,
-          "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+          "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+          "runbook": {
+            "steps": [
+              "List every AI automation currently running at your station, including any nobody remembers setting up.",
+              "For each one, list every tool it can actually reach — not what its instructions say, what it is physically able to do: send, delete, post, read.",
+              "Strip out every tool it doesn't need for its actual job, especially any send, delete, or publish access it isn't using.",
+              "For anything that can reach your CRM, your website, or your listener email list, add a hard restriction at the tool level — not just a written instruction telling it not to.",
+              "Ask Claude to help you list the edge cases each automation could hit and what a safe failure looks like for each one.",
+              "Check each automation's actual output from the last two weeks against what it's supposed to be doing.",
+              "Put a date on the calendar to repeat this whole check, so a new automation can't quietly reappear unwatched."
+            ],
+            "verify": "For each automation, look at the tools it still has and try to name one bad real-world action it could take with each — if you can name one, remove that tool now, don't wait for it to happen."
+          }
         }
       ],
       "tryThis": {
@@ -1952,7 +2367,19 @@
           "roleSlug": "engineering",
           "moduleId": "m8",
           "moduleNumber": 8,
-          "moduleTitle": "The Station's Second Brain"
+          "moduleTitle": "The Station's Second Brain",
+          "runbook": {
+            "steps": [
+              "Before you start, tell Claude: never write down access codes, alarm passwords, or EAS credentials — write \"stored in the station password manager\" instead and move on.",
+              "Open Claude Code with the grill-me skill (a set of instructions that has it interview someone, one question at a time, and save every answer as it goes) and sit down with your chief engineer.",
+              "Ask Claude to grill him about the transmitter site — every routine, every failure mode, every workaround.",
+              "Let Claude checkpoint each answer to a document as you go, so nothing is lost even in a two-hour session.",
+              "When Claude flags a question he can't answer, write down who else on staff might know it.",
+              "Read the finished document together and correct anything Claude got wrong or garbled.",
+              "Save it into your station's second brain folder as the engineering runbook, and point to it from CLAUDE.md — the file Claude reads first, that tells it where things live."
+            ],
+            "verify": "Search the finished document for anything that looks like a code or password — if you find one, delete it and replace it with \"stored in the password manager.\""
+          }
         },
         {
           "role": "Membership & Development",
@@ -1965,7 +2392,19 @@
           "roleSlug": "membership",
           "moduleId": "m8",
           "moduleNumber": 8,
-          "moduleTitle": "The Station's Second Brain"
+          "moduleTitle": "The Station's Second Brain",
+          "runbook": {
+            "steps": [
+              "Export only aggregate numbers — dollars and counts per hour — from each drive; never export donor names, addresses, giving histories, or a CRM record.",
+              "Put those exports, along with past drive scripts and post-drive recaps, into a folder called raw.",
+              "Open Claude Code in that folder and ask it to read everything and write it back out as a linked set of notes in a wiki folder, with an index.",
+              "Check the index and a few notes to confirm nothing beyond aggregate numbers made it in.",
+              "Ask your real question — for example, \"what pitch language preceded our best sustainer hours across the last five drives?\" — and let Claude answer from the index and its links.",
+              "Check the answer against the original scripts and recaps before you use it in planning.",
+              "Add each new drive's results and recap into raw after the drive, so the wiki keeps growing."
+            ],
+            "verify": "Search every file in raw for an @ sign, a name next to a dollar amount, or anything that looks like a donor record — if you find one, pull that file out before Claude ever reads the folder."
+          }
         },
         {
           "role": "Music & Programming",
@@ -1978,7 +2417,19 @@
           "roleSlug": "music",
           "moduleId": "m8",
           "moduleNumber": 8,
-          "moduleTitle": "The Station's Second Brain"
+          "moduleTitle": "The Station's Second Brain",
+          "runbook": {
+            "steps": [
+              "Open Claude Code with the grill-me skill and sit down with your music director.",
+              "Ask Claude to grill her about the rotation logic — separation rules, how local music gets added, drive-time restrictions, how a track graduates or gets rested — one question at a time.",
+              "Let Claude checkpoint every answer to a document as you go.",
+              "Have her review the finished document and correct anything Claude oversimplified or got wrong.",
+              "Save the document as the music section of your station's second brain, and add your local-music library notes alongside it.",
+              "Update CLAUDE.md so it points to this file whenever someone asks a rotation question.",
+              "Tell your team the AI documents the reasoning only — the MD still makes every call, and SoundExchange and PRO reporting stay a verified human process."
+            ],
+            "verify": "Give the finished document to a fill-in host and ask her to answer \"why can't these two tracks air in the same hour\" using only the document — if she can't answer it from the file, the logic isn't actually written down yet."
+          }
         },
         {
           "role": "Grants & Compliance",
@@ -1991,7 +2442,19 @@
           "roleSlug": "grants",
           "moduleId": "m8",
           "moduleNumber": 8,
-          "moduleTitle": "The Station's Second Brain"
+          "moduleTitle": "The Station's Second Brain",
+          "runbook": {
+            "steps": [
+              "Gather past grant applications, CPB reports, community partner lists, and board minutes into a folder called raw.",
+              "Open Claude Code in that folder and ask it to organize everything into linked notes — partners, initiatives, outcomes — with an index, in a wiki folder.",
+              "When the next report opens, ask Claude to assemble the source material for each section, with a link back to the original document for every claim.",
+              "Read every claim and every number in the draft against its linked source document.",
+              "Fix anything unverified or unsourced before it goes into the draft you'll submit.",
+              "Have a second person check the final draft against the wiki's links before submission.",
+              "Add this year's finished report back into raw so next year's wiki starts fuller."
+            ],
+            "verify": "Pick five sentences at random from the drafted report and follow each one's link back to its source document — if any of the five doesn't check out, stop and re-verify the whole section."
+          }
         },
         {
           "role": "Leadership",
@@ -2004,7 +2467,19 @@
           "roleSlug": "leadership",
           "moduleId": "m8",
           "moduleNumber": 8,
-          "moduleTitle": "The Station's Second Brain"
+          "moduleTitle": "The Station's Second Brain",
+          "runbook": {
+            "steps": [
+              "List the documents your station actually has that matter for institutional knowledge.",
+              "Before buying anything, ask whether a CLAUDE.md and a few plain folders (level 1) already answer most of your team's questions.",
+              "If that's not enough, try dropping the documents into a raw folder and asking Claude to build a wiki (level 2) — no vendor, no database, no subscription.",
+              "Only consider semantic search, a knowledge graph, or an always-on platform if you can name the specific pain level 1 or 2 didn't solve.",
+              "Whatever you build, keep it as plain files you own, not a vendor's proprietary format.",
+              "Name one person as the owner of the brain and set a date for when it gets reviewed and refreshed.",
+              "Bring the vendor's pitch back only if your own level-1 or level-2 attempt genuinely fails at something specific."
+            ],
+            "verify": "Ask three staff members to find last year's pledge drive script or the underwriting compliance rule using only what you built — if any of them can't find it in under a minute, the level you're at isn't solving the pain yet."
+          }
         }
       ],
       "tryThis": {
@@ -2170,7 +2645,19 @@
           "roleSlug": "news",
           "moduleId": "m9",
           "moduleNumber": 9,
-          "moduleTitle": "Work That Happens While You Sleep"
+          "moduleTitle": "Work That Happens While You Sleep",
+          "runbook": {
+            "steps": [
+              "Before scheduling anything, run it by hand once in a normal Claude Code chat: give it the real URLs for your city council agenda page, the county board page, and two or three local news sites, and ask it to write today's brief.",
+              "Look at what came back — which sources it actually reached, which ones it couldn't, and where it guessed instead of saying a source failed.",
+              "Rewrite the prompt so nothing is left for it to guess: name every source URL, say exactly what should be in the brief, and say what to do if a site won't load — nobody will be there to answer questions at 5:30am.",
+              "Turn that tested prompt into a scheduled routine — a saved prompt Claude runs on its own, on Anthropic's servers, timed to finish before the morning news meeting.",
+              "Point the routine at an internal newsroom channel only. Never let it post to anything public-facing.",
+              "Put any API keys the routine needs into the routine's own settings, not a file on your computer — it runs on separate servers that can't see your machine.",
+              "Let it run for a few mornings unattended, and read every brief yourself before the newsroom does."
+            ],
+            "verify": "Pick one flagged lead from the brief and open the actual agenda page or article it points to. If the link is dead, the date is wrong, or the item isn't really there, don't trust that morning's brief until you find out why."
+          }
         },
         {
           "role": "Underwriting",
@@ -2183,7 +2670,19 @@
           "roleSlug": "underwriting",
           "moduleId": "m9",
           "moduleNumber": 9,
-          "moduleTitle": "Work That Happens While You Sleep"
+          "moduleTitle": "Work That Happens While You Sleep",
+          "runbook": {
+            "steps": [
+              "Decide first whether this even needs an AI agent — checking business listings and formatting a list is a straight-line job, so a plain scheduled script may do the whole thing for less money and less risk.",
+              "If you do want Claude Code involved, test it by hand first: point it at the city or county new-business license page and the local business journal, and ask for a draft prospect list.",
+              "Ask it to rank the list and format each entry the same way: business name, what they do, public contact info if available, and why they might fit as an underwriter.",
+              "Keep current underwriters and their rates completely out of the prompt — that information has no reason to be typed in at all.",
+              "Turn the tested prompt into a routine scheduled for Monday mornings, writing into the underwriting team's shared document only.",
+              "Put any API keys the routine needs into the routine's own settings, not a file on your computer.",
+              "Treat the weekly list as leads for a human to review, never as something that emails or contacts a prospect on its own."
+            ],
+            "verify": "Look up the top-ranked business on the list yourself — it should be a real, currently open business at the address given. If it's closed, isn't real, or the contact info is wrong, the routine is reading stale or bad pages and needs fixing before you trust the rest."
+          }
         },
         {
           "role": "Grants & Compliance",
@@ -2196,7 +2695,19 @@
           "roleSlug": "grants",
           "moduleId": "m9",
           "moduleNumber": 9,
-          "moduleTitle": "Work That Happens While You Sleep"
+          "moduleTitle": "Work That Happens While You Sleep",
+          "runbook": {
+            "steps": [
+              "List the exact funders to watch, with real web addresses for each — Grants.gov, CPB, NEA, your state arts board, and the specific community foundations you actually apply to.",
+              "Test it by hand once: ask Claude Code to check those sources today and draft the one-page radar — new opportunities, one line on eligibility, deadline, and a countdown on anything already tracked.",
+              "Tell it plainly what to do when a site won't load or a deadline isn't clearly posted: flag it as unclear, never guess.",
+              "Turn the tested prompt into a routine that runs weekly, with the radar emailed to the development director only.",
+              "Put any login or API keys the routine needs into the routine's own settings, not a file on your computer.",
+              "Before anyone acts on a deadline in the radar, open the actual RFP document yourself and confirm the date and eligibility line.",
+              "Review the radar every week it arrives — a missed week doesn't get skipped and caught up later."
+            ],
+            "verify": "Pick one deadline from this week's radar and open the source RFP PDF directly. The date and eligibility line must match exactly — a hallucinated deadline that costs you a submission is the one failure this can't survive."
+          }
         },
         {
           "role": "Music & Programming",
@@ -2209,7 +2720,19 @@
           "roleSlug": "music",
           "moduleId": "m9",
           "moduleNumber": 9,
-          "moduleTitle": "Work That Happens While You Sleep"
+          "moduleTitle": "Work That Happens While You Sleep",
+          "runbook": {
+            "steps": [
+              "Build your local artist list and your venue calendar links by hand first — the routine can only scan what you actually point it at.",
+              "Test it manually in Claude Code before scheduling anything: ask it to check new releases from your list, venue calendars for the next two weeks, and local music press, and write the meeting prep doc.",
+              "Tell it clearly that it only gathers and flags — it never recommends what should get added, that's the music director's call in the meeting.",
+              "Once a manual run looks right, turn it into a Monday-night routine that writes into the same shared file the music director opens Tuesday morning.",
+              "Keep the output to links and short context only — new releases, who's touring through, anything with a hook — with no ranking of what should be added.",
+              "Every Tuesday, make sure a human actually listens to anything before it goes into rotation — nothing gets added on the routine's say-so."
+            ],
+            "verify": "Open two or three links from Tuesday's prep doc — they should land on the real release or the real calendar listing, not a paraphrase of one. If a link doesn't resolve to the actual source, don't trust that entry going into the meeting.",
+            "walkthroughSlug": "music-adds-prep"
+          }
         },
         {
           "role": "Membership & Development",
@@ -2222,7 +2745,18 @@
           "roleSlug": "membership",
           "moduleId": "m9",
           "moduleNumber": 9,
-          "moduleTitle": "Work That Happens While You Sleep"
+          "moduleTitle": "Work That Happens While You Sleep",
+          "runbook": {
+            "steps": [
+              "Export your CRM data and immediately strip it down to aggregate counts and cohorts only — no names, no emails, no addresses, no gift amounts tied to a person.",
+              "Save that stripped, aggregate-only file in a folder on your own machine. This job never goes near a cloud routine — a routine runs on someone else's servers, and it can only be trusted with what you're willing to upload.",
+              "Set up a local scheduled task on a station computer, not a cloud routine, to run the aggregation on a monthly schedule.",
+              "Ask Claude Code to summarize only the aggregate counts and cohort trends into a plain-English brief — never the underlying export.",
+              "Read the draft brief yourself and confirm every number in it traces back to the aggregate file, not to anything more detailed.",
+              "Only after your review does the brief go to leadership."
+            ],
+            "verify": "Open the aggregate file the brief was built from and search it for an @ sign or anything that looks like a name. If anything personally identifying survived the strip, stop and fix the export before this runs again."
+          }
         }
       ],
       "automationBlueprint": {
@@ -2403,7 +2937,19 @@
           "roleSlug": "leadership",
           "moduleId": "m10",
           "moduleNumber": 10,
-          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+          "runbook": {
+            "steps": [
+              "Open a fresh scratch session in Claude Code — one that never had financials, donor data, or unaired reporting anywhere on screen.",
+              "In that session, run /context and read what it shows — how many tokens you're already spending before typing a word, broken down by system, tools, and memory.",
+              "Run /cost to see actual token usage and estimated spend for the session so far.",
+              "Do a few minutes of ordinary back-and-forth work, then run /cost again to see what a cache read costs compared to a fresh message.",
+              "Take screenshots of both /cost and /context, from this scratch session only.",
+              "Turn the screenshots into a one-page briefing: what a typical session costs, and how cache reads — about 10% the price of a fresh read — change the total.",
+              "Frame the recommendation for your GM as a habits story, not a licensing story: a disciplined user gets far more work per dollar than someone who isn't."
+            ],
+            "verify": "Before sending the screenshots anywhere, look at every line on screen for a name, dollar figure, or story detail that shouldn't leave the building. If you see any, the screenshot came from the wrong session — start over in a clean one."
+          }
         },
         {
           "role": "News",
@@ -2416,7 +2962,19 @@
           "roleSlug": "news",
           "moduleId": "m10",
           "moduleNumber": 10,
-          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+          "runbook": {
+            "steps": [
+              "Before opening anything in Claude Code, decide what's actually safe to upload — confidential source material and anything under embargo does not go into a cloud tool at all, full stop.",
+              "Work the cleared records in one continuous session rather than restarting — the cache only pays off if you stay in it.",
+              "Pick one model for the whole session and don't switch mid-stream — switching models re-reads the entire conversation from the beginning with no savings.",
+              "Keep working through the afternoon, batching related questions into one message instead of scattering them across many.",
+              "Around 60% of the way through the session's context, ask Claude to summarize the findings so far, the files touched, and the open questions.",
+              "Run /clear, then paste that summary back in to keep going in a small, cheap, fresh context.",
+              "Do the same handoff any time you're stepping away for a long stretch, so you come back to a small context instead of a stale one that re-reads everything at full price."
+            ],
+            "verify": "Read the handoff summary before you /clear — every finding, file, and open question from the session so far needs to be in it. If something's missing, the next stretch of work starts blind, not just cheap."
+          }
         },
         {
           "role": "Membership & Development",
@@ -2429,7 +2987,18 @@
           "roleSlug": "membership",
           "moduleId": "m10",
           "moduleNumber": 10,
-          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+          "runbook": {
+            "steps": [
+              "Before writing a single prompt, set the rule for the whole drive: no donor names, giving history, or CRM exports ever go in — describe audiences only in aggregate terms, like 'sustainers who gave under $10 a month'.",
+              "Put the drive's tone, rules, and that data rule into a short CLAUDE.md file so it's cached and read automatically instead of retyped every time.",
+              "Batch your requests — ask for all the script variants you need in one message instead of three separate rounds.",
+              "Schedule the heavy generation sessions for afternoons, evenings, or weekends — the five-hour session window drains faster during weekday peak hours, 8am to 2pm Eastern.",
+              "Stay in one session for the whole batch instead of starting fresh each time, so the cache keeps paying off.",
+              "Have a person review every script variant against the data rule before it airs, confirming no real donor detail slipped in."
+            ],
+            "verify": "Search every generated script for a real name, dollar amount, or specific giving detail. If anything beyond an aggregate description shows up, that script gets rewritten before it airs."
+          }
         },
         {
           "role": "Digital & Audience",
@@ -2442,7 +3011,18 @@
           "roleSlug": "digital",
           "moduleId": "m10",
           "moduleNumber": 10,
-          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+          "runbook": {
+            "steps": [
+              "Open a brand-new Claude Code session and run /context before typing anything else, to see your starting overhead — system prompt, tools, agents, skills, and memory all cost tokens before you've said a word.",
+              "Run /mcp to see every MCP server currently connected to this session.",
+              "For each one, check who else on staff actually relies on it before touching anything — a shared connection someone else needs isn't yours to cut alone.",
+              "Disconnect the servers you don't need for this session — a single server can cost around 18,000 tokens on every message you send.",
+              "Run /context again and compare the new number to what you started with.",
+              "Write down what you turned off and why, so it can be turned back on the moment someone needs it."
+            ],
+            "verify": "Compare the two /context readings — the number should drop noticeably after disconnecting. If it barely moves, the servers you disconnected weren't the ones costing you."
+          }
         },
         {
           "role": "Grants & Compliance",
@@ -2455,7 +3035,18 @@
           "roleSlug": "grants",
           "moduleId": "m10",
           "moduleNumber": 10,
-          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+          "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+          "runbook": {
+            "steps": [
+              "Pick one model for the whole LCSR session before you start writing, and leave 'opus plan' mode off — every model switch, including that toggle, re-reads the entire conversation from scratch with no cache savings.",
+              "Draft the narrative in that one session, working section by section rather than restarting for each part.",
+              "If you need to change instructions or tone partway through, edit CLAUDE.md instead of switching models — that edit doesn't break the cache, it just takes effect on your next session.",
+              "Keep the growing draft in the same session as long as it stays workable, so the cache keeps paying off on a long document.",
+              "Once the draft narrative is complete, go through it line by line against your actual station records — every number needs a human to verify it.",
+              "File with CPB only after that verification is done."
+            ],
+            "verify": "Pick five numbers at random from the finished narrative and trace each one back to the actual station record it came from. If even one doesn't match, the draft isn't ready to file."
+          }
         }
       ],
       "tryThis": {
@@ -3090,7 +3681,18 @@
       "roleSlug": "news",
       "moduleId": "m1",
       "moduleNumber": 1,
-      "moduleTitle": "Orientation: What Claude Code Actually Is"
+      "moduleTitle": "Orientation: What Claude Code Actually Is",
+      "runbook": {
+        "steps": [
+          "Save the budget PDF into a folder on your computer — call it something like \"budget-story\" so you can find it again.",
+          "Open Claude Code and point it at that folder (this just means telling it which folder on your computer to work in).",
+          "Ask it to read the whole PDF and list every line item where the amount changed by more than 10% since last year.",
+          "Ask it to give you the page number in the PDF where it found each one, not just the number itself.",
+          "Open the actual PDF to each page it cited and check that the number really says what Claude said it says.",
+          "Hand your reporter only the items you've personally confirmed on the page, with the page numbers attached."
+        ],
+        "verify": "Open the PDF to the page number Claude cited for each flagged line item — if what's on that page doesn't match the number in Claude's list, pull that item before it goes anywhere near a script."
+      }
     },
     {
       "role": "Membership & Development",
@@ -3103,7 +3705,19 @@
       "roleSlug": "membership",
       "moduleId": "m1",
       "moduleNumber": 1,
-      "moduleTitle": "Orientation: What Claude Code Actually Is"
+      "moduleTitle": "Orientation: What Claude Code Actually Is",
+      "runbook": {
+        "steps": [
+          "Gather only past pitch scripts, your goal sheet, and notes on what worked or flopped — leave out anything with a donor's name, email, address, or CRM export.",
+          "Put those files in one folder on your computer, named something like \"drive-context.\"",
+          "Open Claude Code and point it at that folder.",
+          "Ask it to read everything and tell you back, in its own words, what your station's pitch voice sounds like and what's worked before.",
+          "Ask it to draft this year's pitch scripts in that voice, aimed at the goals on your goal sheet.",
+          "Read every draft, mark up what's off, and tell Claude Code why — not just what — you changed it.",
+          "Ask for one more pass using your corrections before you call any script final."
+        ],
+        "verify": "Open the drive-context folder yourself and search it for anything that looks like a donor name, email, or CRM export — if you find one, delete it and start the folder over before Claude Code ever reads it."
+      }
     },
     {
       "role": "Underwriting",
@@ -3116,7 +3730,19 @@
       "roleSlug": "underwriting",
       "moduleId": "m1",
       "moduleNumber": 1,
-      "moduleTitle": "Orientation: What Claude Code Actually Is"
+      "moduleTitle": "Orientation: What Claude Code Actually Is",
+      "runbook": {
+        "steps": [
+          "Write down every underwriting task your GM wants \"an AI\" to handle, one per line.",
+          "For each one, ask: does this follow the exact same steps every single time, or does it need someone to read something messy and make a judgment call?",
+          "Route the same-every-time tasks — like emailing the weekly spot schedule — to a plain scheduled script. That's not a Claude Code job at all.",
+          "For the genuinely messy task — turning a client's rambling intake email into a spot draft — open Claude Code and ask it to draft compliant copy from that email, in your station's usual format.",
+          "Tell it plainly, up front, what a spot must never contain: no calls to action, no price claims, no qualitative claims.",
+          "Send every draft it produces through your normal FCC compliance review before it reaches a client or the air.",
+          "Show your GM the actual split — one boring script, one Claude Code draft with human review — as the real answer to \"get an AI on this.\""
+        ],
+        "verify": "Read the compliance reviewer's notes on the first three Claude-drafted spots — if a call-to-action or price claim slipped through in any of them, tighten your instructions before you trust the next batch."
+      }
     },
     {
       "role": "Music & Programming",
@@ -3129,7 +3755,18 @@
       "roleSlug": "music",
       "moduleId": "m1",
       "moduleNumber": 1,
-      "moduleTitle": "Orientation: What Claude Code Actually Is"
+      "moduleTitle": "Orientation: What Claude Code Actually Is",
+      "runbook": {
+        "steps": [
+          "Open your week's playlist file — the one your local-music host already has.",
+          "Put it in a folder on your computer and open Claude Code there.",
+          "Ask Claude Code to read the playlist and, for each local artist, search online for a short bio, upcoming tour dates, and any recent release news.",
+          "Ask it to put all of that into one prep sheet, organized by artist, in the order they're playing.",
+          "Read the prep sheet and flag anything that sounds off or too good to be true.",
+          "Before your host says anything on air about a tour date, label, or hometown, check it against a real source — the artist's own site or a wire story."
+        ],
+        "verify": "Pick three claims from the prep sheet — a tour date, a label, a hometown — and look each one up yourself on the artist's own site before your host reads any of them on air."
+      }
     },
     {
       "role": "Leadership",
@@ -3142,7 +3779,18 @@
       "roleSlug": "leadership",
       "moduleId": "m1",
       "moduleNumber": 1,
-      "moduleTitle": "Orientation: What Claude Code Actually Is"
+      "moduleTitle": "Orientation: What Claude Code Actually Is",
+      "runbook": {
+        "steps": [
+          "Before you announce the pilot, pick exactly one team, one workflow, and one number you're measuring — hours off show prep, days off the LCSR draft, whatever's real for that team.",
+          "Set a realistic window for judging it — a few weeks, not a few days — and write that window down where the team can see it.",
+          "Tell your board and your staff what you're piloting and where, before anyone asks. Public trust runs on this, not surprise announcements.",
+          "When week one comes in slower than the old process, name it out loud as \"the dip,\" not a verdict on the pilot.",
+          "Keep a simple running log of the one number you picked, every week of the window.",
+          "At the end of the window — not before — sit down with the team and the log, and decide, based on that number, whether it worked."
+        ],
+        "verify": "Look at the log: compare the number from week one to the number from the final week. If you can't put two real numbers side by side, you don't have a verdict — you have a feeling, and a feeling is what would have killed this pilot three weeks early."
+      }
     },
     {
       "role": "Membership & Development",
@@ -3155,7 +3803,20 @@
       "roleSlug": "membership",
       "moduleId": "m2",
       "moduleNumber": 2,
-      "moduleTitle": "First Contact — Point It at a Real Station File"
+      "moduleTitle": "First Contact — Point It at a Real Station File",
+      "runbook": {
+        "steps": [
+          "Export only the columns you need from your CRM — gift amount, date, hour, premium, new-vs-renewing, channel. No names, emails, addresses, or phone numbers.",
+          "Put that stripped file in a folder on your computer called something like \"drive-readout.\"",
+          "Open Claude Code in that folder and ask it to read the file and list back the columns it sees, before it does anything else.",
+          "Ask for the workbook you need: a summary tab, an hour-by-hour take, a new-vs-renewing split, and a comparison to your last drive.",
+          "Tell it to re-sum every column against the source file and show you that check before handing the workbook back.",
+          "Check the workbook's totals against your CRM's own totals for the drive before the numbers go anywhere near the board.",
+          "Save the prompt as a Skill, so the station owns this for next drive, not just you."
+        ],
+        "verify": "Open the finished workbook and search it for an @ sign — if any email address survived the strip, it isn't safe to work with; start over from a clean export.",
+        "walkthroughSlug": "pledge-drive-readout"
+      }
     },
     {
       "role": "Music & Programming",
@@ -3168,7 +3829,19 @@
       "roleSlug": "music",
       "moduleId": "m2",
       "moduleNumber": 2,
-      "moduleTitle": "First Contact — Point It at a Real Station File"
+      "moduleTitle": "First Contact — Point It at a Real Station File",
+      "runbook": {
+        "steps": [
+          "Export this week's play log from your automation system.",
+          "Put the file in a folder on your computer and open Claude Code there.",
+          "Ask it to read the log, tally spins by artist, and flag which ones are tagged local.",
+          "Tell it plainly: if the local tag is blank, don't guess — flag that row for you to decide, don't count it either way.",
+          "Ask it to chart the local percentage week over week and write the counts into a spreadsheet you can reuse.",
+          "Review the flagged blank-tag rows yourself and fill in the local status by hand.",
+          "Compare the resulting local percentage to the number you promised in your last grant, before you report it anywhere."
+        ],
+        "verify": "Pick five rows at random from the tally and count their spins yourself straight from the log — if your hand count doesn't match what Claude reported for those five, don't trust the rest of the tally either."
+      }
     },
     {
       "role": "Grants & Compliance",
@@ -3181,7 +3854,20 @@
       "roleSlug": "grants",
       "moduleId": "m2",
       "moduleNumber": 2,
-      "moduleTitle": "First Contact — Point It at a Real Station File"
+      "moduleTitle": "First Contact — Point It at a Real Station File",
+      "runbook": {
+        "steps": [
+          "Gather the five spreadsheets — wherever they actually live, including that one person's Downloads folder — into a single folder on your computer.",
+          "Open Claude Code and point it at that folder.",
+          "Ask it to find every figure the LCSR needs across those files and build one worksheet, with each number traced back to its source file and cell.",
+          "Tell it plainly: if a number isn't in any of the files, leave the cell empty and flag it for you — never estimate or guess a fill-in.",
+          "Ask it to recompute each total straight from the raw file and show its arithmetic next to the number it reported.",
+          "Chase down the real number yourself for every flagged empty cell before the report goes anywhere.",
+          "Have the person who owns the LCSR filing review and sign the consolidated worksheet before it's submitted."
+        ],
+        "verify": "Pick three numbers on the consolidated worksheet, open the source file and cell it cites, and check the number by eye — if any of the three don't match their cited cell, the whole worksheet needs a re-check before anyone signs it.",
+        "walkthroughSlug": "first-30-minutes"
+      }
     },
     {
       "role": "Digital & Audience",
@@ -3194,7 +3880,19 @@
       "roleSlug": "digital",
       "moduleId": "m2",
       "moduleNumber": 2,
-      "moduleTitle": "First Contact — Point It at a Real Station File"
+      "moduleTitle": "First Contact — Point It at a Real Station File",
+      "runbook": {
+        "steps": [
+          "Collect the monthly download CSV for each show into one folder on your computer.",
+          "Open Claude Code and point it at that folder.",
+          "Ask it to merge the CSVs and chart downloads per episode and per show over time.",
+          "Ask it to flag which episodes outperformed their own show's median.",
+          "Ask it to state, in plain words, exactly how it's defining a \"download\" — and keep that definition attached to the report.",
+          "Write the result into one workbook you can point Claude Code at again next month, instead of starting over."
+        ],
+        "verify": "Pick one show's total from the workbook and add up that show's downloads yourself straight from its monthly CSVs — if your total doesn't match, check whether the merge dropped a month or double-counted one.",
+        "walkthroughSlug": "first-30-minutes"
+      }
     },
     {
       "role": "Underwriting",
@@ -3207,7 +3905,20 @@
       "roleSlug": "underwriting",
       "moduleId": "m2",
       "moduleNumber": 2,
-      "moduleTitle": "First Contact — Point It at a Real Station File"
+      "moduleTitle": "First Contact — Point It at a Real Station File",
+      "runbook": {
+        "steps": [
+          "Export both the traffic log (what was scheduled) and the as-aired report (what actually ran).",
+          "Put both files in one folder on your computer and open Claude Code there.",
+          "Ask it to match scheduled spots against as-aired ones and list every discrepancy with date, time, and spot ID.",
+          "Ask it to show you the actual matching rows behind each discrepancy, not just its conclusion.",
+          "Ask it to produce a make-good candidate list from those discrepancies.",
+          "Spot-check a handful of the discrepancies yourself against the two original files before you tell the client anything.",
+          "Hand the confirmed list to whoever owns the client relationship — Claude drafts no response and no spot copy."
+        ],
+        "verify": "Pick three discrepancies from the list and look up those exact date, time, and spot-ID rows in both original files yourself — if the mismatch isn't really there, the matching logic is wrong and the whole list needs a re-run.",
+        "walkthroughSlug": "first-30-minutes"
+      }
     },
     {
       "role": "Membership & Development",
@@ -3220,7 +3931,18 @@
       "roleSlug": "membership",
       "moduleId": "m3",
       "moduleNumber": 3,
-      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+      "runbook": {
+        "steps": [
+          "In your CRM, create a new API key that is read-only — no edit, no delete, no export-all — and confirm in the CRM's own settings screen that it physically cannot write.",
+          "Save that key in a file called .env in your project folder, and never paste it anywhere else — not in CLAUDE.md, not in an email, not in Slack.",
+          "Open Claude Code in that folder and ask it to add a deny rule in settings.json blocking any write or delete command against the CRM.",
+          "Ask it to explain in plain English what that deny rule actually blocks, so you know it did what you asked before you rely on it.",
+          "Ask Claude for the donor segment summary you need — aggregate counts and totals only, never a request for named records.",
+          "Read the result back and confirm every line is a count or a total, with no donor name, email, or address anywhere in it."
+        ],
+        "verify": "Go back to your CRM's key management screen and confirm the key shows read-only. If it shows any write or delete permission, delete the key, generate a new one, and redo the setup before using it again."
+      }
     },
     {
       "role": "News",
@@ -3233,7 +3955,18 @@
       "roleSlug": "news",
       "moduleId": "m3",
       "moduleNumber": 3,
-      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+      "runbook": {
+        "steps": [
+          "Open Claude Code in your newsroom project folder and ask it to create (or open) CLAUDE.md, with this as the very first rule: never accept unpublished investigative material or confidential source identities, in any form.",
+          "Tell Claude your house style — how you refer to the mayor's office, which sources need a second confirmation, banned words like 'slammed' — and have it write those rules into CLAUDE.md underneath.",
+          "Ask Claude to read the file back to you and confirm the no-go rule is still the first thing anyone sees when it opens the file.",
+          "Use Claude Code normally on a story that has no unpublished material or source names anywhere near it.",
+          "The next time an output comes back wrong — wrong style, wrong assumption — tell Claude to update CLAUDE.md itself so it doesn't repeat that mistake.",
+          "Ask it to show you exactly what changed in the file before you move on to the next story."
+        ],
+        "verify": "Open CLAUDE.md and check that the unpublished-material rule is still the first rule in the file. If a later edit pushed it down or dropped it, put it back at the top before anyone uses this folder again."
+      }
     },
     {
       "role": "Underwriting",
@@ -3246,7 +3979,18 @@
       "roleSlug": "underwriting",
       "moduleId": "m3",
       "moduleNumber": 3,
-      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+      "runbook": {
+        "steps": [
+          "Open Claude Code in your underwriting project folder and open (or create) CLAUDE.md.",
+          "Write in the FCC constraints in plain language: no calls to action, no price or comparative claims, no inducements to buy — sponsor name and a factual description only.",
+          "Add a line requiring every draft to end with a plain statement that it hasn't been cleared and needs human compliance review.",
+          "Ask Claude to draft copy for a real or practice sponsor, then check the result against the rules you just wrote, line by line.",
+          "If anything slips past the rules, tell Claude exactly what it got wrong and have it add that specific example to CLAUDE.md.",
+          "Send every draft to your compliance reviewer before it airs, regardless of how clean Claude's version looks."
+        ],
+        "verify": "Read the draft's closing note out loud. If it doesn't literally say the spot hasn't been cleared and needs a human review, the CLAUDE.md rule didn't take — fix it before the draft goes anywhere near a client."
+      }
     },
     {
       "role": "Leadership",
@@ -3259,7 +4003,18 @@
       "roleSlug": "leadership",
       "moduleId": "m3",
       "moduleNumber": 3,
-      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+      "runbook": {
+        "steps": [
+          "List out, by name, everything that never goes in a prompt box: donor giving histories, personnel files, unpublished journalism, legal correspondence, anything under an NDA.",
+          "Open Claude Code and ask it to draft a one-page policy from that list, explaining in plain English that a closed AI model sends every prompt to a vendor's servers, and that turning off 'training' does not delete what was already sent.",
+          "Have Claude add the technical backstop as an example: a settings.json deny-rule and a scoped read-only key, so the policy isn't just a memo people forget.",
+          "Read the draft policy and correct anything it got wrong about your station's specific tools or data.",
+          "Put the final policy in your global CLAUDE.md so it applies on every project, on every machine, for everyone at the station.",
+          "Circulate the policy to staff and confirm each department head has actually read it."
+        ],
+        "verify": "Ask two staffers in different departments to tell you, in their own words, what they're never allowed to paste into an AI tool. If they can't name the list from memory, the policy is filed away instead of understood — shorten it or post it somewhere visible."
+      }
     },
     {
       "role": "Grants & Compliance",
@@ -3272,7 +4027,18 @@
       "roleSlug": "grants",
       "moduleId": "m3",
       "moduleNumber": 3,
-      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails"
+      "moduleTitle": "Set Up Your Station's Workspace — And Its Guardrails",
+      "runbook": {
+        "steps": [
+          "Before you do anything else, copy your Local Content and Service Report folder to a separate backup location outside the project directory.",
+          "Open Claude Code in the project folder and confirm it's running in Plan mode, not Bypass Permissions mode.",
+          "Ask Claude to add deny rules to settings.json so it can never delete files in that folder.",
+          "Describe the change you want made to the spreadsheets, and ask Claude to show you its plan before it touches anything.",
+          "Read the plan the way you'd read a rundown, line by line, and only approve it once every step makes sense.",
+          "After it runs, open the files and confirm the changes match the plan you approved."
+        ],
+        "verify": "Compare today's file count and total row count in the folder against your backup. If either doesn't match what the approved plan said would change, stop and restore from backup before the deadline gets any closer."
+      }
     },
     {
       "role": "Underwriting",
@@ -3285,7 +4051,18 @@
       "roleSlug": "underwriting",
       "moduleId": "m4",
       "moduleNumber": 4,
-      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+      "runbook": {
+        "steps": [
+          "In Claude Code, ask it to create a Skill folder — .claude/skills/underwriting-copy — with a SKILL.md that describes exactly when to use it: drafting sponsor spot copy.",
+          "Give it your actual rules: no call to action, no price or comparative claims, required sponsor identification, and your 15- and 30-second templates.",
+          "Add two or three approved past examples to the Skill folder so Claude has real copy to match the voice against.",
+          "Require every draft the Skill produces to close with a plain line stating it hasn't been cleared and needs human compliance review.",
+          "Test it: ask for copy for a new sponsor without naming the Skill, and confirm Claude pulled it in on its own.",
+          "Every time compliance catches something the Skill missed, add that exact example to the SKILL.md so it never slips through again."
+        ],
+        "verify": "Ask for sponsor copy without mentioning the Skill by name. If Claude doesn't apply the rules and templates on its own, the Skill's description isn't specific enough for Claude to find it — rewrite that description line."
+      }
     },
     {
       "role": "Music & Programming",
@@ -3298,7 +4075,18 @@
       "roleSlug": "music",
       "moduleId": "m4",
       "moduleNumber": 4,
-      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+      "runbook": {
+        "steps": [
+          "Connect the Google Workspace CLI to your Claude Code project so it can reach your Sheets and Drive.",
+          "Ask Claude to create a Skill — .claude/skills/show-prep — that reads today's row out of the music log Sheet and pulls the station's local-news doc from Drive.",
+          "Tell it the exact shape of the finished prep doc you want: headers, sections, links — not a raw markdown dump.",
+          "Have it write the result as an actual Google Doc, saved where the host already looks for it, not just a chat reply.",
+          "Run the Skill with one sentence and read the whole doc yourself before the host does.",
+          "Check every artist name, song title, and date against the source log — the Skill will get one wrong eventually."
+        ],
+        "verify": "Cross-check three random facts in the prep doc — an artist name, a date, a headline — against the actual Sheet and Drive doc. If any don't match, fix the Skill before the host reads it live."
+      }
     },
     {
       "role": "Grants & Compliance",
@@ -3311,7 +4099,18 @@
       "roleSlug": "grants",
       "moduleId": "m4",
       "moduleNumber": 4,
-      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+      "runbook": {
+        "steps": [
+          "Gather what the Skill will need: the actual CPB report questions, last year's submission, this year's supporting documents in Drive, and your station's standing service-area description.",
+          "Ask Claude to build a Skill — .claude/skills/lcsr-helper — that pulls those documents and drafts each narrative section with the source noted beside it.",
+          "Tell the Skill explicitly, in writing: never invent a number to fill a blank — leave it blank and flag it if the source isn't there.",
+          "Run the Skill and get a full draft of this year's report with every section sourced.",
+          "Trace every single number in the draft back to your own records, one at a time, before accepting it.",
+          "Edit the SKILL.md itself wherever this year's questions changed from last year's, so next year starts from the corrected version."
+        ],
+        "verify": "Pick five numbers at random from the draft and find each one in its cited source document. If even one doesn't match, or has no real source behind it, do not submit until you've traced every remaining figure by hand."
+      }
     },
     {
       "role": "Membership & Development",
@@ -3324,7 +4123,19 @@
       "roleSlug": "membership",
       "moduleId": "m4",
       "moduleNumber": 4,
-      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+      "runbook": {
+        "steps": [
+          "Before building anything, strip the results spreadsheet down to aggregates only — totals by day, by hour, by challenge grant, new vs. renewing counts — with no donor names, addresses, or giving histories in the file.",
+          "Put that stripped file in the folder Claude Code can see, and confirm the original donor-level export stays outside that folder entirely.",
+          "Ask Claude to build a Skill — .claude/skills/pledge-recap — that reads the aggregate Sheet and writes the board-ready narrative in your GM's preferred format.",
+          "Write the same rule into the SKILL.md itself: this Skill only ever reads aggregate totals, never a donor-level export.",
+          "Run the Skill and get the recap — what worked, what fell flat, how it compares to last spring.",
+          "Read the recap and confirm every figure is a total or a count, checked against the aggregate Sheet, before it goes to the board."
+        ],
+        "verify": "Open the aggregate file the Skill actually read and search it for an @ sign or anything that looks like a person's name. If either shows up, the file wasn't stripped — redo it before the Skill touches it again.",
+        "walkthroughSlug": "pledge-drive-readout"
+      }
     },
     {
       "role": "Traffic & Operations",
@@ -3337,7 +4148,18 @@
       "roleSlug": "traffic",
       "moduleId": "m4",
       "moduleNumber": 4,
-      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On"
+      "moduleTitle": "The AI Operating System — Wiring Claude Into the Tools Your Station Already Runs On",
+      "runbook": {
+        "steps": [
+          "Connect Gmail through Claude Code using an account that only has access to the info@ and news-tips inboxes you intend to triage — nothing broader.",
+          "Ask Claude to build a Skill that reads unread mail and sorts it into high / needs action / ignore, with a short brief for each — read-only, no labels applied, nothing deleted.",
+          "Run it against today's backlog and read the brief for every message it calls 'ignore,' not just the ones it flags as high.",
+          "Compare its calls against what you already know about real listener questions or story tips sitting in there.",
+          "Keep it in read-only mode and repeat this check across at least twenty runs before you trust its sorting.",
+          "Only after twenty clean runs, consider letting it apply labels — and never let it auto-archive or auto-reply on a public-facing account, even then."
+        ],
+        "verify": "Manually open every message the Skill marked 'ignore' at least once. If a real tip or donor question is sitting in that bucket, it isn't ready to act on its own yet — stay read-only."
+      }
     },
     {
       "role": "Traffic & Operations",
@@ -3350,7 +4172,20 @@
       "roleSlug": "traffic",
       "moduleId": "m5",
       "moduleNumber": 5,
-      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+      "runbook": {
+        "steps": [
+          "Sit down with your traffic person for 90 minutes, phone and distractions away, in a folder on your computer called station-work.",
+          "Open Claude Code in that folder and tell it: interview us about how the log actually gets built, one question at a time, and don't write anything until we say we're done.",
+          "Let it ask, and let the traffic person answer out loud — including the parts that feel too obvious to say, like why two sponsors never sit back to back.",
+          "When it guesses at a rule instead of asking, stop it and correct it on the spot — a plausible-sounding rule that isn't your rule is worse than no rule.",
+          "Have it write everything to a plain file called traffic-process.md: triggers, steps, judgment calls, exceptions.",
+          "Read the whole file out loud together and have the traffic person mark every line that isn't quite right.",
+          "Fix those lines, then have the traffic person sign and date the bottom of the file.",
+          "Only after it's signed off, ask what part of the written process — not the whole job — could actually be automated."
+        ],
+        "verify": "The traffic person reads the finished file start to finish and says, out loud, 'yes, that's how we do it' for every step. If there's one step they hesitate on, that step isn't done yet."
+      }
     },
     {
       "role": "Membership & Development",
@@ -3363,7 +4198,20 @@
       "roleSlug": "membership",
       "moduleId": "m5",
       "moduleNumber": 5,
-      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+      "runbook": {
+        "steps": [
+          "Before you open anything, agree with your team: this map describes what happens, in words — no donor names, addresses, giving history, or CRM exports ever go into Claude.",
+          "Open Claude Code in a folder on your machine called station-work.",
+          "List out loud every trigger that happens during a drive week: pitch block starts, a gift comes in, a thank-you goes out, a premium ships.",
+          "Ask Claude to help you mark which of those triggers happens most often, and where the backlog actually piles up.",
+          "Pick the single biggest clog and write down one plain-English number that would prove you fixed it, like 'thank-you turnaround drops from nine days to two.'",
+          "Have Claude write the clog, the number, and the trigger list to a file called drive-map.md — descriptions only, still no donor data.",
+          "Read the file back and confirm every line refers to a system or a step, never to a specific person's information.",
+          "Take that one file to leadership before anyone writes a line of code or buys a tool."
+        ],
+        "verify": "Search drive-map.md for an @ sign, a dollar amount, or a full name. If any of those show up, donor data leaked into the map and it needs to be rewritten in descriptions only."
+      }
     },
     {
       "role": "News",
@@ -3376,7 +4224,19 @@
       "roleSlug": "news",
       "moduleId": "m5",
       "moduleNumber": 5,
-      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+      "runbook": {
+        "steps": [
+          "Keep unverified claims and any source's identity out of anything you'll paste elsewhere later — the handoff note is a work summary, not a place to stash sensitive material.",
+          "At the end of each day's working session in Claude Code, before you close it, ask: write me a handoff — what we established, what's still unverified, which documents we've read, what to check next.",
+          "Read that handoff over and fix anything it got wrong or overstated — it will sound confident even about things that aren't confirmed.",
+          "Copy the handoff text somewhere safe, like a plain text file on your machine, not just left in the chat.",
+          "Run /clear to wipe the session — do this only after the handoff is safely copied out.",
+          "Paste the handoff into the fresh session as your first message the next day.",
+          "Before you write or air anything, check every claim in the handoff against the original document yourself."
+        ],
+        "verify": "Pick three claims from the handoff at random and find each one in the original council minutes, contract, or document. If you can't find one, that claim doesn't get used until you can."
+      }
     },
     {
       "role": "Grants & Compliance",
@@ -3389,7 +4249,19 @@
       "roleSlug": "grants",
       "moduleId": "m5",
       "moduleNumber": 5,
-      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+      "runbook": {
+        "steps": [
+          "Open Claude Code in a folder called station-work and keep it open the whole time you assemble this year's LCSR.",
+          "As you pull each figure, narrate it out loud into the chat: 'this number comes from the underwriting spreadsheet,' 'this narrative gets reviewed by the GM.'",
+          "As you decide what counts as a partnership or a program, say the reasoning behind that call too, not just the answer.",
+          "At the end, ask Claude to turn everything you narrated into a written process file called lcsr-process.md: where each figure comes from, who signs off, what counts as what.",
+          "Read it against what you actually did this year and correct anything it smoothed over or guessed at.",
+          "Save that file somewhere the next person assembling the LCSR will actually find it, not just in this year's folder.",
+          "Note in the file that CPB's current requirements still need to be confirmed fresh from CPB's published guidance every year — this file documents your station's process, not CPB's rules."
+        ],
+        "verify": "Hand lcsr-process.md to someone at the station who didn't help assemble this year's report and ask them to find where any one figure comes from. If they can't find it in the file, the file is missing a step."
+      }
     },
     {
       "role": "Leadership",
@@ -3402,7 +4274,19 @@
       "roleSlug": "leadership",
       "moduleId": "m5",
       "moduleNumber": 5,
-      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours"
+      "moduleTitle": "What the AI Can Hold in Its Head — and What Only Lives in Yours",
+      "runbook": {
+        "steps": [
+          "Get your department heads in a room for one afternoon, no vendors, no demos.",
+          "Ask each one the same question: if we got five times the volume tomorrow — five times the members, five times the story pitches, five times the underwriting inquiries — what breaks first in your department?",
+          "Write down every answer, in their words, without smoothing it into vendor-speak.",
+          "Open Claude Code afterward and have it help you organize those answers into a short list, one clog per department.",
+          "For each clog, agree on one plain number that would prove you'd fixed it — not a feeling, an actual measurable thing.",
+          "Rank the list so the biggest, most damaging clog is at the top.",
+          "Treat that ranked list as your actual AI roadmap for the year, and measure any tool pitch against it before you buy anything."
+        ],
+        "verify": "Read the top item on the list back to the department head who named it and ask, 'if we fixed only this and nothing else, would it matter?' If they hesitate, it isn't the real constraint — go back to the question."
+      }
     },
     {
       "role": "Underwriting",
@@ -3415,7 +4299,21 @@
       "roleSlug": "underwriting",
       "moduleId": "m6",
       "moduleNumber": 6,
-      "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+      "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+      "runbook": {
+        "steps": [
+          "Put your station's underwriting policy in a plain text or markdown file inside a project folder, plus the spot copy you're allowed to share.",
+          "In Claude Code, type /agents, choose Create new agent, then Project level, then Generate with Claude.",
+          "When it asks about tools, choose read-only — this sub-agent should never be able to write or send anything.",
+          "Describe the job in plain language: hunt for calls to action, price claims, and promotional language, and check the copy against your station's policy file, not a generic idea of the FCC rules.",
+          "Tell it what to hand back: a line-by-line list of the exact flagged phrase, why it's a problem, and a compliant rewrite, ending in a verdict of CLEAR, NEEDS EDIT, or REWRITE.",
+          "Tell it explicitly it must never say copy is approved — only a human clears copy for air.",
+          "Run it against a real piece of spot copy and read every line it flags before you touch anything.",
+          "Have a person accountable for the license make the actual clearance decision — the sub-agent's verdict is input, not sign-off."
+        ],
+        "verify": "Hand it copy you already know has a problem — a stray 'call today' or a 'best rates' claim — and confirm it actually gets flagged. If the sub-agent calls known-bad copy CLEAR, its description or policy file needs fixing before you trust it on real spots.",
+        "walkthroughSlug": "underwriting-red-team"
+      }
     },
     {
       "role": "News",
@@ -3428,7 +4326,19 @@
       "roleSlug": "news",
       "moduleId": "m6",
       "moduleNumber": 6,
-      "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+      "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+      "runbook": {
+        "steps": [
+          "Strip the pitch down to the question and the plan before it goes anywhere near Claude — no source names, no unpublished material, no tips from anyone who hasn't agreed to be identified.",
+          "In Claude Code, type /agents and create a new project-level sub-agent, read-only tools.",
+          "Describe its job as disagreeing on purpose: find the accountability question, the missing voice, what happens if the central document doesn't exist, and the cheaper version of the story.",
+          "Tell it explicitly not to be encouraging — its only job is to find the holes the room is too excited to see.",
+          "Hand it the stripped-down pitch and let it file its objections before your morning meeting.",
+          "Read every objection and decide, story by story, whether it's a real hole or a question you can already answer.",
+          "Bring the surviving pitches — and the holes the sub-agent found in the ones that didn't survive — into the room."
+        ],
+        "verify": "Pick a pitch everyone already loves and run it through the sub-agent first. If it comes back with zero objections on a story that hasn't been reported yet, the agent isn't actually pushing back — rewrite its description to be more adversarial."
+      }
     },
     {
       "role": "Music & Programming",
@@ -3441,7 +4351,19 @@
       "roleSlug": "music",
       "moduleId": "m6",
       "moduleNumber": 6,
-      "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+      "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+      "runbook": {
+        "steps": [
+          "Gather the forty submissions — bio, press notes, and links — into a folder called station-work.",
+          "In Claude Code, ask it to fan the batch out to sub-agents, one submission per sub-agent, since each one is independent and order doesn't matter.",
+          "Tell it what each brief should cover: who the artist is, where they're from, what it sounds like on paper, and whether they're actually local.",
+          "Run cheap sub-agents for this — it's bulk reading for a short summary, not work that needs your most expensive model.",
+          "Collect the forty one-paragraph briefs back in your main session.",
+          "Read the briefs yourself and sort them into a shortlist by what sounds most promising.",
+          "Listen to every track on the shortlist yourself before anything moves toward rotation."
+        ],
+        "verify": "Pick two or three submissions at random and read the original bio and press notes against the brief a sub-agent wrote. If the brief invents a fact that isn't in the source material, don't trust that brief's shortlist ranking without a second look."
+      }
     },
     {
       "role": "Membership & Development",
@@ -3454,7 +4376,19 @@
       "roleSlug": "membership",
       "moduleId": "m6",
       "moduleNumber": 6,
-      "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+      "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+      "runbook": {
+        "steps": [
+          "Confirm the plan document has no CRM export, donor names, giving history, or lapsed-donor lists in it — aggregate numbers you typed yourself are fine, a file pulled from the donor database is not.",
+          "In Claude Code, type /agents and create a project-level sub-agent with read-only tools, so it can't touch any file you didn't hand it.",
+          "Describe its job as playing devil's advocate on a spring drive plan: is the goal supported by last year's actual pace, does every premium tier make economic sense, is any ask doing double duty.",
+          "Hand it the plan document — goal, day parts, premium ladder, script themes.",
+          "Let it come back with a written teardown of where the plan doesn't hold up.",
+          "Go through the teardown with your team and decide, item by item, what's a real problem versus a thing you can defend.",
+          "Revise the plan document based only on what you've decided is a real problem."
+        ],
+        "verify": "Open the plan document you handed it and search for any donor name, dollar figure tied to a person, or giving history before you send it anywhere. If you find one, the plan document wasn't ready to hand to a sub-agent in the first place."
+      }
     },
     {
       "role": "Grants & Compliance",
@@ -3467,7 +4401,20 @@
       "roleSlug": "grants",
       "moduleId": "m6",
       "moduleNumber": 6,
-      "moduleTitle": "Delegation: Freelancers, and a Newsroom"
+      "moduleTitle": "Delegation: Freelancers, and a Newsroom",
+      "runbook": {
+        "steps": [
+          "Have your drafted LCSR narrative ready in a file, with every number in it already sourced back to your own records.",
+          "In Claude Code, turn on agent teams in settings if it isn't already on — this feature is experimental.",
+          "Say the words 'team create' out loud in your prompt — otherwise Claude will quietly hand you ordinary sub-agents instead of a team.",
+          "Give the team distinct seats: a skeptical grant reviewer, a community member who doesn't already listen to your station, your GM, and a station down the road doing this well.",
+          "Hand the team your narrative and let them debate it across a couple of rounds until they reach a consensus.",
+          "Read back what they agreed was persuasive and what they agreed was filler.",
+          "Revise the narrative using their consensus, but verify every number in the revised version against your own records yourself.",
+          "Watch your usage as you go — a team that talks to itself for multiple rounds spends against your five-hour session limit fast."
+        ],
+        "verify": "Take every statistic the team's consensus praised as persuasive and trace it back to your own records by hand. An agent team will reach a confident consensus about a number it invented just as easily as one that's real."
+      }
     },
     {
       "role": "Membership & Development",
@@ -3480,7 +4427,19 @@
       "roleSlug": "membership",
       "moduleId": "m7",
       "moduleNumber": 7,
-      "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+      "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+      "runbook": {
+        "steps": [
+          "Make a project folder on your computer, and inside it a folder called brand_assets — drop in your logo and anything showing your colors and fonts.",
+          "Open Claude Code in that project folder and describe the page in one sentence: a hero, a case-for-support section, thank-you gifts, a progress thermometer, and a big donate button — tell it to match brand_assets exactly.",
+          "Tell it the donate button must only point to your station's existing donation platform — it must never build a form that collects a name, email, or card number.",
+          "Have it check its own work in a phone-width browser view and fix anything that looks off, twice, before it shows you anything.",
+          "Review the local preview on your own machine — this step is private, nothing is public yet.",
+          "Once you approve it, have it push the files to GitHub (an online backup that keeps every version of your project) and import that into Vercel (the service that turns those files into a live web address).",
+          "Click the donate button on the live page all the way through to confirm it lands on your real donation form."
+        ],
+        "verify": "Click the donate button on the live page and confirm it lands on your station's actual donation form — not a page Claude built that asks for a name, email, or card number."
+      }
     },
     {
       "role": "News",
@@ -3493,7 +4452,19 @@
       "roleSlug": "news",
       "moduleId": "m7",
       "moduleNumber": 7,
-      "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+      "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+      "runbook": {
+        "steps": [
+          "Gather each candidate's questionnaire responses as separate files, one per candidate, with the race clearly labeled.",
+          "Open Claude Code in a folder with all the files and ask for a clean, searchable page — one card per race, candidates side by side, built for a phone screen first.",
+          "Tell it to use each candidate's own words only — it formats the responses, it never paraphrases or summarizes a position.",
+          "Have it check the page at phone width and fix anything illegible before it shows you the result.",
+          "Have an editor read every single card against the original questionnaire, word for word.",
+          "Fix any mismatches, then have Claude push the files to GitHub and import them into Vercel — the service that turns the project into a live web address — so it's live.",
+          "Do one more read of the live page before you share the link publicly."
+        ],
+        "verify": "Have an editor compare every published card, word for word, against the original questionnaire — if even one phrase doesn't match, pull the page down until it's fixed."
+      }
     },
     {
       "role": "Music & Programming",
@@ -3506,7 +4477,19 @@
       "roleSlug": "music",
       "moduleId": "m7",
       "moduleNumber": 7,
-      "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+      "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+      "runbook": {
+        "steps": [
+          "Find a music site whose layout you like and take a full-page screenshot of it.",
+          "Open Claude Code in a project folder and hand it that screenshot plus your artists' photos, bios, and show dates.",
+          "Ask it to rebuild that layout's structure using your brand colors, logo, and your artists instead of the original site's content.",
+          "Tell it to embed each track through Bandcamp, Spotify, or the artist's own player — it must never host or serve an audio file directly.",
+          "Optionally, pull a nicer card design or hover effect from a component library like 21st.dev and ask Claude to work it into the page.",
+          "Have it check the page at phone width and fix anything that looks wrong before it shows you the result.",
+          "Push the files to GitHub and import them into Vercel, and confirm the page is live at a real web address."
+        ],
+        "verify": "Play every embedded track on the live page — if any artist's track doesn't load through their own streaming platform, the embed is broken or hosted the wrong way."
+      }
     },
     {
       "role": "Leadership",
@@ -3519,7 +4502,18 @@
       "roleSlug": "leadership",
       "moduleId": "m7",
       "moduleNumber": 7,
-      "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+      "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+      "runbook": {
+        "steps": [
+          "List every department's automation request on one page, one line each.",
+          "For each request, ask which of the four levels it actually is: a chatbot you trigger yourself, a plain no-AI workflow, a fixed AI workflow, or a full agent.",
+          "For anything that looks like an agent, ask whether a fixed AI workflow could do the same job — if it can, approve the lower level, not the agent.",
+          "For anything touching donor records, member data, or anything publishable, require it stay at chatbot level — human-triggered, human-reviewed — until proven otherwise.",
+          "Write your decision and the level for each request in one shared document leadership can point back to.",
+          "Require any approved AI workflow or agent to be run against a set of known test cases and pass before it goes live."
+        ],
+        "verify": "Pick one approved automation and ask its owner to list every tool it can actually touch — if that list includes anything the task doesn't need (sending, deleting, publishing), send it back before it launches."
+      }
     },
     {
       "role": "Digital & Audience",
@@ -3532,7 +4526,19 @@
       "roleSlug": "digital",
       "moduleId": "m7",
       "moduleNumber": 7,
-      "moduleTitle": "Build It, Ship It, and Know When to Trust It"
+      "moduleTitle": "Build It, Ship It, and Know When to Trust It",
+      "runbook": {
+        "steps": [
+          "List every AI automation currently running at your station, including any nobody remembers setting up.",
+          "For each one, list every tool it can actually reach — not what its instructions say, what it is physically able to do: send, delete, post, read.",
+          "Strip out every tool it doesn't need for its actual job, especially any send, delete, or publish access it isn't using.",
+          "For anything that can reach your CRM, your website, or your listener email list, add a hard restriction at the tool level — not just a written instruction telling it not to.",
+          "Ask Claude to help you list the edge cases each automation could hit and what a safe failure looks like for each one.",
+          "Check each automation's actual output from the last two weeks against what it's supposed to be doing.",
+          "Put a date on the calendar to repeat this whole check, so a new automation can't quietly reappear unwatched."
+        ],
+        "verify": "For each automation, look at the tools it still has and try to name one bad real-world action it could take with each — if you can name one, remove that tool now, don't wait for it to happen."
+      }
     },
     {
       "role": "Engineering / IT",
@@ -3545,7 +4551,19 @@
       "roleSlug": "engineering",
       "moduleId": "m8",
       "moduleNumber": 8,
-      "moduleTitle": "The Station's Second Brain"
+      "moduleTitle": "The Station's Second Brain",
+      "runbook": {
+        "steps": [
+          "Before you start, tell Claude: never write down access codes, alarm passwords, or EAS credentials — write \"stored in the station password manager\" instead and move on.",
+          "Open Claude Code with the grill-me skill (a set of instructions that has it interview someone, one question at a time, and save every answer as it goes) and sit down with your chief engineer.",
+          "Ask Claude to grill him about the transmitter site — every routine, every failure mode, every workaround.",
+          "Let Claude checkpoint each answer to a document as you go, so nothing is lost even in a two-hour session.",
+          "When Claude flags a question he can't answer, write down who else on staff might know it.",
+          "Read the finished document together and correct anything Claude got wrong or garbled.",
+          "Save it into your station's second brain folder as the engineering runbook, and point to it from CLAUDE.md — the file Claude reads first, that tells it where things live."
+        ],
+        "verify": "Search the finished document for anything that looks like a code or password — if you find one, delete it and replace it with \"stored in the password manager.\""
+      }
     },
     {
       "role": "Membership & Development",
@@ -3558,7 +4576,19 @@
       "roleSlug": "membership",
       "moduleId": "m8",
       "moduleNumber": 8,
-      "moduleTitle": "The Station's Second Brain"
+      "moduleTitle": "The Station's Second Brain",
+      "runbook": {
+        "steps": [
+          "Export only aggregate numbers — dollars and counts per hour — from each drive; never export donor names, addresses, giving histories, or a CRM record.",
+          "Put those exports, along with past drive scripts and post-drive recaps, into a folder called raw.",
+          "Open Claude Code in that folder and ask it to read everything and write it back out as a linked set of notes in a wiki folder, with an index.",
+          "Check the index and a few notes to confirm nothing beyond aggregate numbers made it in.",
+          "Ask your real question — for example, \"what pitch language preceded our best sustainer hours across the last five drives?\" — and let Claude answer from the index and its links.",
+          "Check the answer against the original scripts and recaps before you use it in planning.",
+          "Add each new drive's results and recap into raw after the drive, so the wiki keeps growing."
+        ],
+        "verify": "Search every file in raw for an @ sign, a name next to a dollar amount, or anything that looks like a donor record — if you find one, pull that file out before Claude ever reads the folder."
+      }
     },
     {
       "role": "Music & Programming",
@@ -3571,7 +4601,19 @@
       "roleSlug": "music",
       "moduleId": "m8",
       "moduleNumber": 8,
-      "moduleTitle": "The Station's Second Brain"
+      "moduleTitle": "The Station's Second Brain",
+      "runbook": {
+        "steps": [
+          "Open Claude Code with the grill-me skill and sit down with your music director.",
+          "Ask Claude to grill her about the rotation logic — separation rules, how local music gets added, drive-time restrictions, how a track graduates or gets rested — one question at a time.",
+          "Let Claude checkpoint every answer to a document as you go.",
+          "Have her review the finished document and correct anything Claude oversimplified or got wrong.",
+          "Save the document as the music section of your station's second brain, and add your local-music library notes alongside it.",
+          "Update CLAUDE.md so it points to this file whenever someone asks a rotation question.",
+          "Tell your team the AI documents the reasoning only — the MD still makes every call, and SoundExchange and PRO reporting stay a verified human process."
+        ],
+        "verify": "Give the finished document to a fill-in host and ask her to answer \"why can't these two tracks air in the same hour\" using only the document — if she can't answer it from the file, the logic isn't actually written down yet."
+      }
     },
     {
       "role": "Grants & Compliance",
@@ -3584,7 +4626,19 @@
       "roleSlug": "grants",
       "moduleId": "m8",
       "moduleNumber": 8,
-      "moduleTitle": "The Station's Second Brain"
+      "moduleTitle": "The Station's Second Brain",
+      "runbook": {
+        "steps": [
+          "Gather past grant applications, CPB reports, community partner lists, and board minutes into a folder called raw.",
+          "Open Claude Code in that folder and ask it to organize everything into linked notes — partners, initiatives, outcomes — with an index, in a wiki folder.",
+          "When the next report opens, ask Claude to assemble the source material for each section, with a link back to the original document for every claim.",
+          "Read every claim and every number in the draft against its linked source document.",
+          "Fix anything unverified or unsourced before it goes into the draft you'll submit.",
+          "Have a second person check the final draft against the wiki's links before submission.",
+          "Add this year's finished report back into raw so next year's wiki starts fuller."
+        ],
+        "verify": "Pick five sentences at random from the drafted report and follow each one's link back to its source document — if any of the five doesn't check out, stop and re-verify the whole section."
+      }
     },
     {
       "role": "Leadership",
@@ -3597,7 +4651,19 @@
       "roleSlug": "leadership",
       "moduleId": "m8",
       "moduleNumber": 8,
-      "moduleTitle": "The Station's Second Brain"
+      "moduleTitle": "The Station's Second Brain",
+      "runbook": {
+        "steps": [
+          "List the documents your station actually has that matter for institutional knowledge.",
+          "Before buying anything, ask whether a CLAUDE.md and a few plain folders (level 1) already answer most of your team's questions.",
+          "If that's not enough, try dropping the documents into a raw folder and asking Claude to build a wiki (level 2) — no vendor, no database, no subscription.",
+          "Only consider semantic search, a knowledge graph, or an always-on platform if you can name the specific pain level 1 or 2 didn't solve.",
+          "Whatever you build, keep it as plain files you own, not a vendor's proprietary format.",
+          "Name one person as the owner of the brain and set a date for when it gets reviewed and refreshed.",
+          "Bring the vendor's pitch back only if your own level-1 or level-2 attempt genuinely fails at something specific."
+        ],
+        "verify": "Ask three staff members to find last year's pledge drive script or the underwriting compliance rule using only what you built — if any of them can't find it in under a minute, the level you're at isn't solving the pain yet."
+      }
     },
     {
       "role": "News",
@@ -3610,7 +4676,19 @@
       "roleSlug": "news",
       "moduleId": "m9",
       "moduleNumber": 9,
-      "moduleTitle": "Work That Happens While You Sleep"
+      "moduleTitle": "Work That Happens While You Sleep",
+      "runbook": {
+        "steps": [
+          "Before scheduling anything, run it by hand once in a normal Claude Code chat: give it the real URLs for your city council agenda page, the county board page, and two or three local news sites, and ask it to write today's brief.",
+          "Look at what came back — which sources it actually reached, which ones it couldn't, and where it guessed instead of saying a source failed.",
+          "Rewrite the prompt so nothing is left for it to guess: name every source URL, say exactly what should be in the brief, and say what to do if a site won't load — nobody will be there to answer questions at 5:30am.",
+          "Turn that tested prompt into a scheduled routine — a saved prompt Claude runs on its own, on Anthropic's servers, timed to finish before the morning news meeting.",
+          "Point the routine at an internal newsroom channel only. Never let it post to anything public-facing.",
+          "Put any API keys the routine needs into the routine's own settings, not a file on your computer — it runs on separate servers that can't see your machine.",
+          "Let it run for a few mornings unattended, and read every brief yourself before the newsroom does."
+        ],
+        "verify": "Pick one flagged lead from the brief and open the actual agenda page or article it points to. If the link is dead, the date is wrong, or the item isn't really there, don't trust that morning's brief until you find out why."
+      }
     },
     {
       "role": "Underwriting",
@@ -3623,7 +4701,19 @@
       "roleSlug": "underwriting",
       "moduleId": "m9",
       "moduleNumber": 9,
-      "moduleTitle": "Work That Happens While You Sleep"
+      "moduleTitle": "Work That Happens While You Sleep",
+      "runbook": {
+        "steps": [
+          "Decide first whether this even needs an AI agent — checking business listings and formatting a list is a straight-line job, so a plain scheduled script may do the whole thing for less money and less risk.",
+          "If you do want Claude Code involved, test it by hand first: point it at the city or county new-business license page and the local business journal, and ask for a draft prospect list.",
+          "Ask it to rank the list and format each entry the same way: business name, what they do, public contact info if available, and why they might fit as an underwriter.",
+          "Keep current underwriters and their rates completely out of the prompt — that information has no reason to be typed in at all.",
+          "Turn the tested prompt into a routine scheduled for Monday mornings, writing into the underwriting team's shared document only.",
+          "Put any API keys the routine needs into the routine's own settings, not a file on your computer.",
+          "Treat the weekly list as leads for a human to review, never as something that emails or contacts a prospect on its own."
+        ],
+        "verify": "Look up the top-ranked business on the list yourself — it should be a real, currently open business at the address given. If it's closed, isn't real, or the contact info is wrong, the routine is reading stale or bad pages and needs fixing before you trust the rest."
+      }
     },
     {
       "role": "Grants & Compliance",
@@ -3636,7 +4726,19 @@
       "roleSlug": "grants",
       "moduleId": "m9",
       "moduleNumber": 9,
-      "moduleTitle": "Work That Happens While You Sleep"
+      "moduleTitle": "Work That Happens While You Sleep",
+      "runbook": {
+        "steps": [
+          "List the exact funders to watch, with real web addresses for each — Grants.gov, CPB, NEA, your state arts board, and the specific community foundations you actually apply to.",
+          "Test it by hand once: ask Claude Code to check those sources today and draft the one-page radar — new opportunities, one line on eligibility, deadline, and a countdown on anything already tracked.",
+          "Tell it plainly what to do when a site won't load or a deadline isn't clearly posted: flag it as unclear, never guess.",
+          "Turn the tested prompt into a routine that runs weekly, with the radar emailed to the development director only.",
+          "Put any login or API keys the routine needs into the routine's own settings, not a file on your computer.",
+          "Before anyone acts on a deadline in the radar, open the actual RFP document yourself and confirm the date and eligibility line.",
+          "Review the radar every week it arrives — a missed week doesn't get skipped and caught up later."
+        ],
+        "verify": "Pick one deadline from this week's radar and open the source RFP PDF directly. The date and eligibility line must match exactly — a hallucinated deadline that costs you a submission is the one failure this can't survive."
+      }
     },
     {
       "role": "Music & Programming",
@@ -3649,7 +4751,19 @@
       "roleSlug": "music",
       "moduleId": "m9",
       "moduleNumber": 9,
-      "moduleTitle": "Work That Happens While You Sleep"
+      "moduleTitle": "Work That Happens While You Sleep",
+      "runbook": {
+        "steps": [
+          "Build your local artist list and your venue calendar links by hand first — the routine can only scan what you actually point it at.",
+          "Test it manually in Claude Code before scheduling anything: ask it to check new releases from your list, venue calendars for the next two weeks, and local music press, and write the meeting prep doc.",
+          "Tell it clearly that it only gathers and flags — it never recommends what should get added, that's the music director's call in the meeting.",
+          "Once a manual run looks right, turn it into a Monday-night routine that writes into the same shared file the music director opens Tuesday morning.",
+          "Keep the output to links and short context only — new releases, who's touring through, anything with a hook — with no ranking of what should be added.",
+          "Every Tuesday, make sure a human actually listens to anything before it goes into rotation — nothing gets added on the routine's say-so."
+        ],
+        "verify": "Open two or three links from Tuesday's prep doc — they should land on the real release or the real calendar listing, not a paraphrase of one. If a link doesn't resolve to the actual source, don't trust that entry going into the meeting.",
+        "walkthroughSlug": "music-adds-prep"
+      }
     },
     {
       "role": "Membership & Development",
@@ -3662,7 +4776,18 @@
       "roleSlug": "membership",
       "moduleId": "m9",
       "moduleNumber": 9,
-      "moduleTitle": "Work That Happens While You Sleep"
+      "moduleTitle": "Work That Happens While You Sleep",
+      "runbook": {
+        "steps": [
+          "Export your CRM data and immediately strip it down to aggregate counts and cohorts only — no names, no emails, no addresses, no gift amounts tied to a person.",
+          "Save that stripped, aggregate-only file in a folder on your own machine. This job never goes near a cloud routine — a routine runs on someone else's servers, and it can only be trusted with what you're willing to upload.",
+          "Set up a local scheduled task on a station computer, not a cloud routine, to run the aggregation on a monthly schedule.",
+          "Ask Claude Code to summarize only the aggregate counts and cohort trends into a plain-English brief — never the underlying export.",
+          "Read the draft brief yourself and confirm every number in it traces back to the aggregate file, not to anything more detailed.",
+          "Only after your review does the brief go to leadership."
+        ],
+        "verify": "Open the aggregate file the brief was built from and search it for an @ sign or anything that looks like a name. If anything personally identifying survived the strip, stop and fix the export before this runs again."
+      }
     },
     {
       "role": "Leadership",
@@ -3675,7 +4800,19 @@
       "roleSlug": "leadership",
       "moduleId": "m10",
       "moduleNumber": 10,
-      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+      "runbook": {
+        "steps": [
+          "Open a fresh scratch session in Claude Code — one that never had financials, donor data, or unaired reporting anywhere on screen.",
+          "In that session, run /context and read what it shows — how many tokens you're already spending before typing a word, broken down by system, tools, and memory.",
+          "Run /cost to see actual token usage and estimated spend for the session so far.",
+          "Do a few minutes of ordinary back-and-forth work, then run /cost again to see what a cache read costs compared to a fresh message.",
+          "Take screenshots of both /cost and /context, from this scratch session only.",
+          "Turn the screenshots into a one-page briefing: what a typical session costs, and how cache reads — about 10% the price of a fresh read — change the total.",
+          "Frame the recommendation for your GM as a habits story, not a licensing story: a disciplined user gets far more work per dollar than someone who isn't."
+        ],
+        "verify": "Before sending the screenshots anywhere, look at every line on screen for a name, dollar figure, or story detail that shouldn't leave the building. If you see any, the screenshot came from the wrong session — start over in a clean one."
+      }
     },
     {
       "role": "News",
@@ -3688,7 +4825,19 @@
       "roleSlug": "news",
       "moduleId": "m10",
       "moduleNumber": 10,
-      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+      "runbook": {
+        "steps": [
+          "Before opening anything in Claude Code, decide what's actually safe to upload — confidential source material and anything under embargo does not go into a cloud tool at all, full stop.",
+          "Work the cleared records in one continuous session rather than restarting — the cache only pays off if you stay in it.",
+          "Pick one model for the whole session and don't switch mid-stream — switching models re-reads the entire conversation from the beginning with no savings.",
+          "Keep working through the afternoon, batching related questions into one message instead of scattering them across many.",
+          "Around 60% of the way through the session's context, ask Claude to summarize the findings so far, the files touched, and the open questions.",
+          "Run /clear, then paste that summary back in to keep going in a small, cheap, fresh context.",
+          "Do the same handoff any time you're stepping away for a long stretch, so you come back to a small context instead of a stale one that re-reads everything at full price."
+        ],
+        "verify": "Read the handoff summary before you /clear — every finding, file, and open question from the session so far needs to be in it. If something's missing, the next stretch of work starts blind, not just cheap."
+      }
     },
     {
       "role": "Membership & Development",
@@ -3701,7 +4850,18 @@
       "roleSlug": "membership",
       "moduleId": "m10",
       "moduleNumber": 10,
-      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+      "runbook": {
+        "steps": [
+          "Before writing a single prompt, set the rule for the whole drive: no donor names, giving history, or CRM exports ever go in — describe audiences only in aggregate terms, like 'sustainers who gave under $10 a month'.",
+          "Put the drive's tone, rules, and that data rule into a short CLAUDE.md file so it's cached and read automatically instead of retyped every time.",
+          "Batch your requests — ask for all the script variants you need in one message instead of three separate rounds.",
+          "Schedule the heavy generation sessions for afternoons, evenings, or weekends — the five-hour session window drains faster during weekday peak hours, 8am to 2pm Eastern.",
+          "Stay in one session for the whole batch instead of starting fresh each time, so the cache keeps paying off.",
+          "Have a person review every script variant against the data rule before it airs, confirming no real donor detail slipped in."
+        ],
+        "verify": "Search every generated script for a real name, dollar amount, or specific giving detail. If anything beyond an aggregate description shows up, that script gets rewritten before it airs."
+      }
     },
     {
       "role": "Digital & Audience",
@@ -3714,7 +4874,18 @@
       "roleSlug": "digital",
       "moduleId": "m10",
       "moduleNumber": 10,
-      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+      "runbook": {
+        "steps": [
+          "Open a brand-new Claude Code session and run /context before typing anything else, to see your starting overhead — system prompt, tools, agents, skills, and memory all cost tokens before you've said a word.",
+          "Run /mcp to see every MCP server currently connected to this session.",
+          "For each one, check who else on staff actually relies on it before touching anything — a shared connection someone else needs isn't yours to cut alone.",
+          "Disconnect the servers you don't need for this session — a single server can cost around 18,000 tokens on every message you send.",
+          "Run /context again and compare the new number to what you started with.",
+          "Write down what you turned off and why, so it can be turned back on the moment someone needs it."
+        ],
+        "verify": "Compare the two /context readings — the number should drop noticeably after disconnecting. If it barely moves, the servers you disconnected weren't the ones costing you."
+      }
     },
     {
       "role": "Grants & Compliance",
@@ -3727,7 +4898,18 @@
       "roleSlug": "grants",
       "moduleId": "m10",
       "moduleNumber": 10,
-      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits"
+      "moduleTitle": "What This Actually Costs — Tokens, Caching, and Session Limits",
+      "runbook": {
+        "steps": [
+          "Pick one model for the whole LCSR session before you start writing, and leave 'opus plan' mode off — every model switch, including that toggle, re-reads the entire conversation from scratch with no cache savings.",
+          "Draft the narrative in that one session, working section by section rather than restarting for each part.",
+          "If you need to change instructions or tone partway through, edit CLAUDE.md instead of switching models — that edit doesn't break the cache, it just takes effect on your next session.",
+          "Keep the growing draft in the same session as long as it stays workable, so the cache keeps paying off on a long document.",
+          "Once the draft narrative is complete, go through it line by line against your actual station records — every number needs a human to verify it.",
+          "File with CPB only after that verification is done."
+        ],
+        "verify": "Pick five numbers at random from the finished narrative and trace each one back to the actual station record it came from. If even one doesn't match, the draft isn't ready to file."
+      }
     }
   ]
 }

@@ -39,7 +39,10 @@ const Callout: R<{ tone: "note" | "warning" | "guardrail"; title: string; text: 
   const { Icon } = cfg;
   const onDark = props.tone === "guardrail";
   return (
-    <div className="retro-box p-3 sm:p-4" style={{ background: cfg.bg, color: onDark ? "#fff" : "#000" }}>
+    <div
+      className="retro-box p-3 sm:p-4"
+      style={{ background: cfg.bg, color: onDark ? "var(--destructive-foreground)" : "#000" }}
+    >
       <div className="flex items-start gap-2.5">
         <Icon className="mt-0.5 size-5 shrink-0" aria-hidden />
         <div className="min-w-0">

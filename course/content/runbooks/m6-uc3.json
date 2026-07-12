@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Gather the forty submissions — bio, press notes, and links — into a folder called station-work.",
+    "In Claude Code, ask it to fan the batch out to sub-agents, one submission per sub-agent, since each one is independent and order doesn't matter.",
+    "Tell it what each brief should cover: who the artist is, where they're from, what it sounds like on paper, and whether they're actually local.",
+    "Run cheap sub-agents for this — it's bulk reading for a short summary, not work that needs your most expensive model.",
+    "Collect the forty one-paragraph briefs back in your main session.",
+    "Read the briefs yourself and sort them into a shortlist by what sounds most promising.",
+    "Listen to every track on the shortlist yourself before anything moves toward rotation."
+  ],
+  "verify": "Pick two or three submissions at random and read the original bio and press notes against the brief a sub-agent wrote. If the brief invents a fact that isn't in the source material, don't trust that brief's shortlist ranking without a second look."
+}

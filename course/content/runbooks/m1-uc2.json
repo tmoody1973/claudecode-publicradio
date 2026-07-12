@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Gather only past pitch scripts, your goal sheet, and notes on what worked or flopped — leave out anything with a donor's name, email, address, or CRM export.",
+    "Put those files in one folder on your computer, named something like \"drive-context.\"",
+    "Open Claude Code and point it at that folder.",
+    "Ask it to read everything and tell you back, in its own words, what your station's pitch voice sounds like and what's worked before.",
+    "Ask it to draft this year's pitch scripts in that voice, aimed at the goals on your goal sheet.",
+    "Read every draft, mark up what's off, and tell Claude Code why — not just what — you changed it.",
+    "Ask for one more pass using your corrections before you call any script final."
+  ],
+  "verify": "Open the drive-context folder yourself and search it for anything that looks like a donor name, email, or CRM export — if you find one, delete it and start the folder over before Claude Code ever reads it."
+}

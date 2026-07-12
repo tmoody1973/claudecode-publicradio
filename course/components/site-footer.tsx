@@ -27,6 +27,7 @@ export function SiteFooter() {
         <nav className="flex flex-wrap gap-2 pt-2" aria-label="Footer">
           {[
             { href: "/guide", label: "Start here" },
+            { href: "/walkthroughs", label: "Walkthroughs" },
             { href: "/modules", label: "Modules" },
             { href: "/use-cases", label: "Use cases" },
             { href: "/cost", label: "What it costs" },

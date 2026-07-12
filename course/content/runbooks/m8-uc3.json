@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Open Claude Code with the grill-me skill and sit down with your music director.",
+    "Ask Claude to grill her about the rotation logic \u2014 separation rules, how local music gets added, drive-time restrictions, how a track graduates or gets rested \u2014 one question at a time.",
+    "Let Claude checkpoint every answer to a document as you go.",
+    "Have her review the finished document and correct anything Claude oversimplified or got wrong.",
+    "Save the document as the music section of your station's second brain, and add your local-music library notes alongside it.",
+    "Update CLAUDE.md so it points to this file whenever someone asks a rotation question.",
+    "Tell your team the AI documents the reasoning only \u2014 the MD still makes every call, and SoundExchange and PRO reporting stay a verified human process."
+  ],
+  "verify": "Give the finished document to a fill-in host and ask her to answer \"why can't these two tracks air in the same hour\" using only the document \u2014 if she can't answer it from the file, the logic isn't actually written down yet."
+}

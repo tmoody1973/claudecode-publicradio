@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "Have your drafted LCSR narrative ready in a file, with every number in it already sourced back to your own records.",
+    "In Claude Code, turn on agent teams in settings if it isn't already on — this feature is experimental.",
+    "Say the words 'team create' out loud in your prompt — otherwise Claude will quietly hand you ordinary sub-agents instead of a team.",
+    "Give the team distinct seats: a skeptical grant reviewer, a community member who doesn't already listen to your station, your GM, and a station down the road doing this well.",
+    "Hand the team your narrative and let them debate it across a couple of rounds until they reach a consensus.",
+    "Read back what they agreed was persuasive and what they agreed was filler.",
+    "Revise the narrative using their consensus, but verify every number in the revised version against your own records yourself.",
+    "Watch your usage as you go — a team that talks to itself for multiple rounds spends against your five-hour session limit fast."
+  ],
+  "verify": "Take every statistic the team's consensus praised as persuasive and trace it back to your own records by hand. An agent team will reach a confident consensus about a number it invented just as easily as one that's real."
+}

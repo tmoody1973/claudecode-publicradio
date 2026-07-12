@@ -1,0 +1,73 @@
+{
+  "id": "w-underwriting-red-team",
+  "slug": "underwriting-red-team",
+  "tier": "flagship",
+  "title": "Red-team underwriting copy before it airs",
+  "kicker": "It flags. A human accountable for the license still signs off.",
+  "roleSlug": "underwriting",
+  "moduleNumber": 6,
+  "estMinutes": 25,
+  "youWillNeed": [
+    "Claude Code installed and signed in (do the 30-minute walkthrough first if not)",
+    "A folder on your machine called station-work",
+    "The practice file below — do NOT use real sponsor copy while you're learning",
+    "Your station's actual underwriting rules, if they differ from the plain FCC ones used here"
+  ],
+  "guardrail": "The red-team flags, it does not approve. Nothing airs on Claude's say-so — a human who is accountable for the license reviews and signs off on every spot, every time.",
+  "sampleData": {
+    "filename": "underwriting-copy-SYNTHETIC.csv",
+    "description": "Four fake draft spots waiting to clear. Two of them are written to deliberately break the rules — a call to action, a price claim, and a comparative claim — so you can see what a failure actually looks like.",
+    "rows": 4,
+    "columns": ["client", "spot_id", "length_sec", "draft_copy", "flight_start", "flight_end"],
+    "downloadPath": "/samples/underwriting-copy-SYNTHETIC.csv",
+    "synthetic": true
+  },
+  "steps": [
+    {
+      "n": 1,
+      "title": "Name the rules, then ask for a pass/fail on each spot",
+      "do": "Give Claude the three rules explicitly and ask it to go spot by spot, quoting the exact problem phrase whenever a spot fails.",
+      "prompt": "There is one spreadsheet in this folder with draft underwriting copy waiting to clear. Read it, then go through each spot one at a time and red-team it against our station policy: no calls to action, no price claims, no qualitative or comparative claims (like 'the best' or 'unbeatable'). For each spot tell me clearly whether it passes or fails, and quote the exact phrase that's the problem if it fails.",
+      "youWillSee": "Claude will ask your permission to read the file. Say yes. It will then go spot by spot — four of them in this recording — naming PASS or FAILS for each one, and quoting the exact phrase that broke a rule.",
+      "sessionTurn": 1
+    },
+    {
+      "n": 2,
+      "title": "Check its reasoning, not just its verdict",
+      "do": "Read why it passed or failed each spot, not just the verdict. A red-team tool that can't explain itself isn't one you can trust with the next spot.",
+      "youWillSee": "In this recording, two of the four spots failed outright — one broke all three rules in a single sentence, one broke two of them. The other two passed, and Claude pointed out they share the same safe pattern: name the sponsor, describe them factually, give a location, done.",
+      "note": "Notice it also flagged a borderline case — a spot with no dollar figure but language ('rates') close enough to a price claim that it recommended avoiding it anyway. That kind of judgment call is exactly what you're checking, not rubber-stamping."
+    },
+    {
+      "n": 3,
+      "title": "Send failures back for a human rewrite",
+      "do": "Anything flagged FAILS goes back to the sponsor or gets rewritten by a person — never auto-fixed and aired without a second human look.",
+      "youWillSee": "If you ask, Claude can draft a compliant rewrite using the passing spots as a template — but that draft is a starting point for your review, not a finished, approved spot.",
+      "note": "The guardrail again, because it's worth repeating: Claude flags, a human accountable for the license approves."
+    }
+  ],
+  "verify": [
+    {
+      "check": "Re-read the two 'FAILS' spots yourself and confirm the quoted phrase is actually what's broken.",
+      "why": "If Claude quotes the wrong phrase, or misses a violation, you need to know before you send it back to a sponsor as an official rejection.",
+      "ifWrong": "Point it out directly: 'That's not the problem phrase — the actual issue is ___.' Ask it to redo that one spot."
+    },
+    {
+      "check": "Confirm the two 'PASSES' spots against your station's actual underwriting policy, not just the three rules used here.",
+      "why": "This walkthrough only tests three plain rules. Your station may have additional restrictions Claude wasn't told about.",
+      "ifWrong": "Give it your station's real policy document and ask it to re-check the passing spots against that instead."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "symptom": "It passes a spot that you think should fail.",
+      "cause": "The rule it was told to check may be narrower than the rule you actually meant.",
+      "fix": "Quote the exact language you're worried about and ask: 'Does this count as a call to action / price claim / comparative claim, and why or why not?'"
+    },
+    {
+      "symptom": "It offers to just fix the copy instead of only red-teaming it.",
+      "cause": "This is a normal, helpful next step, but it can blur the line between 'flagging a problem' and 'approving a fix.'",
+      "fix": "Say explicitly: 'Don't fix it yet — I just need the pass/fail list first.' Ask for a rewrite as a separate, later step."
+    }
+  ]
+}

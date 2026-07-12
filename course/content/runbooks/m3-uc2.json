@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Open Claude Code in your newsroom project folder and ask it to create (or open) CLAUDE.md, with this as the very first rule: never accept unpublished investigative material or confidential source identities, in any form.",
+    "Tell Claude your house style — how you refer to the mayor's office, which sources need a second confirmation, banned words like 'slammed' — and have it write those rules into CLAUDE.md underneath.",
+    "Ask Claude to read the file back to you and confirm the no-go rule is still the first thing anyone sees when it opens the file.",
+    "Use Claude Code normally on a story that has no unpublished material or source names anywhere near it.",
+    "The next time an output comes back wrong — wrong style, wrong assumption — tell Claude to update CLAUDE.md itself so it doesn't repeat that mistake.",
+    "Ask it to show you exactly what changed in the file before you move on to the next story."
+  ],
+  "verify": "Open CLAUDE.md and check that the unpublished-material rule is still the first rule in the file. If a later edit pushed it down or dropped it, put it back at the top before anyone uses this folder again."
+}

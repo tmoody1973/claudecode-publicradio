@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "Export only the columns you need from your CRM — gift amount, date, hour, premium, new-vs-renewing, channel. No names, emails, addresses, or phone numbers.",
+    "Put that stripped file in a folder on your computer called something like \"drive-readout.\"",
+    "Open Claude Code in that folder and ask it to read the file and list back the columns it sees, before it does anything else.",
+    "Ask for the workbook you need: a summary tab, an hour-by-hour take, a new-vs-renewing split, and a comparison to your last drive.",
+    "Tell it to re-sum every column against the source file and show you that check before handing the workbook back.",
+    "Check the workbook's totals against your CRM's own totals for the drive before the numbers go anywhere near the board.",
+    "Save the prompt as a Skill, so the station owns this for next drive, not just you."
+  ],
+  "verify": "Open the finished workbook and search it for an @ sign — if any email address survived the strip, it isn't safe to work with; start over from a clean export.",
+  "walkthroughSlug": "pledge-drive-readout"
+}

@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Decide first whether this even needs an AI agent — checking business listings and formatting a list is a straight-line job, so a plain scheduled script may do the whole thing for less money and less risk.",
+    "If you do want Claude Code involved, test it by hand first: point it at the city or county new-business license page and the local business journal, and ask for a draft prospect list.",
+    "Ask it to rank the list and format each entry the same way: business name, what they do, public contact info if available, and why they might fit as an underwriter.",
+    "Keep current underwriters and their rates completely out of the prompt — that information has no reason to be typed in at all.",
+    "Turn the tested prompt into a routine scheduled for Monday mornings, writing into the underwriting team's shared document only.",
+    "Put any API keys the routine needs into the routine's own settings, not a file on your computer.",
+    "Treat the weekly list as leads for a human to review, never as something that emails or contacts a prospect on its own."
+  ],
+  "verify": "Look up the top-ranked business on the list yourself — it should be a real, currently open business at the address given. If it's closed, isn't real, or the contact info is wrong, the routine is reading stale or bad pages and needs fixing before you trust the rest."
+}

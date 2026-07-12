@@ -1,0 +1,14 @@
+{
+  "steps": [
+    "Put your station's underwriting policy in a plain text or markdown file inside a project folder, plus the spot copy you're allowed to share.",
+    "In Claude Code, type /agents, choose Create new agent, then Project level, then Generate with Claude.",
+    "When it asks about tools, choose read-only — this sub-agent should never be able to write or send anything.",
+    "Describe the job in plain language: hunt for calls to action, price claims, and promotional language, and check the copy against your station's policy file, not a generic idea of the FCC rules.",
+    "Tell it what to hand back: a line-by-line list of the exact flagged phrase, why it's a problem, and a compliant rewrite, ending in a verdict of CLEAR, NEEDS EDIT, or REWRITE.",
+    "Tell it explicitly it must never say copy is approved — only a human clears copy for air.",
+    "Run it against a real piece of spot copy and read every line it flags before you touch anything.",
+    "Have a person accountable for the license make the actual clearance decision — the sub-agent's verdict is input, not sign-off."
+  ],
+  "verify": "Hand it copy you already know has a problem — a stray 'call today' or a 'best rates' claim — and confirm it actually gets flagged. If the sub-agent calls known-bad copy CLEAR, its description or policy file needs fixing before you trust it on real spots.",
+  "walkthroughSlug": "underwriting-red-team"
+}

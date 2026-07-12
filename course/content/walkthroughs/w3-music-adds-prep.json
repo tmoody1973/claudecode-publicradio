@@ -1,0 +1,72 @@
+{
+  "id": "w-music-adds-prep",
+  "slug": "music-adds-prep",
+  "tier": "flagship",
+  "title": "Walk into the adds meeting already prepared",
+  "kicker": "A ranked prep list, local artists flagged — you still make the call.",
+  "roleSlug": "music",
+  "moduleNumber": 9,
+  "estMinutes": 25,
+  "youWillNeed": [
+    "Claude Code installed and signed in (do the 30-minute walkthrough first if not)",
+    "A folder on your machine called station-work",
+    "The practice file below — do NOT use a real adds list while you're learning"
+  ],
+  "guardrail": "Adds are a human editorial call, every time. Claude gathers, ranks, and flags — it never gets to recommend what actually goes into rotation, and nothing here replaces someone actually listening to the music.",
+  "sampleData": {
+    "filename": "music-adds-SYNTHETIC.csv",
+    "description": "A fake adds list: 12 candidate tracks, 6 of them local, with release dates and spin counts. Genre tags in this practice file are deliberately unreliable, which is part of the lesson.",
+    "rows": 12,
+    "columns": ["artist", "track", "label", "release_date", "local", "genre", "spins_last_week", "notes"],
+    "downloadPath": "/samples/music-adds-SYNTHETIC.csv",
+    "synthetic": true
+  },
+  "steps": [
+    {
+      "n": 1,
+      "title": "Ask for a ranked prep list, not a decision",
+      "do": "Point Claude at the spreadsheet and ask for a talking order for the meeting, with local artists flagged, and be explicit that it should not recommend actual adds.",
+      "prompt": "There is one spreadsheet in this folder — candidates for Tuesday's adds meeting. Read it, then give me a ranked list for the meeting: which tracks should we talk about first. Flag every local artist clearly, since those get priority in our rotation policy. Don't recommend actually adding anything — that's a human call in the meeting — just help me walk in prepared.",
+      "youWillSee": "Claude will ask your permission to read the file. Say yes. It will then read all 12 rows and hand back a ranked talking order with every local artist marked, plus a short note on anything in the data it thinks is worth questioning before you rely on it.",
+      "sessionTurn": 1
+    },
+    {
+      "n": 2,
+      "title": "Read the caution before the ranking",
+      "do": "Look at what Claude flagged about the data itself before you look at the ranking.",
+      "youWillSee": "In this recording, Claude leads with the caution before it says anything else: this is fake data, and it names the placeholder artist names as the tell. Further down, it flags two things worth raising in the meeting: the genre tags skew hard toward hip-hop (6 of the 12 tracks) even though the labels attached don't support that, and two tracks show spins recorded before their official release date.",
+      "note": "This is the pattern to watch for: a data quality caveat, named plainly and up front, instead of buried or quietly worked around. That's what you want it to do with your real spreadsheets too."
+    },
+    {
+      "n": 3,
+      "title": "Bring the ranked list to the meeting, not a decision",
+      "do": "Use the ranked list as your talking order in the room. The rank tells you what to discuss first — it does not tell you what to add.",
+      "youWillSee": "A table with every track, whether it's local, and a one-line reason it's ranked where it is — sorted so locals and time-sensitive releases surface to the top.",
+      "note": "Nothing in the output tells you to add anything. That's deliberate: the room decides, the list just saves you the hour of digging."
+    }
+  ],
+  "verify": [
+    {
+      "check": "Cross-check the local flag against your own knowledge of the artist roster.",
+      "why": "The 'local' flag in the source file could be wrong or out of date, and getting a local artist's priority wrong is the exact failure this walkthrough is meant to prevent.",
+      "ifWrong": "Correct the file yourself and re-run the prompt, or tell Claude directly which rows are actually local."
+    },
+    {
+      "check": "Confirm the spin counts and release dates match what your programming system shows.",
+      "why": "If the sheet you exported is stale, the ranking will be built on outdated urgency — a track that already aired last week could still show up as 'time-sensitive.'",
+      "ifWrong": "Re-export the spreadsheet fresh from your system and run the prompt again before the meeting."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "symptom": "Claude ranks everything the same, or the ranking doesn't make sense.",
+      "cause": "It's likely relying on a column that's unreliable, like a mis-tagged genre field, without you knowing.",
+      "fix": "Ask it directly: 'Which columns did you actually use to rank these, and which did you ignore?'"
+    },
+    {
+      "symptom": "It suggests what to actually add to rotation.",
+      "cause": "The prompt didn't draw the line clearly enough between prep and decision.",
+      "fix": "Remind it in the same conversation: 'Just rank and flag — the room decides what airs.' Then ask it to redo the summary without recommendations."
+    }
+  ]
+}

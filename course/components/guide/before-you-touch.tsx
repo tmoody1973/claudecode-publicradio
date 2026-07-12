@@ -31,7 +31,7 @@ export function BeforeYouTouch() {
   return (
     <section
       aria-labelledby="before-heading"
-      className="border-y-2 border-border bg-destructive py-12 text-white"
+      className="border-y-2 border-border bg-destructive py-12 text-destructive-foreground"
     >
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex items-center gap-3">

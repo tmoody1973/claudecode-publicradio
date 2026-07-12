@@ -5,9 +5,10 @@
  *
  * Run: node scripts/compile-content.mjs
  */
-import { readFileSync, writeFileSync, readdirSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateRunbook } from "./lib/validate-walkthroughs.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SRC = join(__dirname, "..", "content", "modules");
@@ -91,6 +92,28 @@ for (const m of modules) {
 const glossary = [...glossaryMap.values()].sort((a, b) => a.term.localeCompare(b.term));
 
 const useCases = modules.flatMap((m) => m.useCases);
+
+// --- merge runbooks ---
+const RUNBOOKS = join(__dirname, "..", "content", "runbooks");
+const runbookErrors = [];
+
+for (const uc of useCases) {
+  const p = join(RUNBOOKS, `${uc.id}.json`);
+  if (!existsSync(p)) {
+    runbookErrors.push(`${uc.id}: missing runbook (content/runbooks/${uc.id}.json)`);
+    continue;
+  }
+  const rb = JSON.parse(readFileSync(p, "utf8"));
+  runbookErrors.push(...validateRunbook(rb, uc.id));
+  uc.runbook = rb;
+}
+
+if (runbookErrors.length) {
+  console.error("✗ Runbook validation failed:\n" + runbookErrors.map((e) => `  - ${e}`).join("\n"));
+  process.exit(1);
+}
+console.log(`✓ ${useCases.length} runbooks merged`);
+
 const roleCounts = Object.fromEntries(
   ROLES.map((r) => [r.slug, useCases.filter((u) => u.roleSlug === r.slug).length]),
 );

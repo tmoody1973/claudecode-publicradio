@@ -26,7 +26,10 @@ const LIMITS = [
 
 export function Limits() {
   return (
-    <section aria-labelledby="limits-heading" className="bg-destructive py-12 text-white">
+    <section
+      aria-labelledby="limits-heading"
+      className="bg-destructive py-12 text-destructive-foreground"
+    >
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex items-center gap-3">
           <span className="grid size-11 shrink-0 place-items-center border-2 border-black bg-white">

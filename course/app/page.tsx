@@ -50,8 +50,8 @@ export default function Home() {
             asChild
             className="min-h-11 border-2 border-border bg-primary px-5 font-head text-sm uppercase tracking-wide text-black shadow-[4px_4px_0_0_var(--border)]"
           >
-            <Link href="/modules/module-1" className="no-underline">
-              Start with Module 1
+            <Link href="/walkthroughs/first-30-minutes" className="no-underline">
+              Do the first walkthrough
               <ArrowRight className="size-4" aria-hidden />
             </Link>
           </Button>

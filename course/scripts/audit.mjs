@@ -18,6 +18,11 @@ const BASE = process.argv[2] ?? "http://localhost:3000";
 const PAGES = [
   "/",
   "/guide",
+  "/walkthroughs",
+  "/walkthroughs/first-30-minutes",
+  "/walkthroughs/pledge-drive-readout",
+  "/walkthroughs/music-adds-prep",
+  "/walkthroughs/underwriting-red-team",
   "/modules",
   ...Array.from({ length: 10 }, (_, i) => `/modules/module-${i + 1}`),
   "/use-cases",
@@ -142,6 +147,22 @@ const audit = () => {
     .filter((i) => !i.hasAttribute("alt"))
     .map((i) => i.getAttribute("src"));
 
+  // The replayed terminal MUST keep every turn in the DOM and the a11y tree. Progressive
+  // reveal is opacity-only. If a turn is display:none / hidden / aria-hidden, a
+  // screen-reader user silently loses part of the transcript.
+  let terminalTurnsHidden = 0;
+  document.querySelectorAll("figure ol li").forEach((li) => {
+    const s = getComputedStyle(li);
+    if (
+      s.display === "none" ||
+      s.visibility === "hidden" ||
+      li.hasAttribute("hidden") ||
+      li.getAttribute("aria-hidden") === "true"
+    ) {
+      terminalTurnsHidden++;
+    }
+  });
+
   return {
     vw,
     realScrollWidth,
@@ -151,6 +172,7 @@ const audit = () => {
     smallCount: smallTargets.length,
     unnamed: unnamed.slice(0, 5),
     imgNoAlt,
+    terminalTurnsHidden,
   };
 };
 
@@ -173,6 +195,9 @@ for (const path of PAGES) {
   if (r.smallCount > 0) problems.push(`${r.smallCount} small tap targets`);
   if (r.unnamed.length) problems.push(`${r.unnamed.length} unnamed controls`);
   if (r.imgNoAlt.length) problems.push(`${r.imgNoAlt.length} img without alt`);
+  if (r.terminalTurnsHidden > 0) {
+    problems.push(`${r.terminalTurnsHidden} terminal turns removed from the a11y tree`);
+  }
 
   if (problems.length === 0) {
     console.log(`✓ ${path}`);

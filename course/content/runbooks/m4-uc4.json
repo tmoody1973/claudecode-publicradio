@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Before building anything, strip the results spreadsheet down to aggregates only — totals by day, by hour, by challenge grant, new vs. renewing counts — with no donor names, addresses, or giving histories in the file.",
+    "Put that stripped file in the folder Claude Code can see, and confirm the original donor-level export stays outside that folder entirely.",
+    "Ask Claude to build a Skill — .claude/skills/pledge-recap — that reads the aggregate Sheet and writes the board-ready narrative in your GM's preferred format.",
+    "Write the same rule into the SKILL.md itself: this Skill only ever reads aggregate totals, never a donor-level export.",
+    "Run the Skill and get the recap — what worked, what fell flat, how it compares to last spring.",
+    "Read the recap and confirm every figure is a total or a count, checked against the aggregate Sheet, before it goes to the board."
+  ],
+  "verify": "Open the aggregate file the Skill actually read and search it for an @ sign or anything that looks like a person's name. If either shows up, the file wasn't stripped — redo it before the Skill touches it again.",
+  "walkthroughSlug": "pledge-drive-readout"
+}

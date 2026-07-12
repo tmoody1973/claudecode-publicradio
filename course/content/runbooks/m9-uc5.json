@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Export your CRM data and immediately strip it down to aggregate counts and cohorts only — no names, no emails, no addresses, no gift amounts tied to a person.",
+    "Save that stripped, aggregate-only file in a folder on your own machine. This job never goes near a cloud routine — a routine runs on someone else's servers, and it can only be trusted with what you're willing to upload.",
+    "Set up a local scheduled task on a station computer, not a cloud routine, to run the aggregation on a monthly schedule.",
+    "Ask Claude Code to summarize only the aggregate counts and cohort trends into a plain-English brief — never the underlying export.",
+    "Read the draft brief yourself and confirm every number in it traces back to the aggregate file, not to anything more detailed.",
+    "Only after your review does the brief go to leadership."
+  ],
+  "verify": "Open the aggregate file the brief was built from and search it for an @ sign or anything that looks like a name. If anything personally identifying survived the strip, stop and fix the export before this runs again."
+}

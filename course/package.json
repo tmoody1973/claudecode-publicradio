@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "test": "node --test scripts/lib/*.test.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "gen:content": "node scripts/compile-content.mjs",
     "gen:prompt": "node scripts/gen-prompt.mjs",
-    "prebuild": "node scripts/compile-content.mjs && node scripts/gen-prompt.mjs",
+    "gen:samples": "node scripts/gen-sample-data.mjs",
+    "gen:walkthroughs": "node scripts/compile-walkthroughs.mjs",
+    "prebuild": "node scripts/gen-sample-data.mjs && node scripts/compile-content.mjs && node scripts/compile-walkthroughs.mjs && node scripts/gen-prompt.mjs",
     "audit": "node scripts/audit.mjs",
     "benchmark": "node scripts/benchmark.mjs"
   },

@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Connect Gmail through Claude Code using an account that only has access to the info@ and news-tips inboxes you intend to triage — nothing broader.",
+    "Ask Claude to build a Skill that reads unread mail and sorts it into high / needs action / ignore, with a short brief for each — read-only, no labels applied, nothing deleted.",
+    "Run it against today's backlog and read the brief for every message it calls 'ignore,' not just the ones it flags as high.",
+    "Compare its calls against what you already know about real listener questions or story tips sitting in there.",
+    "Keep it in read-only mode and repeat this check across at least twenty runs before you trust its sorting.",
+    "Only after twenty clean runs, consider letting it apply labels — and never let it auto-archive or auto-reply on a public-facing account, even then."
+  ],
+  "verify": "Manually open every message the Skill marked 'ignore' at least once. If a real tip or donor question is sitting in that bucket, it isn't ready to act on its own yet — stay read-only."
+}

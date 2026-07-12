@@ -1,0 +1,80 @@
+{
+  "id": "w-membership-drive",
+  "slug": "pledge-drive-readout",
+  "tier": "flagship",
+  "title": "Turn a pledge-drive export into a board-ready readout",
+  "kicker": "No formulas. Nothing leaves your machine.",
+  "roleSlug": "membership",
+  "moduleNumber": 2,
+  "estMinutes": 35,
+  "youWillNeed": [
+    "Claude Code installed and signed in (do the 30-minute walkthrough first if not)",
+    "A folder on your machine called station-work",
+    "The practice file below — do NOT use a real export while you're learning"
+  ],
+  "guardrail": "Donor names, emails, addresses and phone numbers never go to a cloud model. In this walkthrough you strip them yourself, on your own machine, in step 2 — before you ask Claude to analyze anything.",
+  "sampleData": {
+    "filename": "pledge-drive-SYNTHETIC-do-not-upload.csv",
+    "description": "A fake pledge drive: 420 gifts across four campaign codes. It still has donor names, emails, addresses and phones in it — on purpose. Removing them is the first thing you'll do.",
+    "rows": 420,
+    "columns": ["donor_name", "email", "street_address", "phone", "gift_amount", "gift_date", "campaign_code", "donor_type", "sustainer", "premium"],
+    "downloadPath": "/samples/pledge-drive-SYNTHETIC-do-not-upload.csv",
+    "synthetic": true
+  },
+  "steps": [
+    {
+      "n": 1,
+      "title": "Look before you touch",
+      "do": "Ask Claude to read the file and tell you what's in it — without changing anything.",
+      "prompt": "There is one spreadsheet in this folder — our last pledge drive. Read it and tell me exactly what columns it has, and how many rows. Don't change anything yet.",
+      "youWillSee": "Claude will ask your permission to read the file. Say yes. It will then list all 10 columns, confirm 420 rows, and flag on its own that four of those columns are personal information — before you've even asked it to.",
+      "sessionTurn": 1
+    },
+    {
+      "n": 2,
+      "title": "Strip the personal columns",
+      "do": "Before any analysis, have Claude write a copy with the four personal columns removed. This happens on your machine.",
+      "prompt": "Four of those columns are personal: donor_name, email, street_address, phone. Make me a NEW file called drive-numbers-only.csv with those four columns removed and everything else intact. Don't touch the original. Then tell me how many columns the new file has.",
+      "youWillSee": "A new file, drive-numbers-only.csv, appears in your folder. Claude confirms it has 6 columns, checks it for leftover names, emails and phone numbers, and confirms the original file is untouched.",
+      "note": "This is the habit. Do it every single time, before you ask for anything else — even in practice.",
+      "sessionTurn": 7
+    },
+    {
+      "n": 3,
+      "title": "Get the board-ready readout",
+      "do": "Now that the personal columns are gone, ask for the actual numbers: total raised, gift count, average gift, and a breakdown by campaign.",
+      "prompt": "Good. Now use drive-numbers-only.csv to put together a short readout I can bring to the board: total raised, how many gifts, average gift, and a breakdown by campaign_code. Keep it to something I could read in two minutes.",
+      "youWillSee": "A short written readout: the total raised, the gift count, both the average AND the median gift, and a table breaking the total down by campaign code. It reads polished and confident — and one of its numbers is flat wrong. That's exactly why the checks below exist: read the readout, then check it.",
+      "sessionTurn": 10
+    }
+  ],
+  "verify": [
+    {
+      "check": "Open drive-numbers-only.csv and search it for an @ sign.",
+      "why": "If any email survived the strip, the file is not safe to work with.",
+      "ifWrong": "Delete the file and run step 2 again, naming the columns explicitly."
+    },
+    {
+      "check": "The total in the readout matches the total in your CRM.",
+      "why": "If the total is off, Claude read the wrong file or the wrong column — everything downstream is then wrong too.",
+      "ifWrong": "Ask it to show its arithmetic: 'Show me the total and how you calculated it.'"
+    },
+    {
+      "check": "Read the last paragraph of the recording above, then count the $1,000 gifts in the file yourself.",
+      "why": "Claude says five donors gave $1,000, about 6% of the total. It is wrong. Thirty-five donors gave $1,000 — that is 45% of everything raised, and it is the single most important fact in the drive. It said this confidently, and it never caught itself. We left it in.",
+      "ifWrong": "This is not a trick — it is the whole lesson. Claude sounds exactly as certain when it is wrong as when it is right. Check every number that matters before it reaches a board packet."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "symptom": "Claude says it can't find the file.",
+      "cause": "It's looking in a different folder than the one the file is in.",
+      "fix": "Ask it: 'What folder are you in, and what files can you see?' Then move the file there."
+    },
+    {
+      "symptom": "It made up a number that looks plausible but is wrong.",
+      "cause": "You asked for a conclusion before asking it to read the data.",
+      "fix": "Always make it read first and summarize the columns, before you ask it to calculate anything. It won't always save you — in the recording above, Claude read the real data and still said five donors gave $1,000 when the true number is thirty-five. Check the number itself, not just whether it read the file."
+    }
+  ]
+}

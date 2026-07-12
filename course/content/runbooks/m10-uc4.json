@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Open a brand-new Claude Code session and run /context before typing anything else, to see your starting overhead — system prompt, tools, agents, skills, and memory all cost tokens before you've said a word.",
+    "Run /mcp to see every MCP server currently connected to this session.",
+    "For each one, check who else on staff actually relies on it before touching anything — a shared connection someone else needs isn't yours to cut alone.",
+    "Disconnect the servers you don't need for this session — a single server can cost around 18,000 tokens on every message you send.",
+    "Run /context again and compare the new number to what you started with.",
+    "Write down what you turned off and why, so it can be turned back on the moment someone needs it."
+  ],
+  "verify": "Compare the two /context readings — the number should drop noticeably after disconnecting. If it barely moves, the servers you disconnected weren't the ones costing you."
+}

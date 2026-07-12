@@ -1,0 +1,64 @@
+{
+  "id": "w-first-30-minutes",
+  "slug": "first-30-minutes",
+  "tier": "onboarding",
+  "title": "Your first 30 minutes with Claude Code",
+  "kicker": "Install it, point it at one file, watch it work.",
+  "roleSlug": null,
+  "moduleNumber": 2,
+  "estMinutes": 20,
+  "youWillNeed": [
+    "Claude Code installed and signed in with a paid Claude plan",
+    "A folder on your machine you don't mind Claude reading — call it station-work",
+    "One ordinary document already sitting in that folder (a memo, a set of notes, anything real but not sensitive)"
+  ],
+  "guardrail": "Claude Code can only see files in the folder you point it at. Start with something low-stakes — a memo, not a donor list or a personnel file — until you've done this walkthrough once and know what to expect.",
+  "steps": [
+    {
+      "n": 1,
+      "title": "Put one document in a folder",
+      "do": "Make a folder called station-work somewhere on your computer, and put one real document in it — meeting notes, a memo, anything you'd normally read yourself.",
+      "youWillSee": "An empty-looking folder with one file in it. That's all Claude needs to get started.",
+      "note": "Don't use anything sensitive for this first run. A staff memo or meeting notes is perfect."
+    },
+    {
+      "n": 2,
+      "title": "Ask Claude to read it and summarize",
+      "do": "Open Claude Code in that folder and ask it to read the document and summarize the key points in plain English.",
+      "prompt": "There is one document in this folder. Read it and give me a short summary I could read out loud at tomorrow's meeting — just the key points, in plain English.",
+      "youWillSee": "Claude will ask your permission before it reads the file. Say yes. It will then read the whole thing and hand back a summary organized by topic, in plain language, not a copy-paste of the original.",
+      "sessionTurn": 1
+    },
+    {
+      "n": 3,
+      "title": "Read what came back",
+      "do": "Check the summary against the document. Does it match what you'd have said yourself?",
+      "youWillSee": "A summary broken into the same sections as your document, plus the action items pulled out separately. Nothing about the file has changed — Claude only read it.",
+      "note": "This is the whole trick: point it at something real, ask a plain question, get a plain answer. Everything else in this course builds on that."
+    }
+  ],
+  "verify": [
+    {
+      "check": "Open the original document again and confirm it's unchanged.",
+      "why": "Claude only reads a file unless you explicitly ask it to write or edit one. Confirming the original is untouched is how you build the habit of checking, not just trusting.",
+      "ifWrong": "You didn't do anything wrong — reading never modifies a file. If it looks different, check whether you were in the right folder to begin with."
+    },
+    {
+      "check": "Compare the summary's key points against your own read of the document.",
+      "why": "A summary that drops or invents a detail is a sign to slow down before you rely on it for anything that matters.",
+      "ifWrong": "Ask it directly: 'Quote me the exact sentence in the document that says that.' If it can't, the point was invented — tell it so and ask for a corrected summary."
+    }
+  ],
+  "troubleshooting": [
+    {
+      "symptom": "Claude says it can't find any files in the folder.",
+      "cause": "Claude Code is running from a different folder than the one your document is in.",
+      "fix": "Ask it: 'What folder are you in right now, and what files can you see?' Then either move your document there or restart Claude Code from the right folder."
+    },
+    {
+      "symptom": "It asks for permission and you're not sure what you're agreeing to.",
+      "cause": "This is normal — Claude Code asks before it touches anything outside a plain conversation, like reading a file.",
+      "fix": "Read the specific permission request. If it names the one file you expect, it's safe to allow. If it names something else, say no and ask what it's trying to do."
+    }
+  ]
+}

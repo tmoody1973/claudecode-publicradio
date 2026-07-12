@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Export only aggregate numbers \u2014 dollars and counts per hour \u2014 from each drive; never export donor names, addresses, giving histories, or a CRM record.",
+    "Put those exports, along with past drive scripts and post-drive recaps, into a folder called raw.",
+    "Open Claude Code in that folder and ask it to read everything and write it back out as a linked set of notes in a wiki folder, with an index.",
+    "Check the index and a few notes to confirm nothing beyond aggregate numbers made it in.",
+    "Ask your real question \u2014 for example, \"what pitch language preceded our best sustainer hours across the last five drives?\" \u2014 and let Claude answer from the index and its links.",
+    "Check the answer against the original scripts and recaps before you use it in planning.",
+    "Add each new drive's results and recap into raw after the drive, so the wiki keeps growing."
+  ],
+  "verify": "Search every file in raw for an @ sign, a name next to a dollar amount, or anything that looks like a donor record \u2014 if you find one, pull that file out before Claude ever reads the folder."
+}

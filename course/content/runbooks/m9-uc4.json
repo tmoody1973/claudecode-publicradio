@@ -1,0 +1,12 @@
+{
+  "steps": [
+    "Build your local artist list and your venue calendar links by hand first — the routine can only scan what you actually point it at.",
+    "Test it manually in Claude Code before scheduling anything: ask it to check new releases from your list, venue calendars for the next two weeks, and local music press, and write the meeting prep doc.",
+    "Tell it clearly that it only gathers and flags — it never recommends what should get added, that's the music director's call in the meeting.",
+    "Once a manual run looks right, turn it into a Monday-night routine that writes into the same shared file the music director opens Tuesday morning.",
+    "Keep the output to links and short context only — new releases, who's touring through, anything with a hook — with no ranking of what should be added.",
+    "Every Tuesday, make sure a human actually listens to anything before it goes into rotation — nothing gets added on the routine's say-so."
+  ],
+  "verify": "Open two or three links from Tuesday's prep doc — they should land on the real release or the real calendar listing, not a paraphrase of one. If a link doesn't resolve to the actual source, don't trust that entry going into the meeting.",
+  "walkthroughSlug": "music-adds-prep"
+}

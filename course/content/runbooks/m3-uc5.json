@@ -1,0 +1,11 @@
+{
+  "steps": [
+    "Before you do anything else, copy your Local Content and Service Report folder to a separate backup location outside the project directory.",
+    "Open Claude Code in the project folder and confirm it's running in Plan mode, not Bypass Permissions mode.",
+    "Ask Claude to add deny rules to settings.json so it can never delete files in that folder.",
+    "Describe the change you want made to the spreadsheets, and ask Claude to show you its plan before it touches anything.",
+    "Read the plan the way you'd read a rundown, line by line, and only approve it once every step makes sense.",
+    "After it runs, open the files and confirm the changes match the plan you approved."
+  ],
+  "verify": "Compare today's file count and total row count in the folder against your backup. If either doesn't match what the approved plan said would change, stop and restore from backup before the deadline gets any closer."
+}
