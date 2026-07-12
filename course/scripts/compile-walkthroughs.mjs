@@ -6,7 +6,7 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { validateWalkthrough } from "./lib/validate-walkthroughs.mjs";
+import { validateWalkthrough, validateWalkthroughSet } from "./lib/validate-walkthroughs.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SRC = join(__dirname, "..", "content", "walkthroughs");
@@ -27,14 +27,15 @@ const walkthroughs = files.map((f) => {
 
 const sampleFileExists = (p) => existsSync(join(PUBLIC, p.replace(/^\//, "")));
 
-const errors = walkthroughs.flatMap((w) => validateWalkthrough(w, { sampleFileExists }));
+const errors = [
+  ...walkthroughs.flatMap((w) => validateWalkthrough(w, { sampleFileExists })),
+  ...validateWalkthroughSet(walkthroughs),
+];
 if (errors.length) {
   console.error("✗ Walkthrough validation failed:\n" + errors.map((e) => `  - ${e}`).join("\n"));
   process.exit(1);
 }
 
-const onboarding = walkthroughs.filter((w) => w.tier === "onboarding");
-if (onboarding.length !== 1) throw new Error(`Expected exactly 1 onboarding walkthrough, got ${onboarding.length}`);
 if (walkthroughs.filter((w) => w.tier === "flagship").length !== 3) {
   throw new Error("Expected exactly 3 flagship walkthroughs");
 }

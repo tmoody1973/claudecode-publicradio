@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { validateWalkthrough, validateRunbook } from "./validate-walkthroughs.mjs";
+import { validateWalkthrough, validateRunbook, validateWalkthroughSet } from "./validate-walkthroughs.mjs";
 
 /** A minimal valid walkthrough. Tests mutate clones of this. */
 function valid() {
@@ -161,6 +161,26 @@ test("a step's sessionTurn must point at a real turn", () => {
   const w = valid();
   w.steps[0].sessionTurn = 99;
   assert.ok(validateWalkthrough(w, opts).some((e) => /sessionTurn/i.test(e)));
+});
+
+test("validateWalkthroughSet rejects duplicate slugs", () => {
+  const a = { ...valid(), tier: "onboarding" };
+  const b = { ...valid(), tier: "flagship" };
+  assert.ok(validateWalkthroughSet([a, b]).some((e) => /duplicate slug/i.test(e)));
+});
+
+test("validateWalkthroughSet rejects two flagships on the same module", () => {
+  const a = { ...valid(), id: "a", slug: "a", tier: "flagship", moduleNumber: 2 };
+  const b = { ...valid(), id: "b", slug: "b", tier: "flagship", moduleNumber: 2 };
+  const errs = validateWalkthroughSet([a, b, { ...valid(), id: "o", slug: "o", tier: "onboarding" }]);
+  assert.ok(errs.some((e) => /ambiguous/i.test(e)), errs.join("; "));
+});
+
+test("validateWalkthroughSet allows an onboarding to share a module with a flagship", () => {
+  const on = { ...valid(), id: "o", slug: "o", tier: "onboarding", moduleNumber: 2 };
+  delete on.sampleData;
+  const fl = { ...valid(), id: "f", slug: "f", tier: "flagship", moduleNumber: 2 };
+  assert.deepEqual(validateWalkthroughSet([on, fl]), []);
 });
 
 test("a runbook needs 5-8 steps and a verify line", () => {

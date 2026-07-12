@@ -155,7 +155,8 @@
         "do": "Before any analysis, have Claude write a copy with the four personal columns removed. This happens on your machine.",
         "prompt": "Four of those columns are personal: donor_name, email, street_address, phone. Make me a NEW file called drive-numbers-only.csv with those four columns removed and everything else intact. Don't touch the original. Then tell me how many columns the new file has.",
         "youWillSee": "A new file, drive-numbers-only.csv, appears in your folder. Claude confirms it has 6 columns, checks it for leftover names, emails and phone numbers, and confirms the original file is untouched.",
-        "note": "This is the habit. Do it every single time, before you ask for anything else — even in practice."
+        "note": "This is the habit. Do it every single time, before you ask for anything else — even in practice.",
+        "sessionTurn": 7
       },
       {
         "n": 3,
@@ -252,7 +253,7 @@
           "text": "",
           "tool": {
             "name": "Bash",
-            "arg": "python3 — write drive-numbers-only.csv without the 4 PII columns, then grep it for leftover personal data",
+            "arg": "python3 — write drive-numbers-only.csv without the 4 personal columns, then grep it for leftover personal data",
             "result": "kept columns: gift_amount, gift_date, campaign_code, donor_type, sustainer, premium; 420 data rows written; grep for name/email/phone patterns: 0 matches"
           }
         },

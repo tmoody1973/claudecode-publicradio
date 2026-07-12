@@ -122,6 +122,34 @@ export function validateWalkthrough(w, opts = {}) {
   return e;
 }
 
+/**
+ * Cross-walkthrough checks — things no single walkthrough can see about itself.
+ */
+export function validateWalkthroughSet(list) {
+  const e = [];
+  const slugs = new Set();
+  const ids = new Set();
+  for (const w of list) {
+    if (slugs.has(w.slug)) e.push(`duplicate slug: ${w.slug}`);
+    if (ids.has(w.id)) e.push(`duplicate id: ${w.id}`);
+    slugs.add(w.slug);
+    ids.add(w.id);
+  }
+  const onboarding = list.filter((w) => w.tier === "onboarding");
+  if (onboarding.length !== 1) e.push(`expected exactly 1 onboarding walkthrough, got ${onboarding.length}`);
+
+  // Two FLAGSHIPS on the same module would make walkthroughForModule() ambiguous.
+  // (An onboarding sharing a module with a flagship is fine — the lookup prefers the flagship.)
+  const byModule = new Map();
+  for (const w of list.filter((x) => x.tier === "flagship")) {
+    byModule.set(w.moduleNumber, (byModule.get(w.moduleNumber) ?? 0) + 1);
+  }
+  for (const [mod, n] of byModule) {
+    if (n > 1) e.push(`${n} flagship walkthroughs claim moduleNumber ${mod} — walkthroughForModule() would be ambiguous`);
+  }
+  return e;
+}
+
 export function validateRunbook(rb, useCaseId) {
   const e = [];
   const at = (msg) => e.push(`${useCaseId}: ${msg}`);

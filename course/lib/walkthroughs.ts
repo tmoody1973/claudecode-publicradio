@@ -64,9 +64,17 @@ export function getWalkthrough(slug: string): Walkthrough | undefined {
   return walkthroughs.find((w) => w.slug === slug);
 }
 
-/** The walkthrough that teaches a given module, if one exists. */
+/**
+ * The walkthrough that teaches a given module, if one exists.
+ *
+ * Prefers a flagship: the onboarding walkthrough is also tagged to a module, but it's
+ * reachable from the home CTA and the index, and a module page asking "rather be walked
+ * through it?" means the job, not the install. Without this, `.find()` returns whichever
+ * file sorts first and silently shadows the flagship.
+ */
 export function walkthroughForModule(moduleNumber: number): Walkthrough | undefined {
-  return walkthroughs.find((w) => w.moduleNumber === moduleNumber);
+  const forModule = walkthroughs.filter((w) => w.moduleNumber === moduleNumber);
+  return forModule.find((w) => w.tier === "flagship") ?? forModule[0];
 }
 
 export const onboarding = walkthroughs.find((w) => w.tier === "onboarding");
