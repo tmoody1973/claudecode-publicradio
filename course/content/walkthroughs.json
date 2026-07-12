@@ -1,1 +1,534 @@
-[]
+[
+  {
+    "id": "w-first-30-minutes",
+    "slug": "first-30-minutes",
+    "tier": "onboarding",
+    "title": "Your first 30 minutes with Claude Code",
+    "kicker": "Install it, point it at one file, watch it work.",
+    "roleSlug": null,
+    "moduleNumber": 2,
+    "estMinutes": 20,
+    "youWillNeed": [
+      "Claude Code installed and signed in with a paid Claude plan",
+      "A folder on your machine you don't mind Claude reading — call it station-work",
+      "One ordinary document already sitting in that folder (a memo, a set of notes, anything real but not sensitive)"
+    ],
+    "guardrail": "Claude Code can only see files in the folder you point it at. Start with something low-stakes — a memo, not a donor list or a personnel file — until you've done this walkthrough once and know what to expect.",
+    "steps": [
+      {
+        "n": 1,
+        "title": "Put one document in a folder",
+        "do": "Make a folder called station-work somewhere on your computer, and put one real document in it — meeting notes, a memo, anything you'd normally read yourself.",
+        "youWillSee": "An empty-looking folder with one file in it. That's all Claude needs to get started.",
+        "note": "Don't use anything sensitive for this first run. A staff memo or meeting notes is perfect."
+      },
+      {
+        "n": 2,
+        "title": "Ask Claude to read it and summarize",
+        "do": "Open Claude Code in that folder and ask it to read the document and summarize the key points in plain English.",
+        "prompt": "There is one document in this folder. Read it and give me a short summary I could read out loud at tomorrow's meeting — just the key points, in plain English.",
+        "youWillSee": "Claude will ask your permission before it reads the file. Say yes. It will then read the whole thing and hand back a summary organized by topic, in plain language, not a copy-paste of the original.",
+        "sessionTurn": 1
+      },
+      {
+        "n": 3,
+        "title": "Read what came back",
+        "do": "Check the summary against the document. Does it match what you'd have said yourself?",
+        "youWillSee": "A summary broken into the same sections as your document, plus the action items pulled out separately. Nothing about the file has changed — Claude only read it.",
+        "note": "This is the whole trick: point it at something real, ask a plain question, get a plain answer. Everything else in this course builds on that."
+      }
+    ],
+    "verify": [
+      {
+        "check": "Open the original document again and confirm it's unchanged.",
+        "why": "Claude only reads a file unless you explicitly ask it to write or edit one. Confirming the original is untouched is how you build the habit of checking, not just trusting.",
+        "ifWrong": "You didn't do anything wrong — reading never modifies a file. If it looks different, check whether you were in the right folder to begin with."
+      },
+      {
+        "check": "Compare the summary's key points against your own read of the document.",
+        "why": "A summary that drops or invents a detail is a sign to slow down before you rely on it for anything that matters.",
+        "ifWrong": "Ask it directly: 'Quote me the exact sentence in the document that says that.' If it can't, the point was invented — tell it so and ask for a corrected summary."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "Claude says it can't find any files in the folder.",
+        "cause": "Claude Code is running from a different folder than the one your document is in.",
+        "fix": "Ask it: 'What folder are you in right now, and what files can you see?' Then either move your document there or restart Claude Code from the right folder."
+      },
+      {
+        "symptom": "It asks for permission and you're not sure what you're agreeing to.",
+        "cause": "This is normal — Claude Code asks before it touches anything outside a plain conversation, like reading a file.",
+        "fix": "Read the specific permission request. If it names the one file you expect, it's safe to allow. If it names something else, say no and ask what it's trying to do."
+      }
+    ],
+    "session": {
+      "cwd": "station-work",
+      "recordedOn": "2026-07-12",
+      "trimmed": true,
+      "trimNote": "Sanitized the recording scratch-directory absolute path down to station-work/ — noise removal, not content. Tool results were shortened to their essential facts (a full ls listing and a full file read became one-line summaries) since the reader can see the real conclusions in the next turn. Nothing was added or reworded.",
+      "turns": [
+        {
+          "n": 1,
+          "role": "user",
+          "text": "There is one document in this folder. Read it and give me a short summary I could read out loud at tomorrow's meeting — just the key points, in plain English."
+        },
+        {
+          "n": 2,
+          "role": "assistant",
+          "text": "I'll read the document first."
+        },
+        {
+          "n": 3,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Bash",
+            "arg": "ls -la station-work",
+            "result": "One file: staff-meeting-notes.md"
+          }
+        },
+        {
+          "n": 4,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Read",
+            "arg": "staff-meeting-notes.md",
+            "result": "A Monday staff-meeting memo: pledge-drive recap, programming notes, underwriting, engineering, and a list of action items — about 24 lines."
+          }
+        },
+        {
+          "n": 5,
+          "role": "assistant",
+          "text": "Here's a short summary you could read out loud:\n\n**Lakeside Public Radio — Monday staff meeting recap (March 9)**\n\nThe spring pledge drive closed Friday at $184,300, beating our $175,000 goal. Sustainers were the big win: 61 new monthly donors, up from 44 last fall, with about a third of those coming from the $10-a-month Coffee Club tier. Saturday morning asks underperformed compared to weekday drive time, so Priya wants to cut Saturday ask time in half for the fall drive and shift that time to weekday mornings.\n\nOn programming, the local adds meeting is Tuesday. Two touring acts on the list are playing the Back Room the same week their singles go into rotation, and Carl wants that cross-promoted on air, not just in the newsletter. He also asked engineering to trace a listener's dead-air report from early Sunday overnight.\n\nUnderwriting signed three new Q2 sponsors: a credit union, a bookstore, and a brewery. The credit union's draft copy needs cleanup before it can run — it came in with pricing claims and a call to action, which station policy and FCC guidance don't allow. Legal review is Thursday.\n\nEngineering: the transmitter inspection is next Wednesday, the backup generator test passed, and the Studio B mixing board part is still about two weeks out. Last month's streaming outage was an expired certificate, now on a 60-day renewal reminder.\n\n**Action items:** Priya drafts the fall Saturday schedule change by next Monday. Carl gets cross-promo language to Dana. Jo sends the cleaned-up credit union copy to legal by Wednesday. Theo confirms the mixing board ETA with the vendor. Dana follows up with the board treasurer on the Q2 budget variance."
+        }
+      ]
+    }
+  },
+  {
+    "id": "w-membership-drive",
+    "slug": "pledge-drive-readout",
+    "tier": "flagship",
+    "title": "Turn a pledge-drive export into a board-ready readout",
+    "kicker": "No formulas. Nothing leaves your machine.",
+    "roleSlug": "membership",
+    "moduleNumber": 2,
+    "estMinutes": 35,
+    "youWillNeed": [
+      "Claude Code installed and signed in (do the 30-minute walkthrough first if not)",
+      "A folder on your machine called station-work",
+      "The practice file below — do NOT use a real export while you're learning"
+    ],
+    "guardrail": "Donor names, emails, addresses and phone numbers never go to a cloud model. In this walkthrough you strip them yourself, on your own machine, in step 2 — before you ask Claude to analyze anything.",
+    "sampleData": {
+      "filename": "pledge-drive-SYNTHETIC-do-not-upload.csv",
+      "description": "A fake pledge drive: 420 gifts across four campaign codes. It still has donor names, emails, addresses and phones in it — on purpose. Removing them is the first thing you'll do.",
+      "rows": 420,
+      "columns": [
+        "donor_name",
+        "email",
+        "street_address",
+        "phone",
+        "gift_amount",
+        "gift_date",
+        "campaign_code",
+        "donor_type",
+        "sustainer",
+        "premium"
+      ],
+      "downloadPath": "/samples/pledge-drive-SYNTHETIC-do-not-upload.csv",
+      "synthetic": true
+    },
+    "steps": [
+      {
+        "n": 1,
+        "title": "Look before you touch",
+        "do": "Ask Claude to read the file and tell you what's in it — without changing anything.",
+        "prompt": "There is one spreadsheet in this folder — our last pledge drive. Read it and tell me exactly what columns it has, and how many rows. Don't change anything yet.",
+        "youWillSee": "Claude will ask your permission to read the file. Say yes. It will then list all 10 columns, confirm 420 rows, and flag on its own that four of those columns are personal information — before you've even asked it to.",
+        "sessionTurn": 1
+      },
+      {
+        "n": 2,
+        "title": "Strip the personal columns",
+        "do": "Before any analysis, have Claude write a copy with the four personal columns removed. This happens on your machine.",
+        "prompt": "Four of those columns are personal: donor_name, email, street_address, phone. Make me a NEW file called drive-numbers-only.csv with those four columns removed and everything else intact. Don't touch the original. Then tell me how many columns the new file has.",
+        "youWillSee": "A new file, drive-numbers-only.csv, appears in your folder. Claude confirms it has 6 columns, checks it for leftover names, emails and phone numbers, and confirms the original file is untouched.",
+        "note": "This is the habit. Do it every single time, before you ask for anything else — even in practice."
+      },
+      {
+        "n": 3,
+        "title": "Get the board-ready readout",
+        "do": "Now that the personal columns are gone, ask for the actual numbers: total raised, gift count, average gift, and a breakdown by campaign.",
+        "prompt": "Good. Now use drive-numbers-only.csv to put together a short readout I can bring to the board: total raised, how many gifts, average gift, and a breakdown by campaign_code. Keep it to something I could read in two minutes.",
+        "youWillSee": "A short written readout: the total raised, the gift count, both the average AND the median gift (it will explain why those two numbers can tell different stories), and a table breaking the total down by campaign code.",
+        "sessionTurn": 10
+      }
+    ],
+    "verify": [
+      {
+        "check": "Open drive-numbers-only.csv and search it for an @ sign.",
+        "why": "If any email survived the strip, the file is not safe to work with.",
+        "ifWrong": "Delete the file and run step 2 again, naming the columns explicitly."
+      },
+      {
+        "check": "The total in the readout matches the total in your CRM.",
+        "why": "If the total is off, Claude read the wrong file or the wrong column — everything downstream is then wrong too.",
+        "ifWrong": "Ask it to show its arithmetic: 'Show me the total and how you calculated it.'"
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "Claude says it can't find the file.",
+        "cause": "It's looking in a different folder than the one the file is in.",
+        "fix": "Ask it: 'What folder are you in, and what files can you see?' Then move the file there."
+      },
+      {
+        "symptom": "It made up a number that looks plausible but is wrong.",
+        "cause": "You asked for a conclusion before asking it to read the data.",
+        "fix": "Always make it read first and summarize the columns, before you ask it to calculate anything."
+      }
+    ],
+    "session": {
+      "cwd": "station-work",
+      "recordedOn": "2026-07-12",
+      "trimmed": true,
+      "trimNote": "Sanitized the recording scratch-directory absolute path down to station-work/ — noise removal, not content. The 15-row CSV preview and the full Python one-liners Claude wrote were shortened to their essential facts (what was checked, what it found) since the reader needs the conclusion, not the script. This was recorded as three separate prompts in one continuous session — nothing was merged or reworded.",
+      "turns": [
+        {
+          "n": 1,
+          "role": "user",
+          "text": "There is one spreadsheet in this folder — our last pledge drive. Read it and tell me exactly what columns it has, and how many rows. Don't change anything yet."
+        },
+        {
+          "n": 2,
+          "role": "assistant",
+          "text": "I'll look at what's in the folder first."
+        },
+        {
+          "n": 3,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Bash",
+            "arg": "ls -la station-work",
+            "result": "One file: pledge-drive-SYNTHETIC-do-not-upload.csv"
+          }
+        },
+        {
+          "n": 4,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Read",
+            "arg": "pledge-drive-SYNTHETIC-do-not-upload.csv",
+            "result": "10 columns, first 15 rows shown — donor_name, email, street_address, phone, gift_amount, gift_date, campaign_code, donor_type, sustainer, premium."
+          }
+        },
+        {
+          "n": 5,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Bash",
+            "arg": "python3 — count rows and columns",
+            "result": "header: 10 columns; data rows: 420; rows with wrong field count: 0"
+          }
+        },
+        {
+          "n": 6,
+          "role": "assistant",
+          "text": "I read the file and didn't change anything.\n\n**File:** `pledge-drive-SYNTHETIC-do-not-upload.csv`\n\n**Size:** 10 columns, 420 data rows (plus 1 header row = 421 lines total). Every row has all 10 fields — nothing malformed.\n\n**The columns, in order:**\n\n| Column | Example value |\n|---|---|\n| `donor_name` | \"SAMPLE, Not-A-Real-Donor-001\" |\n| `email` | not-a-real-donor-1@example.invalid |\n| `street_address` | \"5854 Example St, Anytown WI 53206\" |\n| `phone` | 555-0103 |\n| `gift_amount` | 100 |\n| `gift_date` | 2026-03-02 |\n| `campaign_code` | SPRING26-PM |\n| `donor_type` | renewing / new / lapsed-reactivated |\n| `sustainer` | yes / no |\n| `premium` | tickets / mug / tote / none |\n\nTwo things worth flagging before you do anything else with this:\n\nThe filename and the contents both say this is **synthetic test data, not your real donor list**. The names are all \"SAMPLE, Not-A-Real-Donor-###\", the emails end in `.invalid` (a reserved domain that can never receive mail), the addresses are all \"Example St, Anytown WI,\" and the phone numbers are all in the 555-01xx range reserved for fiction. So whatever analysis we do here will be structurally realistic but the numbers won't mean anything about your actual drive.\n\nAlso: this file has real-donor-shaped columns — names, emails, home addresses, phone numbers. If the real version of this ever lands in this folder, it's personally identifiable donor data, and I'd want to be careful about where it gets sent or uploaded. The \"do-not-upload\" in the filename suggests someone already had that thought.\n\nWhat do you want to do with it?"
+        },
+        {
+          "n": 7,
+          "role": "user",
+          "text": "Four of those columns are personal: donor_name, email, street_address, phone. Make me a NEW file called drive-numbers-only.csv with those four columns removed and everything else intact. Don't touch the original. Then tell me how many columns the new file has."
+        },
+        {
+          "n": 8,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Bash",
+            "arg": "python3 — write drive-numbers-only.csv without the 4 PII columns, then grep it for leftover personal data",
+            "result": "kept columns: gift_amount, gift_date, campaign_code, donor_type, sustainer, premium; 420 data rows written; grep for name/email/phone patterns: 0 matches"
+          }
+        },
+        {
+          "n": 9,
+          "role": "assistant",
+          "text": "Done. **The new file has 6 columns.**\n\n`drive-numbers-only.csv` contains: `gift_amount`, `gift_date`, `campaign_code`, `donor_type`, `sustainer`, `premium` — all 420 rows intact, in the same order as the original.\n\nI checked the new file for leftover personal data (searched for the name pattern, the `.invalid` emails, and the `555-0` phone numbers) and got zero matches, so all four personal columns are cleanly gone.\n\nThe original `pledge-drive-SYNTHETIC-do-not-upload.csv` is untouched — same size and timestamp as before.\n\nOne caveat worth knowing: this file is de-identified, not fully anonymous. Each row still corresponds one-to-one with a specific donor, and the combination of gift amount plus exact date could in principle be matched back to someone if a person had the original. That's fine for the analysis you're likely doing, but I'd still treat it as internal rather than something to post publicly."
+        },
+        {
+          "n": 10,
+          "role": "user",
+          "text": "Good. Now use drive-numbers-only.csv to put together a short readout I can bring to the board: total raised, how many gifts, average gift, and a breakdown by campaign_code. Keep it to something I could read in two minutes."
+        },
+        {
+          "n": 11,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Bash",
+            "arg": "python3 — totals, average, median, and a breakdown by campaign_code and donor_type",
+            "result": "420 gifts, total $77,210, avg $183.83, median $75; by campaign_code: WEB $27,520 (36%), AM $19,765 (26%), PM $15,150 (20%), MAIL $14,775 (19%); sustainers: 173 gifts, $33,240"
+          }
+        },
+        {
+          "n": 12,
+          "role": "assistant",
+          "text": "Here's the readout. One important thing first, then the numbers.\n\n**This is the synthetic file, so these numbers are not your real drive.** Every figure below comes from the fabricated sample data, so please don't put these in front of the board as actuals. What this is genuinely good for is proving out the format — once you drop in the real export with the same columns, I can regenerate this in seconds and the numbers will be real.\n\n---\n\n## Spring 2026 Pledge Drive — Board Readout *(SAMPLE DATA)*\n\n**The top line:** 420 gifts, **$77,210 raised**, over a seven-day drive (March 1–7).\n\n**Average gift: $184. Median gift: $75.** That gap matters and is worth saying out loud to the board — the average is pulled up by a handful of large gifts, so \"$184\" isn't what a typical donor gave. The typical donor gave $75. Five donors gave $1,000 each, which alone is about 6% of the total. If a board member asks \"what does a normal supporter give,\" the honest answer is $75.\n\n**Where the money came from:**\n\n| Campaign | Gifts | Raised | Share | Avg gift |\n|---|---|---|---|---|\n| WEB | 114 | $27,520 | 36% | $241 |\n| AM (morning on-air) | 117 | $19,765 | 26% | $169 |\n| PM (afternoon on-air) | 108 | $15,150 | 20% | $140 |\n| MAIL | 81 | $14,775 | 19% | $182 |\n\n**The story in that table:** web is the standout. It brought in roughly the same number of gifts as morning on-air, but each one was worth about $70 more — so it produced the largest share of revenue of any channel. Mail is the quiet performer: the fewest gifts by far, but a healthy average, so it punches above its volume.\n\n**Two supporting facts worth having ready:**\n\nSustainers (recurring givers) made up 173 of the 420 gifts and $33,240 — about 43% of the money. That's a strong recurring base and a good number to lead with if the board cares about predictable revenue.\n\nLapsed donors who came back gave the *highest* average of any group ($222, vs. $172 for renewing donors and $187 for brand-new ones). 73 of them reactivated. That's an argument for spending effort on win-back outreach.\n\n---\n\nWant me to save this as a file you can print or email, or adjust what's in it? And if you can get me the real export with these same six columns, I'll rerun the whole thing against actuals."
+        }
+      ]
+    }
+  },
+  {
+    "id": "w-music-adds-prep",
+    "slug": "music-adds-prep",
+    "tier": "flagship",
+    "title": "Walk into the adds meeting already prepared",
+    "kicker": "A ranked prep list, local artists flagged — you still make the call.",
+    "roleSlug": "music",
+    "moduleNumber": 9,
+    "estMinutes": 25,
+    "youWillNeed": [
+      "Claude Code installed and signed in (do the 30-minute walkthrough first if not)",
+      "A folder on your machine called station-work",
+      "The practice file below — do NOT use a real adds list while you're learning"
+    ],
+    "guardrail": "Adds are a human editorial call, every time. Claude gathers, ranks, and flags — it never gets to recommend what actually goes into rotation, and nothing here replaces someone actually listening to the music.",
+    "sampleData": {
+      "filename": "music-adds-SYNTHETIC.csv",
+      "description": "A fake adds list: 12 candidate tracks, 6 of them local, with release dates and spin counts. Genre tags in this practice file are deliberately unreliable, which is part of the lesson.",
+      "rows": 12,
+      "columns": [
+        "artist",
+        "track",
+        "label",
+        "release_date",
+        "local",
+        "genre",
+        "spins_last_week",
+        "notes"
+      ],
+      "downloadPath": "/samples/music-adds-SYNTHETIC.csv",
+      "synthetic": true
+    },
+    "steps": [
+      {
+        "n": 1,
+        "title": "Ask for a ranked prep list, not a decision",
+        "do": "Point Claude at the spreadsheet and ask for a talking order for the meeting, with local artists flagged, and be explicit that it should not recommend actual adds.",
+        "prompt": "There is one spreadsheet in this folder — candidates for Tuesday's adds meeting. Read it, then give me a ranked list for the meeting: which tracks should we talk about first. Flag every local artist clearly, since those get priority in our rotation policy. Don't recommend actually adding anything — that's a human call in the meeting — just help me walk in prepared.",
+        "youWillSee": "Claude will ask your permission to read the file. Say yes. It will then read all 12 rows and hand back a ranked talking order with every local artist marked, plus a short note on anything in the data it thinks is worth questioning before you rely on it.",
+        "sessionTurn": 1
+      },
+      {
+        "n": 2,
+        "title": "Read the caution before the ranking",
+        "do": "Look at what Claude flagged about the data itself before you look at the ranking.",
+        "youWillSee": "In this recording, Claude noticed the genre column looked wrong — several non-local, clearly-not-hip-hop labels were tagged 'hip-hop' — and said it ignored that column rather than rank on bad data. It also asked what the spins_last_week column actually counts, since some tracks showed spins before their release date.",
+        "note": "This is the pattern to watch for: a data quality problem, named plainly, instead of quietly working around it. That's what you want it to do with your real spreadsheets too."
+      },
+      {
+        "n": 3,
+        "title": "Bring the ranked list to the meeting, not a decision",
+        "do": "Use the ranked list as your talking order in the room. The rank tells you what to discuss first — it does not tell you what to add.",
+        "youWillSee": "A table with every track, whether it's local, and a one-line reason it's ranked where it is — sorted so locals and time-sensitive releases surface to the top.",
+        "note": "Nothing in the output tells you to add anything. That's deliberate: the room decides, the list just saves you the hour of digging."
+      }
+    ],
+    "verify": [
+      {
+        "check": "Cross-check the local flag against your own knowledge of the artist roster.",
+        "why": "The 'local' flag in the source file could be wrong or out of date, and getting a local artist's priority wrong is the exact failure this walkthrough is meant to prevent.",
+        "ifWrong": "Correct the file yourself and re-run the prompt, or tell Claude directly which rows are actually local."
+      },
+      {
+        "check": "Confirm the spin counts and release dates match what your programming system shows.",
+        "why": "If the sheet you exported is stale, the ranking will be built on outdated urgency — a track that already aired last week could still show up as 'time-sensitive.'",
+        "ifWrong": "Re-export the spreadsheet fresh from your system and run the prompt again before the meeting."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "Claude ranks everything the same, or the ranking doesn't make sense.",
+        "cause": "It's likely relying on a column that's unreliable, like a mis-tagged genre field, without you knowing.",
+        "fix": "Ask it directly: 'Which columns did you actually use to rank these, and which did you ignore?'"
+      },
+      {
+        "symptom": "It suggests what to actually add to rotation.",
+        "cause": "The prompt didn't draw the line clearly enough between prep and decision.",
+        "fix": "Remind it in the same conversation: 'Just rank and flag — the room decides what airs.' Then ask it to redo the summary without recommendations."
+      }
+    ],
+    "session": {
+      "cwd": "station-work",
+      "recordedOn": "2026-07-12",
+      "trimmed": true,
+      "trimNote": "Sanitized the recording scratch-directory absolute path down to station-work/ — noise removal, not content. The full folder listing and full 12-row CSV dump were shortened to one-line summaries since the ranked table in the final turn already restates every track.",
+      "turns": [
+        {
+          "n": 1,
+          "role": "user",
+          "text": "There is one spreadsheet in this folder — candidates for Tuesday's adds meeting. Read it, then give me a ranked list for the meeting: which tracks should we talk about first. Flag every local artist clearly, since those get priority in our rotation policy. Don't recommend actually adding anything — that's a human call in the meeting — just help me walk in prepared."
+        },
+        {
+          "n": 2,
+          "role": "assistant",
+          "text": "I'll read the spreadsheet and put together a ranked prep list for you."
+        },
+        {
+          "n": 3,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Bash",
+            "arg": "ls -la station-work",
+            "result": "One file: music-adds-SYNTHETIC.csv"
+          }
+        },
+        {
+          "n": 4,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Read",
+            "arg": "music-adds-SYNTHETIC.csv",
+            "result": "12 rows, 8 columns — artist, track, label, release_date, local, genre, spins_last_week, notes."
+          }
+        },
+        {
+          "n": 5,
+          "role": "assistant",
+          "text": "Read it — 12 candidate tracks, 6 local and 6 not. Here's a ranked talking order, plus two data problems you should know about before you walk in.\n\n## One caution first\n\nThe file is named `music-adds-SYNTHETIC.csv`, and the contents look like test data, not a real export. The **genre column is clearly unreliable**: Abby Jeanne is tagged hip-hop, Nickel&Rose is tagged electronic, and five of the six non-local tracks are tagged hip-hop even though they're on Sub Pop, 4AD, Merge, Dead Oceans, Anti-, and Matador. I ranked on things I can actually trust from the sheet — local status, release date, and spins — and ignored genre entirely. If this is meant to be the real candidate list, someone should re-pull it.\n\n## Ranked talking order\n\nLocals first, per your rotation policy. Today is Sunday 7/12; I treated the meeting as Tuesday 7/14.\n\n| # | Track | Local? | Why it's here |\n|---|---|---|---|\n| 1 | **Abby Jeanne — \"Neon Hymn\"** | **LOCAL** | Out since 7/8 with 12 spins — the strongest local traction on the sheet, and a decision that's already a few days late. |\n| 2 | **Klassik — \"Milwaukee Sun\"** | **LOCAL** | Drops the day of the meeting. 0 spins simply because it isn't out yet. If it isn't decided Tuesday, you miss release week. |\n| 3 | **B~Free — \"Sideways\"** | **LOCAL** | Also drops 7/14. Same release-week timing pressure, less existing traction (3 spins). |\n| 4 | **Lex Allen — \"Open Wide\"** | **LOCAL** | Out 7/17. Already at 8 spins, so there's appetite; deciding Tuesday means you're ready for release day. |\n| 5 | **Immortal Girlfriend — \"Cold Static\"** | **LOCAL** | Out 7/21. Real candidate, but it could survive being held to next week's meeting if you run out of time. |\n| 6 | **Nickel&Rose — \"Half Light\"** | **LOCAL** | Out since 7/11, only 1 spin. Weakest signal of the locals — but it's local, so policy puts it above the national list. |\n| 7 | Static Palace — \"Overpass\" (Merge) | no | 14 spins, the highest number in the room, and out since 7/2. You're effectively already playing it; this is a \"formalize it or stop\" conversation. |\n| 8 | Nightjar — \"Tin Roof\" (Dead Oceans) | no | 10 spins, releases 7/19. Second-most traction. |\n| 9 | The Vanishing — \"Paper Radio\" (Sub Pop) | no | 7 spins, just came out 7/12. |\n| 10 | Wide Ocean — \"Signal Fade\" (Matador) | no | 4 spins, out 7/15. |\n| 11 | Marigold Fields — \"Slow Bloom\" (4AD) | no | 3 spins, out since 7/6 — a week out with little movement. |\n| 12 | Ruthie Blue — \"Anyhow\" (Anti-) | no | Out 7/12, 0 spins. Least evidence of anything; save it for last. |\n\n## The one thing I'd raise in the room\n\nIf you only get through half the list, the top four are the ones that actually expire: Klassik and B~Free both drop Tuesday, Lex Allen drops Friday, and Abby Jeanne is already out. Items 5 through 12 will all still be live decisions next week.\n\nAlso worth asking someone: **what does `spins_last_week` actually count?** Several tracks have spins before their release date — Nightjar has 10 spins and doesn't come out until 7/19. That's normal if it's counting specialty-show or advance plays, but if you're reading those numbers as rotation performance, they mean something different than you think.\n\nI've deliberately not said whether anything should be added — that's the room's call."
+        }
+      ]
+    }
+  },
+  {
+    "id": "w-underwriting-red-team",
+    "slug": "underwriting-red-team",
+    "tier": "flagship",
+    "title": "Red-team underwriting copy before it airs",
+    "kicker": "It flags. A human accountable for the license still signs off.",
+    "roleSlug": "underwriting",
+    "moduleNumber": 6,
+    "estMinutes": 25,
+    "youWillNeed": [
+      "Claude Code installed and signed in (do the 30-minute walkthrough first if not)",
+      "A folder on your machine called station-work",
+      "The practice file below — do NOT use real sponsor copy while you're learning",
+      "Your station's actual underwriting rules, if they differ from the plain FCC ones used here"
+    ],
+    "guardrail": "The red-team flags, it does not approve. Nothing airs on Claude's say-so — a human who is accountable for the license reviews and signs off on every spot, every time.",
+    "sampleData": {
+      "filename": "underwriting-copy-SYNTHETIC.csv",
+      "description": "Four fake draft spots waiting to clear. Two of them are written to deliberately break the rules — a call to action, a price claim, and a comparative claim — so you can see what a failure actually looks like.",
+      "rows": 4,
+      "columns": [
+        "client",
+        "spot_id",
+        "length_sec",
+        "draft_copy",
+        "flight_start",
+        "flight_end"
+      ],
+      "downloadPath": "/samples/underwriting-copy-SYNTHETIC.csv",
+      "synthetic": true
+    },
+    "steps": [
+      {
+        "n": 1,
+        "title": "Name the rules, then ask for a pass/fail on each spot",
+        "do": "Give Claude the three rules explicitly and ask it to go spot by spot, quoting the exact problem phrase whenever a spot fails.",
+        "prompt": "There is one spreadsheet in this folder with draft underwriting copy waiting to clear. Read it, then go through each spot one at a time and red-team it against our station policy: no calls to action, no price claims, no qualitative or comparative claims (like 'the best' or 'unbeatable'). For each spot tell me clearly whether it passes or fails, and quote the exact phrase that's the problem if it fails.",
+        "youWillSee": "Claude will ask your permission to read the file. Say yes. It will then go spot by spot — four of them in this recording — naming PASS or FAILS for each one, and quoting the exact phrase that broke a rule.",
+        "sessionTurn": 1
+      },
+      {
+        "n": 2,
+        "title": "Check its reasoning, not just its verdict",
+        "do": "Read why it passed or failed each spot, not just the verdict. A red-team tool that can't explain itself isn't one you can trust with the next spot.",
+        "youWillSee": "In this recording, two of the four spots failed outright — one broke all three rules in a single sentence, one broke two of them. The other two passed, and Claude pointed out they share the same safe pattern: name the sponsor, describe them factually, give a location, done.",
+        "note": "Notice it also flagged a borderline case — a spot with no dollar figure but language ('rates') close enough to a price claim that it recommended avoiding it anyway. That kind of judgment call is exactly what you're checking, not rubber-stamping."
+      },
+      {
+        "n": 3,
+        "title": "Send failures back for a human rewrite",
+        "do": "Anything flagged FAILS goes back to the sponsor or gets rewritten by a person — never auto-fixed and aired without a second human look.",
+        "youWillSee": "If you ask, Claude can draft a compliant rewrite using the passing spots as a template — but that draft is a starting point for your review, not a finished, approved spot.",
+        "note": "The guardrail again, because it's worth repeating: Claude flags, a human accountable for the license approves."
+      }
+    ],
+    "verify": [
+      {
+        "check": "Re-read the two 'FAILS' spots yourself and confirm the quoted phrase is actually what's broken.",
+        "why": "If Claude quotes the wrong phrase, or misses a violation, you need to know before you send it back to a sponsor as an official rejection.",
+        "ifWrong": "Point it out directly: 'That's not the problem phrase — the actual issue is ___.' Ask it to redo that one spot."
+      },
+      {
+        "check": "Confirm the two 'PASSES' spots against your station's actual underwriting policy, not just the three rules used here.",
+        "why": "This walkthrough only tests three plain rules. Your station may have additional restrictions Claude wasn't told about.",
+        "ifWrong": "Give it your station's real policy document and ask it to re-check the passing spots against that instead."
+      }
+    ],
+    "troubleshooting": [
+      {
+        "symptom": "It passes a spot that you think should fail.",
+        "cause": "The rule it was told to check may be narrower than the rule you actually meant.",
+        "fix": "Quote the exact language you're worried about and ask: 'Does this count as a call to action / price claim / comparative claim, and why or why not?'"
+      },
+      {
+        "symptom": "It offers to just fix the copy instead of only red-teaming it.",
+        "cause": "This is a normal, helpful next step, but it can blur the line between 'flagging a problem' and 'approving a fix.'",
+        "fix": "Say explicitly: 'Don't fix it yet — I just need the pass/fail list first.' Ask for a rewrite as a separate, later step."
+      }
+    ],
+    "session": {
+      "cwd": "station-work",
+      "recordedOn": "2026-07-12",
+      "trimmed": true,
+      "trimNote": "Sanitized the recording scratch-directory absolute path down to station-work/ — noise removal, not content. The full folder listing and full 4-row CSV dump were shortened to one-line summaries since the final turn quotes every draft in full anyway.",
+      "turns": [
+        {
+          "n": 1,
+          "role": "user",
+          "text": "There is one spreadsheet in this folder with draft underwriting copy waiting to clear. Read it, then go through each spot one at a time and red-team it against our station policy: no calls to action, no price claims, no qualitative or comparative claims (like 'the best' or 'unbeatable'). For each spot tell me clearly whether it passes or fails, and quote the exact phrase that's the problem if it fails."
+        },
+        {
+          "n": 2,
+          "role": "assistant",
+          "text": "I'll look at what's in the folder first."
+        },
+        {
+          "n": 3,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Bash",
+            "arg": "ls -la station-work",
+            "result": "One file: underwriting-copy-SYNTHETIC.csv"
+          }
+        },
+        {
+          "n": 4,
+          "role": "tool",
+          "text": "",
+          "tool": {
+            "name": "Read",
+            "arg": "underwriting-copy-SYNTHETIC.csv",
+            "result": "4 spots (UW-1001 to UW-1004) — client, spot_id, length_sec, draft_copy, flight_start, flight_end."
+          }
+        },
+        {
+          "n": 5,
+          "role": "assistant",
+          "text": "I read the file — it's a CSV with four spots. Here's the red-team against your three rules (no calls to action, no price claims, no qualitative/comparative claims).\n\n**UW-1001 — Example Dental Group (15s): FAILS, on all three rules.**\n\n> \"Call today for the best cleaning in Milwaukee — only $79!\"\n\n- Call to action: \"Call today\"\n- Qualitative/superlative claim: \"the best cleaning in Milwaukee\"\n- Price claim: \"only $79\"\n\nThere's essentially nothing salvageable in that sentence — it needs a full rewrite down to a plain identification of the business.\n\n**UW-1002 — Anytown Books (30s): PASSES.**\n\n> \"Support comes from Anytown Books, an independent bookseller on Example Street, offering new and used titles. Online at example.invalid.\"\n\nEverything here is value-neutral description: what they are, where they are, what they carry. \"Online at example.invalid\" is a locator, not an urge to act — that's the standard construction and it's fine. No pricing, no comparison, no imperative verb.\n\n**UW-1003 — Sample Credit Union (15s): FAILS, two rules.**\n\n> \"switch now and get our unbeatable rates. Visit any branch this week!\"\n\n- Call to action: \"switch now\" and \"Visit any branch this week\" (two separate ones, plus the urgency of \"this week\")\n- Comparative claim: \"unbeatable rates\"\n\nNote there's no dollar figure, so it doesn't trip the price rule outright — but \"rates\" is close enough to the line that I'd keep any rate language out entirely rather than argue it.\n\n**UW-1004 — Placeholder Brewing (30s): PASSES.**\n\n> \"Support for this station comes from Placeholder Brewing, a family-owned brewery in Anytown, serving lunch and dinner. Information at example.invalid.\"\n\n\"Family-owned\" is a factual statement about ownership structure, not a quality or comparative claim, so it's clean. Same neutral pattern as the Anytown Books spot.\n\n**Bottom line:** two clear (UW-1002, UW-1004), two need rewrites before they can air (UW-1001, UW-1003). The two passing spots are a good template for fixing the failing ones — same shape: \"Support comes from [name], a [factual description] [location], offering [neutral list of what they do]. Information at [URL].\"\n\nWant me to draft compliant rewrites of UW-1001 and UW-1003 in that same pattern, keeping them to their 15-second lengths?"
+        }
+      ]
+    }
+  }
+]
