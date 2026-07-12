@@ -19,7 +19,7 @@ export function validateWalkthrough(w, opts = {}) {
   if (!w?.slug) at("missing slug");
   if (!TIERS.includes(w?.tier)) at(`tier must be one of ${TIERS.join(" | ")}`);
   if (!w?.title) at("missing title");
-  if (typeof w?.moduleNumber !== "number" || w.moduleNumber < 1 || w.moduleNumber > 10) {
+  if (!Number.isInteger(w?.moduleNumber) || w.moduleNumber < 1 || w.moduleNumber > 10) {
     at("moduleNumber must be an integer 1-10");
   }
 
@@ -83,7 +83,7 @@ export function validateWalkthrough(w, opts = {}) {
     const sd = w.sampleData;
     if (sd.synthetic !== true) at("sampleData.synthetic must be true — we never ship real station data");
     if (!sd.downloadPath) at("sampleData: missing downloadPath");
-    else if (!fileExists(sd.downloadPath)) at(`sampleData: ${sd.downloadPath} does not exist in public/`);
+    else if (!fileExists(sd.downloadPath)) at(`sampleData: file not found at ${sd.downloadPath}`);
     if (!Array.isArray(sd.columns) || sd.columns.length === 0) at("sampleData: must list its columns");
   }
 

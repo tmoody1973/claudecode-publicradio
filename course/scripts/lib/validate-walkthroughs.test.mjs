@@ -48,6 +48,18 @@ test("a valid walkthrough produces no errors", () => {
   assert.deepEqual(validateWalkthrough(valid(), opts), []);
 });
 
+test("rejects a non-integer moduleNumber", () => {
+  const w = valid();
+  w.moduleNumber = 2.5;
+  assert.ok(validateWalkthrough(w, opts).some((e) => /integer/i.test(e)));
+});
+
+test("rejects a moduleNumber outside 1-10", () => {
+  const w = valid();
+  w.moduleNumber = 11;
+  assert.ok(validateWalkthrough(w, opts).some((e) => /moduleNumber/i.test(e)));
+});
+
 test("rejects a walkthrough with no guardrail", () => {
   const w = valid();
   w.guardrail = "";
@@ -91,10 +103,10 @@ test("rejects sampleData that is not marked synthetic", () => {
   assert.ok(validateWalkthrough(w, opts).some((e) => /synthetic/i.test(e)));
 });
 
-test("rejects sampleData whose file is missing from public/", () => {
+test("rejects sampleData whose file the injected predicate reports missing", () => {
   const w = valid();
   const errs = validateWalkthrough(w, { sampleFileExists: () => false });
-  assert.ok(errs.some((e) => /does not exist/i.test(e)), errs.join("; "));
+  assert.ok(errs.some((e) => /not found/i.test(e)), errs.join("; "));
 });
 
 test("the onboarding tier must NOT carry sampleData", () => {
