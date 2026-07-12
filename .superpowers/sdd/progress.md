@@ -31,7 +31,9 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
 - [x] 5 walkthroughs + REAL recorded sessions — COMPLETE (867f619..3a1557d, review clean after 1 Important fix)
       4 sessions, 27 real turns, 0 fabricated permission turns. Fixed: moduleNumber
       shadowing bug (walkthroughForModule now prefers flagship; guarded by validateWalkthroughSet).
-- [ ] 6 walkthrough pages
+- [x] 6 walkthrough pages — COMPLETE (e2a4b43..6f3bee4, review clean after 1 Important fix:
+      terminal was 1655px vs 705px viewport and 'Next turn' produced NO visible change.
+      Now capped at 55vh with scroll-into-view. All turns still in a11y tree.)
 - [ ] 7 fifty runbooks
 - [ ] 8 wire in + audit gate
 
