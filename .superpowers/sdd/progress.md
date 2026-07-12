@@ -28,7 +28,9 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
 - [x] 4 walkthrough section components — COMPLETE (commits 3ca47f8..3f2332a, review clean)
 - [x] 3 recorded-session terminal — COMPLETE (commits 159de30..7d132ad, review clean, no findings)
 - [ ] 4 walkthrough section components
-- [ ] 5 author 4 walkthroughs + RECORD real sessions  <-- long pole, interactive
+- [x] 5 walkthroughs + REAL recorded sessions — COMPLETE (867f619..3a1557d, review clean after 1 Important fix)
+      4 sessions, 27 real turns, 0 fabricated permission turns. Fixed: moduleNumber
+      shadowing bug (walkthroughForModule now prefers flagship; guarded by validateWalkthroughSet).
 - [ ] 6 walkthrough pages
 - [ ] 7 fifty runbooks
 - [ ] 8 wire in + audit gate
@@ -46,3 +48,8 @@ Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
   components/home/limits.tsx, lib/openui-library.tsx (Callout guardrail, color:'#fff'),
   and the use-case guardrail blocks. DESIGN.md calls WCAG AA a hard requirement.
   → Fix in Task 8 or flag to the final whole-branch review.
+- T5: NONE of the 4 real recordings produced a spontaneous Claude mistake/self-correction.
+  The implementer correctly REFUSED to fabricate one. Plan wanted >=1 wrong-turn+correction;
+  honestly unmet rather than faked. 3 of 4 sessions still carry real friction (median-vs-average
+  correction, a mistagged-genre catch, a borderline FCC call). The onboarding (w1) is
+  frictionless. Acceptable — but worth telling the user.
