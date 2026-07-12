@@ -60,10 +60,6 @@ export function validateWalkthrough(w, opts = {}) {
           at(`session turn ${i + 1}: empty turn`);
         }
       });
-      // We deliberately keep the scary moment in. If it's not there, we over-trimmed.
-      if (!s.turns.some((t) => t.role === "permission")) {
-        at("session: no permission prompt — keep one in; it's what a first-timer needs to see coming");
-      }
     }
 
     // steps may point at turns; those pointers must resolve
@@ -73,6 +69,28 @@ export function validateWalkthrough(w, opts = {}) {
         at(`step ${i + 1}: sessionTurn ${st.sessionTurn} does not exist (session has ${turnCount} turns)`);
       }
     });
+  }
+
+  /**
+   * The permission prompt must be WARNED ABOUT, not faked.
+   *
+   * Permission prompts are an interactive-TTY feature — they cannot be captured in a
+   * headless recording. Requiring a `permission` TURN would therefore have forced us to
+   * fabricate one, which breaks the never-add rule that is the entire reason we record
+   * sessions instead of scripting them.
+   *
+   * So we require the truth instead: at least one step must tell her the prompt is
+   * coming. `permission` remains a legal turn role — if a real prompt is ever captured
+   * interactively, it can be used — but it is not required, and it is never invented.
+   */
+  const warnsAboutPermission = (w?.steps ?? []).some((st) =>
+    /permission|ask(s)? (you|your)|approve|allow/i.test(String(st.youWillSee ?? "")),
+  );
+  if (!warnsAboutPermission) {
+    at(
+      "no step warns about the permission prompt — a first-timer must know it's coming. " +
+        "Say so in a step's youWillSee (e.g. \"Claude will ask your permission to read the file. Say yes.\")",
+    );
   }
 
   // --- sample data ---

@@ -25,6 +25,12 @@ function valid() {
     },
     steps: [
       { n: 1, title: "Make a folder", do: "Create a folder called station-work.", youWillSee: "An empty folder." },
+      {
+        n: 2,
+        title: "Point Claude at the file",
+        do: "Ask it to read the spreadsheet.",
+        youWillSee: "Claude will ask your permission to read the file. Say yes.",
+      },
     ],
     session: {
       cwd: "station-work",
@@ -33,7 +39,7 @@ function valid() {
       trimNote: "Trimmed for length; nothing added.",
       turns: [
         { n: 1, role: "user", text: "Read the file." },
-        { n: 2, role: "permission", text: "Allow Claude to read drive.csv?" },
+        { n: 2, role: "tool", text: "", tool: { name: "Read", arg: "drive.csv", result: "420 rows" } },
         { n: 3, role: "assistant", text: "Actually, I misread that — correcting." },
       ],
     },
@@ -91,10 +97,30 @@ test("rejects an unknown turn role", () => {
   assert.ok(validateWalkthrough(w, opts).some((e) => /role/i.test(e)));
 });
 
-test("requires a permission prompt in the recording", () => {
+/**
+ * Permission prompts are an interactive-TTY feature and cannot be captured in a headless
+ * recording. Requiring a `permission` TURN would have forced us to fabricate one, breaking
+ * the never-add rule. So we require the truth instead: a step must WARN that it's coming.
+ */
+test("requires a step that warns the permission prompt is coming", () => {
+  const w = valid();
+  w.steps = w.steps.map((s) => ({ ...s, youWillSee: "Some output appears." }));
+  assert.ok(
+    validateWalkthrough(w, opts).some((e) => /permission/i.test(e)),
+    "a walkthrough that never mentions the permission prompt must fail",
+  );
+});
+
+test("a session with no permission turn is fine, so long as a step warns", () => {
   const w = valid();
   w.session.turns = w.session.turns.filter((t) => t.role !== "permission");
-  assert.ok(validateWalkthrough(w, opts).some((e) => /permission/i.test(e)));
+  assert.deepEqual(validateWalkthrough(w, opts), []);
+});
+
+test("permission is still a legal turn role (if one is ever really captured)", () => {
+  const w = valid();
+  w.session.turns.push({ n: 4, role: "permission", text: "Allow Claude to read drive.csv?" });
+  assert.deepEqual(validateWalkthrough(w, opts), []);
 });
 
 test("rejects sampleData that is not marked synthetic", () => {
