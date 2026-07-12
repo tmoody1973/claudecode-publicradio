@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 import { CopyPrompt } from "@/components/copy-prompt";
 import { BrainLevels } from "@/components/module/brain-levels";
 import { ModuleHeader, ModuleNav } from "@/components/module/module-header";
@@ -21,6 +23,7 @@ import { UseCaseCards } from "@/components/module/use-case-cards";
 import { VideoProvider } from "@/components/video/video-player";
 import { getModule, meta, modules } from "@/lib/course";
 import type { CourseModule } from "@/lib/course";
+import { walkthroughForModule } from "@/lib/walkthroughs";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -125,6 +128,7 @@ export default async function ModulePage({ params }: Props) {
   const i = modules.findIndex((m) => m.slug === mod.slug);
   const prev = modules[i - 1];
   const next = modules[i + 1];
+  const wt = walkthroughForModule(mod.number);
 
   return (
     <div className="mx-auto max-w-4xl px-4 pb-24 pt-6">
@@ -185,6 +189,17 @@ export default async function ModulePage({ params }: Props) {
           </p>
           <p className="mt-1.5 text-[15px] leading-relaxed">{mod.tryThis.setup}</p>
         </div>
+        {wt ? (
+          <Link
+            href={`/walkthroughs/${wt.slug}`}
+            className="retro-box retro-lift mb-4 mt-4 flex min-h-11 items-center gap-2 bg-primary p-4 no-underline"
+          >
+            <span className="font-head text-[13px] uppercase tracking-wide text-black">
+              Rather be walked through it? Do this step by step, with a real recording
+            </span>
+            <ArrowRight className="ml-auto size-5 shrink-0 text-black" aria-hidden />
+          </Link>
+        ) : null}
         <div className="mt-4">
           <CopyPrompt label={mod.tryThis.title} prompt={mod.tryThis.prompt} />
         </div>

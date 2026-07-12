@@ -53,6 +53,7 @@ export function UseCaseCard({ useCase }: { useCase: UseCase }) {
         <details className="mt-3 border-t-2 border-border pt-3">
           <summary className="flex min-h-11 cursor-pointer items-center font-head text-[12px] uppercase tracking-wide">
             How to actually do this
+            <span className="sr-only"> — {useCase.title}</span>
           </summary>
           <ol className="mt-3 space-y-2">
             {useCase.runbook.steps.map((s, i) => (
