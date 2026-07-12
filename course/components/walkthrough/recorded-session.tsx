@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronRight, ShieldAlert, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -25,8 +25,27 @@ import type { RecordedSession as Session, Turn } from "@/lib/walkthroughs";
 export function RecordedSession({ session }: { session: Session }) {
   const total = session.turns.length;
   const [shown, setShown] = useState(1);
+  const containerRef = useRef<HTMLOListElement>(null);
 
   const atEnd = shown >= total;
+
+  // Scroll the newly-revealed turn into view within the transcript's own
+  // scroll container (never the page) each time `shown` changes. Replaying
+  // (shown === 1) scrolls back to the top instead.
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const behavior = reduceMotion ? "auto" : "smooth";
+
+    if (shown <= 1) {
+      container.scrollTo({ top: 0, behavior });
+      return;
+    }
+    container
+      .querySelector<HTMLLIElement>(`[data-turn-index="${shown}"]`)
+      ?.scrollIntoView({ behavior, block: "nearest" });
+  }, [shown]);
 
   return (
     <figure className="retro-box-lg bg-terminal-bg">
@@ -41,10 +60,14 @@ export function RecordedSession({ session }: { session: Session }) {
         </span>
       </div>
 
-      {/* transcript — ALL turns rendered, always */}
-      <ol className="scroll-x space-y-3 p-3 sm:p-4">
+      {/* transcript — ALL turns rendered, always. Capped height + internal
+          scroll so "Next turn" reveals a turn that's actually visible. */}
+      <ol
+        ref={containerRef}
+        className="scroll-x max-h-[55vh] space-y-3 overflow-y-auto overscroll-contain p-3 sm:p-4"
+      >
         {session.turns.map((t, i) => (
-          <TurnRow key={t.n} turn={t} hidden={i + 1 > shown} />
+          <TurnRow key={t.n} turn={t} hidden={i + 1 > shown} index={i + 1} />
         ))}
       </ol>
 
@@ -82,13 +105,13 @@ export function RecordedSession({ session }: { session: Session }) {
   );
 }
 
-function TurnRow({ turn, hidden }: { turn: Turn; hidden: boolean }) {
+function TurnRow({ turn, hidden, index }: { turn: Turn; hidden: boolean; index: number }) {
   // `hidden` dims and disables — it NEVER removes the turn from the DOM.
   const dim = hidden ? "opacity-25" : "opacity-100";
 
   if (turn.role === "user") {
     return (
-      <li className={cn("transition-opacity", dim)}>
+      <li data-turn-index={index} className={cn("transition-opacity", dim)}>
         <div className="flex gap-2">
           <span className="shrink-0 font-mono text-[13px] text-terminal-accent" aria-hidden>
             &gt;
@@ -104,7 +127,7 @@ function TurnRow({ turn, hidden }: { turn: Turn; hidden: boolean }) {
 
   if (turn.role === "permission") {
     return (
-      <li className={cn("transition-opacity", dim)}>
+      <li data-turn-index={index} className={cn("transition-opacity", dim)}>
         <div className="retro-box border-destructive bg-destructive p-2.5">
           <div className="flex items-start gap-2">
             <ShieldAlert className="mt-0.5 size-4 shrink-0 text-destructive-foreground" aria-hidden />
@@ -122,7 +145,7 @@ function TurnRow({ turn, hidden }: { turn: Turn; hidden: boolean }) {
 
   if (turn.role === "tool") {
     return (
-      <li className={cn("transition-opacity", dim)}>
+      <li data-turn-index={index} className={cn("transition-opacity", dim)}>
         <div className="font-mono text-[12px] leading-relaxed text-terminal-dim">
           <div className="[overflow-wrap:anywhere]">
             <span aria-hidden>⏺ </span>
@@ -142,7 +165,7 @@ function TurnRow({ turn, hidden }: { turn: Turn; hidden: boolean }) {
 
   // assistant
   return (
-    <li className={cn("transition-opacity", dim)}>
+    <li data-turn-index={index} className={cn("transition-opacity", dim)}>
       <p className="min-w-0 [overflow-wrap:anywhere] text-[13px] leading-relaxed text-terminal-fg">
         <span className="sr-only">Claude replied: </span>
         {turn.text}

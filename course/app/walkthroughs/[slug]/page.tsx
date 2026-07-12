@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
+import { Section } from "@/components/module/module-sections";
 import { BeforeYouStart } from "@/components/walkthrough/before-you-start";
 import { RecordedSession } from "@/components/walkthrough/recorded-session";
 import { SampleDataCard } from "@/components/walkthrough/sample-data-card";
@@ -21,28 +22,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const w = getWalkthrough(slug);
   if (!w) return { title: "Not found" };
   return { title: w.title, description: w.kicker };
-}
-
-function Section({
-  id,
-  title,
-  subtitle,
-  children,
-}: {
-  id: string;
-  title: string;
-  subtitle?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section id={id} aria-labelledby={`${id}-h`} className="mt-12">
-      <h2 id={`${id}-h`} className="text-xl uppercase tracking-tight sm:text-2xl">
-        {title}
-      </h2>
-      {subtitle ? <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p> : null}
-      <div className="mt-4">{children}</div>
-    </section>
-  );
 }
 
 export default async function WalkthroughPage({ params }: Props) {
