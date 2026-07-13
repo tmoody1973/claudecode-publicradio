@@ -91,8 +91,29 @@ Merge-base: 5c509b2 (the plan commit; branch started from c39635f on main)
             renderer resolves them from the real library. An invented id renders nothing.
         (b) Minor a11y: card header is <h3> while the sibling UseCaseCard uses <h4>,
             giving a non-monotonic heading outline. Fix to <h4>.
-- [ ] 6 wire into the chat (app/api/chat/route.ts)
-- [ ] 7 gates (test, tsc, build, audit + honesty invariants)
+- [x] 6 wire into the chat — COMPLETE (759360b, acceptance bar met)
+      Synchronous searchLibrary + conditional system block. HARDENED: the model emits
+      IDS ONLY; the renderer resolves them against a generated slim client index
+      (content/library-index.ts, 72KB, no descriptions). A fabricated id renders NOTHING.
+      CRITICAL BUG CAUGHT HERE: the feature silently did not fire — 0 Sources blocks in 11
+      runs despite 4 real hits every time. FOUR causes, only two of which I predicted:
+        1. the prompt led with a prohibition ("Sources ONLY when...") -> positive default
+        2. no EXAMPLE showed a Sources block -> added one
+        3. OpenUI Lang commits the block list on LINE 1 (`root = Answer([...])`), so
+           "END your answer with Sources" is unreachable advice. Moved the instruction to
+           root-array composition. One response was truncated mid-Sources at max_tokens
+           (raised 1600 -> 2000).
+        4. the examples accidentally taught "UseCaseCard shape => no Sources" — every miss
+           had the identical root [p1, uc1, guard, follow]. A third example broke it.
+      MEASURED ON THE REAL CHAT (5 runs each): ethics/transcription 5/5, AI policy 4/5,
+      what stations disclose 5/5, install Claude Code 0/5, context window 0/5.
+      ZERO invented ids across ~60 calls.
+- [x] 7 gates — VERIFIED by the controller directly:
+      74 tests pass | tsc clean | build clean | audit: only /cost fails, and it FAILS ON
+      MAIN TOO (verified by checkout) — pre-existing, not a regression from this branch.
+      Honesty invariants all hold: 292 sources, count truthful, 198 + 94 = 292, every
+      source reachable, NO description written by an LLM. 14 deps (unchanged).
+      package.json differs from main ONLY in `scripts`.
 
 ## Minor findings (for the final whole-branch review to triage)
 - T3: `other` bucket is 24% of the library. A reviewer sampled 10 and judged them genuine
