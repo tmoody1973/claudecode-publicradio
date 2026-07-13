@@ -139,6 +139,33 @@ test("parseOgTags returns nulls when there are no tags", () => {
   });
 });
 
+test("parseOgTags prefers a short meta description over a runaway og:description", () => {
+  const long = "word ".repeat(200); // 1000 chars — a CMS dumping the article body
+  const html = `<meta property="og:description" content="${long}"><meta name="description" content="A short, sane blurb.">`;
+  assert.equal(parseOgTags(html).description, "A short, sane blurb.");
+});
+
+test("parseOgTags hard-caps a long description on a word boundary", () => {
+  const html = `<meta property="og:description" content="${"alpha ".repeat(100)}">`;
+  const d = parseOgTags(html).description;
+  assert.ok(d.length <= 301, `expected <=301 chars, got ${d.length}`);
+  assert.ok(d.endsWith("…"), "should end with an ellipsis");
+  assert.ok(!/\balph$|\balp$|\bal$/.test(d.slice(0, -1).trim()), "must not cut mid-word");
+});
+
+test("parseOgTags strips literal HTML tags out of a description", () => {
+  const html = `<meta property="og:description" content="&lt;p&gt;A major study&lt;/p&gt;&lt;p&gt;&lt;/p&gt;">`;
+  assert.equal(parseOgTags(html).description, "A major study");
+});
+
+test("the fixpoint decoder trades a rare over-decode for correctness on real double-encoded data", () => {
+  // 3 real publishers ship &amp;amp; and MEAN "&". Decoding to a fixpoint fixes them.
+  // The cost: text that genuinely wants to SHOW "&amp;" decodes one step too far.
+  // Zero of the 292 real sources hit this; three hit the case above. Deliberate trade.
+  const html = `<meta property="og:description" content="Jamillah Knowles &amp;amp; Digit">`;
+  assert.equal(parseOgTags(html).description, "Jamillah Knowles & Digit");
+});
+
 test("resolveUrl passes a real URL straight through", () => {
   assert.deepEqual(resolveUrl({ title: "Whatever", url: "https://npr.org/x" }), {
     url: "https://npr.org/x",

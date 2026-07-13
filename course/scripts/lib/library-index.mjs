@@ -84,6 +84,12 @@ function decodeOnce(s) {
  * ponytail: the 3-pass cap is a guard, not a tuning knob — it stops a pathological
  * input from spinning, and stops runaway over-decoding of text that is legitimately
  * ABOUT escaping. Every real case in the 292 is clean after 2.
+ *
+ * Trade-off, deliberate: text that genuinely wants to SHOW the literal "&amp;" will
+ * decode one step too far, to "&". Verified against the real 292: zero sources hit
+ * that over-decode today; three (PBS, WashU, JournalismAI) hit the double-encoding
+ * bug this loop fixes. Leaving "&amp;" visible to users is the worse failure, so the
+ * fixpoint loop stays.
  */
 const MAX_DECODE_PASSES = 3;
 
@@ -186,12 +192,57 @@ function meta(html, attr, value) {
   return raw ? decodeEntities(raw) : null;
 }
 
+const DESCRIPTION_MAX = 300;
+// Above this, an og:description is almost certainly a CMS bug (whole article body
+// dumped into the tag), not a blurb. Confirmed live on 3+ publishers, one as long
+// as 22,515 chars — enough alone to blow the chat's ~4k grounding budget.
+const RUNAWAY_OG_THRESHOLD = 400;
+
+/** A publisher's CMS occasionally HTML-encodes real markup into og:description
+ * (id 20, creativesunite.eu: "<p>...</p><p>\r\n</p>"). Our decoder faithfully
+ * decodes it, so strip it back out and collapse the resulting whitespace. */
+function stripHtmlTags(s) {
+  return s.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/** Cut at `max` chars on a word boundary — never mid-word — and mark the cut
+ * with an ellipsis. */
+function truncateOnWordBoundary(s, max) {
+  if (s.length <= max) return s;
+  const slice = s.slice(0, max);
+  const lastSpace = slice.lastIndexOf(" ");
+  return (lastSpace > 0 ? slice.slice(0, lastSpace) : slice).trimEnd() + "…";
+}
+
+/**
+ * A description is meant to be ONE BLURB LINE: it is rendered in a source card
+ * and fed into the chat's grounding prompt. Some publishers' CMSs stuff the
+ * entire article body into og:description while a short, sane
+ * name="description" sits right beside it, unused — prefer that short one.
+ * Then hard-cap whatever survives at 300 chars. Still the publisher's own
+ * words; only clipped, never rewritten.
+ */
+export function cleanDescription(ogDescription, metaDescription) {
+  const og = ogDescription ? stripHtmlTags(ogDescription) : "";
+  const meta = metaDescription ? stripHtmlTags(metaDescription) : "";
+
+  let chosen = og;
+  if (og.length > RUNAWAY_OG_THRESHOLD && meta && meta.length < og.length) {
+    chosen = meta;
+  }
+  if (!chosen) chosen = meta || og; // whichever survived cleaning, if either did
+
+  return chosen ? truncateOnWordBoundary(chosen, DESCRIPTION_MAX) : null;
+}
+
 /** Meta tags only. We never parse article bodies — see the spec. */
 export function parseOgTags(html) {
   return {
     title: meta(html, "property", "og:title"),
-    description:
-      meta(html, "property", "og:description") ?? meta(html, "name", "description"),
+    description: cleanDescription(
+      meta(html, "property", "og:description"),
+      meta(html, "name", "description"),
+    ),
     siteName: meta(html, "property", "og:site_name"),
   };
 }
