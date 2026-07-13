@@ -2,10 +2,14 @@
 // Produced by scripts/gen-library-index.mjs from content/library.json. Run
 // `npm run gen:library` (or `npm run build`) to regenerate after the library changes.
 //
-// Deliberately slim: id, title, publisher, url, bucketLabel only — no descriptions —
-// to keep the client bundle small. This is the ONLY source of truth the Sources
-// renderer may use to resolve a model-emitted id to a real record; an id not present
-// here did not come from the library and must render nothing.
+// Deliberately slim: no descriptions, and linkKind only on the sources that have no
+// standalone link — to keep the chunk small. This resolves a model-emitted id to a real
+// record. It is NOT a provenance check: it holds all 292 sources and has no idea which
+// were retrieved this turn. Provenance is enforced in app/api/chat/route.ts, before the
+// id ever reaches the browser (see lib/stream-filter.mjs).
+//
+// linkKind: "notebook" means the source has no standalone URL — its url is the notebook
+// itself, and the card must say so.
 
 export type LibraryIndexEntry = {
   id: number;
@@ -13,6 +17,7 @@ export type LibraryIndexEntry = {
   publisher: string;
   url: string;
   bucketLabel: string;
+  linkKind?: "notebook";
 };
 
 export const LIBRARY_INDEX: Record<number, LibraryIndexEntry> = {
@@ -37,8 +42,8 @@ export const LIBRARY_INDEX: Record<number, LibraryIndexEntry> = {
   19: {"id":19,"title":"AI Agents for Media and Publishing: Complete Guide","publisher":"MindStudio","url":"https://www.mindstudio.ai/blog/media-publishing","bucketLabel":"AI agents in public media"},
   20: {"id":20,"title":"AI Assistants Threaten News Integrity and Public Trust, Major Study Finds","publisher":"Creatives Unite","url":"https://creativesunite.eu/article/ai-assistants-threaten-news-integrity-and-public-trust-major-study-finds","bucketLabel":"Ethics & governance frameworks"},
   21: {"id":21,"title":"AI Charter","publisher":"Euranet Plus","url":"https://euranetplus-inside.eu/about-us/ai-charter/","bucketLabel":"Newsroom & editorial AI policy"},
-  22: {"id":22,"title":"AI Data Analystv2.pdf","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Other"},
-  23: {"id":23,"title":"AI Ethics and Governance Frameworks for Journalism and Public Service Media: Designing Accountability, Transparency, and Risk Mitigation in the Algorithmic Age","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Ethics & governance frameworks"},
+  22: {"id":22,"title":"AI Data Analystv2.pdf","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Other","linkKind":"notebook"},
+  23: {"id":23,"title":"AI Ethics and Governance Frameworks for Journalism and Public Service Media: Designing Accountability, Transparency, and Risk Mitigation in the Algorithmic Age","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Ethics & governance frameworks","linkKind":"notebook"},
   24: {"id":24,"title":"AI Falsely Reports News 45% of the Time, BBC Backed Study Finds","publisher":"Futureweek","url":"https://futureweek.com/ai-falsely-reports-news-45-of-the-time-bbc-backed-study-finds/","bucketLabel":"Ethics & governance frameworks"},
   25: {"id":25,"title":"AI Governance in Academia: Guidelines for Generative AI - Clayton Peterson and Marie-Catherine Deschênes","publisher":"journals.flvc.org","url":"https://journals.flvc.org/FLAIRS/article/download/138855/144014/275966","bucketLabel":"Ethics & governance frameworks"},
   26: {"id":26,"title":"AI Guidelines Archives","publisher":"Ethics and Journalism","url":"https://ethicsandjournalism.org/resource_type/ai-guidelines/","bucketLabel":"Ethics & governance frameworks"},
@@ -218,7 +223,7 @@ export const LIBRARY_INDEX: Record<number, LibraryIndexEntry> = {
   200: {"id":200,"title":"ONA announces the AI in Journalism Initiative: Shaping the industry's understanding of artificial","publisher":"journalists.org","url":"https://www.journalists.org/news/ona-announces-the-ai-in-journalism-initiative-shaping-the-industry's-understanding-of-artificial","bucketLabel":"Newsroom & editorial AI policy"},
   201: {"id":201,"title":"Online News Association","publisher":"journalists.org","url":"https://www.journalists.org/","bucketLabel":"Newsroom & editorial AI policy"},
   202: {"id":202,"title":"Open data in data journalism: Opportunities and future directions","publisher":"summit.sfu.ca","url":"https://summit.sfu.ca/_flysystem/fedora/2026-03/CJC-Fleerackers-etal2025AAM.pdf","bucketLabel":"Other"},
-  203: {"id":203,"title":"Orchestrating the Newsroom: The Rise of Agentic AI and Autonomous Workflows in Global Journalism","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"AI agents in public media"},
+  203: {"id":203,"title":"Orchestrating the Newsroom: The Rise of Agentic AI and Autonomous Workflows in Global Journalism","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"AI agents in public media","linkKind":"notebook"},
   204: {"id":204,"title":"Our 2025 Year in Review - Chi Hack Night - Chicago's weekly event to build, share, and learn about civic tech.","publisher":"Chi Hack Night","url":"https://chihacknight.org/blog/2026/02/24/2025-year-in-review","bucketLabel":"Other"},
   205: {"id":205,"title":"PAI's Responsible Practices for Synthetic Media","publisher":"Partnership on AI - Synthetic Media","url":"https://syntheticmedia.partnershiponai.org/","bucketLabel":"Ethics & governance frameworks"},
   206: {"id":206,"title":"PAI's Responsible Practices for Synthetic Media: A Framework for Collective Action","publisher":"youtube.com","url":"https://www.youtube.com/watch?v=SvpqX8obTaM","bucketLabel":"Ethics & governance frameworks"},
@@ -266,13 +271,13 @@ export const LIBRARY_INDEX: Record<number, LibraryIndexEntry> = {
   248: {"id":248,"title":"Talking About AI: Communicating Use and Intent to Audiences","publisher":"Poynter","url":"https://www.poynter.org/talking-about-ai-communicating-use-and-intent-to-audiences/","bucketLabel":"Audience & personalisation"},
   249: {"id":249,"title":"Testing ATSC 3.0 and AI-Powered Translations","publisher":"AWARN","url":"https://awarn.org/news/testing-atsc-3-0-and-ai-powered-translations/","bucketLabel":"Transcription & production tooling"},
   250: {"id":250,"title":"Text-for-housing-data service Outlier Media and MuckRock combine to close more information gaps around the country","publisher":"niemanlab.org","url":"https://www.niemanlab.org/2020/01/text-for-housing-data-service-outlier-media-and-muckrock-combine-to-close-more-information-gaps-around-the-country/","bucketLabel":"Other"},
-  251: {"id":251,"title":"The Agentic Turn in Civic Technology: Open Data, Generative AI, and the Reconstruction of Local Democracy","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"AI agents in public media"},
+  251: {"id":251,"title":"The Agentic Turn in Civic Technology: Open Data, Generative AI, and the Reconstruction of Local Democracy","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"AI agents in public media","linkKind":"notebook"},
   252: {"id":252,"title":"The BBC's Policy on the use of AI in Music","publisher":"radiotoday.co.uk","url":"https://radiotoday.co.uk/2026/07/the-bbcs-policy-on-the-use-of-ai-in-music/","bucketLabel":"Newsroom & editorial AI policy"},
   253: {"id":253,"title":"The Complete Guide to Using AI in the Real Estate Industry in Detroit in 2025","publisher":"Nucamp","url":"https://www.nucamp.co/blog/coding-bootcamp-detroit-mi-real-estate-the-complete-guide-to-using-ai-in-the-real-estate-industry-in-detroit-in-2025","bucketLabel":"Other"},
   254: {"id":254,"title":"The Core: Al-Jazeera's AI-integrated newsroom","publisher":"tribune.com.pk","url":"https://tribune.com.pk/story/2583477/the-core-al-jazeera-rolls-out-ai-system-for-news-production","bucketLabel":"Newsroom & editorial AI policy"},
-  255: {"id":255,"title":"The Digital Integration of Artificial Intelligence in Public Service Media: Systematic Alignments, Operational Case Studies, and Governance Frameworks","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Ethics & governance frameworks"},
+  255: {"id":255,"title":"The Digital Integration of Artificial Intelligence in Public Service Media: Systematic Alignments, Operational Case Studies, and Governance Frameworks","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Ethics & governance frameworks","linkKind":"notebook"},
   256: {"id":256,"title":"The Future of Government Services in an AI-Powered World","publisher":"codeforamerica.org","url":"https://codeforamerica.org/news/future-ai-in-government/","bucketLabel":"Other"},
-  257: {"id":257,"title":"The Governance of Algorithmic Journalism: Policies, Ethics, and Workflows in the Age of Generative AI","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Ethics & governance frameworks"},
+  257: {"id":257,"title":"The Governance of Algorithmic Journalism: Policies, Ethics, and Workflows in the Age of Generative AI","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Ethics & governance frameworks","linkKind":"notebook"},
   258: {"id":258,"title":"The Governance of Artificial Intelligence in Public Service Media","publisher":"bakom.admin.ch","url":"https://www.bakom.admin.ch/dam/de/sd-web/P4IABcnPyV9E/vergleichende-analyse-governance-der-kuenstlichen-intelligenz-in-den-oeffentlich-rechtlichen-medien.pdf","bucketLabel":"Ethics & governance frameworks"},
   259: {"id":259,"title":"The Guardian's approach to generative AI","publisher":"the Guardian","url":"https://www.theguardian.com/help/insideguardian/2023/jun/16/the-guardians-approach-to-generative-ai","bucketLabel":"Newsroom & editorial AI policy"},
   260: {"id":260,"title":"The Guardian's generative AI and journalism policy | Stuart Bruce the PR Futurist","publisher":"Stuart Bruce the PR Futurist","url":"https://www.stuartbruce.biz/2026/03/the-guardians-generative-ai-and-journalism-policy/","bucketLabel":"Newsroom & editorial AI policy"},
@@ -303,7 +308,7 @@ export const LIBRARY_INDEX: Record<number, LibraryIndexEntry> = {
   285: {"id":285,"title":"XL8 Delivers Real-Time Spanish Translation Captions to U.S. Public Broadcasters — Marking First Commercial Use of AI-Based Real-Time Translation in Broadcasting","publisher":"xl8.ai","url":"https://www.xl8.ai/newsroom/xl8-delivers-real-time-spanish-translation-captions-to-u-s-public-broadcasters----marking-first-commercial-use-of-ai-based-real-time-translation-in-broadcasting","bucketLabel":"Transcription & production tooling"},
   286: {"id":286,"title":"Your AI agent is ready to go. Is your infrastructure?","publisher":"CIO","url":"https://www.cio.com/article/4159773/your-ai-agent-is-ready-to-go-is-your-infrastructure.html","bucketLabel":"AI agents in public media"},
   287: {"id":287,"title":"Your newsroom needs an AI ethics policy. Start here.","publisher":"Poynter","url":"https://www.poynter.org/ethics-trust/2024/how-to-create-newsroom-artificial-intelligence-ethics-policy/","bucketLabel":"Ethics & governance frameworks"},
-  288: {"id":288,"title":"how-llms-work-guide-for-public-radio.md","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Transcription & production tooling"},
+  288: {"id":288,"title":"how-llms-work-guide-for-public-radio.md","publisher":"notebooklm.google.com","url":"https://notebooklm.google.com/notebook/da7c4315-35c1-448b-ae4c-bd65cc2026f4","bucketLabel":"Transcription & production tooling","linkKind":"notebook"},
   289: {"id":289,"title":"llm - Civic Innovations","publisher":"Civic Innovations","url":"https://civic.io/tag/llm/","bucketLabel":"Other"},
   290: {"id":290,"title":"public-media-ai-panel.pdf","publisher":"tmoody1973.github.io","url":"https://tmoody1973.github.io/claudecode-publicradio/public-media-ai-panel.pdf","bucketLabel":"Ethics & governance frameworks"},
   291: {"id":291,"title":"“Not a replacement of journalists in any way”: AP clarifies standards around generative AI","publisher":"niemanlab.org","url":"https://www.niemanlab.org/2023/08/not-a-replacement-of-journalists-in-any-way-ap-clarifies-standards-around-generative-ai/","bucketLabel":"Newsroom & editorial AI policy"},
