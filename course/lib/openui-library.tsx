@@ -175,13 +175,29 @@ const Comparison: R<{
 };
 
 /**
- * The model can only ever emit numeric ids (see lib/openui-spec.mjs) — never a
- * free-text title, publisher, or url. Each id is resolved against LIBRARY_INDEX,
- * generated from the real vetted content/library.json by scripts/gen-library-index.mjs.
- * An id that doesn't resolve — a fabrication, or an id the model was never actually
- * handed in the LIBRARY grounding block — is silently dropped, and if none resolve
- * the whole card renders nothing. This makes a fabricated citation structurally
- * unrenderable rather than merely discouraged by prompt wording.
+ * WHAT THIS COMPONENT DOES, EXACTLY: it is a LOOKUP, not a provenance check.
+ *
+ * The model can only ever emit numeric ids (see lib/openui-spec.mjs) — never a free-text
+ * title, publisher, or url — so it cannot invent a source that does not exist. Each id is
+ * resolved against LIBRARY_INDEX, generated from the real vetted content/library.json. An
+ * id that resolves to nothing is dropped; if none resolve, the card renders nothing.
+ *
+ * That is a RANGE check. On its own it would happily render any id in 1-292, INCLUDING an
+ * id that was never retrieved for this question — LIBRARY_INDEX holds all 292 sources and
+ * has no idea which four the retriever actually returned this turn. The system prompt's
+ * own few-shot examples contain real ids (`Sources([8, 21, 17])`), so this was a live
+ * exposure, not a theoretical one: a weak free model copying an example would have had
+ * those three rendered under "Vetted sources matched to your question."
+ *
+ * PROVENANCE IS ENFORCED UPSTREAM, in app/api/chat/route.ts — the only place that knows
+ * which ids were retrieved this turn. Its line filter (lib/stream-filter.mjs) intersects
+ * every Sources block the model emits with that set and strips the rest, so an id the
+ * model was not handed never reaches this file. When no library block was sent at all,
+ * every Sources block is dropped outright.
+ *
+ * So: fabrication is caught by the id-only schema; MISATTRIBUTION is caught by the route.
+ * This renderer is the last of the three, not the first, and it should not be described
+ * as more than it is.
  */
 const Sources: R<{ ids: number[] }> = ({ props }) => {
   const items = (props.ids ?? [])
@@ -219,6 +235,15 @@ const Sources: R<{ ids: number[] }> = ({ props }) => {
                     {s.bucketLabel}
                   </Badge>
                 </span>
+                {/* Seven of the 292 sources have no standalone link — their url IS the
+                    notebook. Say so, in text, inside the anchor, so it lands in the link's
+                    accessible name and a screen-reader user is told before they follow it.
+                    Without this the link silently dumps you into a 292-source notebook. */}
+                {s.linkKind === "notebook" ? (
+                  <span className="text-[11px] leading-snug text-muted-foreground">
+                    Read this in the notebook — no standalone link
+                  </span>
+                ) : null}
               </span>
             </a>
           </li>

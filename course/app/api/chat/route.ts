@@ -4,6 +4,7 @@
 import { SYSTEM_PROMPT } from "@/content/system-prompt";
 import { buildGrounding } from "@/lib/retrieval";
 import { searchLibrary, formatLibraryGrounding } from "@/lib/library";
+import { createLineFilter } from "@/lib/stream-filter.mjs";
 import { MODEL_CASCADE } from "@/lib/models";
 
 export const runtime = "nodejs";
@@ -30,54 +31,6 @@ function flattenContent(content: unknown): string {
       .join("");
   }
   return "";
-}
-
-/**
- * Reasoning models leak `<think>` blocks and every model loves a markdown fence.
- * Either one corrupts a line-oriented DSL. Filter the stream by line:
- *  - drop fences
- *  - drop <think> blocks
- *  - drop everything before the first `root =`
- */
-function createLineFilter() {
-  let buffer = "";
-  let started = false;
-  let inThink = false;
-
-  const clean = (line: string): string | null => {
-    const t = line.trim();
-    if (/^<\/?(think|thinking|reasoning)>/i.test(t)) {
-      inThink = /^<(think|thinking|reasoning)>/i.test(t);
-      return null;
-    }
-    if (inThink) return null;
-    if (/^```/.test(t)) return null;
-    if (!started) {
-      if (/^root\s*=/.test(t)) started = true;
-      else return null; // preamble prose — bin it
-    }
-    return line;
-  };
-
-  return {
-    push(chunk: string): string {
-      buffer += chunk;
-      const lines = buffer.split("\n");
-      buffer = lines.pop() ?? ""; // last piece may be a partial line
-      const out: string[] = [];
-      for (const l of lines) {
-        const c = clean(l);
-        if (c !== null) out.push(c);
-      }
-      return out.length ? out.join("\n") + "\n" : "";
-    },
-    flush(): string {
-      if (!buffer) return "";
-      const c = clean(buffer);
-      buffer = "";
-      return c ?? "";
-    },
-  };
 }
 
 const sse = (obj: unknown) => `data: ${JSON.stringify(obj)}\n\n`;
@@ -209,7 +162,11 @@ export async function POST(request: Request) {
       continue; // rate-limited or down — try the next model down the cascade
     }
 
-    const filter = createLineFilter();
+    // The ONLY place that knows which library ids the model was actually handed this turn.
+    // The filter strips every other id out of any Sources block the model emits — including
+    // the real, resolvable ids sitting in the system prompt's own few-shot examples, which
+    // a weak free model will happily copy. See lib/stream-filter.mjs.
+    const filter = createLineFilter(libraryHits.map((h) => h.id));
     const decoder = new TextDecoder();
     const encoder = new TextEncoder();
     let sawContent = false;
