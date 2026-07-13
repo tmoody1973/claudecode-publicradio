@@ -57,7 +57,53 @@ export function tokenize(s) {
  */
 export const SCORE_FLOOR = 3;
 
+/**
+ * Qualification gate (runs BEFORE scoring, decides IF we search at all).
+ *
+ * SCORE_FLOOR alone can't tell a discriminating term from a noise term: one title
+ * match scores 3 whether the word is "underwriting" (1 of 292 docs) or "open" (11 of
+ * 292) — a common verb that leaked open-data articles into "what is a terminal and how
+ * do I open it?". Gate on document frequency instead: a question qualifies only if at
+ * least 2 distinct query tokens appear anywhere in the corpus, or exactly 1 does and
+ * it's rare enough (<= RARE_DF sources) to be specific on its own.
+ *
+ * KNOWN LIMITATION (not fixed here): "how much does Claude cost per month?" still
+ * qualifies — "cost" and "month" each coincidentally appear in exactly 1 source, so two
+ * *distinct* rare tokens clear the >=2 branch even though neither is a real match. This
+ * degrades safely: the model is instructed to omit the Sources block when the returned
+ * sources aren't relevant to its answer. That's the designed second line of defence.
+ */
+export const RARE_DF = 5;
+
 const cache = new WeakMap();
+const dfCache = new WeakMap();
+
+/** Document frequency: token -> number of sources whose title+description+bucketLabel
+ * contain it. Computed once per sources array, not per query. */
+function docFrequencies(sources) {
+  let df = dfCache.get(sources);
+  if (!df) {
+    df = new Map();
+    for (const source of sources) {
+      const tokens = new Set([
+        ...tokenize(source.title),
+        ...tokenize(source.description ?? ""),
+        ...tokenize(source.bucketLabel ?? ""),
+      ]);
+      for (const t of tokens) df.set(t, (df.get(t) ?? 0) + 1);
+    }
+    dfCache.set(sources, df);
+  }
+  return df;
+}
+
+function qualifies(sources, queryTokens) {
+  const df = docFrequencies(sources);
+  const present = [...new Set(queryTokens)].filter((t) => df.has(t));
+  if (present.length >= 2) return true;
+  if (present.length === 1) return df.get(present[0]) <= RARE_DF;
+  return false;
+}
 
 /** Precompute per-source token sets once per array. */
 function fields(source) {
@@ -106,6 +152,7 @@ export function scoreSource(queryTokens, source) {
 export function searchSources(sources, question, k = 4) {
   const q = tokenize(question);
   if (q.length === 0) return [];
+  if (!qualifies(sources, q)) return [];
 
   const seen = new Set();
 

@@ -24,6 +24,7 @@ export type LibrarySource = {
 };
 
 export const SCORE_FLOOR: number;
+export const RARE_DF: number;
 export function tokenize(s: string): string[];
 export function scoreSource(queryTokens: string[], source: LibrarySource): number;
 export function searchSources(sources: LibrarySource[], question: string, k?: number): LibraryHit[];

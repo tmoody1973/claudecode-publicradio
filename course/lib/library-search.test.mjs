@@ -1,5 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 import { tokenize, searchSources, SCORE_FLOOR } from "./library-search.mjs";
 
 /** A tiny fixture standing in for content/library.json. */
@@ -100,4 +103,55 @@ test("tokenize drops stopwords that carry no signal in THIS corpus", () => {
 
 test("SCORE_FLOOR is a positive number", () => {
   assert.ok(SCORE_FLOOR > 0);
+});
+
+// --- Real-corpus regression tests -------------------------------------------------
+// The 3-source fixture above is exactly why the SCORE_FLOOR-only bug shipped: it's too
+// small to have common words. These load the real 292-source library and assert
+// against real behaviour.
+
+const REAL = JSON.parse(
+  readFileSync(join(dirname(fileURLToPath(import.meta.url)), "..", "content", "library.json"), "utf8"),
+).sources;
+
+// Questions a station person would ask that the RESEARCH LIBRARY should answer.
+for (const q of [
+  "What are the ethics risks of using AI for transcription in our newsroom?",
+  "How do other public radio stations use AI for audience personalisation?",
+  "Should we let AI write underwriting copy?",
+  "Do we need an AI policy for our newsroom?",
+  "What do other stations disclose to listeners about AI?",
+]) {
+  test(`real corpus: the library answers "${q.slice(0, 40)}…"`, () => {
+    assert.ok(searchSources(REAL, q, 4).length > 0, "expected at least one source");
+  });
+}
+
+// Course-mechanics questions. The research library has NOTHING for these, and handing the
+// model irrelevant sources only invites it to mention them. These MUST return [].
+for (const q of [
+  "How do I install Claude Code on my laptop?",
+  "What is a terminal and how do I open it?",       // leaked 4 open-data articles before the gate
+  "Can you help me write a thank-you note to a donor?", // leaked a civic-engagement article
+  "What is a context window?",
+  "How do I make a folder on my computer?",
+  "What is an AI agent?",                            // a glossary question — the course answers it
+]) {
+  test(`real corpus: no library block for "${q.slice(0, 40)}…"`, () => {
+    assert.deepEqual(searchSources(REAL, q, 4), [], "a course question leaked library sources");
+  });
+}
+
+test("real corpus: a single RARE token is enough, a single COMMON one is not", () => {
+  // "underwriting" is in 1 of 292 sources — specific enough to stand alone.
+  assert.ok(searchSources(REAL, "underwriting", 4).length > 0);
+  // "open" is in 11 — a common verb, and on its own it means nothing.
+  assert.deepEqual(searchSources(REAL, "open", 4), []);
+});
+
+test("real corpus: the same URL is never returned twice", () => {
+  // 3 URLs are filed twice in the notebook; all 7 notebook-only sources share one URL.
+  const hits = searchSources(REAL, "AI ethics governance policy journalism newsroom", 8);
+  const urls = hits.map((h) => h.url);
+  assert.equal(new Set(urls).size, urls.length);
 });
