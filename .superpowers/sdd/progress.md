@@ -42,7 +42,10 @@ Merge-base: main @ the civic-media merge
       explicit "the video is out of date here" correction. A neutral restatement did NOT override
       the model's priors; an explicit correction did.
       VERIFIED MYSELF on the real chat: 0/4 say "separate products", 4/4 say "three tabs, one app".
-- [ ] 3 the /install page + 6 section components
+- [x] 3 /install page — COMPLETE (51f706a). 102 tests, tsc/build clean.
+      Verified visually myself at 390px: provenance box FIRST, then "one app, three tabs, no
+      terminal", then the tab cards. Windows/Git is a full-width highlighted callout — impossible
+      to miss. Cowork section leads with the red guardrail BEFORE the task. WSL dismissed. No overflow.
 - [ ] 4 wire it in (nav, audit PAGES, /guide link, m2 setup) + gates + chat-learned-the-correction
 
 ## Minor findings (for the final whole-branch review)
