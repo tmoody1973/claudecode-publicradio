@@ -43,6 +43,26 @@ test("cleanTitle strips the (PDF) prefix", () => {
   assert.equal(cleanTitle("(PDF) Ethical guidelines for journalistic use of GenAI"), "Ethical guidelines for journalistic use of GenAI");
 });
 
+test("cleanTitle does not let a repo path be mistaken for a publisher", () => {
+  // Real case from the export. The repo identifier is the only useful part of this title.
+  assert.equal(
+    cleanTitle("GitHub - tmoody1973/gauntlet · GitHub"),
+    "GitHub - tmoody1973/gauntlet",
+  );
+});
+
+test("cleanTitle never strips a title down to a stub", () => {
+  // A publisher strip that leaves one or two words has eaten the title, not a suffix.
+  assert.equal(cleanTitle("Crate - digcrate.app"), "Crate - digcrate.app");
+});
+
+test("cleanTitle strips a double suffix completely", () => {
+  assert.equal(
+    cleanTitle("Journalistic AI Codes of Ethics | Documentos - Universidad Complutense de Madrid"),
+    "Journalistic AI Codes of Ethics",
+  );
+});
+
 test("publisherFromUrl drops www and returns the host", () => {
   assert.equal(publisherFromUrl("https://www.poynter.org/a/b"), "poynter.org");
   assert.equal(publisherFromUrl("https://reutersinstitute.politics.ox.ac.uk/x"), "reutersinstitute.politics.ox.ac.uk");

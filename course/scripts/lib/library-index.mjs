@@ -42,15 +42,31 @@ function isTruncated(title) {
 }
 
 /**
- * Strip a trailing " - Publisher" / " | Publisher".
+ * Strip a trailing " - Publisher" / " | Publisher" / " · Publisher".
  * Only a SHORT trailing segment (≤ 4 words) is a publisher — a long one is prose.
+ * A tail with a "/" is a path or repo identifier, never a publisher. A strip is
+ * refused if it would leave fewer than 3 words — that's eating the title, not a suffix.
  */
-function stripPublisherSuffix(title) {
-  const m = title.match(/^(.*\S)\s+[-|–—]\s+([^-|–—]{2,40})$/);
+function stripPublisherSuffixOnce(title) {
+  const m = title.match(/^(.*\S)\s+[-|–—·]\s+([^-|–—·]{2,40})$/);
   if (!m) return title;
   const tail = m[2].trim();
+  if (tail.includes("/")) return title; // a repo path or URL fragment, not a publisher
   if (tail.split(/\s+/).length > 4) return title; // that's a subtitle, not a publisher
-  return m[1].trim();
+  const head = m[1].trim();
+  if (head.split(/\s+/).length < 3) return title; // never strip a title down to a stub
+  return head;
+}
+
+/** Double-suffixed titles ("Title | Documentos - Universidad ...") need more than one pass. */
+function stripPublisherSuffix(title) {
+  let t = title;
+  for (let i = 0; i < 3; i++) {
+    const next = stripPublisherSuffixOnce(t);
+    if (next === t) break;
+    t = next;
+  }
+  return t;
 }
 
 /**
