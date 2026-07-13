@@ -114,6 +114,23 @@ export function buildCourseLibrary(r = {}) {
     component: r.Comparison ?? stub,
   });
 
+  const Sources = defineComponent({
+    name: "Sources",
+    description:
+      "Vetted sources from the curated research library, pointed at — never quoted. Use this ONLY when library sources have been supplied to you in the LIBRARY section, and ONLY when they genuinely relate to the answer. Copy title, publisher, url and bucket EXACTLY as given. You have not read these sources: never summarise them, never attribute a claim to them, never invent one.",
+    props: z.object({
+      items: z.array(
+        z.object({
+          title: z.string(),
+          publisher: z.string(),
+          url: z.string(),
+          bucket: z.string(),
+        }),
+      ),
+    }),
+    component: r.Sources ?? stub,
+  });
+
   const FollowUps = defineComponent({
     name: "FollowUps",
     description:
@@ -136,6 +153,7 @@ export function buildCourseLibrary(r = {}) {
           ModuleRef.ref,
           VideoLink.ref,
           Comparison.ref,
+          Sources.ref,
           FollowUps.ref,
         ]),
       ),
@@ -155,6 +173,7 @@ export function buildCourseLibrary(r = {}) {
       ModuleRef,
       VideoLink,
       Comparison,
+      Sources,
       FollowUps,
     ],
     componentGroups: [
@@ -180,6 +199,16 @@ export function buildCourseLibrary(r = {}) {
         notes: [
           "- ModuleRef number must be an integer 1-10.",
           "- End almost every answer with FollowUps.",
+        ],
+      },
+      {
+        name: "The research library",
+        components: ["Sources"],
+        notes: [
+          "- Sources ONLY when the LIBRARY section below has given you sources AND they fit the answer. If it gave you none, or none fit, do not emit Sources.",
+          "- You have NOT read these sources. Point at them; never quote, summarise, or attribute a claim to them.",
+          "- Copy title, publisher, url and bucket exactly as given. Never invent a source.",
+          "- Put Sources near the end of the answer, just before FollowUps.",
         ],
       },
     ],
@@ -218,6 +247,8 @@ export const ADDITIONAL_RULES = [
   "VideoLink seconds must be a whole number of seconds into the 6-hour source video.",
   `UseCaseCard role must be exactly one of: ${ROLES.join(", ")}.`,
   "A Callout with tone='guardrail' is REQUIRED for any answer touching donor data, unpublished journalism, or FCC underwriting compliance.",
+  "Sources may only contain sources handed to you in the LIBRARY section, copied exactly. Never invent a source, a URL, or a publisher.",
+  "You have not read the library sources. Never quote them, summarise them, or attribute a claim to them. You are pointing at them.",
 ];
 
 export const EXAMPLES = [

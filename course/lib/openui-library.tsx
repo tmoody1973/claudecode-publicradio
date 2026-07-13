@@ -13,7 +13,7 @@
 
 import { useTriggerAction } from "@openuidev/react-lang";
 import Link from "next/link";
-import { AlertTriangle, ArrowRight, ExternalLink, Info, ShieldAlert } from "lucide-react";
+import { AlertTriangle, ArrowRight, ExternalLink, Info, Library, ShieldAlert } from "lucide-react";
 import { buildCourseLibrary } from "@/lib/openui-spec.mjs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -173,6 +173,51 @@ const Comparison: R<{
   );
 };
 
+const Sources: R<{
+  items: { title: string; publisher: string; url: string; bucket: string }[];
+}> = ({ props }) => {
+  const items = props.items ?? [];
+  if (items.length === 0) return null;
+
+  return (
+    <section className="retro-box bg-card p-3" aria-label="Sources from the library">
+      <header className="mb-2 flex items-center gap-2">
+        <Library className="size-4 shrink-0" aria-hidden />
+        <h3 className="font-head text-[13px] leading-tight">From the library</h3>
+      </header>
+
+      <p className="mb-3 text-[12px] leading-relaxed text-muted-foreground">
+        Vetted sources matched to your question. The assistant has not read them — it is
+        pointing you at them.
+      </p>
+
+      <ul className="space-y-2">
+        {items.map((s, i) => (
+          <li key={i}>
+            <a
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="retro-box retro-lift flex min-h-11 items-start gap-2 bg-background p-2.5 no-underline"
+            >
+              <ExternalLink className="mt-0.5 size-4 shrink-0" aria-hidden />
+              <span className="flex min-w-0 flex-1 flex-col gap-1">
+                <span className="text-[13px] font-medium leading-tight">{s.title}</span>
+                <span className="flex flex-wrap items-center gap-1.5">
+                  <span className="font-mono text-[11px] text-muted-foreground">{s.publisher}</span>
+                  <Badge variant="outline" className="text-[10px]">
+                    {s.bucket}
+                  </Badge>
+                </span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+};
+
 const FollowUps: R<{ questions: string[] }> = ({ props }) => {
   const trigger = useTriggerAction();
   return (
@@ -207,5 +252,6 @@ export const courseLibrary = buildCourseLibrary({
   ModuleRef,
   VideoLink,
   Comparison,
+  Sources,
   FollowUps,
 });
