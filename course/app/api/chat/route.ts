@@ -4,6 +4,7 @@
 import { SYSTEM_PROMPT } from "@/content/system-prompt";
 import { buildGrounding } from "@/lib/retrieval";
 import { searchLibrary, formatLibraryGrounding } from "@/lib/library";
+import { buildInstallGrounding } from "@/lib/install-grounding.mjs";
 import { createLineFilter } from "@/lib/stream-filter.mjs";
 import { MODEL_CASCADE } from "@/lib/models";
 
@@ -114,6 +115,11 @@ export async function POST(request: Request) {
   // feel obliged to mention.
   const libraryHits = searchLibrary(question);
 
+  // Synchronous — a handful of regexes against the question. No network, no DB. Empty
+  // string for anything that isn't a getting-set-up question, and we then send no install
+  // block at all — see lib/install-grounding.mjs for why this exists.
+  const installGrounding = buildInstallGrounding(question);
+
   const payload = {
     messages: [
       {
@@ -122,7 +128,8 @@ export async function POST(request: Request) {
           `${SYSTEM_PROMPT}\n\n# COURSE MATERIAL\n\n${grounding}` +
           (libraryHits.length
             ? `\n\n# LIBRARY: VETTED SOURCES YOU HAVE NOT READ\n\n${formatLibraryGrounding(libraryHits)}`
-            : ""),
+            : "") +
+          (installGrounding ? `\n\n# INSTALL FACTS\n\n${installGrounding}` : ""),
       },
       ...history.map((m) => ({ role: m.role, content: m.content })),
     ],

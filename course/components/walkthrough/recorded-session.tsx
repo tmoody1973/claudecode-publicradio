@@ -153,7 +153,10 @@ function TurnRow({ turn, hidden, index }: { turn: Turn; hidden: boolean; index: 
             {turn.tool ? `${turn.tool.name}(${turn.tool.arg})` : turn.text}
           </div>
           {turn.tool?.result ? (
-            <div className="[overflow-wrap:anywhere] pl-4 text-terminal-dimmer">
+            // terminal-dimmer on terminal-bg is 3.94:1 — under the 4.5:1 AA bar
+            // for this 12px text. terminal-dim clears it (~8.3:1) and is still
+            // visibly dimmer than terminal-fg, so the hierarchy survives.
+            <div className="[overflow-wrap:anywhere] pl-4 text-terminal-dim">
               <span aria-hidden>└ </span>
               {turn.tool.result}
             </div>

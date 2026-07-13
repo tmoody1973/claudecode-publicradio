@@ -157,6 +157,7 @@ for (const m of modules) {
   for (const c of m.concepts) {
     lines.push(`- ${c.term} [${c.tLabel}]: ${c.plain} FOR A STATION: ${c.stationTranslation}`);
   }
+  if (m.conceptsNote) lines.push(`IMPORTANT CORRECTION TO THESE CONCEPTS: ${m.conceptsNote}`);
 
   lines.push(`STATION USE CASES:`);
   for (const uc of m.useCases) {

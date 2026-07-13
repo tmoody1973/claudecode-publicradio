@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Orientation } from "@/components/guide/orientation";
 import { BeforeYouTouch } from "@/components/guide/before-you-touch";
 import { Paths } from "@/components/guide/paths";
@@ -29,6 +31,17 @@ export default function GuidePage() {
           use case end to end and get a real result. Start with the four rules below — they are
           the only part of this that is not optional.
         </p>
+
+        <Link
+          href="/install"
+          className="retro-box mt-6 flex min-h-11 max-w-2xl items-center gap-3 bg-primary px-4 py-3 font-head text-sm uppercase tracking-wide text-black no-underline sm:text-base"
+        >
+          <span className="min-w-0">
+            Not installed yet? Start at Install — it takes about ten minutes and you will not
+            open a terminal.
+          </span>
+          <ArrowRight className="size-5 shrink-0" aria-hidden />
+        </Link>
       </section>
 
       <BeforeYouTouch />

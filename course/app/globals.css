@@ -92,7 +92,11 @@
   --accent: #ffe7a3;
   --accent-foreground: #000;
 
-  --destructive: #e63946;
+  /* Darkened from #e63946: white on that measured 4.17:1 — under the 4.5:1 AA bar,
+     so every "BREAKS"/"Guardrail" badge in light mode failed. This clears at 4.97:1.
+     Same family of bug as text-black on bg-card: a pinned foreground against a
+     token background that never got measured. scripts/audit.mjs measures it now. */
+  --destructive: #d62839;
   --destructive-foreground: #fff;
 
   --border: #000;

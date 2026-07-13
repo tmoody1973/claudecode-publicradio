@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV = [
+  { href: "/install", label: "Install" },
   { href: "/guide", label: "Start here" },
   { href: "/walkthroughs", label: "Walkthroughs" },
   { href: "/modules", label: "Modules" },

@@ -250,6 +250,7 @@ export const ADDITIONAL_RULES = [
   "The one reason to leave Sources out: you have read the titles in the LIBRARY section, and what you actually wrote has nothing to do with any of them. A keyword matcher chose them and it is sometimes wrong — that judgement is yours, and it is the only reason to omit the block.",
   "Sources ids must come only from the LIBRARY section, copied exactly. Never invent an id, a URL, or a publisher.",
   "You have not read the library sources. Never quote them, summarise them, or attribute a claim to them. You are pointing at them.",
+  "Never state that Claude Code integrates with a specific named product (e.g. Gmail, Google Drive, Sheets, Slack) or runs a specific named feature (e.g. Skills, MCP, plugins) unless that exact integration or feature is spelled out in the course material given to you. If asked and the material does not name it, say plainly that the material does not cover it.",
 ];
 
 export const EXAMPLES = [

@@ -44,7 +44,11 @@ export default function CostPage() {
               href={quote.youtube}
               target="_blank"
               rel="noreferrer"
-              className="retro-box retro-lift inline-flex min-h-11 items-center bg-card px-3 font-mono text-[13px] no-underline"
+              // Pre-existing bug: this link is inside a bg-primary figure with
+              // text-black on the wrapper, and this link sits on bg-card instead —
+              // near-black in dark mode. text-black is only safe on bg-primary;
+              // text-card-foreground flips with the theme.
+              className="retro-box retro-lift inline-flex min-h-11 items-center bg-card px-3 font-mono text-[13px] text-card-foreground no-underline"
             >
               Hear it at {quote.tLabel}
             </a>
