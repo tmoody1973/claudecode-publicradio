@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, PencilRuler } from "lucide-react";
 import { CopyPrompt } from "@/components/copy-prompt";
 import { BrainLevels } from "@/components/module/brain-levels";
 import { ModuleHeader, ModuleNav } from "@/components/module/module-header";
@@ -170,6 +170,15 @@ export default async function ModulePage({ params }: Props) {
         subtitle="What each one means — and what it means for a public media station."
       >
         <Concepts concepts={mod.concepts} />
+        {mod.conceptsNote && (
+          <aside className="retro-box-lg mt-6 rounded-none bg-card p-3 sm:p-4">
+            <p className="flex items-center gap-2 font-head text-[11px] uppercase tracking-widest">
+              <PencilRuler className="size-4 shrink-0" aria-hidden />
+              Editor’s note — correction to the source
+            </p>
+            <p className="mt-2 text-[15px] leading-relaxed">{mod.conceptsNote}</p>
+          </aside>
+        )}
       </Section>
 
       <Extras mod={mod} />

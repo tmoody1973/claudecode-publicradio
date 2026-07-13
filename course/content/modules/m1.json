@@ -18,7 +18,7 @@
   "concepts": [
     {
       "term": "Chat vs. Cowork vs. Code",
-      "plain": "Anthropic makes three things. Chat is the website you already know. Cowork is a simpler tool for everyday office automation. Claude Code is the most powerful, and despite the name it needs no coding.",
+      "plain": "Chat, Cowork and Claude Code are three tabs inside one app — you download one thing. Chat is the claude.ai you already know. Cowork does a whole job for you and hands back the finished file. Claude Code opens the real files on your computer and shows you every change before it makes it. None of the three needs a terminal.",
       "stationTranslation": "Chat is asking a smart temp a question. Claude Code is that temp with a desk in your building, a key to the file room, and your style guide already read.",
       "tLabel": "0:01:10",
       "t": 70
@@ -66,6 +66,7 @@
       "t": 1307
     }
   ],
+  "conceptsNote": "The video calls these three separate products. As of July 2026 they are not — they are three tabs inside the one Claude desktop app, and you install a single thing to get all three. We checked Anthropic's documentation on 13 July 2026. This matters more here than it would for a developer: the video's wording implies you must go and choose a different product, when in fact you download one app and click a different tab.",
   "mindsetShifts": [
     {
       "n": 1,

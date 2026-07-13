@@ -130,6 +130,7 @@ export type CourseModule = {
   // module-specific extras
   mindsetShifts?: MindsetShift[];
   mindsetShiftsNote?: string;
+  conceptsNote?: string;
   exampleClaudeMd?: string;
   skillAnatomy?: SkillAnatomy;
   pyramid?: { levels: PyramidLevel[]; bigIdea: string };
