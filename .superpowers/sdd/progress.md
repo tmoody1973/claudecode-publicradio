@@ -30,7 +30,9 @@ Merge-base: main @ the civic-media merge
 - Flex/grid children need `min-w-0` or they blow past a 320px viewport (3 prior incidents).
 
 ## Tasks
-- [ ] 1 lib/install-facts.mjs + .d.mts + tests (every claim + its source URL; verify links resolve)
+- [x] 1 install facts — COMPLETE (6d359b1). 99 tests. ALL 10 source URLs verified 200 live.
+      Verified myself: Windows/Git landmine present, no free-path claim, no Cowork availability
+      assertion, no "three products" language.
 - [ ] 2 fix module 1's "three products" error (m1.json, course.ts, compile-content.mjs, module page)
 - [ ] 3 the /install page + 6 section components
 - [ ] 4 wire it in (nav, audit PAGES, /guide link, m2 setup) + gates + chat-learned-the-correction
