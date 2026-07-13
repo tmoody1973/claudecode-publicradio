@@ -64,7 +64,21 @@ Merge-base: 5c509b2 (the plan commit; branch started from c39635f on main)
       rate-limit boundary; (d) 3 publishers stuff the WHOLE ARTICLE into og:description
       (one was 22,515 chars — would have blown the entire 4k grounding budget alone).
       NOTE FOR TASK 4/5: LibrarySource now also has `classifiedBy: string`.
-- [ ] 4 retriever + tests (lib/library-search.mjs/.d.mts, lib/library.ts)
+- [x] 4 retriever — COMPLETE (054bb97..2b7c6e4, review clean after 2 fix rounds)
+      74 tests, tsc clean, synchronous, zero imports in library-search.mjs.
+      Reviews/verification caught THREE real bugs, none of which fixtures could have found:
+        (a) "how do I install Claude Code" leaked, matching "Code for America"/"Code.org"
+            -> "code" added to the library stopword list
+        (b) SCORE_FLOOR=3 (one title-word match) leaked badly: "how do I OPEN a terminal"
+            returned 4 open-data articles; "thank-you NOTE to a donor" returned civic-tech.
+            NO floor separates these. Replaced with a document-frequency GATE: a question
+            qualifies only if >=2 tokens match the corpus, OR exactly 1 does and it is RARE
+            (df <= 5, e.g. "underwriting" = 1 of 292). Validated on 16 real questions.
+        (c) One source was a KEYWORD MAGNET — the public-radio-agents repo title enumerates
+            half the station vocabulary — and won queries on length alone. Fixed with IDF
+            weighting + BM25 length normalisation (b=0.75). SCORE_FLOOR now 2.5.
+      Tests now run against the REAL 292-source corpus, not just a 3-source fixture. That
+      change is what caught (b) and (c).
 - [ ] 5 Sources component (openui-spec.mjs + openui-library.tsx)
 - [ ] 6 wire into the chat (app/api/chat/route.ts)
 - [ ] 7 gates (test, tsc, build, audit + honesty invariants)
@@ -77,3 +91,15 @@ Merge-base: 5c509b2 (the plan commit; branch started from c39635f on main)
 - T3: the fixpoint entity decoder over-decodes text that legitimately wants to DISPLAY
   "&amp;". Zero of the 292 real sources hit this; three hit the opposite case. Deliberate
   trade, pinned by a test.
+- T4 RETRIEVAL QUALITY — the honest read, for the FINAL REVIEW and for Tarik:
+  Safety is solid (course questions leak nothing). Relevance is GOOD, NOT GREAT.
+    "Do we need an AI policy for our newsroom?"  -> 4/4 relevant. Excellent.
+    "Is it ethical to clone a host voice?"       -> all ethics sources, none about voice
+                                                    cloning. The library may have none.
+    "audience personalisation"                   -> #1 is "City Bureau", a civic-journalism
+                                                    org the LLM MIS-BUCKETED as Audience.
+  Two separable causes: (1) keyword retrieval has a real semantic ceiling — this is exactly
+  the evidence the SPEC named as the trigger for rung 2 (precomputed embeddings in the JSON,
+  cosine in-process, STILL no database); (2) some LLM bucket labels are wrong and feed bad
+  retrieval — buckets are hand-correctable in a committed JSON file.
+  DECISION DEFERRED TO TARIK after the branch is green. Do not climb the ladder unasked.
