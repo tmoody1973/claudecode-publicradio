@@ -79,7 +79,18 @@ Merge-base: 5c509b2 (the plan commit; branch started from c39635f on main)
             weighting + BM25 length normalisation (b=0.75). SCORE_FLOOR now 2.5.
       Tests now run against the REAL 292-source corpus, not just a 3-source fixture. That
       change is what caught (b) and (c).
-- [ ] 5 Sources component (openui-spec.mjs + openui-library.tsx)
+- [x] 5 Sources component — COMPLETE (e3398da, review clean; 2 findings folded into T6)
+      In BOTH openui-spec.mjs and openui-library.tsx + Answer union + components[] +
+      componentGroups + ADDITIONAL_RULES. Generated prompt carries "have NOT read",
+      "never quote", "Never invent a source". Rendered for real: a 232-char title wraps
+      at 320px with no h-scroll. All gates green (tsc/build/74 tests/audit).
+      TWO REVIEW FINDINGS DEFERRED INTO TASK 6 (they belong there):
+        (a) CRITICAL-ish: Sources props are FREE STRINGS the model emits. Nothing stops it
+            fabricating a plausible source+URL, which would render identically to a vetted
+            one. On THIS site that is self-defeating. FIX IN T6: model emits IDs only; the
+            renderer resolves them from the real library. An invented id renders nothing.
+        (b) Minor a11y: card header is <h3> while the sibling UseCaseCard uses <h4>,
+            giving a non-monotonic heading outline. Fix to <h4>.
 - [ ] 6 wire into the chat (app/api/chat/route.ts)
 - [ ] 7 gates (test, tsc, build, audit + honesty invariants)
 
