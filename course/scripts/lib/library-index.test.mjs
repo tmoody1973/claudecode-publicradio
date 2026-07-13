@@ -63,6 +63,25 @@ test("cleanTitle strips a double suffix completely", () => {
   );
 });
 
+test("cleanTitle strips a publisher off a legitimate two-word title", () => {
+  // A 2-word head is a real title, not a stub. Confirmed real cases from the export.
+  assert.equal(cleanTitle("GenAI Guidelines | KQED"), "GenAI Guidelines");
+  assert.equal(cleanTitle("Public Programs - BetaNYC"), "Public Programs");
+  assert.equal(cleanTitle("Local News - Partnership on AI"), "Local News");
+});
+
+test("cleanTitle still refuses to reduce a title to a single word", () => {
+  // One real word left = the stripper has eaten the title, not a suffix.
+  assert.equal(cleanTitle("About - Some Publisher"), "About - Some Publisher");
+});
+
+test("cleanTitle strips a chain of four suffixes", () => {
+  assert.equal(
+    cleanTitle("In the Age of AI | FRONTLINE | PBS | Official Site | Documentary Series"),
+    "In the Age of AI | FRONTLINE",
+  );
+});
+
 test("publisherFromUrl drops www and returns the host", () => {
   assert.equal(publisherFromUrl("https://www.poynter.org/a/b"), "poynter.org");
   assert.equal(publisherFromUrl("https://reutersinstitute.politics.ox.ac.uk/x"), "reutersinstitute.politics.ox.ac.uk");

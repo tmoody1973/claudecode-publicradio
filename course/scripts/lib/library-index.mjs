@@ -41,11 +41,19 @@ function isTruncated(title) {
   return /\.\.\.\s*$/.test(title) || /…\s*$/.test(title);
 }
 
+const SEPARATOR_TOKENS = new Set(["-", "|", "–", "—", "·"]);
+
+/** A bare separator split out by \s+ isn't a word — don't let it pad the count. */
+function realWordCount(s) {
+  return s.split(/\s+/).filter((w) => w && !SEPARATOR_TOKENS.has(w)).length;
+}
+
 /**
  * Strip a trailing " - Publisher" / " | Publisher" / " · Publisher".
  * Only a SHORT trailing segment (≤ 4 words) is a publisher — a long one is prose.
  * A tail with a "/" is a path or repo identifier, never a publisher. A strip is
- * refused if it would leave fewer than 3 words — that's eating the title, not a suffix.
+ * refused if it would leave fewer than 2 real words — that's eating the title, not
+ * a suffix (real words = tokens that aren't themselves a bare separator).
  */
 function stripPublisherSuffixOnce(title) {
   const m = title.match(/^(.*\S)\s+[-|–—·]\s+([^-|–—·]{2,40})$/);
@@ -54,11 +62,21 @@ function stripPublisherSuffixOnce(title) {
   if (tail.includes("/")) return title; // a repo path or URL fragment, not a publisher
   if (tail.split(/\s+/).length > 4) return title; // that's a subtitle, not a publisher
   const head = m[1].trim();
-  if (head.split(/\s+/).length < 3) return title; // never strip a title down to a stub
+  if (realWordCount(head) < 2) return title; // never strip a title down to a stub
   return head;
 }
 
-/** Double-suffixed titles ("Title | Documentos - Universidad ...") need more than one pass. */
+/**
+ * Double- and triple-suffixed titles ("Title | Documentos - Universidad ...") need
+ * more than one pass.
+ *
+ * ponytail: cap stays at 3, not 5. Swept all 292 real titles at cap 3 vs 5: exactly
+ * one differs — "In the Age of AI | FRONTLINE | PBS | Official Site | Documentary
+ * Series" — and cap 5 makes it *worse* (eats "FRONTLINE", the actual show name,
+ * because nothing but the pass cap was stopping it). No real title needs a 4th
+ * pass. Raise this only once a real title needs one AND doesn't collide with a
+ * short chain like the FRONTLINE case.
+ */
 function stripPublisherSuffix(title) {
   let t = title;
   for (let i = 0; i < 3; i++) {
