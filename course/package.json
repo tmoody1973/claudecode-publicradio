@@ -14,6 +14,7 @@
     "gen:walkthroughs": "node scripts/compile-walkthroughs.mjs",
     "prebuild": "node scripts/gen-sample-data.mjs && node scripts/compile-content.mjs && node scripts/compile-walkthroughs.mjs && node scripts/gen-prompt.mjs",
     "library:export": "node scripts/export-library.mjs",
+    "library:index": "node --env-file=.env.local scripts/index-library.mjs",
     "audit": "node scripts/audit.mjs",
     "benchmark": "node scripts/benchmark.mjs"
   },
