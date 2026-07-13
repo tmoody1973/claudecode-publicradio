@@ -187,10 +187,11 @@ test("resolveUrl sends every other URL-less source to the public notebook", () =
   });
 });
 
-test("the six buckets are exactly the agreed set", () => {
+test("the seven buckets are exactly the agreed set", () => {
   assert.deepEqual(Object.keys(BUCKETS).sort(), [
     "agents",
     "audience",
+    "civic-media",
     "governance",
     "newsroom-policy",
     "other",

@@ -23,6 +23,7 @@ export const BUCKETS = {
   production: "Transcription & production tooling",
   governance: "Ethics & governance frameworks",
   agents: "AI agents in public media",
+  "civic-media": "Civic media & open data",
   other: "Other",
 };
 

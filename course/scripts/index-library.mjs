@@ -30,6 +30,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const NOTEBOOK_ID = "da7c4315-35c1-448b-ae4c-bd65cc2026f4";
 const CONCURRENCY = 6;
 const TIMEOUT_MS = 12_000;
+// A classification call is a 25-source reasoning request, not a page fetch — it is
+// legitimately slow. Generous, but finite: a batch that has said nothing for 2 minutes
+// is stalled, not thinking.
+const CLASSIFY_TIMEOUT_MS = 120_000;
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122 Safari/537.36";
 
@@ -107,39 +111,66 @@ async function classifyBatch(batch) {
 
   for (;;) {
     const model = MODEL_CASCADE[modelIndex];
-    const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://claude-code-public-media.vercel.app",
-        "X-Title": "Claude Code for Public Media - library indexing",
-      },
-      body: JSON.stringify({
-        model,
-        temperature: 0,
-        messages: [
-          {
-            role: "system",
-            content:
-              `You file sources into a public-media AI research library. For each numbered source, ` +
-              `return ONLY its bucket slug.\n\nBuckets:\n${BUCKET_LIST}\n\n` +
-              `Use "other" when none of the five fits — do NOT force-fit.\n` +
-              `Reply with exactly ${batch.length} lines, each "N: slug". No prose, no fences.`,
-          },
-          { role: "user", content: numbered },
-        ],
-      }),
-    });
+    // A free model can accept the request, return 200 headers, and then never finish the
+    // body — the run hangs forever on one batch (observed: 6+ min, socket open, no bytes).
+    // The deadline therefore has to span the BODY READ, not just the headers: clearing the
+    // timer as soon as `fetch` resolves leaves `res.json()` unguarded, which is exactly
+    // where it stalls. Same AbortController pattern as fetchMeta, held one step longer.
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), CLASSIFY_TIMEOUT_MS);
 
-    if (res.status === 429 && modelIndex < MODEL_CASCADE.length - 1) {
+    let status, body;
+    try {
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        signal: ctrl.signal,
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": "https://claude-code-public-media.vercel.app",
+          "X-Title": "Claude Code for Public Media - library indexing",
+        },
+        body: JSON.stringify({
+          model,
+          temperature: 0,
+          messages: [
+            {
+              role: "system",
+              content:
+                `You file sources into a public-media AI research library. For each numbered source, ` +
+                `return ONLY its bucket slug.\n\nBuckets:\n${BUCKET_LIST}\n\n` +
+                `Use "other" when none of the others fits — do NOT force-fit.\n` +
+                `Reply with exactly ${batch.length} lines, each "N: slug". No prose, no fences.`,
+            },
+            { role: "user", content: numbered },
+          ],
+        }),
+      });
+      status = res.status;
+      body = await res.text(); // still inside the deadline — this is where a stall lands
+    } catch (err) {
+      if (err.name !== "AbortError") throw err;
+      // A stalled model is a rate limit by another name: fall forward, same as a 429.
+      if (modelIndex >= MODEL_CASCADE.length - 1) {
+        throw new Error(`OpenRouter timed out on every model in the cascade (last: ${model}).`);
+      }
+      modelIndex++;
+      console.log(`\n  ! ${model} timed out — falling back to ${MODEL_CASCADE[modelIndex]}`);
+      continue;
+    } finally {
+      clearTimeout(timer);
+    }
+
+    if (status === 429 && modelIndex < MODEL_CASCADE.length - 1) {
       modelIndex++;
       console.log(`\n  ! ${model} rate-limited — falling back to ${MODEL_CASCADE[modelIndex]}`);
       continue;
     }
-    if (!res.ok) throw new Error(`OpenRouter HTTP ${res.status} (${model}): ${(await res.text()).slice(0, 200)}`);
+    if (status < 200 || status >= 300) {
+      throw new Error(`OpenRouter HTTP ${status} (${model}): ${body.slice(0, 200)}`);
+    }
 
-    const text = (await res.json()).choices?.[0]?.message?.content ?? "";
+    const text = JSON.parse(body).choices?.[0]?.message?.content ?? "";
 
     const buckets = new Array(batch.length).fill("other");
     for (const line of text.split("\n")) {
