@@ -53,11 +53,27 @@ Merge-base: 5c509b2 (the plan commit; branch started from c39635f on main)
       <2 REAL words (separator tokens don't count); loop cap 3 (NOT 5 — the fixer proved
       empirically that 5 strips "In the Age of AI | FRONTLINE" down to "In the Age of AI").
       Verified independently: 173/292 titles cleaned, 292/292 reachable, 285 direct / 7 notebook.
-- [ ] 3 indexing script (scripts/index-library.mjs, content/library.json)
+- [x] 3 indexing script — COMPLETE (64b53e3..fcad8ac, review clean after 2 fix rounds)
+      FINAL DATA: 292 sources | 198 with a description | 94 title-only | 0 dropped.
+      All descriptions verified LIVE against publishers' own og:description (4 spot-checks,
+      character-for-character). No LLM ever wrote a description. Buckets: single model
+      (nemotron), `classifiedBy` on every record. Max description 300 chars.
+      Reviews caught 4 real bugs: (a) 42 records shipped raw HTML entities; (b) the fix
+      only decoded one level — 3 publishers double-encode (&amp;amp;), so it now loops to
+      a fixpoint; (c) bucket classification had silently split across 2 models at a
+      rate-limit boundary; (d) 3 publishers stuff the WHOLE ARTICLE into og:description
+      (one was 22,515 chars — would have blown the entire 4k grounding budget alone).
+      NOTE FOR TASK 4/5: LibrarySource now also has `classifiedBy: string`.
 - [ ] 4 retriever + tests (lib/library-search.mjs/.d.mts, lib/library.ts)
 - [ ] 5 Sources component (openui-spec.mjs + openui-library.tsx)
 - [ ] 6 wire into the chat (app/api/chat/route.ts)
 - [ ] 7 gates (test, tsc, build, audit + honesty invariants)
 
 ## Minor findings (for the final whole-branch review to triage)
-(none yet)
+- T3: `other` bucket is 24% of the library. A reviewer sampled 10 and judged them genuine
+  refusals-to-force-fit, not the model giving up — but a human pass over the `other` pile
+  would likely reclassify a few into newsroom-policy/governance. Buckets are a correctable
+  label in a committed JSON file; this is cheap to fix by hand later.
+- T3: the fixpoint entity decoder over-decodes text that legitimately wants to DISPLAY
+  "&amp;". Zero of the 292 real sources hit this; three hit the opposite case. Deliberate
+  trade, pinned by a test.
