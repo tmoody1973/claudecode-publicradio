@@ -135,3 +135,41 @@ Merge-base: 5c509b2 (the plan commit; branch started from c39635f on main)
   cosine in-process, STILL no database); (2) some LLM bucket labels are wrong and feed bad
   retrieval — buckets are hand-correctable in a committed JSON file.
   DECISION DEFERRED TO TARIK after the branch is green. Do not climb the ladder unasked.
+
+
+## FINAL WHOLE-BRANCH REVIEW (opus) + fixes — COMPLETE
+Verdict: MERGE. It found what 7 prior reviews missed:
+  1. The renderer COMMENT claimed a fabricated id was "structurally unrenderable". FALSE —
+     LIBRARY_INDEX holds all 292, so ANY id in 1-292 rendered, including ids never retrieved
+     this turn. A RANGE check wearing the costume of a PROVENANCE check. Worse: the system
+     prompt's few-shot examples carry REAL resolvable ids (Sources([8,21,17])) on EVERY turn.
+     The "zero invented ids" metric was structurally blind to it — a copied example id IS valid.
+     FIXED PROPERLY (not by softening the comment): app/api/chat/route.ts now intersects the
+     model's emitted Sources ids with the ids actually retrieved this turn, in the existing
+     line filter. Verified end-to-end: model emitted Sources([192,109]); retriever had
+     returned [192,76,133,109]. A strict subset. 16 new tests pin it.
+  2. The prompt ASSERTED "these sources genuinely match" — which the retriever's own comment
+     documents as sometimes false — and disarmed the model's relevance check. Copy rewritten
+     to be true while keeping a positive default.
+  3. FIRING WAS PHRASING-FRAGILE: 3 plausible station questions retrieved 4 good sources each
+     and emitted NOTHING, 0/12. Now 5/5 on all six phrasings.
+  4. 74KB library index shipped to EVERY visitor of EVERY page via the root layout. Now lazy.
+  5. The 7 notebook-only sources rendered as unlabelled links (a spec §4 promise). Now labelled.
+  6. Dead exports removed.
+
+## FINAL STATE — verified by the controller directly
+90 tests pass | tsc clean | build clean | audit 21/21 pages CLEAN.
+CORRECTION: the "/cost fails on main" finding was a STALE-SERVER ARTIFACT. The audit needs a
+live server on :3000; a dead/stale process produced phantom failures. With a clean prod server,
+ALL 21 pages pass. Nothing is failing.
+
+## OPEN — TARIK'S CALL, do not decide unasked
+- RUNG 2 (embeddings)? The final reviewer argued AGAINST it, with evidence: the observed
+  failures were COMPLIANCE/PHRASING failures, not RECALL failures — the retriever found 4 good
+  sources every time; the model just didn't emit the block. Embeddings would have fixed none of
+  them. Those are now fixed. Do not climb the ladder on a hunch.
+- `other` bucket = 24%; some labels wrong (City Bureau -> "Audience & personalisation").
+  Hand-correctable in committed JSON. Non-blocking: a bucket is a badge, not a claim.
+- 94 of 292 sources have no description. NOT stated on any user-visible surface — but no
+  surface implies otherwise either, and the spec's own /library page is a declared non-goal.
+  The spec contradicts itself here. Worth resolving when/if a /library page lands.
