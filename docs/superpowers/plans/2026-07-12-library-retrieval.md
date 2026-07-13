@@ -888,6 +888,28 @@ test("results are capped at k", () => {
   assert.ok(hits.length <= 2);
 });
 
+test("the same URL never appears twice in one result set", () => {
+  // The notebook genuinely contains 3 URLs filed twice under different titles. We keep
+  // both records (never drop a source), but showing a person the same link twice in one
+  // Sources block looks broken. Dedupe by URL at retrieval time, keeping the best-scoring.
+  const dupes = [
+    ...SOURCES,
+    {
+      id: 4,
+      title: "Automating transcription in the newsroom: a case study series",
+      publisher: "bbc.co.uk",
+      url: "https://bbc.co.uk/transcription", // same URL as id 2
+      bucket: "production",
+      bucketLabel: "Transcription & production tooling",
+      linkKind: "direct",
+      description: "Whisper and its rivals, tested against broadcast audio.",
+    },
+  ];
+  const hits = searchSources(dupes, "transcription in the newsroom", 4);
+  const urls = hits.map((h) => h.url);
+  assert.equal(new Set(urls).size, urls.length, "a URL was returned twice");
+});
+
 test("results carry a human-readable bucket label for the UI", () => {
   const hits = searchSources(SOURCES, "transcription", 4);
   assert.equal(hits[0].bucketLabel, "Transcription & production tooling");
@@ -1013,15 +1035,26 @@ export function scoreSource(queryTokens, source) {
 
 /**
  * @returns the top k sources scoring at or above SCORE_FLOOR, best first. [] if none.
+ *
+ * Deduped by URL. The notebook genuinely files 3 URLs twice under different titles; we
+ * keep both records (a source is never dropped from the library) but a person must never
+ * be handed the same link twice in one Sources block. Best-scoring title wins.
  */
 export function searchSources(sources, question, k = 4) {
   const q = tokenize(question);
   if (q.length === 0) return [];
 
+  const seen = new Set();
+
   return sources
     .map((source) => ({ source, s: scoreSource(q, source) }))
     .filter((r) => r.s >= SCORE_FLOOR)
     .sort((a, b) => b.s - a.s || a.source.id - b.source.id)
+    .filter(({ source }) => {
+      if (seen.has(source.url)) return false;
+      seen.add(source.url);
+      return true;
+    })
     .slice(0, k)
     .map(({ source }) => ({
       id: source.id,

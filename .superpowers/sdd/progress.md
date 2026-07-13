@@ -1,59 +1,55 @@
-# SDD progress — walkthroughs
+# SDD progress — library retrieval
 
-Plan:   docs/superpowers/plans/2026-07-12-walkthroughs.md
-Spec:   docs/superpowers/specs/2026-07-12-walkthroughs-design.md
-Branch: feat/walkthroughs
-Merge-base: 0fd711d36ff637a4b3d2a0d573366425cf3cf60f
+(The previous ledger for `feat/walkthroughs` is superseded — that branch is merged;
+its record lives in git history.)
 
-## Pre-flight decisions (binding — supersede the plan text)
-1. PERMISSION PROMPTS — REVISED 2026-07-12 (human decision, supersedes original):
-   Permission prompts CANNOT be captured headlessly (verified against the real CLI —
-   they are an interactive-TTY feature). Requiring a permission TURN would have forced
-   fabrication, breaking the never-add rule. RESOLUTION: no permission turn required;
-   instead a STEP must warn the prompt is coming. Validator enforces this. Sessions are
-   still 100% real recordings.
-   RECORDING COMMAND (proven working, produces clean newcomer-representative output):
-     claude -p "<prompt>" \
-       --append-system-prompt "<neutralizer: ignore PAI/Algorithm output format>" \
-       --settings '{"hooks":{}}' \
-       --output-format stream-json --verbose --permission-mode default
-   (--bare is NOT usable: it never reads OAuth/keychain, so it cannot authenticate.)
-2. TERMINAL COLOURS: no hardcoded hex. Add --terminal-bg/-fg/-dim/-chrome/-accent
-   to globals.css, identical in both themes (a terminal is theme-invariant).
-3. BRANCH: feat/walkthroughs.
+Plan:   docs/superpowers/plans/2026-07-12-library-retrieval.md
+Spec:   docs/superpowers/specs/2026-07-12-library-retrieval-design.md
+Branch: feat/library-retrieval
+Merge-base: 5c509b2 (the plan commit; branch started from c39635f on main)
+
+## Pre-flight decisions (binding)
+1. NO DATABASE. The spec deleted Neon/pgvector — 292 pointer-sized records (~18k tokens)
+   is a SMALLER haystack than the course digest lib/retrieval.ts already scores in-process.
+   searchLibrary is SYNCHRONOUS. If a `Promise.all` or an `await searchLibrary` appears in
+   route.ts, someone has re-added the database.
+2. NO NEW NPM DEPENDENCIES. Zero. (`@neondatabase/serverless` was withdrawn with the DB.)
+   Baseline: 14 deps. package.json may differ from main ONLY in `scripts`.
+3. POINTER, NOT KNOWLEDGE BASE. The chat has NOT read the library sources. It points at
+   them. No quoting, no summarising, no attributing a claim to them, no inline [N] markers.
+4. AN LLM ASSIGNS BUCKETS (a correctable label). AN LLM NEVER WRITES DESCRIPTIONS (an
+   uncheckable claim). Descriptions come from the publisher's own og:description or they
+   do not exist. A failed fetch => description: null, descriptionSource: "none".
+5. NEVER SILENTLY DROP A SOURCE. All 292 survive into library.json. Coverage is reported
+   loudly and never rounded up.
+6. STOPWORD LISTS ARE DELIBERATELY NOT SHARED with lib/retrieval.ts. The corpora need
+   different lists: retrieval.ts stops "claude"/"code"/"station"; the library must ALSO
+   stop "ai"/"artificial"/"intelligence"/"public"/"media" — those appear across most of
+   292 sources about AI in public media and discriminate nothing. Sharing one list would
+   degrade both. This is a stated spec relationship, not an oversight.
+7. bucketLabel is DENORMALISED into every library.json record so lib/library-search.mjs
+   (app code) never imports BUCKETS out of scripts/ (build tooling). App code must not
+   depend on the scripts directory.
+
+## Environment notes (carried over from the walkthroughs run — still true)
+- `node --test scripts/lib/` (bare dir) throws MODULE_NOT_FOUND on Node 26.
+  Use the GLOB form: `node --test scripts/lib/*.test.mjs lib/*.test.mjs`.
+- `text-white` on `bg-destructive` is a dark-mode contrast failure (2.78:1).
+  Use `text-destructive-foreground`.
+- Flex/grid children need `min-w-0` or they inflate the track past a 320px viewport.
+  This has bitten the project three times.
 
 ## Tasks
-- [x] 1 validator + types — COMPLETE (commits 02f7743..cc6027f, review clean)
-- [x] 2 synthetic sample data — COMPLETE (commits f45bd5a..3abccf8, review clean, no findings)
-- [x] 4 walkthrough section components — COMPLETE (commits 3ca47f8..3f2332a, review clean)
-- [x] 3 recorded-session terminal — COMPLETE (commits 159de30..7d132ad, review clean, no findings)
-- [ ] 4 walkthrough section components
-- [x] 5 walkthroughs + REAL recorded sessions — COMPLETE (867f619..3a1557d, review clean after 1 Important fix)
-      4 sessions, 27 real turns, 0 fabricated permission turns. Fixed: moduleNumber
-      shadowing bug (walkthroughForModule now prefers flagship; guarded by validateWalkthroughSet).
-- [x] 6 walkthrough pages — COMPLETE (e2a4b43..6f3bee4, review clean after 1 Important fix:
-      terminal was 1655px vs 705px viewport and 'Next turn' produced NO visible change.
-      Now capped at 55vh with scroll-into-view. All turns still in a11y tree.)
-- [x] 7 fifty runbooks — COMPLETE (6a41132..dcf187f, review clean; 1 Minor folded into T8:
-      all 50 <summary> share the identical a11y name)
-- [x] 8 wire in + audit gate — COMPLETE (3f4b8a2..09b29d0). a11y assert PROVEN by making
-      it fail (display:none on turns -> audit failed naming all 4 walkthrough routes) then pass.
+- [x] 1 export the notebook — COMPLETE (commits dad0584..deaabad, review clean)
+      292 sources verified in the artifact. NOTE: the implementer rewrote `prebuild`
+      (out of scope — the plan had misquoted it); I reverted it byte-identical to main
+      and corrected the plan. package.json now differs from main ONLY by library:export.
+- [ ] 2 pure indexing helpers + tests (scripts/lib/library-index.mjs)
+- [ ] 3 indexing script (scripts/index-library.mjs, content/library.json)
+- [ ] 4 retriever + tests (lib/library-search.mjs/.d.mts, lib/library.ts)
+- [ ] 5 Sources component (openui-spec.mjs + openui-library.tsx)
+- [ ] 6 wire into the chat (app/api/chat/route.ts)
+- [ ] 7 gates (test, tsc, build, audit + honesty invariants)
 
 ## Minor findings (for the final whole-branch review to triage)
-- T1: no test exercises per-field checks on `verify` entries (check/why/ifWrong) or
-  `sampleData.columns` non-empty. Code paths exist but are unexercised. Task 7's
-  fixtures could cover them.
-- T1 env note: `node --test scripts/lib/` (bare dir) throws MODULE_NOT_FOUND on Node 26.
-  Use the glob form `node --test scripts/lib/*.test.mjs`. Applies to Tasks 5/7 too.
-- SITEWIDE CONTRAST BUG (found during T3): `text-white` on `bg-destructive` is near-
-  invisible in DARK mode — --destructive flips to a light coral (#ff6b6b) while
-  --destructive-foreground is dark (#1a1815). T3 fixed it in the terminal by using
-  `text-destructive-foreground`. The SAME bug exists in code written earlier:
-  components/home/limits.tsx, lib/openui-library.tsx (Callout guardrail, color:'#fff'),
-  and the use-case guardrail blocks. DESIGN.md calls WCAG AA a hard requirement.
-  → Fix in Task 8 or flag to the final whole-branch review.
-- T5: NONE of the 4 real recordings produced a spontaneous Claude mistake/self-correction.
-  The implementer correctly REFUSED to fabricate one. Plan wanted >=1 wrong-turn+correction;
-  honestly unmet rather than faked. 3 of 4 sessions still carry real friction (median-vs-average
-  correction, a mistagged-genre catch, a borderline FCC call). The onboarding (w1) is
-  frictionless. Acceptable — but worth telling the user.
+(none yet)
