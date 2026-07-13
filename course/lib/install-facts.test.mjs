@@ -1,5 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 import {
   CHECKED_ON,
   SOURCES,
@@ -66,4 +69,30 @@ test("we never assert where Cowork is available", () => {
 
 test("CHECKED_ON is a real, human-readable date", () => {
   assert.match(CHECKED_ON, /^\d{1,2} \w+ \d{4}$/);
+});
+
+// --- The correction also has to reach the chat, not just this page ---------------
+// content/course.json is what lib/retrieval.ts grounds the chat with. These pin the
+// data half of that fix: module 1's Cowork concept must stay corrected, and the
+// conceptsNote that overrides the video's wrong claim must still exist and name the
+// video. (The other half — that retrieval.ts actually SENDS conceptsNote to the
+// model — is checked by grepping lib/retrieval.ts in the verification step; a data
+// fixture can't observe that.)
+const COURSE = JSON.parse(
+  readFileSync(join(dirname(fileURLToPath(import.meta.url)), "..", "content", "course.json"), "utf8"),
+);
+const m1 = COURSE.modules.find((m) => m.number === 1);
+
+test("module 1's Cowork concept no longer calls Chat/Cowork/Code three separate things", () => {
+  assert.ok(m1, "module 1 not found in content/course.json");
+  const blob = JSON.stringify(m1.concepts).toLowerCase();
+  assert.ok(!/three separate products|three things/.test(blob));
+});
+
+test("module 1 carries a non-empty conceptsNote", () => {
+  assert.ok(typeof m1.conceptsNote === "string" && m1.conceptsNote.trim().length > 0);
+});
+
+test("module 1's conceptsNote names what the video got wrong", () => {
+  assert.match(m1.conceptsNote.toLowerCase(), /video/);
 });

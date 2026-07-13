@@ -93,6 +93,11 @@ function moduleDetail(m: CourseModule): string {
       `- ${c.term} (video ${c.tLabel}, t=${c.t}s): ${c.plain} | For a station: ${c.stationTranslation}`,
     );
   }
+  if (m.conceptsNote) {
+    parts.push(
+      `IMPORTANT CORRECTION TO THE CONCEPTS ABOVE — the source video is out of date here. Use the corrected version and do NOT repeat the video's version: ${m.conceptsNote}`,
+    );
+  }
 
   parts.push(`STATION USE CASES:`);
   for (const u of m.useCases) {
