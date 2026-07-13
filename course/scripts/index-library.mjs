@@ -33,18 +33,19 @@ const TIMEOUT_MS = 12_000;
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122 Safari/537.36";
 
-// Empirically benchmarked cascade from lib/models.ts, best first. On a 429 we fall
-// forward to the next ":free" model and stay there — cheaper than restarting the
-// whole 292-fetch phase to retry a model that's still rate-limited.
+// Empirically benchmarked cascade from lib/models.ts, best first. nemotron is primary
+// because the last run showed it does NOT rate-limit; gpt-oss (which did 429 mid-run
+// last time) is kept as a fallback for resilience. On a 429 we fall forward to the
+// next ":free" model and stay there — cheaper than restarting the whole 292-fetch
+// phase to retry a model that's still rate-limited.
 const MODEL_CASCADE = [
-  "openai/gpt-oss-120b:free",
   "nvidia/nemotron-3-super-120b-a12b:free",
+  "openai/gpt-oss-120b:free",
   "openrouter/free",
   "qwen/qwen3-next-80b-a3b-instruct:free",
   "meta-llama/llama-3.3-70b-instruct:free",
 ];
 let modelIndex = 0;
-const modelsUsed = new Set();
 
 const apiKey = process.env.OPENROUTER_API_KEY;
 if (!apiKey) {
@@ -138,7 +139,6 @@ async function classifyBatch(batch) {
     }
     if (!res.ok) throw new Error(`OpenRouter HTTP ${res.status} (${model}): ${(await res.text()).slice(0, 200)}`);
 
-    modelsUsed.add(model);
     const text = (await res.json()).choices?.[0]?.message?.content ?? "";
 
     const buckets = new Array(batch.length).fill("other");
@@ -148,7 +148,7 @@ async function classifyBatch(batch) {
       const i = Number(m[1]) - 1;
       if (i >= 0 && i < batch.length && isValidBucket(m[2])) buckets[i] = m[2];
     }
-    return buckets;
+    return { buckets, model };
   }
 }
 
@@ -192,11 +192,14 @@ const enriched = await pool(input, CONCURRENCY, async (s, i) => {
 console.log(`\nClassifying into buckets…`);
 for (let i = 0; i < enriched.length; i += 25) {
   const batch = enriched.slice(i, i + 25);
-  const buckets = await classifyBatch(batch);
+  const { buckets, model } = await classifyBatch(batch);
   batch.forEach((s, j) => {
     s.bucket = buckets[j];
     // Denormalised so lib/library-search.mjs never has to import BUCKETS out of scripts/.
     s.bucketLabel = BUCKETS[buckets[j]];
+    // Disclosure, not decoration: if a rate-limit ever splits a run across models
+    // again, every record still says — honestly — which one labelled it.
+    s.classifiedBy = model;
   });
   process.stdout.write(`  ${Math.min(i + 25, enriched.length)}/${enriched.length}\r`);
 }
@@ -216,8 +219,13 @@ const out = {
 writeFileSync(join(__dirname, "..", "content", "library.json"), JSON.stringify(out, null, 2) + "\n");
 
 // --- The coverage report. Loud, honest, never rounded up. ---
+const byModel = enriched.reduce((a, s) => ((a[s.classifiedBy] = (a[s.classifiedBy] ?? 0) + 1), a), {});
+const modelSpread = Object.entries(byModel)
+  .map(([m, c]) => `${m.split("/").pop()} (${c})`)
+  .join(", ");
+
 console.log(`\n\n✓ content/library.json — ${out.count} sources, ALL of them kept\n`);
-console.log(`  classification model(s) : ${[...modelsUsed].join(", ")}`);
+console.log(`  classified by: ${modelSpread}`);
 console.log(`  with a description : ${withDescription}`);
 console.log(`  title-only         : ${out.titleOnly}`);
 console.log(`\n  buckets:`);

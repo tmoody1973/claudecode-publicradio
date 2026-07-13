@@ -30,10 +30,47 @@ export function isValidBucket(slug) {
   return Object.prototype.hasOwnProperty.call(BUCKETS, slug);
 }
 
-const ENTITIES = { amp: "&", lt: "<", gt: ">", quot: '"', "#39": "'", apos: "'", nbsp: " " };
+const NAMED_ENTITIES = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: " ",
+  mdash: "—",
+  ndash: "–",
+  rsquo: "’",
+  lsquo: "‘",
+  ldquo: '"',
+  rdquo: '"',
+  hellip: "…",
+  eacute: "é",
+  uuml: "ü",
+  agrave: "à",
+  ccedil: "ç",
+  deg: "°",
+  pound: "£",
+  euro: "€",
+  trade: "™",
+  reg: "®",
+  copy: "©",
+};
 
+/** Hex (&#x27;), decimal (&#8217;) and a common named set. Unknown entities pass through untouched. */
 function decodeEntities(s) {
-  return s.replace(/&(#?\w+);/g, (m, e) => ENTITIES[e] ?? m);
+  return s.replace(/&(#[xX][0-9a-fA-F]+|#\d+|[a-zA-Z]+);/g, (m, e) => {
+    if (e[0] === "#") {
+      const isHex = e[1] === "x" || e[1] === "X";
+      const codepoint = parseInt(isHex ? e.slice(2) : e.slice(1), isHex ? 16 : 10);
+      if (!Number.isInteger(codepoint) || codepoint < 0 || codepoint > 0x10ffff) return m;
+      try {
+        return String.fromCodePoint(codepoint);
+      } catch {
+        return m;
+      }
+    }
+    return NAMED_ENTITIES[e] ?? m;
+  });
 }
 
 /** The export truncates long titles with a literal "...". */

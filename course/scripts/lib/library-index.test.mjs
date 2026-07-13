@@ -114,6 +114,16 @@ test("parseOgTags decodes HTML entities", () => {
   assert.equal(parseOgTags(html).description, 'Ethics & governance "rules"');
 });
 
+test("parseOgTags decodes hex, decimal and named entities", () => {
+  const html = `<meta property="og:description" content="NIST AI RMF&#x27;s guide &mdash; the &ldquo;right&rdquo; way&#8230;">`;
+  assert.equal(parseOgTags(html).description, 'NIST AI RMF\'s guide — the "right" way…');
+});
+
+test("decodeEntities leaves an unknown entity alone rather than mangling it", () => {
+  const html = `<meta property="og:description" content="A &notarealentity; B">`;
+  assert.equal(parseOgTags(html).description, "A &notarealentity; B");
+});
+
 test("parseOgTags returns nulls when there are no tags", () => {
   assert.deepEqual(parseOgTags("<html><body>nothing</body></html>"), {
     title: null,
