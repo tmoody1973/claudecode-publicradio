@@ -41,7 +41,10 @@ export function Prerequisites() {
                 href={critical.source}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-flex min-h-11 items-center border-2 border-border bg-card px-3 font-head text-xs uppercase tracking-wide text-black no-underline"
+                // text-black is only safe on bg-primary. This link sits on bg-card,
+                // which is near-black in dark mode — text-card-foreground flips with
+                // the theme instead of pinning a color that only works in light mode.
+                className="mt-3 inline-flex min-h-11 items-center border-2 border-border bg-card px-3 font-head text-xs uppercase tracking-wide text-card-foreground no-underline"
               >
                 See Anthropic&apos;s setup docs
               </a>

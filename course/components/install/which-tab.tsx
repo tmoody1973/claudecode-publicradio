@@ -44,7 +44,10 @@ export function WhichTab() {
               </div>
 
               {isCode ? (
-                <span className="w-fit border-2 border-border bg-card px-2 py-1 font-head text-[10px] uppercase tracking-widest">
+                // text-black is only safe on bg-primary (light yellow in both themes).
+                // This badge sits on bg-card, which is near-black in dark mode — pin
+                // text-card-foreground instead so it flips with the theme.
+                <span className="w-fit border-2 border-border bg-card px-2 py-1 font-head text-[10px] uppercase tracking-widest text-card-foreground">
                   This is what the rest of the course teaches
                 </span>
               ) : null}
