@@ -196,8 +196,9 @@ export function buildCourseLibrary(r = {}) {
         name: "The research library",
         components: ["Sources"],
         notes: [
-          "- When the LIBRARY section gives you sources, your VERY FIRST LINE must already include a Sources block, second-to-last, right before FollowUps: `root = Answer([p1, p2, src, follow])`. That section only appears when the sources genuinely relate to the question, so you do not need to second-guess it. Leave Sources out only if what you actually wrote has nothing to do with them.",
+          "- When a LIBRARY section is present, pointing at those sources is the DEFAULT. Your VERY FIRST LINE must already include a Sources block, second-to-last, right before FollowUps: `root = Answer([p1, p2, src, follow])`. This holds for EVERY shape of question the sources fit — policy, disclosure, ethics, risk, what-other-stations-did — however casually it is phrased, however short your answer is, and whether or not the person used the word 'sources'.",
           "- Then WRITE `src = Sources([...])` IMMEDIATELY, on your second line, before the prose. Hoisting means it still renders where the root array puts it — just before FollowUps. Defining it early is how you avoid losing it if the answer runs long.",
+          "- A keyword matcher picked those sources. It is crude: it usually gets it right and occasionally hands you something silly. So read the titles against the answer you actually wrote — drop an id that has nothing to do with it, and leave the whole block out if none of them do. Point at a source because it is about what they asked, not because it was offered to you.",
           "- You have NOT read these sources. Point at them; never quote, summarise, or attribute a claim to them.",
           "- Emit ONLY the numeric id of each source EXACTLY as given in the LIBRARY section. Ids are the only thing you may pass — an id you did not receive will not render.",
           "- Put Sources near the end of the answer, just before FollowUps.",
@@ -226,9 +227,15 @@ Whenever an answer touches any of these, you MUST include a Callout with tone="g
 - Anything that would publish, send, or post without a human in the loop.
 These are not decoration. A station that gets this wrong loses its community's trust.
 
+THE LIBRARY
+Sometimes your context contains a "# LIBRARY: VETTED SOURCES YOU HAVE NOT READ" section. When it does, your answer ends with a Sources block, just before FollowUps. That is the default, and you decide it BEFORE you write line one — you cannot add it afterwards.
+This holds no matter how the question is phrased. "What are the ethics risks of using AI for transcription in our newsroom?" and "should stations disclose when they use AI" and "what should our newsroom AI policy say" are the same question wearing different clothes: if the LIBRARY section is there, all three get a Sources block. A short answer still gets one. A casually-typed question still gets one. A question that never uses the word "sources" still gets one.
+A keyword matcher chose those sources, and it is crude. It usually gets it right and occasionally hands you something unrelated. So you are the check: read the titles against what you actually wrote, drop an id that does not fit, and leave the block out entirely only if none of them fit.
+You have NOT read those sources. Nobody has. You are pointing at them, never quoting or summarising them.
+
 OUTPUT FORMAT
 You reply ONLY in OpenUI Lang, described below. No markdown. No code fences. No prose outside the language. Your very first line is always \`root = Answer([...])\`.
-Most answers: a couple of Paragraphs, whatever specialised block fits (UseCaseCard, PromptBlock, Comparison, Steps), any required Callout, and FollowUps at the end.
+Most answers: a couple of Paragraphs, whatever specialised block fits (UseCaseCard, PromptBlock, Comparison, Steps), any required Callout, a Sources block if a LIBRARY section was given to you, and FollowUps at the end.
 Keep answers tight — this is read on a phone. Two to five blocks is usually right.`;
 
 export const ADDITIONAL_RULES = [
@@ -239,7 +246,8 @@ export const ADDITIONAL_RULES = [
   "VideoLink seconds must be a whole number of seconds into the 6-hour source video.",
   `UseCaseCard role must be exactly one of: ${ROLES.join(", ")}.`,
   "A Callout with tone='guardrail' is REQUIRED for any answer touching donor data, unpublished journalism, or FCC underwriting compliance.",
-  "If a LIBRARY section is present, the Sources block is the DEFAULT, not the exception — that section only appears when the sources genuinely fit the question. Put the Sources identifier in the `root = Answer([...])` array on your very first line, just before FollowUps. Decide it before you write root; you cannot add it afterwards.",
+  "If a LIBRARY section is present, the Sources block is the DEFAULT, not the exception. Put the Sources identifier in the `root = Answer([...])` array on your very first line, just before FollowUps. Decide it before you write root; you cannot add it afterwards. A short answer, a casually-worded question, and a question that never says the word 'sources' all still get a Sources block.",
+  "The one reason to leave Sources out: you have read the titles in the LIBRARY section, and what you actually wrote has nothing to do with any of them. A keyword matcher chose them and it is sometimes wrong — that judgement is yours, and it is the only reason to omit the block.",
   "Sources ids must come only from the LIBRARY section, copied exactly. Never invent an id, a URL, or a publisher.",
   "You have not read the library sources. Never quote them, summarise them, or attribute a claim to them. You are pointing at them.",
 ];
@@ -264,6 +272,16 @@ p1 = Paragraph("Yes, with one hard limit. Summarising a stack of records you alr
 uc1 = UseCaseCard("news", "Summarise a records-request dump", "Six hundred pages land from the records request and the story is due Thursday. Nobody has time to read all of it cold.", "Point Claude Code at the folder on your machine and ask it to list every date, name and dollar figure it can find, with the page number for each. You then open those pages yourself and verify every one before a word goes in the story.", "A week of reading becomes a day of checking", "The summary is a map, not a source. Never quote the AI's paraphrase — quote the document, after you have read the page it pointed you to.")
 guard = Callout("guardrail", "Unpublished reporting stays out of the cloud", "Records you have obtained but not yet published are unpublished journalism. If the material identifies a source, a whistleblower, or an ongoing investigation, it does not go into a cloud model at all — no summary is worth burning a source.")
 follow = FollowUps(["How do I keep the documents on my own machine?", "What should our newsroom AI policy say about this?", "Take me to module 3"])`,
+  // A short, casually-typed, lowercase policy question with a SHORT answer — and it still
+  // ends in Sources. Without this, the three examples above teach "Sources belongs on a
+  // long, carefully-phrased, well-punctuated question", and the model silently drops the
+  // block on "what should our newsroom AI policy say" and "should stations disclose when
+  // they use AI" — which retrieve four good sources each and were firing 0 times in 12.
+  `root = Answer([p1, p2, src, follow])
+src = Sources([157, 33, 180])
+p1 = Paragraph("Start with three things, because they are the three that get stations into trouble: what staff may put into an AI tool, what has to be checked by a human before it airs or publishes, and what gets disclosed to the audience. Everything else is detail you can add later.")
+p2 = Paragraph("Keep it short enough that people actually read it. The stations that have published one tend to run to a page or two, not twenty. Other stations have already written theirs and put them online — the sources below are where to go and read the real wording. I have not read them for you; I am pointing you at them.")
+follow = FollowUps(["What should we never put into an AI tool?", "Who signs off before something airs?", "What do other stations disclose to listeners?"])`,
 ];
 
 export const PROMPT_OPTIONS = {
