@@ -155,3 +155,21 @@ test("real corpus: the same URL is never returned twice", () => {
   const urls = hits.map((h) => h.url);
   assert.equal(new Set(urls).size, urls.length);
 });
+
+test("real corpus: a long keyword-enumerating title does not outrank a better-matched source", () => {
+  // This repo's title lists half the station vocabulary ("public radio stations… development,
+  // marketing, underwriting, programming"), so raw keyword overlap used to make it win queries
+  // it had no business winning. Length normalisation must demote it.
+  const hits = searchSources(REAL, "How do other public radio stations use AI for audience personalisation?", 4);
+  assert.ok(hits.length > 0);
+  assert.ok(
+    !/public-radio-agents/.test(hits[0].title),
+    `the keyword magnet ranked #1: ${hits[0].title}`,
+  );
+});
+
+test("real corpus: the one source that mentions underwriting is still findable", () => {
+  // It is the ONLY source in 292 containing the word. Returning it is honest, not a bug.
+  const hits = searchSources(REAL, "Should we let AI write underwriting copy?", 4);
+  assert.ok(hits.length > 0, "the library's only underwriting source must still surface");
+});

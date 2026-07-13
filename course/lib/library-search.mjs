@@ -52,10 +52,28 @@ export function tokenize(s) {
  * nothing against a research library and must get nothing — handing the model
  * irrelevant sources only invites it to mention them.
  *
- * 3 = one solid hit (a single title match, or a description+publisher pair). Below
- * that we're scoring incidental overlap, not a real match — reject it.
+ * The scale changed completely when scoring moved from flat field-weights to
+ * IDF-weighted, length-normalised (BM25-style) scoring below, so this had to be
+ * re-derived empirically, not guessed. IDF scales with corpus size N (log(1 + N/(1+df))),
+ * so the *smallest* legitimate match — a single title-word hit in the 3-source unit-test
+ * fixture, where N is tiny and idf is correspondingly small — sets the binding constraint,
+ * not the 292-source library:
+ *   - Fixture: "transcription" hits one title word, df=1 of 3 sources.
+ *     idf = log(1 + 3/2) ≈ 0.916; fieldWeight(title)=3 → raw ≈ 2.75; length-normalised ≈ 2.70.
+ *     This is a real, single-solid-hit match and MUST clear the floor.
+ *   - Real 292-source corpus: course-mechanics questions that leak past the df GATE on an
+ *     incidental rare token (e.g. "context window", "AI agent") still score 8-17 — but
+ *     that leakage is caught by the qualify() gate above, before scoring is even
+ *     consulted, not by SCORE_FLOOR. SCORE_FLOOR is a second line of defence for weak
+ *     matches that already cleared the gate, not the primary filter for course questions.
+ * 2.5 sits just below the tiny-fixture single-hit score (~2.70) — the tightest real
+ * case — while still rejecting near-zero incidental overlap. Verified by running the
+ * full test suite (74 cases: 62 fixture/unit + 12 real-corpus) at this value.
  */
-export const SCORE_FLOOR = 3;
+export const SCORE_FLOOR = 2.5;
+
+/** BM25-style length normalisation strength. 0 = no normalisation, 1 = full. */
+const LENGTH_NORM_B = 0.75;
 
 /**
  * Qualification gate (runs BEFORE scoring, decides IF we search at all).
@@ -105,15 +123,21 @@ function qualifies(sources, queryTokens) {
   return false;
 }
 
-/** Precompute per-source token sets once per array. */
+/** Precompute per-source token sets (and total token count, for length norm) once per source. */
 function fields(source) {
   let f = cache.get(source);
   if (!f) {
+    const title = tokenize(source.title);
+    const description = tokenize(source.description ?? "");
+    const bucket = tokenize(source.bucketLabel ?? "");
+    const publisher = tokenize(source.publisher);
     f = {
-      title: new Set(tokenize(source.title)),
-      description: new Set(tokenize(source.description ?? "")),
-      bucket: new Set(tokenize(source.bucketLabel ?? "")),
-      publisher: new Set(tokenize(source.publisher)),
+      title: new Set(title),
+      description: new Set(description),
+      bucket: new Set(bucket),
+      publisher: new Set(publisher),
+      // TOTAL token count (not unique) across all fields — what "long" means for BM25.
+      docLen: title.length + description.length + bucket.length + publisher.length,
     };
     f.all = new Set([...f.title, ...f.description, ...f.bucket, ...f.publisher]);
     cache.set(source, f);
@@ -121,25 +145,53 @@ function fields(source) {
   return f;
 }
 
-export function scoreSource(queryTokens, source) {
+const avgLenCache = new WeakMap();
+
+/** Average docLen across the corpus. Computed once per sources array, not per query. */
+function avgDocLen(sources) {
+  let avg = avgLenCache.get(sources);
+  if (avg == null) {
+    const total = sources.reduce((sum, s) => sum + fields(s).docLen, 0);
+    avg = sources.length ? total / sources.length : 1;
+    avgLenCache.set(sources, avg);
+  }
+  return avg;
+}
+
+/**
+ * Score a source against a tokenized query, weighting each matched token by rarity
+ * (IDF) and normalising the total by document length (BM25-style, b=0.75) so a long
+ * keyword-enumerating title can no longer outscore a shorter, better-targeted source
+ * purely by having more words to match against.
+ */
+export function scoreSource(queryTokens, source, sources) {
   const f = fields(source);
-  let s = 0;
+  const df = docFrequencies(sources);
+  const N = sources.length;
+
+  let raw = 0;
   for (const q of queryTokens) {
-    if (f.title.has(q)) s += 3;
-    else if (f.description.has(q)) s += 2;
-    else if (f.bucket.has(q)) s += 2;
-    else if (f.publisher.has(q)) s += 1;
+    const idf = Math.log(1 + N / (1 + (df.get(q) ?? 0)));
+    let fieldWeight = 0;
+    if (f.title.has(q)) fieldWeight = 3;
+    else if (f.description.has(q)) fieldWeight = 2;
+    else if (f.bucket.has(q)) fieldWeight = 2;
+    else if (f.publisher.has(q)) fieldWeight = 1;
     else {
       // cheap stem-ish partial: "transcribing" should still reach "transcription"
       for (const w of f.all) {
         if (w.length > 3 && q.length > 3 && (w.startsWith(q) || q.startsWith(w))) {
-          s += 1;
+          fieldWeight = 1;
           break;
         }
       }
     }
+    raw += fieldWeight * idf;
   }
-  return s;
+
+  const avgLen = avgDocLen(sources);
+  const lengthNorm = 1 - LENGTH_NORM_B + LENGTH_NORM_B * (f.docLen / avgLen);
+  return raw / lengthNorm;
 }
 
 /**
@@ -157,7 +209,7 @@ export function searchSources(sources, question, k = 4) {
   const seen = new Set();
 
   return sources
-    .map((source) => ({ source, s: scoreSource(q, source) }))
+    .map((source) => ({ source, s: scoreSource(q, source, sources) }))
     .filter((r) => r.s >= SCORE_FLOOR)
     .sort((a, b) => b.s - a.s || a.source.id - b.source.id)
     .filter(({ source }) => {
