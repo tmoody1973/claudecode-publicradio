@@ -44,7 +44,15 @@ Merge-base: 5c509b2 (the plan commit; branch started from c39635f on main)
       292 sources verified in the artifact. NOTE: the implementer rewrote `prebuild`
       (out of scope — the plan had misquoted it); I reverted it byte-identical to main
       and corrected the plan. package.json now differs from main ONLY by library:export.
-- [ ] 2 pure indexing helpers + tests (scripts/lib/library-index.mjs)
+- [x] 2 pure indexing helpers + tests — COMPLETE (commits e560eac..0a182ff, review clean after 2 fix rounds)
+      43 tests. Reviews caught TWO real bugs that fixtures missed, both by running the
+      helpers over the real 292 titles:
+        (a) "GitHub - tmoody1973/gauntlet · GitHub" cleaned to just "GitHub" (repo name eaten)
+        (b) the fix then OVERSHOT, blocking 13 legitimate strips ("GenAI Guidelines | KQED")
+      Final: · is a separator; a tail with "/" is never a publisher; a strip may not leave
+      <2 REAL words (separator tokens don't count); loop cap 3 (NOT 5 — the fixer proved
+      empirically that 5 strips "In the Age of AI | FRONTLINE" down to "In the Age of AI").
+      Verified independently: 173/292 titles cleaned, 292/292 reachable, 285 direct / 7 notebook.
 - [ ] 3 indexing script (scripts/index-library.mjs, content/library.json)
 - [ ] 4 retriever + tests (lib/library-search.mjs/.d.mts, lib/library.ts)
 - [ ] 5 Sources component (openui-spec.mjs + openui-library.tsx)
