@@ -12,7 +12,7 @@
     "gen:prompt": "node scripts/gen-prompt.mjs",
     "gen:samples": "node scripts/gen-sample-data.mjs",
     "gen:walkthroughs": "node scripts/compile-walkthroughs.mjs",
-    "prebuild": "npm run gen:samples && npm run gen:content && npm run gen:walkthroughs && npm run gen:prompt",
+    "prebuild": "node scripts/gen-sample-data.mjs && node scripts/compile-content.mjs && node scripts/compile-walkthroughs.mjs && node scripts/gen-prompt.mjs",
     "library:export": "node scripts/export-library.mjs",
     "audit": "node scripts/audit.mjs",
     "benchmark": "node scripts/benchmark.mjs"

@@ -148,8 +148,13 @@ In `course/package.json`, inside `"scripts"`, add:
 "library:export": "node scripts/export-library.mjs",
 ```
 
-**Do NOT add it to `prebuild`.** Confirm `prebuild` still reads exactly:
-`"prebuild": "npm run gen:samples && npm run gen:content && npm run gen:walkthroughs && npm run gen:prompt"`
+**Do NOT add it to `prebuild`, and do NOT rewrite `prebuild`.** It currently reads, and must still read, exactly:
+
+```
+"prebuild": "node scripts/gen-sample-data.mjs && node scripts/compile-content.mjs && node scripts/compile-walkthroughs.mjs && node scripts/gen-prompt.mjs"
+```
+
+This is the build chain of a live, deployed site. Leave it byte-for-byte alone. Your only change to `scripts` is adding your own key.
 
 - [ ] **Step 3: Run it**
 
