@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "node --test scripts/lib/*.test.mjs",
+    "test": "node --test scripts/lib/*.test.mjs lib/*.test.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
