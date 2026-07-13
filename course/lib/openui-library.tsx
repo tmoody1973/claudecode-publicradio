@@ -13,8 +13,9 @@
 
 import { useTriggerAction } from "@openuidev/react-lang";
 import Link from "next/link";
-import { AlertTriangle, ArrowRight, ExternalLink, Info, ShieldAlert } from "lucide-react";
+import { AlertTriangle, ArrowRight, ExternalLink, Info, Library, ShieldAlert } from "lucide-react";
 import { buildCourseLibrary } from "@/lib/openui-spec.mjs";
+import { LIBRARY_INDEX, type LibraryIndexEntry } from "@/content/library-index";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CopyPrompt } from "@/components/copy-prompt";
@@ -173,6 +174,85 @@ const Comparison: R<{
   );
 };
 
+/**
+ * WHAT THIS COMPONENT DOES, EXACTLY: it is a LOOKUP, not a provenance check.
+ *
+ * The model can only ever emit numeric ids (see lib/openui-spec.mjs) — never a free-text
+ * title, publisher, or url — so it cannot invent a source that does not exist. Each id is
+ * resolved against LIBRARY_INDEX, generated from the real vetted content/library.json. An
+ * id that resolves to nothing is dropped; if none resolve, the card renders nothing.
+ *
+ * That is a RANGE check. On its own it would happily render any id in 1-292, INCLUDING an
+ * id that was never retrieved for this question — LIBRARY_INDEX holds all 292 sources and
+ * has no idea which four the retriever actually returned this turn. The system prompt's
+ * own few-shot examples contain real ids (`Sources([8, 21, 17])`), so this was a live
+ * exposure, not a theoretical one: a weak free model copying an example would have had
+ * those three rendered under "Vetted sources matched to your question."
+ *
+ * PROVENANCE IS ENFORCED UPSTREAM, in app/api/chat/route.ts — the only place that knows
+ * which ids were retrieved this turn. Its line filter (lib/stream-filter.mjs) intersects
+ * every Sources block the model emits with that set and strips the rest, so an id the
+ * model was not handed never reaches this file. When no library block was sent at all,
+ * every Sources block is dropped outright.
+ *
+ * So: fabrication is caught by the id-only schema; MISATTRIBUTION is caught by the route.
+ * This renderer is the last of the three, not the first, and it should not be described
+ * as more than it is.
+ */
+const Sources: R<{ ids: number[] }> = ({ props }) => {
+  const items = (props.ids ?? [])
+    .map((id) => LIBRARY_INDEX[id])
+    .filter((s): s is LibraryIndexEntry => Boolean(s));
+  if (items.length === 0) return null;
+
+  return (
+    <section className="retro-box bg-card p-3" aria-label="Sources from the library">
+      <header className="mb-2 flex items-center gap-2">
+        <Library className="size-4 shrink-0" aria-hidden />
+        <h4 className="font-head text-[13px] leading-tight">From the library</h4>
+      </header>
+
+      <p className="mb-3 text-[12px] leading-relaxed text-muted-foreground">
+        Vetted sources matched to your question. The assistant has not read them — it is
+        pointing you at them.
+      </p>
+
+      <ul className="space-y-2">
+        {items.map((s) => (
+          <li key={s.id}>
+            <a
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="retro-box retro-lift flex min-h-11 items-start gap-2 bg-background p-2.5 no-underline"
+            >
+              <ExternalLink className="mt-0.5 size-4 shrink-0" aria-hidden />
+              <span className="flex min-w-0 flex-1 flex-col gap-1">
+                <span className="text-[13px] font-medium leading-tight">{s.title}</span>
+                <span className="flex flex-wrap items-center gap-1.5">
+                  <span className="font-mono text-[11px] text-muted-foreground">{s.publisher}</span>
+                  <Badge variant="outline" className="text-[10px]">
+                    {s.bucketLabel}
+                  </Badge>
+                </span>
+                {/* Seven of the 292 sources have no standalone link — their url IS the
+                    notebook. Say so, in text, inside the anchor, so it lands in the link's
+                    accessible name and a screen-reader user is told before they follow it.
+                    Without this the link silently dumps you into a 292-source notebook. */}
+                {s.linkKind === "notebook" ? (
+                  <span className="text-[11px] leading-snug text-muted-foreground">
+                    Read this in the notebook — no standalone link
+                  </span>
+                ) : null}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+};
+
 const FollowUps: R<{ questions: string[] }> = ({ props }) => {
   const trigger = useTriggerAction();
   return (
@@ -207,5 +287,6 @@ export const courseLibrary = buildCourseLibrary({
   ModuleRef,
   VideoLink,
   Comparison,
+  Sources,
   FollowUps,
 });
