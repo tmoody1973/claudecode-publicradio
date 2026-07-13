@@ -105,6 +105,22 @@ const audit = () => {
     return { w, h };
   };
 
+  // Radix (Select, Switch) mounts a real <select>/<input type=checkbox> behind every
+  // control so the widget participates in forms and AT — aria-hidden, tabindex=-1,
+  // pointer-events:none, opacity:0, sized 1x1 or the browser's default 13x13. Nobody can
+  // tap them, so a 44px minimum is meaningless. They enter the DOM only on hydration,
+  // which is why this fires on some runs and not others: it's a race, not a regression.
+  // A genuinely tappable control is never aria-hidden and never pointer-events:none.
+  const isUntappable = (el) => {
+    const s = getComputedStyle(el);
+    return (
+      el.getAttribute("aria-hidden") === "true" ||
+      s.pointerEvents === "none" ||
+      s.opacity === "0" ||
+      s.visibility === "hidden"
+    );
+  };
+
   const smallTargets = [];
   document
     .querySelectorAll("a, button, input, textarea, select, [role=button], [role=switch], [role=tab]")
@@ -112,6 +128,7 @@ const audit = () => {
       const r = el.getBoundingClientRect();
       if (r.width === 0 && r.height === 0) return; // hidden
       if (el.classList.contains("skip-link")) return; // off-screen until focused
+      if (isUntappable(el)) return; // a control nobody can tap has no tap target
       if (isInlineInProse(el)) return; // WCAG 2.5.8 exemption
       const { w, h } = effectiveBox(el);
       if (h < 44 || w < 44) {
