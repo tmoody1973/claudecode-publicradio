@@ -33,9 +33,22 @@ Merge-base: main @ the civic-media merge
 - [x] 1 install facts — COMPLETE (6d359b1). 99 tests. ALL 10 source URLs verified 200 live.
       Verified myself: Windows/Git landmine present, no free-path claim, no Cowork availability
       assertion, no "three products" language.
-- [ ] 2 fix module 1's "three products" error (m1.json, course.ts, compile-content.mjs, module page)
+- [x] 2 module 1 correction — COMPLETE (e4a3566 + ce1a2fa). 102 tests.
+      MY PLAN HAD A BUG: it told the implementer to put the correction in content/digest.md.
+      NOTHING IN THE APP READS digest.md. The chat grounds via buildGrounding() -> moduleDetail()
+      in lib/retrieval.ts, which pushed mindsetShiftsNote but NEVER conceptsNote. So the page was
+      fixed and the CHAT KEPT LYING — saying Cowork is "a lightweight desktop app" and inventing
+      Gmail/Drive/Sheets integrations. Fixed by pushing conceptsNote into moduleDetail() as an
+      explicit "the video is out of date here" correction. A neutral restatement did NOT override
+      the model's priors; an explicit correction did.
+      VERIFIED MYSELF on the real chat: 0/4 say "separate products", 4/4 say "three tabs, one app".
 - [ ] 3 the /install page + 6 section components
 - [ ] 4 wire it in (nav, audit PAGES, /guide link, m2 setup) + gates + chat-learned-the-correction
 
 ## Minor findings (for the final whole-branch review)
-(none yet)
+- RESIDUAL HALLUCINATION: ~1 in 4 answers still invents an integration ("connect to Gmail or
+  Google Sheets") that the course material never claims. Down from every run pre-fix. This is the
+  free model's general tendency, not a regression from this work — the SYSTEM_PROMPT already
+  forbids inventing Claude Code features and it violates that anyway. Worth naming to Tarik: the
+  site's own thesis is that Claude sounds identical when right and wrong, and here is that thesis
+  operating on the site itself.
