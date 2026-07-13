@@ -17,6 +17,7 @@ const BASE = process.argv[2] ?? "http://localhost:3000";
 
 const PAGES = [
   "/",
+  "/install",
   "/guide",
   "/walkthroughs",
   "/walkthroughs/first-30-minutes",
