@@ -15,6 +15,7 @@ import { useTriggerAction } from "@openuidev/react-lang";
 import Link from "next/link";
 import { AlertTriangle, ArrowRight, ExternalLink, Info, Library, ShieldAlert } from "lucide-react";
 import { buildCourseLibrary } from "@/lib/openui-spec.mjs";
+import { LIBRARY_INDEX, type LibraryIndexEntry } from "@/content/library-index";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CopyPrompt } from "@/components/copy-prompt";
@@ -173,17 +174,26 @@ const Comparison: R<{
   );
 };
 
-const Sources: R<{
-  items: { title: string; publisher: string; url: string; bucket: string }[];
-}> = ({ props }) => {
-  const items = props.items ?? [];
+/**
+ * The model can only ever emit numeric ids (see lib/openui-spec.mjs) — never a
+ * free-text title, publisher, or url. Each id is resolved against LIBRARY_INDEX,
+ * generated from the real vetted content/library.json by scripts/gen-library-index.mjs.
+ * An id that doesn't resolve — a fabrication, or an id the model was never actually
+ * handed in the LIBRARY grounding block — is silently dropped, and if none resolve
+ * the whole card renders nothing. This makes a fabricated citation structurally
+ * unrenderable rather than merely discouraged by prompt wording.
+ */
+const Sources: R<{ ids: number[] }> = ({ props }) => {
+  const items = (props.ids ?? [])
+    .map((id) => LIBRARY_INDEX[id])
+    .filter((s): s is LibraryIndexEntry => Boolean(s));
   if (items.length === 0) return null;
 
   return (
     <section className="retro-box bg-card p-3" aria-label="Sources from the library">
       <header className="mb-2 flex items-center gap-2">
         <Library className="size-4 shrink-0" aria-hidden />
-        <h3 className="font-head text-[13px] leading-tight">From the library</h3>
+        <h4 className="font-head text-[13px] leading-tight">From the library</h4>
       </header>
 
       <p className="mb-3 text-[12px] leading-relaxed text-muted-foreground">
@@ -192,8 +202,8 @@ const Sources: R<{
       </p>
 
       <ul className="space-y-2">
-        {items.map((s, i) => (
-          <li key={i}>
+        {items.map((s) => (
+          <li key={s.id}>
             <a
               href={s.url}
               target="_blank"
@@ -206,7 +216,7 @@ const Sources: R<{
                 <span className="flex flex-wrap items-center gap-1.5">
                   <span className="font-mono text-[11px] text-muted-foreground">{s.publisher}</span>
                   <Badge variant="outline" className="text-[10px]">
-                    {s.bucket}
+                    {s.bucketLabel}
                   </Badge>
                 </span>
               </span>

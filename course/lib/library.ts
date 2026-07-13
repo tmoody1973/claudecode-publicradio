@@ -45,7 +45,7 @@ export function formatLibraryGrounding(hits: LibraryHit[]): string {
   const lines = hits.map((h) => {
     const where = h.linkKind === "notebook" ? " [no standalone link — lives in the notebook]" : "";
     const desc = h.description ? `\n  ${h.description}` : "\n  (no description available)";
-    return `- title: ${h.title}\n  publisher: ${h.publisher}\n  bucket: ${h.bucketLabel}\n  url: ${h.url}${where}${desc}`;
+    return `- id: ${h.id}\n  title: ${h.title}\n  publisher: ${h.publisher}\n  bucket: ${h.bucketLabel}\n  url: ${h.url}${where}${desc}`;
   });
 
   return [
@@ -53,10 +53,24 @@ export function formatLibraryGrounding(hits: LibraryHit[]): string {
     `hand-vetted by Tarik Moody (Radio Milwaukee). They were matched to this question by`,
     `keyword overlap.`,
     ``,
-    `YOU HAVE NOT READ THEM. Nobody has read them for you. You may POINT the person at`,
-    `them with a Sources block, copying title, publisher, url and bucket EXACTLY as given.`,
-    `You must NEVER quote them, summarise what they say, or attribute any claim to them.`,
-    `If they are not relevant to your answer, leave the Sources block out entirely.`,
+    `This section only appears when the sources genuinely match the question, so POINT the`,
+    `person at them. Put a Sources block in the \`root = Answer([...])\` array on your very`,
+    `first line, second-to-last, right before FollowUps — \`root = Answer([p1, p2, src,`,
+    `follow])\` — then write \`src = Sources([...])\` immediately, on line two, before the`,
+    `prose. Hoisting still renders it in the right place, and defining it early is how you`,
+    `avoid losing it if the answer runs long.`,
+    ``,
+    `The COURSE MATERIAL above may already answer the question on its own. That is not a`,
+    `reason to drop these. The course teaches the person what to do; these sources are where`,
+    `they go to see what real newsrooms and stations actually did. Pointing at them ADDS to a`,
+    `complete answer — it never replaces one. So a confident, course-grounded answer still`,
+    `ends with Sources.`,
+    ``,
+    `YOU HAVE NOT READ THEM. Nobody has read them for you. Emit ONLY the numeric id of each`,
+    `source EXACTLY as given below — never a title, publisher, or url. An id you were not`,
+    `given below will not render. You must NEVER quote them, summarise what they say, or`,
+    `attribute any claim to them. Leave the Sources block out only if what you actually`,
+    `wrote has nothing to do with them.`,
     ``,
     ...lines,
   ].join("\n");

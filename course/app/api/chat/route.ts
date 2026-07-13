@@ -3,6 +3,7 @@
 // generated from the same component library at build time by scripts/gen-prompt.mjs.
 import { SYSTEM_PROMPT } from "@/content/system-prompt";
 import { buildGrounding } from "@/lib/retrieval";
+import { searchLibrary, formatLibraryGrounding } from "@/lib/library";
 import { MODEL_CASCADE } from "@/lib/models";
 
 export const runtime = "nodejs";
@@ -150,16 +151,34 @@ export async function POST(request: Request) {
   // Cap history — free models are rate-limited and we already send a big grounding block.
   const history = messages.slice(-8);
   const lastUser = [...history].reverse().find((m) => m.role === "user");
-  const grounding = buildGrounding(lastUser?.content ?? "");
+  const question = lastUser?.content ?? "";
+  const grounding = buildGrounding(question);
+
+  // Synchronous — 292 records scored in-process. No network, no DB, no added latency.
+  // Returns [] for anything that doesn't clear the score floor ("how do I install
+  // Claude Code" scores nothing against a research library), and we then send no
+  // library block at all rather than pad the prompt with sources the model would
+  // feel obliged to mention.
+  const libraryHits = searchLibrary(question);
 
   const payload = {
     messages: [
-      { role: "system", content: `${SYSTEM_PROMPT}\n\n# COURSE MATERIAL\n\n${grounding}` },
+      {
+        role: "system",
+        content:
+          `${SYSTEM_PROMPT}\n\n# COURSE MATERIAL\n\n${grounding}` +
+          (libraryHits.length
+            ? `\n\n# LIBRARY: VETTED SOURCES YOU HAVE NOT READ\n\n${formatLibraryGrounding(libraryHits)}`
+            : ""),
+      },
       ...history.map((m) => ({ role: m.role, content: m.content })),
     ],
     stream: true,
     temperature: 0.4,
-    max_tokens: 1600,
+    // 1600 truncated real answers mid-`Sources([...` — a long UseCaseCard plus a PromptBlock
+    // eats the budget before the tail of the answer lands. Sources is defined early now, but
+    // the headroom stops any tail block (FollowUps included) from being cut off.
+    max_tokens: 2000,
     // Suppress thinking tokens where the model supports it — they corrupt the DSL.
     reasoning: { exclude: true },
   };

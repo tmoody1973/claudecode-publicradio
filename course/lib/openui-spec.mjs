@@ -117,17 +117,8 @@ export function buildCourseLibrary(r = {}) {
   const Sources = defineComponent({
     name: "Sources",
     description:
-      "Vetted sources from the curated research library, pointed at — never quoted. Use this ONLY when library sources have been supplied to you in the LIBRARY section, and ONLY when they genuinely relate to the answer. Copy title, publisher, url and bucket EXACTLY as given. You have not read these sources: never summarise them, never attribute a claim to them, never invent one.",
-    props: z.object({
-      items: z.array(
-        z.object({
-          title: z.string(),
-          publisher: z.string(),
-          url: z.string(),
-          bucket: z.string(),
-        }),
-      ),
-    }),
+      "Vetted sources from the curated research library, pointed at — never quoted. Use this ONLY when library sources have been supplied to you in the LIBRARY section, and ONLY when they genuinely relate to the answer. Emit ONLY the numeric id of each source EXACTLY as given in the LIBRARY section — ids are the only thing you may pass, never a title, publisher, or url. An id you did not receive will not render. You have not read these sources: never summarise them, never attribute a claim to them, never invent one.",
+    props: z.object({ ids: z.array(z.number()) }),
     component: r.Sources ?? stub,
   });
 
@@ -205,9 +196,10 @@ export function buildCourseLibrary(r = {}) {
         name: "The research library",
         components: ["Sources"],
         notes: [
-          "- Sources ONLY when the LIBRARY section below has given you sources AND they fit the answer. If it gave you none, or none fit, do not emit Sources.",
+          "- When the LIBRARY section gives you sources, your VERY FIRST LINE must already include a Sources block, second-to-last, right before FollowUps: `root = Answer([p1, p2, src, follow])`. That section only appears when the sources genuinely relate to the question, so you do not need to second-guess it. Leave Sources out only if what you actually wrote has nothing to do with them.",
+          "- Then WRITE `src = Sources([...])` IMMEDIATELY, on your second line, before the prose. Hoisting means it still renders where the root array puts it — just before FollowUps. Defining it early is how you avoid losing it if the answer runs long.",
           "- You have NOT read these sources. Point at them; never quote, summarise, or attribute a claim to them.",
-          "- Copy title, publisher, url and bucket exactly as given. Never invent a source.",
+          "- Emit ONLY the numeric id of each source EXACTLY as given in the LIBRARY section. Ids are the only thing you may pass — an id you did not receive will not render.",
           "- Put Sources near the end of the answer, just before FollowUps.",
         ],
       },
@@ -247,7 +239,8 @@ export const ADDITIONAL_RULES = [
   "VideoLink seconds must be a whole number of seconds into the 6-hour source video.",
   `UseCaseCard role must be exactly one of: ${ROLES.join(", ")}.`,
   "A Callout with tone='guardrail' is REQUIRED for any answer touching donor data, unpublished journalism, or FCC underwriting compliance.",
-  "Sources may only contain sources handed to you in the LIBRARY section, copied exactly. Never invent a source, a URL, or a publisher.",
+  "If a LIBRARY section is present, the Sources block is the DEFAULT, not the exception — that section only appears when the sources genuinely fit the question. Put the Sources identifier in the `root = Answer([...])` array on your very first line, just before FollowUps. Decide it before you write root; you cannot add it afterwards.",
+  "Sources ids must come only from the LIBRARY section, copied exactly. Never invent an id, a URL, or a publisher.",
   "You have not read the library sources. Never quote them, summarise them, or attribute a claim to them. You are pointing at them.",
 ];
 
@@ -257,6 +250,20 @@ p1 = Paragraph("Yes — this is one of the clearest wins for a membership team. 
 uc1 = UseCaseCard("membership", "Turn a drive export into a board summary", "The drive ends Sunday and the board packet is due Wednesday. You have a 4,000-row CSV and no analyst.", "Point Claude Code at the file on your machine and ask for totals by day, new-vs-renewing split, and average gift. It writes the summary and shows its arithmetic so you can check it.", "A two-day scramble becomes about an hour", "Strip names, emails and addresses before the file goes anywhere near a cloud model. Aggregate numbers are fine; donor records are not.")
 guard = Callout("guardrail", "Donor data never leaves the building", "Export only the columns you actually need — amounts, dates, campaign codes. No names, no emails, no addresses. If the file has a column you would not read aloud on air, delete it first.")
 follow = FollowUps(["How do I strip the personal columns safely?", "What else can I do with the drive data?", "Take me to module 2"])`,
+  `root = Answer([p1, p2, src, follow])
+src = Sources([8, 21, 17])
+p1 = Paragraph("Most newsrooms that have published guidance disclose two things: that AI was used somewhere in the workflow, and that a human edited and approved the final piece before it went out. Very few disclose which specific tool they used — the disclosure is about the process, not the product.")
+p2 = Paragraph("The pattern that shows up again and again is a short line at the end of a story or in an editor's note, not a blanket banner on every page. A few public broadcasters go further and publish a standing AI charter so the newsroom isn't writing the same disclaimer from scratch every time. The sources below are where to go and read the actual wording for yourself — I have not read them for you.")
+follow = FollowUps(["What would a short AI charter for my station look like?", "Should we disclose AI use inside a single story or as a standing policy?", "What do our own guardrails say about this?"])`,
+  // A UseCaseCard + guardrail answer that ALSO points at sources. Without this, the two
+  // examples above accidentally teach "UseCaseCard shape = no Sources", and the model
+  // drops the block on exactly the station-shaped questions the library is best at.
+  `root = Answer([p1, uc1, guard, src, follow])
+src = Sources([91, 51, 223])
+p1 = Paragraph("Yes, with one hard limit. Summarising a stack of records you already have is one of the safest wins there is — it is your own material, and you are the one checking the summary against the documents.")
+uc1 = UseCaseCard("news", "Summarise a records-request dump", "Six hundred pages land from the records request and the story is due Thursday. Nobody has time to read all of it cold.", "Point Claude Code at the folder on your machine and ask it to list every date, name and dollar figure it can find, with the page number for each. You then open those pages yourself and verify every one before a word goes in the story.", "A week of reading becomes a day of checking", "The summary is a map, not a source. Never quote the AI's paraphrase — quote the document, after you have read the page it pointed you to.")
+guard = Callout("guardrail", "Unpublished reporting stays out of the cloud", "Records you have obtained but not yet published are unpublished journalism. If the material identifies a source, a whistleblower, or an ongoing investigation, it does not go into a cloud model at all — no summary is worth burning a source.")
+follow = FollowUps(["How do I keep the documents on my own machine?", "What should our newsroom AI policy say about this?", "Take me to module 3"])`,
 ];
 
 export const PROMPT_OPTIONS = {
