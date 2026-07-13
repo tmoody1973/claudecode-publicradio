@@ -119,6 +119,13 @@ test("parseOgTags decodes hex, decimal and named entities", () => {
   assert.equal(parseOgTags(html).description, 'NIST AI RMF\'s guide — the "right" way…');
 });
 
+test("decodeEntities handles double-encoded entities", () => {
+  // Real cases: PBS ships "&amp;nbsp;", JournalismAI ships "&amp;amp;". A single pass
+  // would leave a literal "&nbsp;" / "&amp;" on the page.
+  const html = `<meta property="og:description" content="Jamillah Knowles &amp;amp; Digit &amp;hellip;">`;
+  assert.equal(parseOgTags(html).description, "Jamillah Knowles & Digit …");
+});
+
 test("decodeEntities leaves an unknown entity alone rather than mangling it", () => {
   const html = `<meta property="og:description" content="A &notarealentity; B">`;
   assert.equal(parseOgTags(html).description, "A &notarealentity; B");

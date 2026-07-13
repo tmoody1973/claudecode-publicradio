@@ -56,8 +56,7 @@ const NAMED_ENTITIES = {
   copy: "©",
 };
 
-/** Hex (&#x27;), decimal (&#8217;) and a common named set. Unknown entities pass through untouched. */
-function decodeEntities(s) {
+function decodeOnce(s) {
   return s.replace(/&(#[xX][0-9a-fA-F]+|#\d+|[a-zA-Z]+);/g, (m, e) => {
     if (e[0] === "#") {
       const isHex = e[1] === "x" || e[1] === "X";
@@ -71,6 +70,31 @@ function decodeEntities(s) {
     }
     return NAMED_ENTITIES[e] ?? m;
   });
+}
+
+/**
+ * Hex (&#x27;), decimal (&#8217;) and a common named set. An unrecognised entity is
+ * left alone rather than mangled.
+ *
+ * Decodes REPEATEDLY until the string stops changing, because three real sources
+ * (PBS, WashU, JournalismAI) ship DOUBLE-encoded og:descriptions — the raw attribute
+ * holds "&amp;amp;" / "&amp;nbsp;", so a single pass yields a still-literal "&amp;" /
+ * "&nbsp;" in the UI.
+ *
+ * ponytail: the 3-pass cap is a guard, not a tuning knob — it stops a pathological
+ * input from spinning, and stops runaway over-decoding of text that is legitimately
+ * ABOUT escaping. Every real case in the 292 is clean after 2.
+ */
+const MAX_DECODE_PASSES = 3;
+
+function decodeEntities(s) {
+  let out = s;
+  for (let i = 0; i < MAX_DECODE_PASSES; i++) {
+    const next = decodeOnce(out);
+    if (next === out) break; // stable — nothing left to decode
+    out = next;
+  }
+  return out;
 }
 
 /** The export truncates long titles with a literal "...". */
